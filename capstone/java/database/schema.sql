@@ -59,13 +59,15 @@ CREATE TABLE driver_details (
 -- pickup information
 CREATE TABLE pickup_details (
 	pickup_id SERIAL,
+	driver_id int,
+	route_id int,
 	requesting_username varchar(50) NOT NULL,
 	pickup_date date NOT NULL,
 	pickup_weight int NOT NULL, -- 60lbs * num_of_bins
 	num_of_bins int NOT NULL, -- User selection of 1, 2, or 3(max) per pickup
 	is_Picked_Up boolean DEFAULT false,
 	CONSTRAINT PK_pickup_details PRIMARY KEY (pickup_id),
-    --CONSTRAINT FK_pickup_details_driver_details FOREIGN KEY (driver_id) REFERENCES driver_details (employee_id),
+    CONSTRAINT FK_pickup_details_driver_details FOREIGN KEY (driver_id) REFERENCES driver_details (employee_id),
     CONSTRAINT FK_pickup_details_user_details FOREIGN KEY (requesting_username) REFERENCES user_details (username),
 	CONSTRAINT chk_num_of_bins CHECK (num_of_bins > 0 AND num_of_bins <= 3)
 );
