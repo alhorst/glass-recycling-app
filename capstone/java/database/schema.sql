@@ -71,21 +71,17 @@ CREATE TABLE pickup_details (
 );
 
 
---Tuesday AM --- do we need a Route table to store to link unique Route_id, to one Driver_id, to max daily pickup_id's
+-- Route table to store to link unique Route_id, to one Driver_id, to max daily pickup_id's
 --- idea:
     -- driver_details, routes, driver_routes (could this be an array?)
-    -- pickup requests in data store,
-CREATE TABLE routes (
-    route_id SERIAL,
-    driver_id int,
-    route_date date NOT NULL,
-    CONSTRAINT PK_routes PRIMARY KEY (route_id),
-    CONSTRAINT FK_routes_driver_details FOREIGN KEY ()
-);
-
-
-
-
+    -- pickup requests in data store?
+--CREATE TABLE routes (
+--    route_id SERIAL,
+--    driver_id int,
+--    route_date date NOT NULL,
+--    CONSTRAINT PK_routes PRIMARY KEY (route_id),
+--    CONSTRAINT FK_routes_driver_details FOREIGN KEY ()
+--);
 
 COMMIT TRANSACTION;
 
