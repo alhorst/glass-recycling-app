@@ -15,7 +15,7 @@ public class UserDetails {
     private int credits_balance;
     private int credits_redeemed;
 
-    public UserDetails() { };
+    public UserDetails() { }
 
     public UserDetails(int account_id, String username, String full_name,
                        String street_address, String city, String state_abbreviation,
@@ -39,7 +39,7 @@ public class UserDetails {
     public String getFullAddress(){
         return getStreet_address() + ", " + getCity() + ", " + getState_abbreviation() + " " + getZipcode();
     }
-    
+
     public int getAccount_id() {
         return account_id;
     }
