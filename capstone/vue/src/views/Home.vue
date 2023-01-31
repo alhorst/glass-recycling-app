@@ -1,14 +1,38 @@
+
+<!-- This is splash page. user can see the splash page but can not access the details if not logged in --> 
+
 <template>
-<div class="container">
-  <div class="home">
-   <img src="" alt= "Glass Recycling Logo" class="logo">
+<div id="container">
+
+  <div id="home" class="header">
+    <section class="desc"> Welcome to GlassEco</section>
+   
+   <img src="../img/updateimage.png" alt= "Glass Recycling Logo" class="logo">
+
   </div>
+
+  <!--container for information and the sign up, registration" -->
+  <div class="body-container">
+    <section class="info">Information about recycling</section>
+    <div id="account">
+      <nav id="sign-in" class="account-sign"><p>Don't have an acount yet? Register
+        <router-link v-bind:to="{name: 'register'}">here!</router-link></p>
+      </nav>
+      <nav id="log-in">
+        <p>If you have an account, please log in<router-link v-bind:to="{name: 'login'}"> here!</router-link></p>
+      </nav>
+    </div>  
+  </div>
+
+  <!--
   <nav>
       <ul>
         <li><a href="#">Home</a></li>
         <li><a href="#">Account</a></li>
       </ul>
   </nav>
+
+  
 
 <div class= "recycling-container">
   <h2 class="info">Information </h2>
@@ -29,6 +53,7 @@
   </div>
 
 </div>
+-->
 
 
 </div>
@@ -45,105 +70,72 @@ export default {
 <style scope>
 
 *{
-  background-color:#EAFFF1 ;
+  background-color:#BFE3BC ;
 }
 
-.info {
-  background-color: cornsilk;
+img{
+ 
+  display: flex;
+
 }
 
-.left-container {
+#log-in {
+   display: flex;
+  margin: 0px 100px 30px 690px;
+  font-size: 20px;
+  flex-direction:row;
+  padding: 0rem;
+}
+
+#account {
   display: flex;
   flex-direction: column;
+}
+
+
+
+
+.desc {
+font-family: cursive;
+  font-size: 30px;
+}
+
+#container{
+  display: flex;
+  flex-direction: column;
+ 
+}
+.account-sign{
+  display: flex;
+  margin: 0px 100px 50px 690px;
+  font-size: 20px;
+  flex-direction:row;
+  padding: 0rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  padding:35px;
+
+}
+
+.body-container {
+  display: flex;
+  flex-direction: row;
   margin: 60px;
-  padding: 30px 50px 30px 400px;
+  padding: 30px 200px 200px 300px;
   font-family: cursive;
   font-size: 20px;
- 
-}
-.footer-container {
-  display: flex;
-}
-
-.right-container {
-  display: flex;
-  margin: 100px;
-  flex-direction: column;
-  font-size: 20px;
-}
-
-.home-footer:hover, .contact:hover, .drop-off:hover, .calendar:hover{
-color: green;
-text-decoration: underline;
-}
-
-.home-footer, .contact, .drop-off, .calendar, .app-home{
-  padding: 15px;
-  text-transform: uppercase;
-}
-
-
-
-
-
-
-.container {
-  background-color: #EAFFF1;
-  padding: 20px;
- 
-}
-
-.logo {
-  width: 140px;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  display: flex;
-
-}
-
-li {
-  font-family:Georgia, 'Times New Roman', Times, serif;
-  font-size: 20px;
-  text-transform: uppercase;
-  color: black;
-  padding: 0 50px 0 0;
-  margin-left: 40px;
-
-}
-
-.recycling-container {
-  margin: 200px 60px 300px 60px;
-  height: 500px;
-  background-color:	cornsilk;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
+  border-style: solid;
+  border-color: cornsilk;
   
+
 }
 
-a,
-a:visited {
-  color: black;
-  text-decoration: none;
-}
 
-a:hover {
-  color: green;
-  text-decoration: underline;
-}
-
-nav{
-  display: flex;
-  flex: auto;
-  justify-content: right;
-  align-content:flex-end;
-  flex-direction: row;
-}
 
 
 </style>
