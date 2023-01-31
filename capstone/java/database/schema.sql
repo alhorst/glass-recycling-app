@@ -1,9 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS pickup_details;
-DROP TABLE IF EXISTS driver_details;
-DROP TABLE IF EXISTS user_details;
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS pickup_details, driver_details, user_details, users;
 
 DROP SEQUENCE IF EXISTS seq_account_id, seq_employee_id;
 
@@ -79,6 +76,8 @@ CREATE TABLE pickup_details (
 
 
 --Tuesday AM --- do we need a Route table to store to link unique Route_id, to one Driver_id, to max daily pickup_id's
+--- idea:
+    -- driver_details, routes, driver_routes
 
 
 
