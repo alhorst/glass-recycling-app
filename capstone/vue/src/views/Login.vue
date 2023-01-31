@@ -12,7 +12,12 @@
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
-      <label for="username" class="sr-only">Username</label>
+     <label class="container">
+  <input type="radio" name="radio">
+  <span class="checkmark">Login as Bussiness Admin</span>
+</label>
+<br>
+      <label for="username" class="sr-only"><b>Username: </b></label>
       <input
         type="text"
         id="username"
@@ -22,7 +27,8 @@
         required
         autofocus
       />
-      <label for="password" class="sr-only">Password</label>
+      <br>
+      <label for="password" class="sr-only"><b>Password: </b></label>
       <input
         type="password"
         id="password"
@@ -31,6 +37,7 @@
         v-model="user.password"
         required
       />
+      <br>
       <router-link :to="{ name: 'register' }">Need an account?</router-link>
       <button type="submit">Sign in</button>
     </form>
@@ -74,3 +81,53 @@ export default {
   }
 };
 </script>
+
+
+<style scoped>
+
+.text-center{  
+        width: 600px; 
+        height: 300px; 
+        overflow: hidden;   
+        margin: 50px 30px 0px 0px;  
+        padding: 40px;  
+        background: cornsilk;  
+        border-radius: 0px ;  
+        border-style: solid;
+        border-color: cornsilk;
+        
+          
+}  
+
+.sr-only {
+  font-size: 20px;
+  padding: 5px;
+  margin: 3px;
+}
+
+.form-control {
+    font-size: 18px;
+  padding: 2px;
+  margin: 2px;
+}
+.checkmark {
+  font-size: 15px;
+  padding:12px;
+  margin-bottom: 2rem;
+}
+
+.form-signin {
+  width:600px;
+  height: 300px;
+}
+
+
+
+
+
+
+
+
+
+
+</style>
