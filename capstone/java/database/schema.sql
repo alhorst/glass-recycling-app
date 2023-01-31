@@ -1,9 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS pickup_details;
-DROP TABLE IF EXISTS driver_details;
-DROP TABLE IF EXISTS user_details;
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS pickup_details, driver_details, user_details, users;
 
 DROP SEQUENCE IF EXISTS seq_account_id, seq_employee_id;
 
@@ -38,7 +35,7 @@ CREATE TABLE user_details (
 	phone_number varchar(11), -- example: 7032978845 (country code '1' optional)
 	email_address varchar(100),
 	total_pounds_recycled int DEFAULT 0,
-    credits_balance int DEFAULT 0,
+    credits_balance int DEFAULT 0, -- 1pt per pound
     credits_redeemed int DEFAULT 0,
 	CONSTRAINT PK_user_details PRIMARY KEY (username),
 	CONSTRAINT FK_user_details_users FOREIGN KEY (username) REFERENCES users (username)
@@ -66,9 +63,7 @@ CREATE TABLE pickup_details (
 	route_id int,
 	requesting_username varchar(50) NOT NULL,
 	pickup_date date NOT NULL,
-	-- pickup_time time -- optional: unless we need time for scheduling, instead of just date (route is organized by efficiency)
-	--Another option would be: pickup_date_time TIMESTAMP (NOT NULL), What works best? as the data will be coming from the schedule pickup form*/
-	pickup_weight int NOT NULL, -- full weight * num_of_bins
+	pickup_weight int NOT NULL, -- 60lbs * num_of_bins
 	num_of_bins int NOT NULL, -- User selection of 1, 2, or 3(max) per pickup
 	is_Picked_Up boolean DEFAULT false,
 	CONSTRAINT PK_pickup_details PRIMARY KEY (pickup_id),
@@ -78,9 +73,17 @@ CREATE TABLE pickup_details (
 );
 
 
---Tuesday AM --- do we need a Route table to store to link unique Route_id, to one Driver_id, to max daily pickup_id's
-
-
+-- Route table to store to link unique Route_id, to one Driver_id, to max daily pickup_id's
+--- idea:
+    -- driver_details, routes, driver_routes (could this be an array?)
+    -- pickup requests in data store?
+--CREATE TABLE routes (
+--    route_id SERIAL,
+--    driver_id int,
+--    route_date date NOT NULL,
+--    CONSTRAINT PK_routes PRIMARY KEY (route_id),
+--    CONSTRAINT FK_routes_driver_details FOREIGN KEY ()
+--);
 
 COMMIT TRANSACTION;
 
