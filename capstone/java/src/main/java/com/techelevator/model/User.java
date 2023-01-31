@@ -15,14 +15,16 @@ public class User {
    @JsonIgnore
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
+   private boolean is_driver;
 
    public User() { }
 
-   public User(int id, String username, String password, String authorities) {
+   public User(int id, String username, String password, String authorities, boolean is_driver) {
       this.id = id;
       this.username = username;
       this.password = password;
       if(authorities != null) this.setAuthorities(authorities);
+      this.is_driver = is_driver;
       this.activated = true;
    }
 
@@ -66,6 +68,14 @@ public class User {
       this.authorities = authorities;
    }
 
+   public boolean isIs_driver() {
+      return is_driver;
+   }
+
+   public void setIs_driver(boolean is_driver) {
+      this.is_driver = is_driver;
+   }
+
    public void setAuthorities(String authorities) {
       String[] roles = authorities.split(",");
       for(String role : roles) {
@@ -73,6 +83,7 @@ public class User {
          this.authorities.add(new Authority(authority));
       }
    }
+
 
    @Override
    public boolean equals(Object o) {
@@ -83,7 +94,8 @@ public class User {
               activated == user.activated &&
               Objects.equals(username, user.username) &&
               Objects.equals(password, user.password) &&
-              Objects.equals(authorities, user.authorities);
+              Objects.equals(authorities, user.authorities) &&
+              is_driver == user.is_driver;
    }
 
    @Override
@@ -98,6 +110,7 @@ public class User {
               ", username='" + username + '\'' +
               ", activated=" + activated +
               ", authorities=" + authorities +
+              ", is_driver=" + is_driver +
               '}';
    }
 }

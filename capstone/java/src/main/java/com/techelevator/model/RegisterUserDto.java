@@ -17,6 +17,7 @@ public class RegisterUserDto {
     private String confirmPassword;
     @NotEmpty(message = "Please select a role for this user.")
     private String role;
+    private boolean is_driver;
 
     public String getUsername() {
         return username;
@@ -48,5 +49,13 @@ public class RegisterUserDto {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isIs_driver() {
+        return is_driver;
+    }
+
+    public void setIs_driver(boolean is_driver) {
+        this.is_driver = is_driver;
     }
 }
