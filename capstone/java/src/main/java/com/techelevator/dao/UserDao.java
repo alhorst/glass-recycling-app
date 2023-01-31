@@ -8,6 +8,10 @@ public interface UserDao {
 
     List<User> findAll();
 
+    List<User> listAllDrivers();
+
+    List<User> listAllRecyclers();
+
     User getUserById(int userId);
 
     User findByUsername(String username);

@@ -46,6 +46,7 @@ public class JdbcUserDao implements UserDao {
 		}
 	}
 
+    // returns list of all users, drivers, and admins
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
@@ -56,8 +57,33 @@ public class JdbcUserDao implements UserDao {
             User user = mapRowToUser(results);
             users.add(user);
         }
-
         return users;
+    }
+
+    // returns list of all drivers
+    @Override
+    public List<User> listAllDrivers() {
+        List<User> allDrivers = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE is_driver = true AND role = 'ROLE_USER';";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            User driver = mapRowToUser(results);
+            allDrivers.add(driver);
+        }
+        return allDrivers;
+    }
+
+    // returns list of all recycling users
+    @Override
+    public List<User> listAllRecyclers() {
+        List<User> allRecyclers = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE is_driver = false AND role = 'ROLE_USER';";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while (results.next()) {
+            User user = mapRowToUser(results);
+            allRecyclers.add(user);
+        }
+        return allRecyclers;
     }
 
     @Override
