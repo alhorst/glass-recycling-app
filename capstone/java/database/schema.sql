@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS seq_account_id, seq_employee_id;
 
 -- user/password information for users who recycle, drivers, and admins
+-- Drivers (ROLE_USER && is_driver = true)
 CREATE TABLE users (
 	user_id SERIAL,
 	username varchar(50) NOT NULL UNIQUE,
@@ -53,7 +54,7 @@ CREATE SEQUENCE seq_employee_id
 CREATE TABLE driver_details (
     employee_id int NOT NULL DEFAULT nextval ('seq_employee_id'),
     username varchar(50) NOT NULL,
-    home_office varchar(200) DEFAULT ('3001 Railroad St, Pittsburgh, PA 15201'), -- example. 3001 Railroad St, Pittsburgh, PA 15201 -- full address could avoid concatenation when feeding into API
+    home_office varchar(200) DEFAULT ('3001 Railroad St, Pittsburgh, PA 15201'), -- default to home base address, same for all drivers -- full address could avoid concatenation when feeding into API
     CONSTRAINT PK_driver_details PRIMARY KEY (employee_id),
     CONSTRAINT FK_driver_details_users FOREIGN KEY (username) REFERENCES users (username)
 );
@@ -75,6 +76,9 @@ CREATE TABLE pickup_details (
     CONSTRAINT FK_pickup_details_user_details FOREIGN KEY (requesting_username) REFERENCES user_details (username),
 	CONSTRAINT chk_num_of_bins CHECK (num_of_bins > 0 AND num_of_bins <= 3)
 );
+
+
+--Tuesday AM --- do we need a Route table to store to link unique Route_id, to one Driver_id, to max daily pickup_id's
 
 
 
