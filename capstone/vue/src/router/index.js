@@ -5,6 +5,8 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import Admin from '../views/AdminDashboard.vue'
+import Driver from '../views/DriverDashboard.vue'
 
 Vue.use(Router)
 
@@ -53,7 +55,23 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
-    }
+    },
+    {
+      path: "/admin",
+      name: "admin-dash",
+      component: Admin,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/driver",
+      name: "driver-dash",
+      component: Driver,
+      meta: {
+        requiresAuth: false
+      }
+    },
   ]
 })
 

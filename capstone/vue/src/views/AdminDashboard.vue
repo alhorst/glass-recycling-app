@@ -5,7 +5,7 @@
         <nav>
           <ul>
             <router-link v-bind:to="{ name: 'home' }">Home</router-link>
-            Dashboard Pick-ups Routes Drivers Users Account
+            Dashboard Pick-ups Routes Drivers Users Account Logout
           </ul>
         </nav>
         <router-view />
@@ -16,8 +16,8 @@
               <th>Requester</th>
               <th>Date</th>
               <th>Number of Bins</th>
-              <th>Status</th>
               <th>Driver</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -46,7 +46,18 @@
                   v-model="filter.numberOfBins"
                 />
               </td>
-              <td><input type="text" /></td>
+              <td>
+                <input type="text" id="driverFilter" v-model="filter.driver" />
+              </td>
+              <td>
+                <input type="checkbox" />
+              </td>
+              <td>{{ pickup.pickupID }}</td>
+              <td>{{ pickup.requester }}</td>
+              <td>{{ pickup.date }}</td>
+              <td>{{ pickup.numberOfBins }}</td>
+              <td>{{ pickup.driver }}</td>
+              <td>{{ pickup.status }}</td>
             </tr>
           </tbody>
         </table>
@@ -61,5 +72,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#navbar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
 </style>
