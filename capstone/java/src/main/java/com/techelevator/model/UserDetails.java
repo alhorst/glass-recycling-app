@@ -35,11 +35,6 @@ public class UserDetails {
         this.credits_redeemed = credits_redeemed;
     }
 
-    //return full address as a string to use in Routes API
-    public String getFullAddress(){
-        return getStreet_address() + ", " + getCity() + ", " + getState_abbreviation() + " " + getZipcode();
-    }
-
     public int getAccount_id() {
         return account_id;
     }
