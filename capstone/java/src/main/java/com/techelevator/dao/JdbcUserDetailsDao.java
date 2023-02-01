@@ -112,17 +112,15 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
         return address;
     }
 
-
     @Override
     public int getCreditBalance(String username) {
         int currentBalance = 0;
-        String sql = "SELECT account_id, username, full_name, street_address, city, state_abbreviation, " +
-                    "zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed " +
+        String sql = "SELECT credits_balance " +
                     "FROM user_details WHERE username = ?;";
 
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         if (result.next()){
-            currentBalance = mapRowToUserDetail(result).getCredits_balance();
+            currentBalance = result.getInt("credits_balance");
         }
         return currentBalance;
     }
@@ -130,13 +128,12 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
     @Override
     public int getCreditRedeemed(String username) {
         int creditsRedeemed = 0;
-        String sql = "SELECT account_id, username, full_name, street_address, city, state_abbreviation, " +
-                "zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed " +
+        String sql = "SELECT credits_redeemed " +
                 "FROM user_details WHERE username = ?;";
 
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         if (result.next()){
-            creditsRedeemed = mapRowToUserDetail(result).getCredits_redeemed();
+            creditsRedeemed = result.getInt("credits_redeemed");
         }
         return creditsRedeemed;
     }
@@ -144,13 +141,12 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
     @Override
     public int getTotalGlassRecycled(String username) {
         int totalGlassRecycled = 0;
-        String sql = "SELECT account_id, username, full_name, street_address, city, state_abbreviation, " +
-                     "zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed " +
+        String sql = "SELECT total_pounds_recycled " +
                      "FROM user_details WHERE username = ?;";
 
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         if (result.next()){
-            totalGlassRecycled = mapRowToUserDetail(result).getTotal_pounds_recycled();
+            totalGlassRecycled = result.getInt("total_pounds_recycled");
         }
         return totalGlassRecycled;
     }
