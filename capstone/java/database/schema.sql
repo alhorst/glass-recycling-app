@@ -71,19 +71,27 @@ CREATE TABLE pickup_details (
     CONSTRAINT FK_pickup_details_user_details FOREIGN KEY (requesting_username) REFERENCES user_details (username),
 	CONSTRAINT chk_num_of_bins CHECK (num_of_bins > 0 AND num_of_bins <= 3)
 );
+-- for route_id above --- in pickup_details (think we can scratch driver_id);
+-- idea from Andy:
+-- 'silly number' for route_id could be unassigned example if route id is 0, means unassigned
+-- when pickup is assigned to a route for that date, update the route_id #, keeping in mind limit of pickups per route (8-10)
 
 
--- Route table to store to link unique Route_id, to one Driver_id, to max daily pickup_id's
---- idea:
-    -- driver_details, routes, driver_routes (could this be an array?)
-    -- pickup requests in data store?
+-- Route table to store to link unique Route_id, to one Driver_id, and date
 --CREATE TABLE routes (
 --    route_id SERIAL,
---    driver_id int,
 --    route_date date NOT NULL,
---    CONSTRAINT PK_routes PRIMARY KEY (route_id),
---    CONSTRAINT FK_routes_driver_details FOREIGN KEY ()
+--    driver_id int NOT NULL,
+--    CONSTRAINT PK_routes PRIMARY KEY (route_id), --- add foreign key on pickup_details table
 --);
+
+-- Brought up idea of a credits table to track pounds of glass, credits, along with account_id
+-- Andy said it can live on the user_details table in our case
+-- credits table
+--- user_id (connect user table)
+--- pounds recycled
+--- credits balance
+--- * ask product owner - about credits redeemed history
 
 COMMIT TRANSACTION;
 
