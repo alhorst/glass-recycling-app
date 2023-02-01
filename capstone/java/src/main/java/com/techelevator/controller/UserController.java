@@ -62,6 +62,7 @@ public class UserController {
         }
     }
 
+    // do we need this method?
     @RequestMapping(path="/users/{username}", method= RequestMethod.GET)
     public User getUserByUsername(@PathVariable String username) {
         User user = userDao.findByUsername(username);
@@ -91,6 +92,7 @@ public class UserController {
         }
     }
 
+    //needs work --- no username in path variable
     @RequestMapping(path="users/{username}/details", method= RequestMethod.GET)
     public UserDetails getUserDetailByAccountId(@PathVariable String username) {
         UserDetails userDetail = userDetailsDao.findUserDetailsByUsername(username);
@@ -129,6 +131,7 @@ public class UserController {
         }
     }
 
+    //needs work ---- no username in pathvariable - look request param
     @RequestMapping(path="users/{username}/address", method= RequestMethod.GET)
     public String getFullAddressByUsername(@PathVariable String username) {
         if (userDetailsDao.findUserDetailsByUsername(username) == null){
