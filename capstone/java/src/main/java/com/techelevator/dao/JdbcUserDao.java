@@ -22,29 +22,7 @@ public class JdbcUserDao implements UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override
-    public int findIdByUsername(String username) {
-        if (username == null) throw new IllegalArgumentException("Username cannot be null");
 
-        int userId;
-        try {
-            userId = jdbcTemplate.queryForObject("select user_id from users where username = ?", int.class, username);
-        } catch (EmptyResultDataAccessException e) {
-            throw new UsernameNotFoundException("User " + username + " was not found.");
-        }
-        return userId;
-    }
-
-	@Override
-	public User getUserById(int userId) {
-		String sql = "SELECT * FROM users WHERE user_id = ?";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
-		if (results.next()) {
-			return mapRowToUser(results);
-		} else {
-			return null;
-		}
-	}
 
     // returns list of all users, drivers, and admins
     @Override
@@ -98,6 +76,31 @@ public class JdbcUserDao implements UserDao {
         throw new UsernameNotFoundException("User " + username + " was not found.");
     }
 
+    @Override
+    public User getUserById(int userId) {
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        if (results.next()) {
+            return mapRowToUser(results);
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public int findIdByUsername(String username) {
+        if (username == null) throw new IllegalArgumentException("Username cannot be null");
+
+        int userId;
+        try {
+            userId = jdbcTemplate.queryForObject("select user_id from users where username = ?", Integer.class, username);
+        } catch (EmptyResultDataAccessException e) {
+            throw new UsernameNotFoundException("User " + username + " was not found.");
+        }
+        return userId;
+    }
+
+    //implemented via Authentication Controller to create both User and Driver accounts
     @Override
     public boolean create(String username, String password, String role, boolean is_driver) {
         String insertUserSql = "insert into users (username,password_hash,role,is_driver) values (?,?,?,?)";

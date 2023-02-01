@@ -99,15 +99,13 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
     @Override
     public String getFullAddressByUsername(String username) {
         String address = null;
-        String sql = "SELECT account_id, username, full_name, street_address, city, state_abbreviation, " +
-                    "zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed " +
+        String sql = "SELECT street_address, city, state_abbreviation, zipcode, " +
                     "FROM user_details WHERE username = ?;";
 
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
         if (result.next()){
-            UserDetails userDetail = mapRowToUserDetail(result);
-            address = userDetail.getStreet_address() + ", " + userDetail.getCity() + ", " +
-                                userDetail.getState_abbreviation() + " " + userDetail.getZipcode();
+            address = result.getString("street_address") + ", " + result.getString("city") + ", " +
+                                result.getString("state_abbreviation") + " " + result.getString("zipcode");
         }
         return address;
     }
