@@ -51,7 +51,7 @@ CREATE SEQUENCE seq_employee_id
 CREATE TABLE driver_details (
     employee_id int NOT NULL DEFAULT nextval ('seq_employee_id'),
     username varchar(50) NOT NULL,
-    home_office varchar(200) DEFAULT ('3001 Railroad St, Pittsburgh, PA 15201'), -- default to home base address, same for all drivers -- full address could avoid concatenation when feeding into API
+    home_office_address varchar(200) DEFAULT ('3001 Railroad St, Pittsburgh, PA 15201'), -- default to home base address, same for all drivers -- full address could avoid concatenation when feeding into API
     CONSTRAINT PK_driver_details PRIMARY KEY (employee_id),
     CONSTRAINT FK_driver_details_users FOREIGN KEY (username) REFERENCES users (username)
 );

@@ -3,12 +3,14 @@ package com.techelevator.dao;
 import com.techelevator.model.PickupDetails;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class JdbcPickupDetailsDao implements PickupDetailsDao {
 
     private final JdbcTemplate jdbcTemplate;
@@ -72,7 +74,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         String sql = "UPDATE pickup_details " +
                 "SET driver_id = ?, requesting username = ?, pickup_date = ?, num_of_bins = ?, is_picked_up = ? " +
                 "WHERE pickup_id = ?;";
-        jdbcTemplate.update(sql, pickupDetails.getDriver_id(), pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up());
+        jdbcTemplate.update(sql, pickupDetails.getDriver_id(), pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up(), pickupDetails.getPickup_id());
 
     }
 
