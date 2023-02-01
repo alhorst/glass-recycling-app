@@ -1,7 +1,12 @@
 <template>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      <div class="login-form__logo-container">
+                <img class="login-form__logo" src="../img/updateimage.png" alt="Logo">
+      </div>
+      <div class="login-form__content">
+                <div class="login-form__header">Login to your account</div>
+        </div>    
       <div
         class="alert alert-danger"
         role="alert"
@@ -13,11 +18,12 @@
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
      <label class="container">
-  <input type="radio" name="radio">
+  <input type="radio" name="radio" class="radio">
   <span class="checkmark">Login as Bussiness Admin</span>
 </label>
 <br>
-      <label for="username" class="sr-only"><b>Username: </b></label>
+<!--
+      <label for="username" class="sr-only"><b>Username: </b></label> -->
       <input
         type="text"
         id="username"
@@ -28,7 +34,8 @@
         autofocus
       />
       <br>
-      <label for="password" class="sr-only"><b>Password: </b></label>
+      <!--
+      <label for="password" class="sr-only"><b>Password: </b></label> -->
       <input
         type="password"
         id="password"
@@ -38,8 +45,13 @@
         required
       />
       <br>
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+      <button class="login-form__button" type="submit">Login</button>
+      <div class="login-form_links">
+      <router-link :to="{ name: 'register' }" class="login-form_link">Need an account?</router-link>
+      </div>
+      <!--
       <button type="submit">Sign in</button>
+      -->
     </form>
   </div>
 </template>
@@ -84,42 +96,115 @@ export default {
 
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap');
+
+
 
 .text-center{  
-        width: 600px; 
-        height: 300px; 
-        overflow: hidden;   
-        margin: 50px 30px 0px 0px;  
-        padding: 40px;  
-        background: cornsilk;  
-        border-radius: 0px ;  
-        border-style: solid;
-        border-color: cornsilk;
+    background: #009578;
+    margin: 15px;
+    margin-top: 50px;
+    padding: 150px;
         
           
 }  
 
-.sr-only {
-  font-size: 20px;
-  padding: 5px;
-  margin: 3px;
+.form-signin, .form-signin * {
+   box-sizing: border-box;
+    font-family: 'Source Sans Pro';
+}
+
+.form-signin{
+  max-width: 400px;
+  height: 500px;
+    margin: 0 auto;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+.login-form__logo-container {
+    padding: 30px;
+}
+
+
+.login-form__logo {
+    display: block;
+    max-width: 125px;
+    margin: 0 auto;
+}
+
+.login-form__content {
+    padding: 30px;
+     background: #eeeeee;
+}
+
+.login-form__header {
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 20px;
+     background: #eeeeee;
 }
 
 .form-control {
-    font-size: 18px;
-  padding: 2px;
-  margin: 2px;
+   width: 95%;
+    margin: 10px;
+    padding: 10px 5px 10px 5px;
+    border-radius: 5px;
+    border: 2px solid #dddddd;
+    background: #ffffff;
+    outline: none;
+    transition: border-color 0.5s;
+}
+
+.form-control:focus {
+    border-color: #009578;
+}
+
+.form-control::placeholder {
+  color: #aaaaaa;
+}
+
+.login-form__button {
+    padding: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    background: #009578;
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 95%;
+    margin: 10px;
+    padding: 10px 5px 10px 5px;
+}
+
+.login-form__button:active {
+    background: #008067;
+}
+.login-form_links {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.login-form_link {
+    font-size: 0.9em;
+    color: #008067;
+    text-decoration: none;
 }
 .checkmark {
   font-size: 15px;
-  padding:12px;
-  margin-bottom: 2rem;
+  margin: 10px;
+  
 }
 
-.form-signin {
-  width:600px;
-  height: 300px;
+.radio {
+  margin-left: 15px;
 }
+
+
+
 
 
 

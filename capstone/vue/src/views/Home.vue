@@ -2,29 +2,47 @@
 <!-- This is splash page. user can see the splash page but can not access the details if not logged in --> 
 
 <template>
-<div id="container">
+  <div id="container">
+    <div id="home" class="header">
+      <section class="desc">Welcome to GlassEco</section>
 
-  <div id="home" class="header">
-    <section class="desc"> Welcome to GlassEco</section>
-   
-   <img src="../img/updateimage.png" alt= "Glass Recycling Logo" class="logo">
+      <img
+        src="../img/updateimage.png"
+        alt="Glass Recycling Logo"
+        class="logo"
+      />
+    </div>
 
-  </div>
+    <!--container for information and the sign up, registration" -->
+    <div class="body-container">
+      <div class="info">
+        Information about recycling
+        <img src="../img/bottles.png" alt="bottles" class="info-image" />
+      </div>
+      <div class="detail">detail</div>
+      <div id="account">
+        <nav id="sign-in" class="account-sign">
+          <p>
+            Don't have an acount yet? Register
+            <router-link id="register" v-bind:to="{ name: 'register' }"
+              >here!</router-link
+            >
+          </p>
+        </nav>
+        <nav id="log-in">
+          <p>
+            If you have an account, please log in<router-link
+              id="login"
+              v-bind:to="{ name: 'login' }"
+            >
+              here!</router-link
+            >
+          </p>
+        </nav>
+      </div>
+    </div>
 
-  <!--container for information and the sign up, registration" -->
-  <div class="body-container">
-    <section class="info">Information about recycling</section>
-    <div id="account">
-      <nav id="sign-in" class="account-sign"><p>Don't have an acount yet? Register
-        <router-link v-bind:to="{name: 'register'}">here!</router-link></p>
-      </nav>
-      <nav id="log-in">
-        <p>If you have an account, please log in<router-link v-bind:to="{name: 'login'}"> here!</router-link></p>
-      </nav>
-    </div>  
-  </div>
-
-  <!--
+    <!--
   <nav>
       <ul>
         <li><a href="#">Home</a></li>
@@ -54,88 +72,115 @@
 
 </div>
 -->
-
-
-</div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "home"
+  name: "home",
   //name: "account"
 };
 </script>
 
 
 <style scope>
-
-*{
-  background-color:#BFE3BC ;
+* {
+  background-color: #bfe3bc;
 }
 
-img{
- 
-  display: flex;
+.detail {
+  background-color: #24b4a5;
+  box-sizing: content-box;
+  padding: 10px 300px 60px 100px;
+  border-right-style: solid;
+  border-right-color: cornsilk;
+  border-right-width: 5px;
 
+}
+
+img {
+  display: flex;
+}
+
+.info {
+  border-right-style: solid;
+  border-right-color: cornsilk;
+  border-right-width: 5px;
+   align-items: center;
+  justify-content: center;
+  text-align: center;
+  
 }
 
 #log-in {
-   display: flex;
-  margin: 0px 100px 30px 690px;
+  margin: 0px 10px 0px 60px;
   font-size: 20px;
-  flex-direction:row;
   padding: 0rem;
+  align-items: center;
+  justify-content: center;
+  
 }
 
 #account {
   display: flex;
   flex-direction: column;
+  background-color: #24b4a5;
+  padding:10px 5px 20px 0px;
 }
 
-
-
-
 .desc {
-font-family: cursive;
+  font-family: cursive;
   font-size: 30px;
 }
 
-#container{
+#login:hover,
+#register:hover {
+  color: #24b4a5;
+}
+
+#container {
   display: flex;
   flex-direction: column;
- 
+  align-items: center;
 }
-.account-sign{
-  display: flex;
-  margin: 0px 100px 50px 690px;
+.account-sign {
+  margin: 0px 10px 0px 60px;
   font-size: 20px;
-  flex-direction:row;
-  padding: 0rem;
+  background-color: #24b4a5;
+  padding-left:2px;
 }
 
 .header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:center;
-  padding:35px;
-
+  align-items: center;
+  padding: 35px;
 }
 
 .body-container {
   display: flex;
-  flex-direction: row;
-  margin: 60px;
-  padding: 30px 200px 200px 300px;
+  margin: 40px;
+  padding: 30px 60px 60px 100px;
   font-family: cursive;
   font-size: 20px;
   border-style: solid;
   border-color: cornsilk;
-  
+  background-color: #24b4a5;
+  justify-content:space-evenly;
 
 }
 
+.info-image {
+  width: 300px;
+  background-color: #24b4a5;
+}
 
 
-
+/*check media again */
+@media screen and (max-width: 1024px) {
+  .body-container div{
+    flex-wrap: wrap;
+  }
+}
 </style>
