@@ -43,7 +43,7 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.createToken(authentication, false);
         
-        User user = userDao.findByUsername(loginDto.getUsername());
+        User user = userDao.findUserByUsername(loginDto.getUsername());
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
@@ -54,7 +54,7 @@ public class AuthenticationController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public void registerUser(@Valid @RequestBody RegisterUserDto newUser) {
         try {
-            User user = userDao.findByUsername(newUser.getUsername());
+            User user = userDao.findUserByUsername(newUser.getUsername());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Already Exists.");
         } catch (UsernameNotFoundException e) {
             userDao.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole(), false);
@@ -66,10 +66,10 @@ public class AuthenticationController {
     // driver information, we'll send to this handler. Can change path to what works best
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "/register/driver", method = RequestMethod.POST)
+    @RequestMapping(value = "/addDriver", method = RequestMethod.POST)
     public void registerDriver(@Valid @RequestBody RegisterUserDto newDriver) {
         try {
-            User user = userDao.findByUsername(newDriver.getUsername());
+            User user = userDao.findUserByUsername(newDriver.getUsername());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Already Exists.");
         } catch (UsernameNotFoundException e) {
             userDao.create(newDriver.getUsername(),newDriver.getPassword(), newDriver.getRole(), true);

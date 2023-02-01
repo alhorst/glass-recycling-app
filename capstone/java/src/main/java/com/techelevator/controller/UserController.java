@@ -16,8 +16,8 @@ import java.util.List;
 public class UserController {
 
 
-    //Look into Authorization for methods - what should be admin authorized? or purely authenticated?
-
+    //To-do:
+    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
 
     private UserDao userDao;
@@ -30,42 +30,32 @@ public class UserController {
 
 
 
-    //JdbcUserDao Methods start here **********
+    //UserDao Methods start here **********
 
-    //this might be better suited in the drivers Controller
+    //get all users from users table (recyclers, admins, drivers)
+    @RequestMapping(path="/users", method= RequestMethod.GET)
+    public List<User> getAllUsers() {
+        return userDao.findAllUsers();
+    }
+
+
+    //get all drivers from users table
     @RequestMapping(path="/drivers", method= RequestMethod.GET)
     public List<User> getAllDrivers() {
         return userDao.listAllDrivers();
     }
 
-    @RequestMapping(path="/users", method= RequestMethod.GET)
-    public List<User> getAllUsers() {
-        return userDao.findAll();
-    }
 
-    //can tweak path name, trying to differentiate registered recylers from all users
-    @RequestMapping(path="/users/registered", method= RequestMethod.GET)
+    //can tweak path name, trying to differentiate registered recylers from all users. "path=/recyclers" ?
+    @RequestMapping(path="/registeredUsers", method= RequestMethod.GET)
     public List<User> getAllRecyclers() {
         return userDao.listAllRecyclers();
     }
 
-
-
-    @RequestMapping(path="/users/{id}", method= RequestMethod.GET)
-    public User getUserById(@PathVariable int id) {
-        User user = userDao.getUserById(id);
-
-        if (user == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such user exists");
-        } else {
-            return user;
-        }
-    }
-
-    // do we need this method?
-    @RequestMapping(path="/users/{username}", method= RequestMethod.GET)
-    public User getUserByUsername(@PathVariable String username) {
-        User user = userDao.findByUsername(username);
+    //get user from users table, by user_id
+    @RequestMapping(path="/users/{userId}", method= RequestMethod.GET)
+    public User getUserById(@PathVariable int userId) {
+        User user = userDao.getUserById(userId);
 
         if (user == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such user exists");
@@ -74,16 +64,18 @@ public class UserController {
         }
     }
 
-    //JdbcUserDetailsDao methods start here **********
+    //UserDetailsDao methods start here **********
 
-    @RequestMapping(path="users/details", method= RequestMethod.GET)
+    //get all user details from user_details table
+    @RequestMapping(path="/users/details", method= RequestMethod.GET)
     public List<UserDetails> getAllUserDetails() {
         return userDetailsDao.findAllUserDetails();
     }
 
-    @RequestMapping(path="users/{id}/details", method= RequestMethod.GET)
-    public UserDetails getUserDetailByAccountId(@PathVariable int id) {
-        UserDetails userDetail = userDetailsDao.findUserDetailsByAccountId(id);
+    //Get user detail from user_details table, using account_id
+    @RequestMapping(path="/users/details/{accountId}", method= RequestMethod.GET)
+    public UserDetails getUserDetailByAccountId(@PathVariable int accountId) {
+        UserDetails userDetail = userDetailsDao.findUserDetailsByAccountId(accountId);
 
         if (userDetail == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such user exists");
@@ -92,64 +84,78 @@ public class UserController {
         }
     }
 
-    //needs work --- no username in path variable
-    @RequestMapping(path="users/{username}/details", method= RequestMethod.GET)
-    public UserDetails getUserDetailByAccountId(@PathVariable String username) {
-        UserDetails userDetail = userDetailsDao.findUserDetailsByUsername(username);
-
-        if (userDetail == null){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such user exists");
-        } else {
-            return userDetail;
-        }
-    }
-
-    //needs work ------------------------------------------
+    //add new user detail to user_details table --- registering a user after they've completed information form
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path="users/details", method= RequestMethod.POST)
-    public UserDetails addUserDetails(@RequestBody UserDetails newUserDetail) {
-        return null;
+    @RequestMapping(path="/users/details", method= RequestMethod.POST)
+    public UserDetails addNewUserDetails(@RequestBody UserDetails newUserDetail) {
+        if (newUserDetail == userDetailsDao.findUserDetailsByAccountId(newUserDetail.getAccount_id())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "That user account already exists.");
+        } else {
+            return userDetailsDao.createUserDetails(newUserDetail);
+        }
     }
 
-
-    @RequestMapping(path="users/{id}/details", method= RequestMethod.PUT)
-    public void updateUserDetails(@RequestBody UserDetails userDetails, @PathVariable int id) {
-        if (userDetails.getAccount_id() != id) {
+    //update a user detail on the user_details table --- UserDetails object in Request body & account_id
+    @RequestMapping(path="/users/details/{accountId}", method= RequestMethod.PUT)
+    public void updateUserDetails(@RequestBody UserDetails userDetails, @PathVariable int accountId) {
+        if (userDetails.getAccount_id() != accountId) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id provided does not match the UserDetail you're trying to update");
         } else {
             userDetailsDao.updateUserDetails(userDetails);
         }
     }
 
+    //deleting a user detail from user_details table
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path="users/{id}/details", method= RequestMethod.DELETE)
-    public void deleteUserDetails(@PathVariable int id) {
-        if (userDetailsDao.findUserDetailsByAccountId(id) == null){
+    @RequestMapping(path="/users/details/{accountId}", method= RequestMethod.DELETE)
+    public void deleteUserDetails(@PathVariable int accountId) {
+        if (userDetailsDao.findUserDetailsByAccountId(accountId) == null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such Account Id exists");
         } else {
-            userDetailsDao.deleteUserDetails(id);
+            userDetailsDao.deleteUserDetails(accountId);
         }
     }
 
-    //needs work ---- no username in pathvariable - look request param
-    @RequestMapping(path="users/{username}/address", method= RequestMethod.GET)
-    public String getFullAddressByUsername(@PathVariable String username) {
-        if (userDetailsDao.findUserDetailsByUsername(username) == null){
+    //Get full address in string format for Routes API, using account_id
+    //example - '3001 Railroad St, Pittsburgh, PA 15201'
+    @RequestMapping(path="/users/details/{account_id}/address", method= RequestMethod.GET)
+    public String getFullAddressByAccountId(@PathVariable int account_id) {
+        if (userDetailsDao.findUserDetailsByAccountId(account_id) == null){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such username exists");
         } else {
-            return userDetailsDao.getFullAddressByUsername(username);
+            return userDetailsDao.getFullAddressByAccountId(account_id);
         }
     }
 
-    //still need:
+    //Get total amount of glass recycled for an account_id
+    @RequestMapping(path="/users/details/{account_id}/total", method= RequestMethod.GET)
+    public int getTotalGlassRecycledByAccountId(@PathVariable int account_id) {
+        if (userDetailsDao.findUserDetailsByAccountId(account_id) == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such username exists");
+        } else {
+            return userDetailsDao.getTotalGlassRecycledByAccountId(account_id);
+        }
+    }
 
-    // create user details
+    //Get current credit/point balance for an account_id
+    @RequestMapping(path="/users/details/{account_id}/balance", method= RequestMethod.GET)
+    public int getCreditBalanceByAccountId(@PathVariable int account_id) {
+        if (userDetailsDao.findUserDetailsByAccountId(account_id) == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such username exists");
+        } else {
+            return userDetailsDao.getCreditBalanceByAccountId(account_id);
+        }
+    }
 
-    // getTotalGlassRecycled
 
-    // getCreditBalance
-
-    //getCreditsRedeemed
-
-
+    //Get the total amount of credits an account has redeemed towards prizes
+    //Not 100% sure we'll need this method, keeping for now
+    @RequestMapping(path="/users/details/{account_id}/redeemed", method= RequestMethod.GET)
+    public int getCreditRedeemedByAccountId(@PathVariable int account_id) {
+        if (userDetailsDao.findUserDetailsByAccountId(account_id) == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No such username exists");
+        } else {
+            return userDetailsDao.getCreditRedeemedByAccountId(account_id);
+        }
+    }
 }
