@@ -18,6 +18,9 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    //Home office address
+    private static final String HOME_OFFICE_ADDRESS = "3001 Railroad St, Pittsburgh, PA 15201";
+
     @Override
     public List<DriverDetails> getAllDrivers() {
         List<DriverDetails> allDrivers = new ArrayList<>();
@@ -59,12 +62,17 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
 
     @Override
     public DriverDetails createDriver(DriverDetails driverDetails) {
-        return null;
+        String sql = "INSERT INTO driver_details (username, home_office_address) " +
+                    "VALUES (?, ?) RETURNING employee_id;";
+        Integer employee_id = jdbcTemplate.queryForObject(sql, Integer.class, driverDetails.getUsername(), HOME_OFFICE_ADDRESS);
+        return getDriverByEmployeeId(employee_id);
     }
 
     @Override
     public void updateDriver(DriverDetails driverDetails) {
-
+        String sql = "UPDATE driver_details " +
+                    "SET employee_id = ?, username = ?, home_office_address = ?;";
+        jdbcTemplate.update(sql, driverDetails.getEmployee_id(), driverDetails.getUsername(), HOME_OFFICE_ADDRESS);
     }
 
     @Override

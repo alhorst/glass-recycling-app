@@ -18,7 +18,7 @@ public interface UserDetailsDao {
 
     void deleteUserDetails(int account_id);
 
-    String getFullAddress(String username);
+    String getFullAddressByUsername(String username);
 
     int getCreditBalance(String username);
 
