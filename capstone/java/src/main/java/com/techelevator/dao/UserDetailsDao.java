@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface UserDetailsDao {
 
-    List<UserDetails> getAllUserDetails();
+    List<UserDetails> findAllUserDetails();
 
-    UserDetails getUserDetailsByAccountId(int account_id);
+    UserDetails findUserDetailsByAccountId(int account_id);
 
-    UserDetails getUserDetailsByUsername(String username);
+    UserDetails findUserDetailsByUsername(String username);
 
     UserDetails createUserDetails(UserDetails userDetails);
 

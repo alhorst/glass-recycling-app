@@ -23,7 +23,7 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
     private static final int STARTING_CREDITS_REDEEMED = 0;
 
     @Override
-    public List<UserDetails> getAllUserDetails() {
+    public List<UserDetails> findAllUserDetails() {
         List<UserDetails> allUsers = new ArrayList<>();
         String sql = "SELECT account_id, username, full_name, street_address, city, state_abbreviation, " +
                 "zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed " +
@@ -38,7 +38,7 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
     }
 
     @Override
-    public UserDetails getUserDetailsByAccountId(int account_id) {
+    public UserDetails findUserDetailsByAccountId(int account_id) {
         UserDetails userDetails = null;
         String sql = "SELECT account_id, username, full_name, street_address, city, state_abbreviation, " +
                 "zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed " +
@@ -52,7 +52,7 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
     }
 
     @Override
-    public UserDetails getUserDetailsByUsername(String username) {
+    public UserDetails findUserDetailsByUsername(String username) {
         UserDetails userDetails = null;
         String sql = "SELECT account_id, username, full_name, street_address, city, state_abbreviation, " +
                 "zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed " +
@@ -74,7 +74,7 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
                              userDetails.getCity(), userDetails.getState_abbreviation(), userDetails.getZipcode(), userDetails.getPhone_number(),
                              userDetails.getEmail_address(), STARTING_TOTAL_POUNDS, STARTING_CREDITS, STARTING_CREDITS_REDEEMED);
 
-        return getUserDetailsByAccountId(account_id);
+        return findUserDetailsByAccountId(account_id);
     }
 
     @Override
@@ -111,6 +111,19 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
     }
 
     @Override
+    public int getTotalGlassRecycled(String username) {
+        int totalGlassRecycled = 0;
+        String sql = "SELECT total_pounds_recycled " +
+                "FROM user_details WHERE username = ?;";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+        if (result.next()){
+            totalGlassRecycled = result.getInt("total_pounds_recycled");
+        }
+        return totalGlassRecycled;
+    }
+
+    @Override
     public int getCreditBalance(String username) {
         int currentBalance = 0;
         String sql = "SELECT credits_balance " +
@@ -136,18 +149,7 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
         return creditsRedeemed;
     }
 
-    @Override
-    public int getTotalGlassRecycled(String username) {
-        int totalGlassRecycled = 0;
-        String sql = "SELECT total_pounds_recycled " +
-                     "FROM user_details WHERE username = ?;";
 
-        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
-        if (result.next()){
-            totalGlassRecycled = result.getInt("total_pounds_recycled");
-        }
-        return totalGlassRecycled;
-    }
 
     private UserDetails mapRowToUserDetail(SqlRowSet rs) {
         UserDetails userDetail = new UserDetails();
