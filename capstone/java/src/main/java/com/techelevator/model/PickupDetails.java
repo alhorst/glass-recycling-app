@@ -12,14 +12,7 @@ public class PickupDetails {
     private int num_of_bins;
     private Boolean is_picked_up;
 
-    public PickupDetails(int pickup_id, int driver_id, String requesting_username, Date pickup_date, int num_of_bins, Boolean is_picked_up) {
-        this.pickup_id = pickup_id;
-        this.driver_id = driver_id;
-        this.requesting_username = requesting_username;
-        this.pickup_date = pickup_date;
-        this.num_of_bins = num_of_bins;
-        this.is_picked_up = is_picked_up;
-    }
+
 
     public int getPickup_id() {
         return pickup_id;
