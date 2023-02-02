@@ -62,7 +62,7 @@ CREATE TABLE driver_details (
 CREATE TABLE routes (
     route_id SERIAL,
     route_date date NOT NULL,
-    driver_id int NOT NULL,
+    driver_id int,
     CONSTRAINT PK_routes PRIMARY KEY (route_id),
     CONSTRAINT FK_routes_driver_details FOREIGN KEY (driver_id) REFERENCES driver_details (employee_id)
 );
