@@ -30,7 +30,7 @@ public class JdbcUserDao implements UserDao {
     @Override
     public List<User> findAllUsers() {
         List<User> users = new ArrayList<>();
-        String sql = "select * from users";
+        String sql = "SELECT * FROM users";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
@@ -96,7 +96,7 @@ public class JdbcUserDao implements UserDao {
 
         int userId;
         try {
-            userId = jdbcTemplate.queryForObject("select user_id from users where username = ?", Integer.class, username);
+            userId = jdbcTemplate.queryForObject("SELECT user_id FROM users WHERE username = ?", Integer.class, username);
         } catch (EmptyResultDataAccessException e) {
             throw new UsernameNotFoundException("User " + username + " was not found.");
         }
@@ -106,7 +106,7 @@ public class JdbcUserDao implements UserDao {
     //implemented via Authentication Controller to create both User and Driver accounts
     @Override
     public boolean create(String username, String password, String role, boolean is_driver) {
-        String insertUserSql = "insert into users (username,password_hash,role,is_driver) values (?,?,?,?)";
+        String insertUserSql = "INSERT INTO users (username,password_hash,role,is_driver) values (?,?,?,?)";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         String ssRole = role.toUpperCase().startsWith("ROLE_") ? role.toUpperCase() : "ROLE_" + role.toUpperCase();
 
