@@ -84,11 +84,6 @@ CREATE TABLE pickup_details (
 );
 
 
-
-
-
-
-
 -- Brought up idea of a credits table to track pounds of glass, credits, along with account_id
 -- Andy said it can live on the user_details table in our case, assuming one user account has one credit account which is true
 -- credits table

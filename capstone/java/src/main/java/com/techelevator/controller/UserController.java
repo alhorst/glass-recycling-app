@@ -15,7 +15,6 @@ import java.util.List;
 @CrossOrigin
 public class UserController {
 
-
     //To-do:
     ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
