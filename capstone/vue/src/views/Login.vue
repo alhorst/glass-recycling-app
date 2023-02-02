@@ -18,7 +18,7 @@
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
      <label class="container">
-  <input type="radio" name="radio" class="radio">
+  <input type="radio" name="radio" class="radio" >
   <span class="checkmark">Login as Bussiness Admin</span>
 </label>
 <br>
@@ -45,7 +45,10 @@
         required
       />
       <br>
+      
       <button class="login-form__button" type="submit">Login</button>
+      <!-- <router-link :to="{ name: 'account'}">
+      </router-link> -->
       <div class="login-form_links">
       <router-link :to="{ name: 'register' }" class="login-form_link">Need an account?</router-link>
       </div>
@@ -62,6 +65,7 @@ import authService from "../services/AuthService";
 export default {
   name: "login",
   components: {},
+  checked : false,
   data() {
     return {
       user: {
@@ -79,7 +83,7 @@ export default {
           if (response.status == 200) {
             this.$store.commit("SET_AUTH_TOKEN", response.data.token);
             this.$store.commit("SET_USER", response.data.user);
-            this.$router.push("/");
+            this.$router.push("/account");
           }
         })
         .catch(error => {
@@ -89,7 +93,12 @@ export default {
             this.invalidCredentials = true;
           }
         });
-    }
+    },
+
+    //check status will define admin or user
+    // checkStatus(){
+    //   if(this.user.username)
+    // }
   }
 };
 </script>

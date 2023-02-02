@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Admin from '../views/AdminDashboard.vue'
 import Driver from '../views/DriverDashboard.vue'
+import Account from '../views/Account.vue'
 
 Vue.use(Router)
 
@@ -28,9 +29,9 @@ const router = new Router({
       name: 'home',
       component: Home,
 
-      // meta: {
-      //   requiresAuth: true
-      // }
+    // meta: {
+    //    requiresAuth: true
+    //    }
     },
     {
       path: "/login",
@@ -72,6 +73,16 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+    path: "/account",
+    name: "account",
+    component: Account,
+    // meta: {
+    //   requiresAuth: true,
+    // }
+    }
+
+
   ]
 })
 

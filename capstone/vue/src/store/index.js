@@ -16,10 +16,18 @@ if(currentToken != null) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
 }
 
+
+//account holder should be updated!
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    accountHolder: {
+      username:'yu',
+      fullname:'',
+      streetAddress:'',
+      city:'',
+}
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -31,6 +39,7 @@ export default new Vuex.Store({
       state.user = user;
       localStorage.setItem('user',JSON.stringify(user));
     },
+
     LOGOUT(state) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
