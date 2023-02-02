@@ -74,7 +74,7 @@ CREATE TABLE pickup_details (
 	route_id int,
 	requesting_username varchar(50) NOT NULL,
 	pickup_date date NOT NULL,
-	pickup_weight int NOT NULL, -- 60lbs * num_of_bins
+	pickup_weight int, -- 60lbs * num_of_bins
 	num_of_bins int NOT NULL, -- User selection of 1, 2, or 3(max) per pickup
 	is_Picked_Up boolean DEFAULT false,
 	CONSTRAINT PK_pickup_details PRIMARY KEY (pickup_id),
