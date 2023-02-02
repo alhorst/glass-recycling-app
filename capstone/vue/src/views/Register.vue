@@ -58,6 +58,9 @@ export default {
         password: '',
         confirmPassword: '',
         role: 'user',
+        is_driver: false,
+
+        // admin action addidng driver then it turns to true       driver: false,
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.',
@@ -118,7 +121,7 @@ export default {
 
 .form-register{
   max-width: 400px;
-  height: 550px;
+  height: 600px;
     margin: 0 auto;
     border-radius: 5px;
     overflow: hidden;

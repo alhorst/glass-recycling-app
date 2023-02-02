@@ -4,7 +4,7 @@
 <template>
   <div id="container">
     <div id="home" class="header">
-      <section class="desc">Welcome to GlassEco</section>
+      <section class="desc">Welcome to Vitrum Recycle</section>
 
       <img
         src="../img/updateimage.png"
