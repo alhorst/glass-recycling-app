@@ -5,21 +5,30 @@ Three columns( history, calendar, account)
 -->
 
 <template>
-    <div>
-    
-    </div>
+  <div>MyAccountCorrect
+  <div>
+<router-link :to="{name: 'account-detail'}"> My Account Address Info</router-link>
+</div> 
+</div>
 </template>
 
 <script>
 
-export default {
-    name: "AccountMain",
-methods:{
-    setUser(user){
-        this.$store.commit('SET_USER', user)
-    }
 
-}
-}
+
+// export default {
+//     name: "account-main",
+//     data() {
+//         return {
+//             user: '',
+
+//     }
+//     created(){
+//         accountService.get
+//     }
+
+//     //accountservice.getmethod
+
+//     }
 
 </script>

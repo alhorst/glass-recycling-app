@@ -1,10 +1,6 @@
 import axios from 'axios';
 
-
 //should  we have fixed http??? Ask!
-const http = axios.create({
-    baseURL: "http://localhost:8083"
-})
 
 export default {
 
@@ -15,7 +11,12 @@ export default {
 
     //this method is to get all account details for user/driver based on username
     getUserInfoById(userId) {
-        return http.get(`/users/${userId}`)
+        return axios.get(`/users/${userId}`)
+    },
+
+    // //add new user detail.
+    addUserDetails(userDetail) {
+        return axios.post('/users/details', userDetail)
     }
 
 }

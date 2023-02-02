@@ -62,7 +62,7 @@ CREATE TABLE driver_details (
 CREATE TABLE routes (
     route_id SERIAL,
     route_date date NOT NULL,
-    driver_id int NOT NULL,
+    driver_id int,
     CONSTRAINT PK_routes PRIMARY KEY (route_id),
     CONSTRAINT FK_routes_driver_details FOREIGN KEY (driver_id) REFERENCES driver_details (employee_id)
 );
@@ -71,10 +71,10 @@ CREATE TABLE routes (
 -- route_id will default to 0 == unassigned
 CREATE TABLE pickup_details (
 	pickup_id SERIAL,
-	route_id int DEFAULT 0,
+	route_id int,
 	requesting_username varchar(50) NOT NULL,
 	pickup_date date NOT NULL,
-	pickup_weight int NOT NULL, -- 60lbs * num_of_bins
+	pickup_weight int, -- 60lbs * num_of_bins
 	num_of_bins int NOT NULL, -- User selection of 1, 2, or 3(max) per pickup
 	is_Picked_Up boolean DEFAULT false,
 	CONSTRAINT PK_pickup_details PRIMARY KEY (pickup_id),
