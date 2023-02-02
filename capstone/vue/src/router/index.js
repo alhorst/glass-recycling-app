@@ -8,6 +8,7 @@ import store from '../store/index'
 import Admin from '../views/AdminDashboard.vue'
 import Driver from '../views/DriverDashboard.vue'
 import Account from '../views/Account.vue'
+import AccountDetails from '../views/AccountDetails.vue'
 
 Vue.use(Router)
 
@@ -80,7 +81,13 @@ const router = new Router({
     // meta: {
     //   requiresAuth: true,
     // }
+    },
+    {
+      path: "/account-detail",
+    name: "account-detail",
+    component: AccountDetails,
     }
+
 
 
   ]
