@@ -6,11 +6,12 @@ import java.util.List;
 
 public interface UserDetailsDao {
 
-    List<UserDetails> getAllUserDetails();
+    List<UserDetails> findAllUserDetails();
 
-    UserDetails getUserDetailsByAccountId(int account_id);
+    UserDetails findUserDetailsByAccountId(int account_id);
 
-    UserDetails getUserDetailsByUsername(String username);
+    // May not need this method - commenting out for now
+    //UserDetails findUserDetailsByUsername(String username);
 
     UserDetails createUserDetails(UserDetails userDetails);
 
@@ -18,13 +19,15 @@ public interface UserDetailsDao {
 
     void deleteUserDetails(int account_id);
 
-    String getFullAddressByUsername(String username);
+    String getFullAddressByAccountId(int account_id);
 
-    int getCreditBalance(String username);
+    int getTotalGlassRecycledByAccountId(int account_id);
 
-    int getCreditRedeemed(String username);
+    int getCreditBalanceByAccountId(int account_id);
 
-    int getTotalGlassRecycled(String username);
+    int getCreditRedeemedByAccountId(int account_id);
+
+
 
 
 

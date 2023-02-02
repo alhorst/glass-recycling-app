@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface UserDao {
 
-    List<User> findAll();
+    List<User> findAllUsers();
 
     List<User> listAllDrivers();
 
@@ -14,9 +14,9 @@ public interface UserDao {
 
     User getUserById(int userId);
 
-    User findByUsername(String username);
+    User findUserByUsername(String username);
 
-    int findIdByUsername(String username);
+    int findUserIdByUsername(String username);
 
     boolean create(String username, String password, String role, boolean is_driver);
 }

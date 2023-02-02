@@ -25,34 +25,34 @@ public class JdbcUserDaoTests extends BaseDaoTests {
 
     @Test(expected = IllegalArgumentException.class)
     public void findIdByUsername_given_null_throws_exception() {
-        sut.findIdByUsername(null);
+        sut.findUserIdByUsername(null);
     }
 
     @Test(expected = UsernameNotFoundException.class)
     public void findIdByUsername_given_invalid_username_throws_exception() {
-        sut.findIdByUsername("invalid");
+        sut.findUserIdByUsername("invalid");
     }
 
     @Test
     public void findIdByUsername_given_valid_user_returns_user_id() {
-        int actualUserId = sut.findIdByUsername(USER_1.getUsername());
+        int actualUserId = sut.findUserIdByUsername(USER_1.getUsername());
 
         Assert.assertEquals(USER_1.getId(), actualUserId);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void findByUsername_given_null_throws_exception() {
-        sut.findByUsername(null);
+        sut.findUserByUsername(null);
     }
 
     @Test(expected = UsernameNotFoundException.class)
     public void findByUsername_given_invalid_username_throws_exception() {
-        sut.findByUsername("invalid");
+        sut.findUserByUsername("invalid");
     }
 
     @Test
     public void findByUsername_given_valid_user_returns_user() {
-        User actualUser = sut.findByUsername(USER_1.getUsername());
+        User actualUser = sut.findUserByUsername(USER_1.getUsername());
 
         Assert.assertEquals(USER_1, actualUser);
     }
@@ -72,7 +72,7 @@ public class JdbcUserDaoTests extends BaseDaoTests {
 
     @Test
     public void findAll_returns_all_users() {
-        List<User> users = sut.findAll();
+        List<User> users = sut.findAllUsers();
 
         Assert.assertNotNull(users);
         Assert.assertEquals(3, users.size());
@@ -104,7 +104,7 @@ public class JdbcUserDaoTests extends BaseDaoTests {
 
         Assert.assertTrue(userWasCreated);
 
-        User actualUser = sut.findByUsername(newUser.getUsername());
+        User actualUser = sut.findUserByUsername(newUser.getUsername());
         newUser.setId(actualUser.getId());
 
         actualUser.setPassword(newUser.getPassword()); // reset password back to unhashed password for testing

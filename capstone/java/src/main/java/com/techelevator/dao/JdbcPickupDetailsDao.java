@@ -15,18 +15,18 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public JdbcPickupDetailsDao(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public JdbcPickupDetailsDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public PickupDetails getPickupDetails(int pickup_id) {
+    public PickupDetails getPickupDetails(int pickupId) {
 
         PickupDetails pickupDetails = null;
         String sql = "SELECT pickup_id, driver_id, requesting_username, pickup_date, num_of_bins, is_picked_up " +
                     "FROM pickup_details " +
                     "WHERE pickup_id = ?;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, pickup_id);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, pickupId);
         if (results.next()) {
             pickupDetails = mapRowToPickupDetails(results);
         }
@@ -35,12 +35,12 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
     }
 
     @Override
-    public List<PickupDetails> getPickupDetailsByDriverId(int driver_Id) {
+    public List<PickupDetails> getPickupDetailsByDriverId(int driverId) {
         List<PickupDetails> pickupDetailsList = new ArrayList<>();
         String sql = "SELECT pickup_id, driver_id, requesting_username, pickup_date, num_of_bins, is_picked_up " +
                     "FROM pickup_details " +
                     "WHERE driver_id = ?;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, driver_Id);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, driverId);
         while (results.next()) {
             pickupDetailsList.add(mapRowToPickupDetails(results));
         }
@@ -48,12 +48,12 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
     }
 
     @Override
-    public List<PickupDetails> getPickupDetailsByDate(Date pickup_date) {
+    public List<PickupDetails> getPickupDetailsByDate(Date pickupDate) {
         List<PickupDetails> pickupDetailsList = new ArrayList<>();
         String sql = "SELECT pickup_id, driver_id, requesting_username, pickup_date, num_of_bins, is_picked_up " +
                 "FROM pickup_details " +
                 "WHERE pickup_date = ?;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, pickup_date);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, pickupDate);
         while (results.next()) {
             pickupDetailsList.add(mapRowToPickupDetails(results));
         }
@@ -72,16 +72,16 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
     @Override
     public void updatePickupDetails(PickupDetails pickupDetails) {
         String sql = "UPDATE pickup_details " +
-                "SET driver_id = ?, requesting username = ?, pickup_date = ?, num_of_bins = ?, is_picked_up = ? " +
+                "SET driver_id = ?, requesting_username = ?, pickup_date = ?, num_of_bins = ?, is_picked_up = ? " +
                 "WHERE pickup_id = ?;";
         jdbcTemplate.update(sql, pickupDetails.getDriver_id(), pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up(), pickupDetails.getPickup_id());
 
     }
 
     @Override
-    public void deletePickupDetails(int pickup_id) {
+    public void deletePickupDetails(int pickupId) {
         String sql = "DELETE FROM pickup_details WHERE pickup_id = ?;";
-        jdbcTemplate.update(sql, pickup_id);
+        jdbcTemplate.update(sql, pickupId);
 
     }
 
