@@ -5,6 +5,7 @@ import com.techelevator.dao.PickupDetailsDao;
 import com.techelevator.dao.RoutesDao;
 import com.techelevator.model.DriverDetails;
 import com.techelevator.model.PickupDetails;
+import com.techelevator.model.Routes;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -58,18 +59,16 @@ public class PickupController {
 
 
     //Add a pickup in the pickup_details table
-    //how to get newPickup object back - reference driver controller
-    // might need new method - getPickupDetailByRequestingUsername
-    /*
+
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/pickups", method= RequestMethod.POST)
     public PickupDetails addPickupDetails(@RequestBody PickupDetails newPickup) {
         if (newPickup != null) {
-            pickupDetailsDao.createPickupDetails(newPickup);
+            return pickupDetailsDao.createPickupDetails(newPickup);
 
         }
         return null;
-    }*/
+    }
 
     //Updates a row in the pickup_details table
     //would be a way to assign pickup to a driver/route
@@ -95,6 +94,54 @@ public class PickupController {
     }
 
 
+    //RoutesDao Methods start here **********
 
+    //Get a Route object from the routes table, using route_id
+    @RequestMapping(path="/routes/{routeId}", method= RequestMethod.GET)
+    public Routes getRouteByRouteId(@PathVariable int routeId) {
+        Routes route = null;
+        route = routesDao.getRoutesByRouteId(routeId);
+        if (route != null) {
+            return route;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such route exists");
+        }
+    }
 
+    //Get routes by date Method--- thinking of best way to implement and pass date to the handler method
+
+    //Add a route to the routes table - returning the new Route object
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path="/routes", method= RequestMethod.POST)
+    public Routes addNewRoute(@RequestBody Routes newRoute) {
+        if (newRoute != null) {
+            return routesDao.createRoute(newRoute);
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No route details provided in the request");
+        }
+    }
+
+    //Update a route on the routes table - returning the updated route
+    @RequestMapping(path="/routes/{routeId}", method= RequestMethod.PUT)
+    public Routes updateRoute(@RequestBody Routes routeToUpdate, @PathVariable int routeId) {
+        if (routeToUpdate.getRouteId() != routeId) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The route Id provided does not match the route record you're attempting to update");
+        } else {
+            Routes updatedRoute = null;
+            routesDao.updateRoute(routeToUpdate);
+            updatedRoute = routesDao.getRoutesByRouteId(routeId);
+            return updatedRoute;
+        }
+    }
+
+    //Deletes a route from the routes table
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path="/routes/{routeId}", method= RequestMethod.DELETE)
+    public void deleteRoute(@PathVariable int routeId) {
+        if (routesDao.getRoutesByRouteId(routeId) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The route record you're attempting to delete, does not exist");
+        } else {
+            routesDao.deleteRoute(routeId);
+        }
+    }
 }

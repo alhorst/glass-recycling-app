@@ -57,11 +57,10 @@ public class DriverController {
     @RequestMapping(path="/driverDetails", method= RequestMethod.POST)
     public DriverDetails addDriverDetail(@RequestBody DriverDetails newDriver) {
         if (newDriver != null) {
-            driverDetailsDao.createDriver(newDriver);
+            return driverDetailsDao.createDriver(newDriver);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No details provided in the request!");
         }
-        return driverDetailsDao.getDriverByEmployeeId(newDriver.getEmployee_id());
     }
 
     //Update a row in the driver_details table - returns the updated Driver Detail object
