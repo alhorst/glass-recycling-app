@@ -113,7 +113,7 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
     @Override
     public String getFullAddressByAccountId(int account_id) {
         String address = null;
-        String sql = "SELECT street_address, city, state_abbreviation, zipcode, " +
+        String sql = "SELECT street_address, city, state_abbreviation, zipcode " +
                     "FROM user_details WHERE account_id = ?;";
 
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, account_id);
