@@ -14,6 +14,10 @@ import java.util.List;
 @CrossOrigin
 public class DriverController {
 
+    //To-do:
+    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
+
+
     private DriverDetailsDao driverDetailsDao;
     private PickupDetailsDao pickupDetailsDao;
     private RoutesDao routesDao;
@@ -81,12 +85,4 @@ public class DriverController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The driver you're attempting to delete, does not exist");
         }
     }
-
-
-
-
-
-
-
-
 }

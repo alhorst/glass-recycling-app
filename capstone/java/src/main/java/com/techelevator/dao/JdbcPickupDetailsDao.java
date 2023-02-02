@@ -19,6 +19,10 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
+    //Do we need a getUnassignedPickups method - would display list of unassigned pickups to admin
+
+
     @Override
     public PickupDetails getPickupDetails(int pickupId) {
 
