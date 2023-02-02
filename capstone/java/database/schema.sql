@@ -71,7 +71,7 @@ CREATE TABLE routes (
 -- route_id will default to 0 == unassigned
 CREATE TABLE pickup_details (
 	pickup_id SERIAL,
-	route_id int DEFAULT 0,
+	route_id int,
 	requesting_username varchar(50) NOT NULL,
 	pickup_date date NOT NULL,
 	pickup_weight int NOT NULL, -- 60lbs * num_of_bins
