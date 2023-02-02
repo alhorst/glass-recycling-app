@@ -23,10 +23,12 @@ public class JdbcUserDao implements UserDao {
     }
 
 
+    //Methods calling on users table
 
-    // returns list of all users, drivers, and admins
+
+    //get all users from users table (recyclers, admins, drivers)
     @Override
-    public List<User> findAll() {
+    public List<User> findAllUsers() {
         List<User> users = new ArrayList<>();
         String sql = "select * from users";
 
@@ -38,7 +40,7 @@ public class JdbcUserDao implements UserDao {
         return users;
     }
 
-    // returns list of all drivers
+    //get all drivers from users table
     @Override
     public List<User> listAllDrivers() {
         List<User> allDrivers = new ArrayList<>();
@@ -65,10 +67,10 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User findByUsername(String username) {
+    public User findUserByUsername(String username) {
         if (username == null) throw new IllegalArgumentException("Username cannot be null");
 
-        for (User user : this.findAll()) {
+        for (User user : this.findAllUsers()) {
             if (user.getUsername().equalsIgnoreCase(username)) {
                 return user;
             }
@@ -76,6 +78,7 @@ public class JdbcUserDao implements UserDao {
         throw new UsernameNotFoundException("User " + username + " was not found.");
     }
 
+    //get user from users table, by user_id
     @Override
     public User getUserById(int userId) {
         String sql = "SELECT * FROM users WHERE user_id = ?";
@@ -88,7 +91,7 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public int findIdByUsername(String username) {
+    public int findUserIdByUsername(String username) {
         if (username == null) throw new IllegalArgumentException("Username cannot be null");
 
         int userId;
