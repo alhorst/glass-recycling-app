@@ -167,6 +167,7 @@ export default {
 
 <style>
 #grid-container {
+  font-family: "Raleway", sans-serif;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas:
@@ -194,16 +195,16 @@ export default {
 }
 #report {
   grid-area: report;
+  font-family: "Raleway", sans-serif;
   width: 500px;
   height: 400px;
   padding: 25px;
   margin: 25px;
-  border: 1px dashed gray;
 }
+
 .coord-input {
-  border: 1px dashed gray;
-  padding: 25px;
-  margin: 25px;
+  padding: 20px;
+  margin: 20px;
 }
 .input-cell {
   vertical-align: top;

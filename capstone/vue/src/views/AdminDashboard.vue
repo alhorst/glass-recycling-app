@@ -465,7 +465,7 @@ export default {
     "map"
     "pickups"
     "drivers";
-  grid-template-rows: 1fr 2fr 2fr;
+  grid-template-rows: auto;
   gap: 40px;
   padding: 10px;
   border: 1px solid white;

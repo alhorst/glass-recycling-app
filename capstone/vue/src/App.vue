@@ -18,7 +18,9 @@
   </div>
 </template>
 
-<style scoped>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
+
 #nav {
   font-family: "Raleway", sans-serif;
   font-weight: bold;
