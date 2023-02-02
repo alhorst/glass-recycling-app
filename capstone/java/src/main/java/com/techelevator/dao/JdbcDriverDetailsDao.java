@@ -1,15 +1,13 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.DriverDetails;
-import com.techelevator.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import java.sql.Driver;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Component
 public class JdbcDriverDetailsDao implements DriverDetailsDao{
