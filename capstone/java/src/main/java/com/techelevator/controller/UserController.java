@@ -39,15 +39,15 @@ public class UserController {
     }
 
 
-    //get all drivers from users table
+    //get all drivers from users table (ROLE == USER, is_driver == true)
     @RequestMapping(path="/drivers", method= RequestMethod.GET)
     public List<User> getAllDrivers() {
         return userDao.listAllDrivers();
     }
 
 
-    //can tweak path name, trying to differentiate registered recylers from all users. "path=/recyclers" ?
-    @RequestMapping(path="/registeredUsers", method= RequestMethod.GET)
+    //get all recyclers from the users table (ROLE == USER, is_driver == false)
+    @RequestMapping(path="/recyclers", method= RequestMethod.GET)
     public List<User> getAllRecyclers() {
         return userDao.listAllRecyclers();
     }
