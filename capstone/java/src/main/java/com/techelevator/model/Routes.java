@@ -8,8 +8,6 @@ import java.util.Date;
 public class Routes {
 
     private int routeId;
-    //Blocks past or same day route creation - must be 1 day in advance
-    @Future(message = "You must schedule a route for a future date")
     private Date routeDate;
     private int driverId;
 
