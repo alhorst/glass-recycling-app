@@ -4,12 +4,12 @@
 <template>
   <div id="container">
     <div id="home" class="header">
-      <img
+      <!-- <img
         src="../img/image (1).png"
         alt="Glass Recycling Logo"
         class="logo"
-      />
-      <section class="desc">Vitrum Recycle</section>
+     
+      <section class="desc">Vitrum Recycle</section> /> -->
     </div>
 
     <!--container for information and the sign up, registration" -->
@@ -104,22 +104,12 @@ export default {
 
 
 <style scope>
-<<<<<<< HEAD
 * {
   font-family: 'Raleway', sans-serif;
 }
 #container{
   /* background-color: #bfe3bc; */
 }
-=======
-/* #container{
-  background-color: #bfe3bc;
-} */
-
-*{
-   background: white;
-} 
->>>>>>> 5ca8bf7e16233de11893707ce42047231135ecf8
 
 #first-container{
   display: flex;

@@ -4,10 +4,18 @@
       <!-- Navbar -->
       <div id="nav-container">
         <img id="logo" src="./img/logo.png" alt="Vitrum Recycling Logo" />
-        <router-link v-bind:to="{ name: 'home' }"><i class="fa fa-fw fa-home"></i>Home</router-link>
-        <router-link v-bind:to="{ name: 'account'}"><i class="fa fa-fw fa-user"></i>Account</router-link>
+        <router-link v-bind:to="{ name: 'home' }"
+          ><i class="fa fa-fw fa-home"></i>Home</router-link
+        >
+        <router-link v-bind:to="{ name: 'account' }"
+          ><i class="fa fa-fw fa-user"></i>Account</router-link
+        >
         <!-- This router link for logout is going to dropdown from Account...once I figure it out -->
-        <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+        <router-link
+          v-bind:to="{ name: 'logout' }"
+          v-if="$store.state.token != ''"
+          >Logout</router-link
+        >
       </div>
     </div>
     <router-view />
@@ -18,7 +26,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
 
 /* Why the heck is the gradient applying to ever box */
-* {
+#app {
   background: rgb(11, 122, 30);
   background: linear-gradient(
     0deg,
@@ -42,9 +50,10 @@
 a:link,
 a:visited {
   /* background-color: green; */
-  /* color: white; */
+  color: white; 
   padding: 14px 20px;
   text-align: center;
+  font-size: 1.2em;
   text-decoration: none;
   display: inline-block;
 }

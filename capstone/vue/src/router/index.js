@@ -56,22 +56,22 @@ const router = new Router({
         requiresAuth: false
       }
     },
-    {
-      path: "/admin",
-      name: "admin-dash",
-      component: Admin,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: "/driver",
-      name: "driver-dash",
-      component: Driver,
-      meta: {
-        requiresAuth: false
-      }
-    },
+    // {
+    //   path: "/admin",
+    //   name: "admin-dash",
+    //   component: Admin,
+    //   meta: {
+    //     requiresAuth: true
+    //   }
+    // },
+    // {
+    //   path: "/driver",
+    //   name: "driver-dash",
+    //   component: Driver,
+    //   meta: {
+    //     requiresAuth: false
+    //   }
+    // },
     {
     path: "/account",
     name: "account",
