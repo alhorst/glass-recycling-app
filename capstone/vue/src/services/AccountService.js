@@ -19,8 +19,10 @@ export default {
         return axios.post('/users/details', userDetail)
     },
 
-    getUserDetails(){
-        return axios.get('/users/details')
+
+    //get userdetail by username
+    getUserDetails(username){
+        return axios.get('/users/myDetails', username)
     }
 
 }
