@@ -108,10 +108,9 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
 
     @Override
     public PickupDetails createPickupDetails(PickupDetails pickupDetails) {
-        String sql = "INSERT INTO pickup_details (route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up) " +
+        String sql = "INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up) " +
                     "VALUES (?, ?, ?, ?, ?) RETURNING pickup_id;";
-        Integer newId = jdbcTemplate.queryForObject(sql, Integer.class,
-                pickupDetails.getRoute_id(), pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.getPickup_weight(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up());
+        Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.calcPickupWeight(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up());
         return getPickupDetails(newId);
     }
 
@@ -120,7 +119,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         String sql = "UPDATE pickup_details " +
                     "SET route_id = ?, requesting_username = ?, pickup_date = ?, pickup_weight = ?, num_of_bins = ?, is_picked_up = ? " +
                     "WHERE pickup_id = ?;";
-        jdbcTemplate.update(sql, pickupDetails.getRoute_id(), pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.getPickup_weight(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up(), pickupDetails.getPickup_id());
+        jdbcTemplate.update(sql, pickupDetails.getRoute_id(), pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.calcPickupWeight(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up(), pickupDetails.getPickup_id());
 
     }
 
