@@ -1,17 +1,13 @@
 <template>
   <div id="app">
-    <div class="container">
-      <div id="nav">
-        <router-link v-bind:to="{ name: 'home' }"
-          ><i class="fa fa-fw fa-home"></i>Home</router-link
-        >
-        <i class="fa fa-fw fa-envelope"></i>Contact
-        <i class="fa fa-fw fa-user"></i>Login
-        <router-link
-          v-bind:to="{ name: 'logout' }"
-          v-if="$store.state.token != ''"
-          >Logout</router-link
-        >
+    <div class="navbar">
+      <!-- Navbar -->
+      <div id="nav-container">
+        <img id="logo" src="./img/logo.png" alt="Vitrum Recycling Logo" />
+        <router-link v-bind:to="{ name: 'home' }"><i class="fa fa-fw fa-home"></i>Home</router-link>
+        <router-link v-bind:to="{ name: 'account'}"><i class="fa fa-fw fa-user"></i>Account</router-link>
+        <!-- This router link for logout is going to dropdown from Account...once I figure it out -->
+        <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
       </div>
     </div>
     <router-view />
@@ -21,12 +17,25 @@
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
 
+/* Why the heck is the gradient applying to ever box */
+* {
+  background: rgb(11, 122, 30);
+  background: linear-gradient(
+    0deg,
+    rgba(11, 122, 30, 1) 0%,
+    rgba(122, 198, 47, 1) 22%,
+    rgba(252, 252, 252, 1) 95%
+  );
+}
+
+#logo {
+  float: left;
+}
 #nav {
   font-family: "Raleway", sans-serif;
-  font-weight: bold;
   font-size: 1.5em;
   text-align: center;
-  /* background-color: green; */
+  background-color: white;
   width: 100%;
 }
 

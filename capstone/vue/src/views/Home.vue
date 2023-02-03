@@ -4,11 +4,6 @@
 <template>
   <div id="container">
     <div id="home" class="header">
-      <img
-        src="../img/updateimage.png"
-        alt="Glass Recycling Logo"
-        class="logo"
-      />
       <section class="desc">Vitrum Recycle</section>
     </div>
 
@@ -103,8 +98,11 @@ export default {
 
 
 <style scope>
+* {
+  font-family: 'Raleway', sans-serif;
+}
 #container{
-  background-color: #bfe3bc;
+  /* background-color: #bfe3bc; */
 }
 
 #first-container{
@@ -113,7 +111,7 @@ export default {
   
 }
 .detail-image{
-  flex:1;
+  flex: 1;
 }
 
 .detail {
@@ -131,7 +129,7 @@ img {
 
 .last-container {
 
-   padding: 150px;
+  padding: 150px;
   margin: 30px;
   height: 100px;
   width:600px;
@@ -184,7 +182,6 @@ img {
 }
 
 .desc {
-  font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -229,7 +226,6 @@ margin-right: auto
   border-color: cornsilk; */
   /* background-color: #24b4a5; */
   /* justify-content: space-evenly; */
-  font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   letter-spacing: 0.01em;
