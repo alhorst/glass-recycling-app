@@ -18,6 +18,7 @@ public class JdbcRoutesDao implements RoutesDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
     @Override
     public List<Routes> getAllRoutes() {
         List<Routes> allRoutes = new ArrayList<>();
@@ -61,6 +62,8 @@ public class JdbcRoutesDao implements RoutesDao {
         return routesByDriverId;
     }
 
+    //Researching best way to implement - commenting out for now
+    /*
     @Override
     public List<Routes> getRoutesByDate(Date routeDate) {
         List<Routes> routesList = new ArrayList<>();
@@ -74,7 +77,7 @@ public class JdbcRoutesDao implements RoutesDao {
         }
 
         return routesList;
-    }
+    }*/
 
     @Override
     public Routes createRoute(Routes routes) {

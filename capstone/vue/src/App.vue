@@ -42,7 +42,7 @@
 a:link,
 a:visited {
   /* background-color: green; */
-  color: white;
+  /* color: white; */
   padding: 14px 20px;
   text-align: center;
   text-decoration: none;
@@ -53,7 +53,7 @@ a:hover {
   /* background-color: blue; */
 }
 a:active {
-  background-color: pink;
+  /* background-color: pink; */
 }
 /* .container {
   display: flex;

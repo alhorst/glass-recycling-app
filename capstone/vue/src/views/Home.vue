@@ -4,6 +4,11 @@
 <template>
   <div id="container">
     <div id="home" class="header">
+      <img
+        src="../img/image (1).png"
+        alt="Glass Recycling Logo"
+        class="logo"
+      />
       <section class="desc">Vitrum Recycle</section>
     </div>
 
@@ -90,6 +95,7 @@
 </template>
 
 <script>
+
 export default {
   name: "home",
   //name: "account"
@@ -98,12 +104,22 @@ export default {
 
 
 <style scope>
+<<<<<<< HEAD
 * {
   font-family: 'Raleway', sans-serif;
 }
 #container{
   /* background-color: #bfe3bc; */
 }
+=======
+/* #container{
+  background-color: #bfe3bc;
+} */
+
+*{
+   background: white;
+} 
+>>>>>>> 5ca8bf7e16233de11893707ce42047231135ecf8
 
 #first-container{
   display: flex;

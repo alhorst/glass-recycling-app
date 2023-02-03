@@ -75,32 +75,47 @@ export default {
       invalidCredentials: false
     };
   },
-  methods: {
-    login() {
-      authService
-        .login(this.user)
-        .then(response => {
-          if (response.status == 200) {
-            this.$store.commit("SET_AUTH_TOKEN", response.data.token);
-            this.$store.commit("SET_USER", response.data.user);
-            this.$router.push("/account");
-          }
-        })
-        .catch(error => {
-          const response = error.response;
+  // methods: {
+  //   login() {
+  //     authService
+  //       .login(this.user)
+  //       .then(response => {
+  //         if (response.status == 200) {
+  //           this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+  //           this.$store.commit("SET_USER", response.data.user);
+  //           this.$router.push("/account");
+  //         }
+  //       })
+  //       .catch(error => {
+  //         const response = error.response;
+
+  //         if (response.status === 401) {
+  //           this.invalidCredentials = true;
+  //         }
+  //       });
+  //   },
+
+       methods: {
+         login(){
+           authService.login(this.user).then((response) => {
+             if(response.status == 200 ) {
+                 this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+                 this.$store.commit("SET_USER", response.data.user);
+                 if(response.data.user.username === "admin"){
+                 this.$router.push("/admin");
+                 }else{
+                 this.$router.push("/account");
+                 }
+           }}).catch(error => {
+         const response = error.response;
 
           if (response.status === 401) {
-            this.invalidCredentials = true;
-          }
-        });
-    },
-
-    //check status will define admin or user
-    // checkStatus(){
-    //   if(this.user.username)
-    // }
+       this.invalidCredentials = true;
+         }
+       });
   }
-};
+}
+  }
 </script>
 
 

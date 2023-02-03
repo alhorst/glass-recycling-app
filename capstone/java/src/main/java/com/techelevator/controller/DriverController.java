@@ -30,17 +30,18 @@ public class DriverController {
 
     //DriverDetailsDao Methods start here **********
 
+
     //Get all driver details objects from the driver_details table
     @RequestMapping(path="/driverDetails", method= RequestMethod.GET)
     public List<DriverDetails> getAllDrivers() {
         return driverDetailsDao.getAllDrivers();
     }
 
-    //Get a driver detail object from the driver_details table, using employee_id
-    @RequestMapping(path="/driverDetails/{employee_id}", method= RequestMethod.GET)
-    public DriverDetails getDriverByEmployeeId(@PathVariable int employee_id) {
+    //Get a driver detail object from the driver_details table, using driver_id
+    @RequestMapping(path="/driverDetails/{driver_id}", method= RequestMethod.GET)
+    public DriverDetails getDriverByEmployeeId(@PathVariable int driver_id) {
         DriverDetails driver = null;
-        driver = driverDetailsDao.getDriverByEmployeeId(employee_id);
+        driver = driverDetailsDao.getDriverByDriverId(driver_id);
 
         if (driver == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no driver details for that employee ID");
@@ -63,24 +64,24 @@ public class DriverController {
 
     //Deletes a driver detail from the driver_details table
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path="/driverDetails/{employee_id}", method= RequestMethod.DELETE)
-    public void deleteDriverDetail(@PathVariable int employee_id) {
-        if (driverDetailsDao.getDriverByEmployeeId(employee_id) != null) {
-            driverDetailsDao.deleteDriver(employee_id);
+    @RequestMapping(path="/driverDetails/{driver_id}", method= RequestMethod.DELETE)
+    public void deleteDriverDetail(@PathVariable int driver_id) {
+        if (driverDetailsDao.getDriverByDriverId(driver_id) != null) {
+            driverDetailsDao.deleteDriver(driver_id);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The driver you're attempting to delete, does not exist");
         }
     }
 
-    /* Leaning towards us not needing this functionality - commenting out for now
+     //Leaning towards us not needing this functionality - commenting out for now
     //Update a row in the driver_details table - returns the updated Driver Detail object
-    @RequestMapping(path="/driverDetails/{employee_id}", method= RequestMethod.PUT)
-    public DriverDetails updateDriverDetail(@RequestBody DriverDetails driverToUpdate, @PathVariable int employee_id) {
-        if (driverToUpdate.getEmployee_id() == employee_id) {
+    /*@RequestMapping(path="/driverDetails/{driver_id}", method= RequestMethod.PUT)
+    public DriverDetails updateDriverDetail(@RequestBody DriverDetails driverToUpdate, @PathVariable int driver_id) {
+        if (driverToUpdate.getDriver_id() == driver_id) {
             driverDetailsDao.updateDriver(driverToUpdate);
-            return driverDetailsDao.getDriverByEmployeeId(employee_id);
+            return driverDetailsDao.getDriverByDriverId(driver_id);
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The employee Id provided does not match the record you're attempting to update");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Driver ID provided does not match the record you're attempting to update");
         }
     }*/
 }
