@@ -8,16 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 @CrossOrigin
 public class UserController {
-
-    //To-do:
-    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
-
 
     private UserDao userDao;
     private UserDetailsDao userDetailsDao;
@@ -28,8 +25,11 @@ public class UserController {
     }
 
 
+    //To-do:
+    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
     //UserDao Methods start here **********
+
 
     //get all users from users table (recyclers, admins, drivers)
     @RequestMapping(path="/users", method= RequestMethod.GET)
@@ -65,6 +65,13 @@ public class UserController {
 
     //UserDetailsDao methods start here **********
 
+
+    //get my user details - for logged in user via Principal
+    @RequestMapping(path="/users/myDetails", method= RequestMethod.GET)
+    public UserDetails getMyUserDetails(Principal principal) {
+        return userDetailsDao.findUserDetailsByUsername(principal.getName());
+    }
+
     //get all user details from user_details table
     @RequestMapping(path="/users/details", method= RequestMethod.GET)
     public List<UserDetails> getAllUserDetails() {
@@ -86,24 +93,26 @@ public class UserController {
     //add new user detail to user_details table --- registering a user after they've completed information form
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/users/details", method= RequestMethod.POST)
-    public UserDetails addNewUserDetails(@RequestBody UserDetails newUserDetail) {
-        if (newUserDetail == userDetailsDao.findUserDetailsByAccountId(newUserDetail.getAccount_id())){
+    public UserDetails addNewUserDetails(@Valid @RequestBody UserDetails newUserDetail) {
+        if (newUserDetail.getUsername() == userDetailsDao.findUserDetailsByAccountId(newUserDetail.getAccount_id()).getUsername()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "That user account already exists.");
         } else {
             return userDetailsDao.createUserDetails(newUserDetail);
         }
     }
 
-    //update a user detail on the user_details table --- UserDetails object in Request body & account_id
+    //update a user detail on the user_details table --- UserDetails object in Request body & account_id -- returns the updated UserDetails object
     @RequestMapping(path="/users/details/{accountId}", method= RequestMethod.PUT)
-    public void updateUserDetails(@RequestBody UserDetails userDetails, @PathVariable int accountId) {
+    public UserDetails updateUserDetails(@Valid @RequestBody UserDetails userDetails, @PathVariable int accountId) {
         if (userDetails.getAccount_id() != accountId) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id provided does not match the UserDetail you're trying to update");
         } else {
             userDetailsDao.updateUserDetails(userDetails);
+            return userDetailsDao.findUserDetailsByAccountId(accountId);
         }
     }
 
+    //will throw foreign key constraint error if user has pickups in pickup_details. Can this be prevented?
     //deleting a user detail from user_details table
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path="/users/details/{accountId}", method= RequestMethod.DELETE)

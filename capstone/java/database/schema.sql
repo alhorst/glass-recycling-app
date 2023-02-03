@@ -42,7 +42,11 @@ CREATE TABLE user_details (
 );
 
 -- Driver information
+<<<<<<< HEAD
 -- Sequence below --> Drivers have employee_id, starting with 3001
+=======
+-- Sequence below --> Drivers have driver_id, starting with 3001
+>>>>>>> main
 CREATE SEQUENCE seq_driver_id
     INCREMENT BY 1
     START WITH 3001
@@ -68,7 +72,8 @@ CREATE TABLE routes (
 );
 
 -- pickup information
--- route_id will default to 0 == unassigned
+-- route_id will default to null = IF NULL means pickup is yet to be assigned
+-- to add pickup to a route, update the route_id value
 CREATE TABLE pickup_details (
 	pickup_id SERIAL,
 	route_id int,

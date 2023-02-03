@@ -4,22 +4,41 @@
 <template>
   <div id="container">
     <div id="home" class="header">
-      <section class="desc">Welcome to Vitrum Recycle</section>
-
       <img
         src="../img/updateimage.png"
         alt="Glass Recycling Logo"
         class="logo"
       />
+      <section class="desc">Vitrum Recycle</section>
     </div>
 
     <!--container for information and the sign up, registration" -->
     <div class="body-container">
-      <div class="info">
-        Information about recycling
-        <img src="../img/bottles.png" alt="bottles" class="info-image" />
+      <div class="first-container">
+        <div class="info">
+          <b>VITRUM</b> Recycle is a grassroots program offering curbside glass
+          recycling in the Pittsburgh metro region. Despite its status as an
+          infinitely recyclable material, 75% of glass containers used by
+          consumers will be disposed of in landfills where it will never
+          decompose.
+          <!-- <img src="../img/bottles.png" alt="bottles" class="info-image" /> -->
+        </div>
+        <div class="detail-image"> </div>
       </div>
-      <div class="detail">detail</div>
+      <div class="mid-container">
+        <div>
+          Enroll with Vitrum today and our fleet of glass wranglers will deliver custom bins to your home or business.
+        </div>
+        <div></div>
+      </div>
+      <div class="last-container">
+        <div></div>
+        <div>When those bins are full, simply schedule a pickup date on our handy app and drop those wine bottles 
+          and jam jars at the curb; they will be crushed to a fine sand which we sell or donate to our commercial 
+          partners for a wide variety of sustainable applications: erosion remediation, creating road services, 
+          and even to make swanky and unique kitchen countertops. Keep track of your recycling stats on your 
+          dashboard and earn points with every pickup to redeem for cool prizes. Sign up today!</div>
+      </div>
       <div id="account">
         <nav id="sign-in" class="account-sign">
           <p>
@@ -84,53 +103,93 @@ export default {
 
 
 <style scope>
-* {
+#container{
   background-color: #bfe3bc;
 }
 
-.detail {
-  background-color: #24b4a5;
-  box-sizing: content-box;
-  padding: 10px 300px 60px 100px;
-  border-right-style: solid;
-  border-right-color: cornsilk;
-  border-right-width: 5px;
+#first-container{
+  display: flex;
+  
+  
+}
+.detail-image{
+  flex:1;
+}
 
+.detail {
+  /* background-color: #24b4a5; */
+  /* box-sizing: content-box;
+  padding: 10px 370px 60px 100px; */
+  /* border-right-style: solid;
+  border-right-color: cornsilk;
+  border-right-width: 5px; */
 }
 
 img {
   display: flex;
 }
 
-.info {
-  border-right-style: solid;
-  border-right-color: cornsilk;
-  border-right-width: 5px;
-   align-items: center;
+.last-container {
+
+   padding: 150px;
+  margin: 30px;
+  height: 100px;
+  width:600px;
+  align-items: center;
   justify-content: center;
-  text-align: center;
-  
+  text-align: justify;
+  flex-direction: row;
+}
+
+.mid-container {
+   padding: 200px;
+  margin: 30px;
+  height: 100px;
+  width:600px;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
+  flex-direction: row;
+  margin-left: auto;
+}
+
+.info {
+  /* border-right-style: solid;
+  border-right-color: cornsilk;
+  border-right-width: 5px; */
+  padding: 30px;
+  margin: 30px;
+  height: 100px;
+  width:600px;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
 }
 
 #log-in {
-  margin: 0px 10px 0px 60px;
+  /* margin: 0px 10px 0px 60px; */
   font-size: 20px;
-  padding: 0rem;
+  /* padding: 0rem; */
   align-items: center;
   justify-content: center;
-  
+  padding-left: 30px;
+  border-radius: 90px;
 }
 
 #account {
-  display: flex;
-  flex-direction: column;
-  background-color: #24b4a5;
-  padding:10px 5px 20px 0px;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* background-color: #24b4a5; */
+  /* padding:10px 5px 20px 0px; */
 }
 
 .desc {
-  font-family: cursive;
-  font-size: 30px;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  font-size: 1.5rem;
 }
 
 #login:hover,
@@ -139,15 +198,19 @@ img {
 }
 
 #container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* display: flex;
+  flex-direction: column; */
+  /* align-items: center; */
+  text-align: center;
+margin-left: auto;
+margin-right: auto
 }
 .account-sign {
-  margin: 0px 10px 0px 60px;
+  /* margin: 0px 10px 0px 60px; */
   font-size: 20px;
-  background-color: #24b4a5;
-  padding-left:2px;
+  /* background-color: #24b4a5; */
+  padding-left: 30px;
+  border-radius: 90px;
 }
 
 .header {
@@ -155,31 +218,33 @@ img {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 35px;
+  padding: 25px;
 }
 
 .body-container {
-  display: flex;
-  margin: 40px;
-  padding: 30px 60px 60px 100px;
-  font-family: cursive;
-  font-size: 20px;
-  border-style: solid;
-  border-color: cornsilk;
-  background-color: #24b4a5;
-  justify-content:space-evenly;
-
+  /* display: flex; */
+  margin: auto;
+  padding: 30px 0px 60px 100px;
+  /* border-style: solid;
+  border-color: cornsilk; */
+  /* background-color: #24b4a5; */
+  /* justify-content: space-evenly; */
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  font-size: 1.5rem;
 }
 
 .info-image {
   width: 300px;
-  background-color: #24b4a5;
+  /* background-color: #24b4a5; */
 }
-
 
 /*check media again */
 @media screen and (max-width: 1024px) {
-  .body-container div{
+  .body-container div {
     flex-wrap: wrap;
   }
 }

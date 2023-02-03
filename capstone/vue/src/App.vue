@@ -26,13 +26,13 @@
   font-weight: bold;
   font-size: 1.5em;
   text-align: center;
-  background-color: green;
+  /* background-color: green; */
   width: 100%;
 }
 
 a:link,
 a:visited {
-  background-color: green;
+  /* background-color: green; */
   color: white;
   padding: 14px 20px;
   text-align: center;
@@ -41,7 +41,7 @@ a:visited {
 }
 
 a:hover {
-  background-color: blue;
+  /* background-color: blue; */
 }
 a:active {
   background-color: pink;

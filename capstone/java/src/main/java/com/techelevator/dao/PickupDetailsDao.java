@@ -9,9 +9,17 @@ public interface PickupDetailsDao {
 
     PickupDetails getPickupDetails(int pickup_id);
 
-    List<PickupDetails> getPickupDetailsByDriverId(int driver_Id);
+    List<PickupDetails> getAllPickupDetails();
 
-    List<PickupDetails> getPickupDetailsByDate(Date pickup_date);
+    List<PickupDetails> getPickupDetailsByUsername(String username);
+
+    List<PickupDetails> getPickupDetailsByRouteId(int routeId);
+
+    List<PickupDetails> getPickupDetailsByDriverId(int driverId);
+
+    //Researching best way to implement
+    //commenting out for now
+    //List<PickupDetails> getPickupDetailsByDate(Date pickupDate);
 
     PickupDetails createPickupDetails(PickupDetails pickupDetails);
 

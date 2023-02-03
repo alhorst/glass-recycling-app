@@ -17,6 +17,10 @@ export default {
     // //add new user detail.
     addUserDetails(userDetail) {
         return axios.post('/users/details', userDetail)
+    },
+
+    getUserDetails(){
+        return axios.get('/users/details')
     }
 
 }

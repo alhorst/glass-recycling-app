@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Save Address Details</h1>
     <account-details />
   </div>
 </template>

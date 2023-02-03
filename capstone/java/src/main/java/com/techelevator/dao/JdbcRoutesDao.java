@@ -18,6 +18,20 @@ public class JdbcRoutesDao implements RoutesDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+
+    @Override
+    public List<Routes> getAllRoutes() {
+        List<Routes> allRoutes = new ArrayList<>();
+        String sql = "SELECT route_id, route_date, driver_id " +
+                    "FROM routes;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Routes route = mapRowToRoutes(results);
+            allRoutes.add(route);
+        }
+        return allRoutes;
+    }
+
     @Override
     public Routes getRoutesByRouteId(int routeId) {
 
@@ -35,6 +49,22 @@ public class JdbcRoutesDao implements RoutesDao {
     }
 
     @Override
+    public List<Routes> getRoutesByDriverId(int driverId) {
+        List<Routes> routesByDriverId = new ArrayList<>();
+        String sql = "SELECT route_id, route_date, driver_id " +
+                    "FROM routes " +
+                    "WHERE driver_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, driverId);
+        while(results.next()) {
+            Routes route = mapRowToRoutes(results);
+            routesByDriverId.add(route);
+        }
+        return routesByDriverId;
+    }
+
+    //Researching best way to implement - commenting out for now
+    /*
+    @Override
     public List<Routes> getRoutesByDate(Date routeDate) {
         List<Routes> routesList = new ArrayList<>();
         String sql = "SELECT route_id, route_date, driver_id " +
@@ -47,7 +77,7 @@ public class JdbcRoutesDao implements RoutesDao {
         }
 
         return routesList;
-    }
+    }*/
 
     @Override
     public Routes createRoute(Routes routes) {

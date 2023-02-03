@@ -1,14 +1,17 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.Future;
 import java.util.Date;
 
 public class PickupDetails {
 
     private int pickup_id;
-    private int driver_id;
     private int route_id;
     private String requesting_username;
+    //Blocks past or same day pickup requests - must be 1 day in advance
+    @Future(message = "You must schedule a pickup for a future date")
     private Date pickup_date;
+    private int pickup_weight;
     private int num_of_bins;
     private Boolean is_picked_up;
 
@@ -22,12 +25,12 @@ public class PickupDetails {
         this.pickup_id = pickup_id;
     }
 
-    public int getDriver_id() {
-        return driver_id;
+    public int getRoute_id() {
+        return route_id;
     }
 
-    public void setDriver_id(int driver_id) {
-        this.driver_id = driver_id;
+    public void setRoute_id(int route_id) {
+        this.route_id = route_id;
     }
 
     public String getRequesting_username() {
@@ -52,6 +55,14 @@ public class PickupDetails {
 
     public void setNum_of_bins(int num_of_bins) {
         this.num_of_bins = num_of_bins;
+    }
+
+    public int getPickup_weight() {
+        return pickup_weight;
+    }
+
+    public void setPickup_weight(int pickup_weight) {
+        this.pickup_weight = pickup_weight;
     }
 
     public Boolean getIs_picked_up() {

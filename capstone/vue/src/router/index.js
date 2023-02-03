@@ -78,14 +78,17 @@ const router = new Router({
     path: "/account",
     name: "account",
     component: Account,
-    // meta: {
-    //   requiresAuth: true,
-    // }
+     meta: {
+       requiresAuth: true,
+     }
     },
     {
       path: "/account-detail",
     name: "account-detail",
     component: AccountDetails,
+    meta: {
+      requiresAuth: true,
+    }
     }
 
 
