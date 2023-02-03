@@ -7,7 +7,11 @@ import java.util.List;
 
 public interface RoutesDao {
 
+    List<Routes> getAllRoutes();
+
     Routes getRoutesByRouteId(int routeId);
+
+    List<Routes> getRoutesByDriverId(int driverId);
 
     List<Routes> getRoutesByDate(Date routeDate);
 

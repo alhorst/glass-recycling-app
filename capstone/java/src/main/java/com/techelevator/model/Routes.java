@@ -1,5 +1,8 @@
 package com.techelevator.model;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class Routes {

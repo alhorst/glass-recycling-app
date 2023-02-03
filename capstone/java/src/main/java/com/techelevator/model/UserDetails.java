@@ -1,13 +1,23 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+
 public class UserDetails {
 
     private int account_id;
     private String username;
+    @NotBlank(message = "Your name cannot be blank")
     private String full_name;
+    @NotEmpty(message = "Your address cannot be blank")
     private String street_address;
+    @NotEmpty(message = "Your city cannot be blank")
     private String city;
+    @NotEmpty(message = "Please enter your state abbreviation, example: PA")
     private String state_abbreviation;
+    @NotEmpty(message = "Please enter your 5 digit zipcode")
     private String zipcode;
     private String phone_number;
     private String email_address;

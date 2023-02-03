@@ -19,6 +19,19 @@ public class JdbcRoutesDao implements RoutesDao {
     }
 
     @Override
+    public List<Routes> getAllRoutes() {
+        List<Routes> allRoutes = new ArrayList<>();
+        String sql = "SELECT route_id, route_date, driver_id " +
+                    "FROM routes;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            Routes route = mapRowToRoutes(results);
+            allRoutes.add(route);
+        }
+        return allRoutes;
+    }
+
+    @Override
     public Routes getRoutesByRouteId(int routeId) {
 
         Routes routes = null;
@@ -32,6 +45,20 @@ public class JdbcRoutesDao implements RoutesDao {
         }
 
         return routes;
+    }
+
+    @Override
+    public List<Routes> getRoutesByDriverId(int driverId) {
+        List<Routes> routesByDriverId = new ArrayList<>();
+        String sql = "SELECT route_id, route_date, driver_id " +
+                    "FROM routes " +
+                    "WHERE driver_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, driverId);
+        while(results.next()) {
+            Routes route = mapRowToRoutes(results);
+            routesByDriverId.add(route);
+        }
+        return routesByDriverId;
     }
 
     @Override

@@ -1,15 +1,15 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.DriverDetails;
-import com.techelevator.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
-import java.sql.Driver;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+@Component
 public class JdbcDriverDetailsDao implements DriverDetailsDao{
 
     private JdbcTemplate jdbcTemplate;
@@ -68,12 +68,13 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
         return getDriverByEmployeeId(employee_id);
     }
 
+    /*   Commenting out for now - don't think we'll need this functionality
     @Override
     public void updateDriver(DriverDetails driverDetails) {
         String sql = "UPDATE driver_details " +
                     "SET employee_id = ?, username = ?, home_office_address = ?;";
         jdbcTemplate.update(sql, driverDetails.getEmployee_id(), driverDetails.getUsername(), HOME_OFFICE_ADDRESS);
-    }
+    }*/
 
     @Override
     public void deleteDriver(int employee_id) {
