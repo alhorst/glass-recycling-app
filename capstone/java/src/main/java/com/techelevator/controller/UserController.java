@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +64,13 @@ public class UserController {
     }
 
     //UserDetailsDao methods start here **********
+
+
+    //get my user details - logged in user via Principal
+    @RequestMapping(path="/users/myDetails", method= RequestMethod.GET)
+    public UserDetails getMyUserDetails(Principal principal) {
+        return userDetailsDao.findUserDetailsByUsername(principal.getName());
+    }
 
     //get all user details from user_details table
     @RequestMapping(path="/users/details", method= RequestMethod.GET)
