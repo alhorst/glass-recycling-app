@@ -2,12 +2,14 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.DriverDetailsDao;
 import com.techelevator.dao.RoutesDao;
+import com.techelevator.model.DriverDetails;
 import com.techelevator.model.Routes;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,24 @@ public class RoutesController {
     ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
     //RoutesDao Methods start here **********
+
+
+    //Get My Routes --- Will return routes linked to logged in DRIVER account
+    //--- filtering by Date, thinking this could be done w/ a filter function on the front end
+    @RequestMapping(path="/routes/myRoutes", method= RequestMethod.GET)
+    public List<Routes> getMyRoutes(Principal principal) {
+
+        DriverDetails loggedInDriver = driverDetailsDao.getDriverByUsername(principal.getName());
+        int driver_id = loggedInDriver.getDriver_id();
+
+        List<Routes> myRoutes = routesDao.getRoutesByDriverId(driver_id);
+
+        if (myRoutes.size() != 0) {
+            return myRoutes;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no routes assigned to this driver yet");
+        }
+    }
 
     //Get all routes from the routes table
     @RequestMapping(path="/routes", method= RequestMethod.GET)
@@ -53,15 +73,15 @@ public class RoutesController {
     }
 
     //Get a List of Route objects from the routes table, grouped by driver_id
-    @RequestMapping(path="/routes/drivers/{driverId}", method= RequestMethod.GET)
-    public List<Routes> getRoutesByDriverId(@PathVariable int driverId) {
+    @RequestMapping(path="/routes/drivers/{driver_Id}", method= RequestMethod.GET)
+    public List<Routes> getRoutesByDriverId(@PathVariable int driver_Id) {
 
-        if (driverDetailsDao.getDriverByEmployeeId(driverId) == null) {
+        if (driverDetailsDao.getDriverByDriverId(driver_Id) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That driver id does not exist");
         }
 
         List<Routes> results = new ArrayList<>();
-        results = routesDao.getRoutesByDriverId(driverId);
+        results = routesDao.getRoutesByDriverId(driver_Id);
         if (results.size() == 0) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no routes assigned to that driver");
         } else {

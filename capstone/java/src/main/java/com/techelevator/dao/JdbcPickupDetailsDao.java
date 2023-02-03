@@ -22,6 +22,21 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
     //Do we need a getUnassignedPickups method - would display list of unassigned pickups to admin
 
 
+    //getMyPickupDetails in PickupController utilizes, feeding in the principal's username
+    @Override
+    public List<PickupDetails> getPickupDetailsByUsername(String username) {
+        List<PickupDetails> myPickups = new ArrayList<>();
+        String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
+                    "FROM pickup_details " +
+                    "WHERE requesting_username = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+        while(results.next()) {
+            PickupDetails eachPickup = mapRowToPickupDetails(results);
+            myPickups.add(eachPickup);
+        }
+        return myPickups;
+    }
+
     @Override
     public PickupDetails getPickupDetails(int pickupId) {
 
@@ -75,6 +90,9 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         return pickupsByDriver;
     }
 
+    //researching best way to implement
+    //commenting out for now
+    /*
     @Override
     public List<PickupDetails> getPickupDetailsByDate(Date pickupDate) {
         List<PickupDetails> pickupDetailsList = new ArrayList<>();
@@ -86,7 +104,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
             pickupDetailsList.add(mapRowToPickupDetails(results));
         }
         return pickupDetailsList;
-    }
+    }*/
 
     @Override
     public PickupDetails createPickupDetails(PickupDetails pickupDetails) {

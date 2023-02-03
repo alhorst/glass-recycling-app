@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -29,6 +29,7 @@ public class UserController {
     ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
     //UserDao Methods start here **********
+
 
     //get all users from users table (recyclers, admins, drivers)
     @RequestMapping(path="/users", method= RequestMethod.GET)
@@ -63,6 +64,13 @@ public class UserController {
     }
 
     //UserDetailsDao methods start here **********
+
+
+    //get my user details - for logged in user via Principal
+    @RequestMapping(path="/users/myDetails", method= RequestMethod.GET)
+    public UserDetails getMyUserDetails(Principal principal) {
+        return userDetailsDao.findUserDetailsByUsername(principal.getName());
+    }
 
     //get all user details from user_details table
     @RequestMapping(path="/users/details", method= RequestMethod.GET)

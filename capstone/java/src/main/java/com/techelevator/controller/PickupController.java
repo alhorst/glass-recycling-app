@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -32,6 +33,19 @@ public class PickupController {
 
     //PickupDetailsDao Methods start here **********
 
+
+    //Get my pickup details - Will return pickups requested by the logged-in user account
+    //--- filtering by Date, thinking this could be done w/ a filter function on the front end
+    @RequestMapping(path="/pickups/myPickups", method= RequestMethod.GET)
+    public List<PickupDetails> getMyPickups(Principal principal) {
+        List<PickupDetails> myPickups = pickupDetailsDao.getPickupDetailsByUsername(principal.getName());
+        if (myPickups.size() != 0) {
+            return myPickups;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are currently no pickups associated with that User!");
+        }
+    }
+
     //Get all pickups from the pickup_details table
     @RequestMapping(path="/pickups", method= RequestMethod.GET)
     public List<PickupDetails> getAllPickups(){
@@ -53,13 +67,13 @@ public class PickupController {
         }
     }
 
-    //Get a list of PickupDetails associated with a driver ID/employee_id
+    //Get a list of PickupDetails associated with a driver ID
     @RequestMapping(path="/pickups/drivers/{driverId}", method= RequestMethod.GET)
     public List<PickupDetails> getPickupDetailsByDriverId(@PathVariable int driverId) {
 
         List<PickupDetails> results = null;
 
-        if (driverDetailsDao.getDriverByEmployeeId(driverId) != null) {
+        if (driverDetailsDao.getDriverByDriverId(driverId) != null) {
              results = pickupDetailsDao.getPickupDetailsByDriverId(driverId);
              if (results == null) {
                  throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That driver is not assigned to any pickups at the moment");

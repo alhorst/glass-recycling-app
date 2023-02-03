@@ -4,24 +4,24 @@ import java.sql.Driver;
 
 public class DriverDetails {
 
-    private int employee_id;
+    private int driver_id;
     private String username;
     private String home_office_address;
 
     public DriverDetails() { }
 
-    public DriverDetails(int employee_id, String username, String home_office_address) {
-        this.employee_id = employee_id;
+    public DriverDetails(int driver_id, String username, String home_office_address) {
+        this.driver_id = driver_id;
         this.username = username;
         this.home_office_address = home_office_address;
     }
 
-    public int getEmployee_id() {
-        return employee_id;
+    public int getDriver_id() {
+        return driver_id;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setDriver_id(int driver_id) {
+        this.driver_id = driver_id;
     }
 
     public String getUsername() {
@@ -43,7 +43,7 @@ public class DriverDetails {
     @Override
     public String toString() {
         return "DriverDetails{" +
-                "employee_id=" + employee_id +
+                "driver_id=" + driver_id +
                 ", username='" + username + '\'' +
                 ", home_office_address='" + home_office_address + '\'' +
                 '}';

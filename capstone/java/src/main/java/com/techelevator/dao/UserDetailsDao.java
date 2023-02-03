@@ -10,8 +10,7 @@ public interface UserDetailsDao {
 
     UserDetails findUserDetailsByAccountId(int account_id);
 
-    // May not need this method - commenting out for now
-    //UserDetails findUserDetailsByUsername(String username);
+    UserDetails findUserDetailsByUsername(String username);
 
     UserDetails createUserDetails(UserDetails userDetails);
 

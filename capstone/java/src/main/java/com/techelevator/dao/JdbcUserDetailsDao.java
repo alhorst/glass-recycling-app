@@ -58,8 +58,7 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
         return userDetails;
     }
 
-    // May not need this method - commenting out for now
-    /*
+    //Get My User_Details in UserController calls this, feeds in principal.getName()
     @Override
     public UserDetails findUserDetailsByUsername(String username) {
         UserDetails userDetails = null;
@@ -72,7 +71,7 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
             userDetails = mapRowToUserDetail(result);
         }
         return userDetails;
-    }*/
+    }
 
     //add new user detail to user_details table --- registering a user after they've completed information form
     @Override

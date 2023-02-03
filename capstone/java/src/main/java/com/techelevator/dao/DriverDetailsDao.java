@@ -9,7 +9,7 @@ public interface DriverDetailsDao {
 
     List<DriverDetails> getAllDrivers();
 
-    DriverDetails getDriverByEmployeeId(int employee_id);
+    DriverDetails getDriverByDriverId(int driverId);
 
     DriverDetails getDriverByUsername(String username);
 
@@ -18,5 +18,5 @@ public interface DriverDetailsDao {
     // Commenting out for now - don't think we'll need this functionality
     // void updateDriver(DriverDetails driverDetails);
 
-    void deleteDriver(int employee_id);
+    void deleteDriver(int driver_Id);
 }
