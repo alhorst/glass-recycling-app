@@ -2,7 +2,7 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS routes, pickup_details, driver_details, user_details, users CASCADE;
 
-DROP SEQUENCE IF EXISTS seq_account_id, seq_employee_id;
+DROP SEQUENCE IF EXISTS seq_account_id, seq_driver_id;
 
 -- user/password information for users who recycle, drivers, and admins
 -- Drivers (ROLE_USER && is_driver = true)
@@ -43,16 +43,16 @@ CREATE TABLE user_details (
 
 -- Driver information
 -- Sequence below --> Drivers have employee_id, starting with 3001
-CREATE SEQUENCE seq_employee_id
+CREATE SEQUENCE seq_driver_id
     INCREMENT BY 1
     START WITH 3001
     NO MAXVALUE;
 
 CREATE TABLE driver_details (
-    employee_id int NOT NULL DEFAULT nextval ('seq_employee_id'),
+    driver_id int NOT NULL DEFAULT nextval ('seq_driver_id'),
     username varchar(50) NOT NULL,
     home_office_address varchar(200) DEFAULT ('3001 Railroad St, Pittsburgh, PA 15201'), -- default to home base address, same for all drivers -- full address could avoid concatenation when feeding into API
-    CONSTRAINT PK_driver_details PRIMARY KEY (employee_id),
+    CONSTRAINT PK_driver_details PRIMARY KEY (driver_id),
     CONSTRAINT FK_driver_details_users FOREIGN KEY (username) REFERENCES users (username)
 );
 
@@ -64,7 +64,7 @@ CREATE TABLE routes (
     route_date date NOT NULL,
     driver_id int,
     CONSTRAINT PK_routes PRIMARY KEY (route_id),
-    CONSTRAINT FK_routes_driver_details FOREIGN KEY (driver_id) REFERENCES driver_details (employee_id)
+    CONSTRAINT FK_routes_driver_details FOREIGN KEY (driver_id) REFERENCES driver_details (driver_id)
 );
 
 -- pickup information
