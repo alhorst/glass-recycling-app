@@ -5,8 +5,6 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
-import Admin from '../views/AdminDashboard.vue'
-import Driver from '../views/DriverDashboard.vue'
 import Account from '../views/Account.vue'
 import AccountDetails from '../views/AccountDetails.vue'
 
@@ -58,22 +56,22 @@ const router = new Router({
         requiresAuth: false
       }
     },
-    {
-      path: "/admin",
-      name: "admin-dash",
-      component: Admin,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: "/driver",
-      name: "driver-dash",
-      component: Driver,
-      meta: {
-        requiresAuth: false
-      }
-    },
+    // {
+    //   path: "/admin",
+    //   name: "admin-dash",
+    //   component: Admin,
+    //   meta: {
+    //     requiresAuth: true
+    //   }
+    // },
+    // {
+    //   path: "/driver",
+    //   name: "driver-dash",
+    //   component: Driver,
+    //   meta: {
+    //     requiresAuth: false
+    //   }
+    // },
     {
     path: "/account",
     name: "account",
