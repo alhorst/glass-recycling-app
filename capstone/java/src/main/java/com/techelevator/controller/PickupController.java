@@ -3,21 +3,17 @@ package com.techelevator.controller;
 import com.techelevator.dao.DriverDetailsDao;
 import com.techelevator.dao.PickupDetailsDao;
 import com.techelevator.dao.RoutesDao;
-import com.techelevator.model.DriverDetails;
 import com.techelevator.model.PickupDetails;
-import com.techelevator.model.Routes;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.sql.Driver;
+import javax.validation.Valid;
 import java.util.List;
 
+@RestController
+@CrossOrigin
 public class PickupController {
-
-    //To-do:
-    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
-
 
     private PickupDetailsDao pickupDetailsDao;
     private RoutesDao routesDao;
@@ -30,8 +26,21 @@ public class PickupController {
     }
 
 
+    //To-do:
+    //////look into get pickup details by Date method
+    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
     //PickupDetailsDao Methods start here **********
+
+    //Get all pickups from the pickup_details table
+    @RequestMapping(path="/pickups", method= RequestMethod.GET)
+    public List<PickupDetails> getAllPickups(){
+        if (pickupDetailsDao.getAllPickupDetails() != null){
+            return pickupDetailsDao.getAllPickupDetails();
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no pickups at this time");
+        }
+    }
 
     //Get a PickupDetails object, by pickup_id
     @RequestMapping(path="/pickups/{pickupId}", method= RequestMethod.GET)
@@ -44,28 +53,40 @@ public class PickupController {
         }
     }
 
-    //Get a list of PickupDetails associated with a driver ID
-    @RequestMapping(path="/drivers/{driverId}/pickups", method= RequestMethod.GET)
+    //Get a list of PickupDetails associated with a driver ID/employee_id
+    @RequestMapping(path="/pickups/drivers/{driverId}", method= RequestMethod.GET)
     public List<PickupDetails> getPickupDetailsByDriverId(@PathVariable int driverId) {
+
+        List<PickupDetails> results = null;
+
         if (driverDetailsDao.getDriverByEmployeeId(driverId) != null) {
-            return pickupDetailsDao.getPickupDetailsByDriverId(driverId);
+             results = pickupDetailsDao.getPickupDetailsByDriverId(driverId);
+             if (results == null) {
+                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That driver is not assigned to any pickups at the moment");
+             } else {
+                 return results;
+             }
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That driver Id does not exist");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That driver does not exist");
         }
     }
 
-    //To-do:
-    //////look into get pickup details by Date method
-
+    //Get a list of PickupDetails associated with a route ID
+    @RequestMapping(path="/pickups/routes/{routeId}", method= RequestMethod.GET)
+    public List<PickupDetails> getPickupDetailsByRouteId(@PathVariable int routeId) {
+        if (pickupDetailsDao.getPickupDetailsByRouteId(routeId) != null) {
+            return pickupDetailsDao.getPickupDetailsByRouteId(routeId);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no pickups assigned to that route");
+        }
+    }
 
     //Add a pickup in the pickup_details table
-
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/pickups", method= RequestMethod.POST)
-    public PickupDetails addPickupDetails(@RequestBody PickupDetails newPickup) {
+    public PickupDetails addPickupDetails(@Valid @RequestBody PickupDetails newPickup) {
         if (newPickup != null) {
             return pickupDetailsDao.createPickupDetails(newPickup);
-
         }
         return null;
     }
@@ -73,7 +94,7 @@ public class PickupController {
     //Updates a row in the pickup_details table
     //would be a way to assign pickup to a driver/route
     @RequestMapping(path="/pickups/{pickupId}", method= RequestMethod.PUT)
-    public PickupDetails updatePickupDetails(@RequestBody PickupDetails updatedPickup, @PathVariable int pickupId) {
+    public PickupDetails updatePickupDetails(@Valid @RequestBody PickupDetails updatedPickup, @PathVariable int pickupId) {
         if (pickupId == updatedPickup.getPickup_id()) {
             pickupDetailsDao.updatePickupDetails(updatedPickup);
             return pickupDetailsDao.getPickupDetails(pickupId);
@@ -90,58 +111,6 @@ public class PickupController {
             pickupDetailsDao.deletePickupDetails(pickupId);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Pickup you're attempting to delete, does not exist");
-        }
-    }
-
-
-    //RoutesDao Methods start here **********
-
-    //Get a Route object from the routes table, using route_id
-    @RequestMapping(path="/routes/{routeId}", method= RequestMethod.GET)
-    public Routes getRouteByRouteId(@PathVariable int routeId) {
-        Routes route = null;
-        route = routesDao.getRoutesByRouteId(routeId);
-        if (route != null) {
-            return route;
-        } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such route exists");
-        }
-    }
-
-    //Get routes by date Method--- thinking of best way to implement and pass date to the handler method
-
-    //Add a route to the routes table - returning the new Route object
-    @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path="/routes", method= RequestMethod.POST)
-    public Routes addNewRoute(@RequestBody Routes newRoute) {
-        if (newRoute != null) {
-            return routesDao.createRoute(newRoute);
-        } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No route details provided in the request");
-        }
-    }
-
-    //Update a route on the routes table - returning the updated route
-    @RequestMapping(path="/routes/{routeId}", method= RequestMethod.PUT)
-    public Routes updateRoute(@RequestBody Routes routeToUpdate, @PathVariable int routeId) {
-        if (routeToUpdate.getRouteId() != routeId) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The route Id provided does not match the route record you're attempting to update");
-        } else {
-            Routes updatedRoute = null;
-            routesDao.updateRoute(routeToUpdate);
-            updatedRoute = routesDao.getRoutesByRouteId(routeId);
-            return updatedRoute;
-        }
-    }
-
-    //Deletes a route from the routes table
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path="/routes/{routeId}", method= RequestMethod.DELETE)
-    public void deleteRoute(@PathVariable int routeId) {
-        if (routesDao.getRoutesByRouteId(routeId) == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The route record you're attempting to delete, does not exist");
-        } else {
-            routesDao.deleteRoute(routeId);
         }
     }
 }

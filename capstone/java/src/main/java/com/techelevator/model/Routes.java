@@ -1,10 +1,15 @@
 package com.techelevator.model;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class Routes {
 
     private int routeId;
+    //Blocks past or same day route creation - must be 1 day in advance
+    @Future(message = "You must schedule a route for a future date")
     private Date routeDate;
     private int driverId;
 

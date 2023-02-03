@@ -14,10 +14,6 @@ import java.util.List;
 @CrossOrigin
 public class DriverController {
 
-    //To-do:
-    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
-
-
     private DriverDetailsDao driverDetailsDao;
     private PickupDetailsDao pickupDetailsDao;
     private RoutesDao routesDao;
@@ -29,6 +25,8 @@ public class DriverController {
     }
 
 
+    //To-do:
+    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
     //DriverDetailsDao Methods start here **********
 
@@ -59,21 +57,9 @@ public class DriverController {
         if (newDriver != null) {
             return driverDetailsDao.createDriver(newDriver);
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No details provided in the request!");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No Driver Details provided in the request!");
         }
     }
-
-    /* I don't think we need this functionality - commenting out for now
-    //Update a row in the driver_details table - returns the updated Driver Detail object
-    @RequestMapping(path="/driverDetails/{employee_id}", method= RequestMethod.PUT)
-    public DriverDetails updateDriverDetail(@RequestBody DriverDetails driverToUpdate, @PathVariable int employee_id) {
-        if (driverToUpdate.getEmployee_id() == employee_id) {
-            driverDetailsDao.updateDriver(driverToUpdate);
-            return driverDetailsDao.getDriverByEmployeeId(employee_id);
-        } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The employee Id provided does not match the record you're attempting to update");
-        }
-    }*/
 
     //Deletes a driver detail from the driver_details table
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -85,4 +71,16 @@ public class DriverController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The driver you're attempting to delete, does not exist");
         }
     }
+
+    /* Leaning towards us not needing this functionality - commenting out for now
+    //Update a row in the driver_details table - returns the updated Driver Detail object
+    @RequestMapping(path="/driverDetails/{employee_id}", method= RequestMethod.PUT)
+    public DriverDetails updateDriverDetail(@RequestBody DriverDetails driverToUpdate, @PathVariable int employee_id) {
+        if (driverToUpdate.getEmployee_id() == employee_id) {
+            driverDetailsDao.updateDriver(driverToUpdate);
+            return driverDetailsDao.getDriverByEmployeeId(employee_id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The employee Id provided does not match the record you're attempting to update");
+        }
+    }*/
 }
