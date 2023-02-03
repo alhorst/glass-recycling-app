@@ -106,7 +106,7 @@ export default {
 
 
 .text-center{  
-    background: #009578;
+    background: #bfe3bc;
     margin: 15px;
     margin-top: 50px;
     padding: 100px;
