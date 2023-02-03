@@ -94,16 +94,18 @@ public class UserController {
         }
     }
 
-    //update a user detail on the user_details table --- UserDetails object in Request body & account_id
+    //update a user detail on the user_details table --- UserDetails object in Request body & account_id -- returns the updated UserDetails object
     @RequestMapping(path="/users/details/{accountId}", method= RequestMethod.PUT)
-    public void updateUserDetails(@RequestBody UserDetails userDetails, @PathVariable int accountId) {
+    public UserDetails updateUserDetails(@RequestBody UserDetails userDetails, @PathVariable int accountId) {
         if (userDetails.getAccount_id() != accountId) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id provided does not match the UserDetail you're trying to update");
         } else {
             userDetailsDao.updateUserDetails(userDetails);
+            return userDetailsDao.findUserDetailsByAccountId(accountId);
         }
     }
 
+    //will throw foreign key constraint error if user has pickups in pickup_details. Can this be prevented?
     //deleting a user detail from user_details table
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path="/users/details/{accountId}", method= RequestMethod.DELETE)

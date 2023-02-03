@@ -63,6 +63,7 @@ public class DriverController {
         }
     }
 
+    /* I don't think we need this functionality - commenting out for now
     //Update a row in the driver_details table - returns the updated Driver Detail object
     @RequestMapping(path="/driverDetails/{employee_id}", method= RequestMethod.PUT)
     public DriverDetails updateDriverDetail(@RequestBody DriverDetails driverToUpdate, @PathVariable int employee_id) {
@@ -72,7 +73,7 @@ public class DriverController {
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The employee Id provided does not match the record you're attempting to update");
         }
-    }
+    }*/
 
     //Deletes a driver detail from the driver_details table
     @ResponseStatus(HttpStatus.NO_CONTENT)

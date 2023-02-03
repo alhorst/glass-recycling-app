@@ -68,12 +68,13 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
         return getDriverByEmployeeId(employee_id);
     }
 
+    /*   Commenting out for now - don't think we'll need this functionality
     @Override
     public void updateDriver(DriverDetails driverDetails) {
         String sql = "UPDATE driver_details " +
                     "SET employee_id = ?, username = ?, home_office_address = ?;";
         jdbcTemplate.update(sql, driverDetails.getEmployee_id(), driverDetails.getUsername(), HOME_OFFICE_ADDRESS);
-    }
+    }*/
 
     @Override
     public void deleteDriver(int employee_id) {
