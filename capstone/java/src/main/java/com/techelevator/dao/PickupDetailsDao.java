@@ -11,6 +11,8 @@ public interface PickupDetailsDao {
 
     List<PickupDetails> getAllPickupDetails();
 
+    List<PickupDetails> getPickupDetailsByUsername(String username);
+
     List<PickupDetails> getPickupDetailsByRouteId(int routeId);
 
     List<PickupDetails> getPickupDetailsByDriverId(int driverId);

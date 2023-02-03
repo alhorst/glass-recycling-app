@@ -58,6 +58,7 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
         return userDetails;
     }
 
+    //Get My User_Details in UserController calls this, feeds in principal.getName()
     @Override
     public UserDetails findUserDetailsByUsername(String username) {
         UserDetails userDetails = null;

@@ -23,6 +23,20 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
 
 
     @Override
+    public List<PickupDetails> getPickupDetailsByUsername(String username) {
+        List<PickupDetails> myPickups = new ArrayList<>();
+        String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
+                    "FROM pickup_details " +
+                    "WHERE requesting_username = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+        while(results.next()) {
+            PickupDetails eachPickup = mapRowToPickupDetails(results);
+            myPickups.add(eachPickup);
+        }
+        return myPickups;
+    }
+
+    @Override
     public PickupDetails getPickupDetails(int pickupId) {
 
         PickupDetails pickupDetails = null;

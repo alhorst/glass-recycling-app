@@ -4,11 +4,13 @@ import com.techelevator.dao.DriverDetailsDao;
 import com.techelevator.dao.PickupDetailsDao;
 import com.techelevator.dao.RoutesDao;
 import com.techelevator.model.PickupDetails;
+import com.techelevator.model.UserDetails;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -31,6 +33,17 @@ public class PickupController {
     ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
     //PickupDetailsDao Methods start here **********
+
+    //get my user details - logged in user via Principal
+    @RequestMapping(path="/pickups/myPickups", method= RequestMethod.GET)
+    public List<PickupDetails> getMyPickups(Principal principal) {
+        List<PickupDetails> myPickups = pickupDetailsDao.getPickupDetailsByUsername(principal.getName());
+        if (myPickups.size() != 0) {
+            return myPickups;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are currently no pickups associated with that User!");
+        }
+    }
 
     //Get all pickups from the pickup_details table
     @RequestMapping(path="/pickups", method= RequestMethod.GET)
