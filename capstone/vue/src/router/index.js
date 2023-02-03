@@ -63,7 +63,7 @@ const router = new Router({
       name: "admin-dash",
       component: Admin,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {

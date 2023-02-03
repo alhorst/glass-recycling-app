@@ -5,7 +5,7 @@
   <div id="container">
     <div id="home" class="header">
       <img
-        src="../img/updateimage.png"
+        src="../img/image (1).png"
         alt="Glass Recycling Logo"
         class="logo"
       />
@@ -95,6 +95,7 @@
 </template>
 
 <script>
+
 export default {
   name: "home",
   //name: "account"
@@ -103,9 +104,13 @@ export default {
 
 
 <style scope>
-#container{
+/* #container{
   background-color: #bfe3bc;
-}
+} */
+
+*{
+   background: white;
+} 
 
 #first-container{
   display: flex;
@@ -184,7 +189,6 @@ img {
 }
 
 .desc {
-  font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   letter-spacing: 0.02em;
