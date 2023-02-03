@@ -91,10 +91,11 @@ public class UserController {
     }
 
     //add new user detail to user_details table --- registering a user after they've completed information form
+    //small change done here by Kubra
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/users/details", method= RequestMethod.POST)
     public UserDetails addNewUserDetails(@Valid @RequestBody UserDetails newUserDetail) {
-        if (newUserDetail.getUsername() == userDetailsDao.findUserDetailsByAccountId(newUserDetail.getAccount_id()).getUsername()){
+        if ((newUserDetail.getUsername()).equals(userDetailsDao.findUserDetailsByUsername(newUserDetail.getUsername()))){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "That user account already exists.");
         } else {
             return userDetailsDao.createUserDetails(newUserDetail);

@@ -8,7 +8,7 @@ Three columns( history, calendar, account)
   <div class="account">
   <div>
 <router-link :to="{name: 'account-detail'}" class="my-account">My Account</router-link>
-<!-- //<div>{{user}}</div> -->
+<div>{{user}}</div>
 </div>
 <!-- recycling history and calendar
 <div>
