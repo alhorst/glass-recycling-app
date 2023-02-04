@@ -69,34 +69,34 @@ INSERT INTO routes (route_date)
  VALUES ('2023-02-07');
 
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('mraymond', '2023-02-05', 60, 1, false);
+VALUES ('mraymond', '2023-02-11', 60, 1, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('bblanc', '2023-02-05', 120, 2, false);
+VALUES ('bblanc', '2023-02-11', 120, 2, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('mbron', '2023-02-05', 180, 3, false);
+VALUES ('mbron', '2023-02-11', 180, 3, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('ltoussaint', '2023-02-06', 60, 1, false);
+VALUES ('ltoussaint', '2023-02-11', 60, 1, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('dcody', '2023-02-06', 180, 3, false);
+VALUES ('dcody', '2023-02-11', 180, 3, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('awingfield', '2023-02-06', 120, 2, false);
+VALUES ('awingfield', '2023-02-11', 120, 2, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('jholden', '2023-02-05', 180, 3, false);
+VALUES ('jholden', '2023-02-11', 180, 3, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('aburton', '2023-02-06', 60, 1, false);
+VALUES ('aburton', '2023-02-11', 60, 1, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('nnagata', '2023-02-07', 120, 2, false);
+VALUES ('nnagata', '2023-02-11', 120, 2, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('cmao', '2023-02-07', 180, 3, false);
+VALUES ('cmao', '2023-02-11', 180, 3, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('cdrummer', '2023-02-07', 60, 1, false);
+VALUES ('cdrummer', '2023-02-12', 60, 1, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('fjohnson', '2023-02-05', 120, 2, false);
+VALUES ('fjohnson', '2023-02-12', 120, 2, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('kashford', '2023-02-06', 180, 3, false);
+VALUES ('kashford', '2023-02-12', 180, 3, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('adawes', '2023-02-06', 60, 1, false);
+VALUES ('adawes', '2023-02-12', 60, 1, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('minaros', '2023-02-07', 120, 2, false);
+VALUES ('minaros', '2023-02-12', 120, 2, false);
 
 COMMIT TRANSACTION;
