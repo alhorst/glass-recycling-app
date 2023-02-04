@@ -7,11 +7,14 @@
       <nav>
         <ul>
           <li>
+            <i class="fa-solid fa-bars"></i>
             <router-link v-bind:to="{ name: 'home' }"
               ><i class="fa-solid fa-house"></i>Home</router-link
             >
           </li>
           <li><i class="fa-solid fa-recycle"></i>Services</li>
+          <li><i class="fa-regular fa-calendar"></i>Schedule Pickup</li>
+          <li><i class="fa-solid fa-pen"></i>Blog</li>
         </ul>
       </nav>
       <div class="spacer">&nbsp;</div>
@@ -27,6 +30,20 @@
       <!-- </div> -->
     </div>
     <router-view />
+    <div class="footer">
+      <ul>
+        <i class="fa-solid fa-comment"></i>
+        <li>Contact us</li>
+        <i class="fa-solid fa-truck-fast"></i>
+        <li>Careers</li>
+        <li>Dummy</li>
+      </ul>
+      <div class="icons">
+      <i class="fa-brands fa-facebook"></i>
+      <i class="fa-brands fa-instagram"></i>
+      <i class="fa-brands fa-twitter"></i>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,7 +55,7 @@ html {
     0deg,
     rgba(11, 122, 30, 1) 0%,
     rgba(122, 198, 47, 1) 22%,
-    rgba(252, 252, 252, 1) 95%
+    rgba(252, 252, 252, 1) 85%
   );
 }
 
@@ -57,7 +74,6 @@ html {
   align-items: center;
   position: fixed;
   font-size: 20px;
-  padding: 10px;
   width: 100%;
   left: 0;
   top: 0;
@@ -109,5 +125,17 @@ a {
 a:hover {
   box-shadow: inset 200px 0 0 0 #9bdb66;
   color: white;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+}
+
+.footer i {
+  color: #0b7a1e;
 }
 </style>

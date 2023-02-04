@@ -14,7 +14,7 @@
           decompose.
           <!-- <img src="../img/bottles.png" alt="bottles" class="info-image" /> -->
         </div>
-        <div class="detail-image"></div>
+        <div class="images-container"></div>
       </div>
       <div class="mid-container">
         <div>
@@ -107,44 +107,46 @@ export default {
   border: 1px solid red;
 }
 
-#first-container {
-  display: flex;
-  border: 1px solid green;
-}
-
-.last-container {
-  border: 1px solid blue;
-  padding: 150px;
-  margin: 30px;
-  height: 100px;
-  width: 600px;
-  align-items: center;
-  justify-content: center;
-  text-align: justify;
-  flex-direction: row;
-}
-
-.mid-container {
-  border: 1px solid yellow;
-  padding: 200px;
-  margin: 30px;
-  height: 100px;
-  width: 80%;
-  align-items: center;
-  justify-content: center;
-  text-align: justify;
-  flex-direction: row;
-  margin-left: auto;
-}
-
 .about-us {
   background-color: white;
-  margin-top: 30px;
+  margin-top: 5em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border: 1px solid rgb(236, 1, 197);
   padding: 30px;
-  height: 100px;
-  width: 80%;
+  height: 130px;
+  width: 85%;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
+}
+
+.images-container {
+  border: 1px solid orange;
+  margin-top: 5em;
+  padding: 30px;
+}
+
+.mid-container {
+  background-color: white;
+  margin-top: 5em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgb(236, 1, 197);
+  padding: 30px;
+  height: 60px;
+  width: 85%;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
+}
+
+.last-container {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-top: 5em;
+  border: 1px solid blue;
+  padding: 30px;
+  height: 200px;
+  width: 85%;
   align-items: center;
   justify-content: center;
   text-align: justify;
