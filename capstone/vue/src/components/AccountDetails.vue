@@ -7,7 +7,8 @@
         <div class="item">
           <p>Username</p>
           <div class="name-item">
-            <input type="text" name="name" placeholder="UserName" v-model="userDetails.username"/>
+            <input type="text" name="name" placeholder="UserName" 
+            v-model="userDetails.username"/>
             <!-- <input type="text" name="name" placeholder="Last"/> -->
           </div>
         </div>
@@ -55,26 +56,30 @@ export default {
             phone_number:'',
             email_address:'',
 
-        }
+        },
         }
     },
-// methods:{
-//     setUser(user){
-//         this.$store.commit('SET_USER', user)
+   created(){
+       AccountService.getUserDetails().then(response => {
+         this.userDetails = response.data;
+       })
+   },
 
 methods: {
     saveAccountDetails(){
+
         AccountService.addUserDetails(this.userDetails).then((response) => {
             if(response.status === 201) {
                 //
                 this.$router.push('/account')
-            }
-        })
+        }
+      })
     },
-     cancel() {
+     cancel(){
       this.$router.push("/account");
+    },
+
     }
-}
 }
 
 </script>

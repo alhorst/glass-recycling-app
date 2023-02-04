@@ -10,20 +10,26 @@ Three columns( history, calendar, account)
 <router-link :to="{name: 'account-detail'}" class="my-account">My Account</router-link>
 <div>{{user}}</div>
 </div>
-<!-- recycling history and calendar
+<!-- recycling history and calendar-->
 <div>
+    <pick-up></pick-up>
     </div> 
 
-    <div></div> -->
+
 </div>
+
 </template>
 
 <script>
 
 import AccountService from "../services/AccountService.js"
+import PickUp from"../components/PickUp.vue";
 
 export default {
     name: "account-main",
+    components: { 
+      PickUp
+    },
      data() {
       return {
           user: '',
@@ -46,19 +52,15 @@ export default {
 </script>
 
 <style scoped>
-
 .account {
-    display: flex;
-    flex-direction: row-reverse;
-    font-size: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 20px;
 }
 
 .my-account {
-    border-radius: .5rem;
-    padding: 18px;
-    background-color: lightgray;
-
-  
+  border-radius: 0.5rem;
+  padding: 18px;
+  background-color: lightgray;
 }
-
 </style>

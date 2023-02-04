@@ -154,7 +154,6 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         return pickupDetailsList;
     }*/
 
-    //Add pickup to pickup_details table
     @Override
     public PickupDetails createPickupDetails(PickupDetails pickupDetails) {
         String sql = "INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up) " +
