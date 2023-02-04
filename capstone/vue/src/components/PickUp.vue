@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <form v-on:submit.prevent>
-          <h1>Sign Up</h1>
+          <h3>Schedule Pick Up</h3>
 
           <fieldset>
             <label for="name">Name:</label>

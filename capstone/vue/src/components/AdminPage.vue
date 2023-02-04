@@ -267,7 +267,7 @@
 import Locations from "./Locations.vue";
 
 export default {
-  name: "user-list",
+  name: "admin-page",
   components: {
     Locations,
   },

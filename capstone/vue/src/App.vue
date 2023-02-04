@@ -20,6 +20,8 @@
         </ul>
         <div class="spacer">&nbsp;</div>
         <div class="dropdown">
+
+          <!--I need to change name to "account-detail" because of I can't see the account form"Kubra-->
           <router-link v-bind:to="{ name: 'account' }"
             >Account<i class="fa-solid fa-user"></i
           ></router-link>
@@ -39,7 +41,9 @@
       </nav>
       <!-- </div> -->
     </div>
-    <router-view />
+    <div class="main-view">
+    <router-view/>
+    </div>
     <div class="footer">
       <ul>
         <i class="fa-solid fa-comment"></i>
@@ -106,6 +110,9 @@ html {
   top: 0;
   z-index: 1;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.main-view{
+  margin-top: 8%;
 }
 
 nav {

@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Account from '../views/Account.vue'
 import AccountDetails from '../views/AccountDetails.vue'
+import Admin from '../views/Admin.vue'
 
 Vue.use(Router)
 
@@ -56,14 +57,14 @@ const router = new Router({
         requiresAuth: false
       }
     },
-    // {
-    //   path: "/admin",
-    //   name: "admin-dash",
-    //   component: Admin,
-    //   meta: {
-    //     requiresAuth: true
-    //   }
-    // },
+    {
+      path: "/admin",
+      name: "admin",
+      component: Admin,
+      meta: {
+        requiresAuth: true
+      }
+    },
     // {
     //   path: "/driver",
     //   name: "driver-dash",
