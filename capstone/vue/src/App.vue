@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <!-- Nav bar -->
+    <!-- Nav container -->
     <div class="nav-container">
+      <div class="toggle">
+        <i class="fa-solid fa-bars" @click="showMenu()"></i>
+      </div>
       <!-- <div id="navbar"> -->
-      <img id="logo" src="./img/logo-clear.png" alt="Vitrum Recycling Logo" />
-      <nav>
+      <nav :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'">
+        <img id="logo" src="./img/logo-clear.png" alt="Vitrum Recycling Logo" />
         <ul>
           <li>
-            <i class="fa-solid fa-bars"></i>
             <router-link v-bind:to="{ name: 'home' }"
               ><i class="fa-solid fa-house"></i>Home</router-link
             >
@@ -39,13 +41,28 @@
         <li>Dummy</li>
       </ul>
       <div class="icons">
-      <i class="fa-brands fa-facebook"></i>
-      <i class="fa-brands fa-instagram"></i>
-      <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-twitter"></i>
       </div>
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      showMobileMenu: false,
+    };
+  },
+
+  methods: {
+    showMenu() {
+      this.showMobileMenu = !this.showMobileMenu;
+    },
+  },
+};
+</script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
@@ -81,6 +98,15 @@ html {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 /* #navbar {
   background-color: white;
   padding: 0.2em;
@@ -100,6 +126,10 @@ li {
   margin-left: 10px;
   margin-top: 10px;
   color: #0b7a1e;
+}
+
+.toggle {
+  display: none;
 }
 
 i {
@@ -138,4 +168,43 @@ a:hover {
 .footer i {
   color: #0b7a1e;
 }
+
+@media screen and (max-width: 768px) {
+  .nav-container {
+    padding-top: 10px;
+    position: absolute;
+    width: 100%;
+  }
+
+  .open-menu {
+    opacity: 1;
+    height: 150px;
+  }
+
+  .closed-menu {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+  }
+
+  nav {
+    flex-direction: column;
+    z-index: 100;
+    position: relative;
+    transition: all 0.2s ease-out;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  .toggle {
+    display: block;
+    text-align: right;
+    padding: 0 10px 10px 0;
+  }
+}
 </style>
+
+
+
