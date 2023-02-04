@@ -21,6 +21,8 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
     //Home office address
     private static final String HOME_OFFICE_ADDRESS = "3001 Railroad St, Pittsburgh, PA 15201";
 
+
+    //Get all driver_details from driver_details table
     @Override
     public List<DriverDetails> getAllDrivers() {
         List<DriverDetails> allDrivers = new ArrayList<>();
@@ -34,6 +36,7 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
         return allDrivers;
     }
 
+    //Get all driver_details from driver_details table, by driver_id
     @Override
     public DriverDetails getDriverByDriverId(int driverId) {
         DriverDetails driver = null;
@@ -47,6 +50,7 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
         return driver;
     }
 
+    //Get all driver_details from driver_details table, by username
     @Override
     public DriverDetails getDriverByUsername(String username) {
         DriverDetails driver = null;
@@ -59,6 +63,7 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
         return driver;
     }
 
+    //Add driver to driver_details table
     @Override
     public DriverDetails createDriver(DriverDetails driverDetails) {
         String sql = "INSERT INTO driver_details (username, home_office_address) " +
@@ -75,6 +80,8 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
         jdbcTemplate.update(sql, driverDetails.getDriver_id(), driverDetails.getUsername(), HOME_OFFICE_ADDRESS);
     }*/
 
+    //Delete driver from driver_details table
+    //Can run into FK constraint if driver is associated with routes/pickups
     @Override
     public void deleteDriver(int driverId) {
         String sql = "DELETE FROM driver_details WHERE driver_id = ?;";

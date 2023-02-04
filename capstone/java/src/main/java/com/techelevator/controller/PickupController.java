@@ -26,23 +26,46 @@ public class PickupController {
         this.driverDetailsDao = driverDetailsDao;
     }
 
-
     //To-do:
     //////look into get pickup details by Date method
     ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
+
     //PickupDetailsDao Methods start here **********
 
 
-    //Get my pickup details - Will return pickups requested by the logged-in user account
+    //Get my(user) pickups - Will return pickups requested by the logged-in Recycling user account
     //--- filtering by Date, thinking this could be done w/ a filter function on the front end
     @RequestMapping(path="/pickups/myPickups", method= RequestMethod.GET)
     public List<PickupDetails> getMyPickups(Principal principal) {
-        List<PickupDetails> myPickups = pickupDetailsDao.getPickupDetailsByUsername(principal.getName());
+        List<PickupDetails> myPickups = pickupDetailsDao.getPickupDetailsByRecyclerUsername(principal.getName());
         if (myPickups.size() != 0) {
             return myPickups;
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are currently no pickups associated with that User!");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Currently, you have not scheduled any pickups");
+        }
+    }
+
+    //Get my unassigned pickups - Will return all pickups for current logged-in user, that are NOT yet assigned to route/driver
+    @RequestMapping(path="/pickups/myPickups/unassigned", method= RequestMethod.GET)
+    public List<PickupDetails> getMyUnassignedPickups(Principal principal) {
+        List<PickupDetails> myUnassignedPickups = pickupDetailsDao.getUnassignedPickupsByUsername(principal.getName());
+        if (myUnassignedPickups.size() != 0) {
+            return myUnassignedPickups;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Currently, you do not have any unassigned pickups");
+        }
+    }
+
+    //Get my(driver) pickups - Will return pickups assigned to the logged-in Driver's account
+    //--- filtering by Date, thinking this could be done w/ a filter function on the front end
+    @RequestMapping(path="/pickups/drivers/myPickups", method= RequestMethod.GET)
+    public List<PickupDetails> getMyPickupsAsDriver(Principal principal) {
+        List<PickupDetails> myDriverPickups = pickupDetailsDao.getPickupDetailsByDriverUsername(principal.getName());
+        if (myDriverPickups.size() != 0) {
+            return myDriverPickups;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no pickups assigned to you at this time");
         }
     }
 
@@ -72,7 +95,7 @@ public class PickupController {
     //Get a PickupDetails object, by pickup_id
     @RequestMapping(path="/pickups/{pickupId}", method= RequestMethod.GET)
     public PickupDetails getPickupByPickupId(@PathVariable int pickupId) {
-        PickupDetails pickup = pickupDetailsDao.getPickupDetails(pickupId);
+        PickupDetails pickup = pickupDetailsDao.getPickupDetailsByPickupId(pickupId);
         if (pickup != null) {
             return pickup;
         } else {
@@ -124,7 +147,7 @@ public class PickupController {
     public PickupDetails updatePickupDetails(@Valid @RequestBody PickupDetails updatedPickup, @PathVariable int pickupId) {
         if (pickupId == updatedPickup.getPickup_id()) {
             pickupDetailsDao.updatePickupDetails(updatedPickup);
-            return pickupDetailsDao.getPickupDetails(pickupId);
+            return pickupDetailsDao.getPickupDetailsByPickupId(pickupId);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The pickup Id provided does not match the record you're attempting to update");
         }
@@ -134,7 +157,7 @@ public class PickupController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path="/pickups/{pickupId}", method= RequestMethod.DELETE)
     public void deletePickupDetails(@PathVariable int pickupId) {
-        if (pickupDetailsDao.getPickupDetails(pickupId) != null) {
+        if (pickupDetailsDao.getPickupDetailsByPickupId(pickupId) != null) {
             pickupDetailsDao.deletePickupDetails(pickupId);
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Pickup you're attempting to delete, does not exist");

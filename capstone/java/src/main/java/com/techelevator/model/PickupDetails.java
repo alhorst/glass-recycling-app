@@ -8,7 +8,7 @@ public class PickupDetails {
     private int pickup_id;
     private int route_id;
     private String requesting_username;
-    //Blocks past or same day pickup requests - must be 1 day in advance
+    //Blocks past or same day pickup requests - must be at least 1 day in advance
     @Future(message = "You must schedule a pickup for a future date")
     private Date pickup_date;
     private int pickup_weight;
@@ -17,6 +17,19 @@ public class PickupDetails {
 
     private final int FULL_BIN_WEIGHT = 60; //Full bin is 60lbs
 
+    public PickupDetails() {}
+
+    public PickupDetails(int pickup_id, int route_id, String requesting_username, Date pickup_date, int pickup_weight, int num_of_bins, Boolean is_picked_up) {
+        this.pickup_id = pickup_id;
+        this.route_id = route_id;
+        this.requesting_username = requesting_username;
+        this.pickup_date = pickup_date;
+        this.pickup_weight = pickup_weight;
+        this.num_of_bins = num_of_bins;
+        this.is_picked_up = is_picked_up;
+    }
+
+    //Method to calc pickup_weight for each pickup requested, Full bin weight X num of bins
     public int calcPickupWeight() {
         pickup_weight = num_of_bins * FULL_BIN_WEIGHT;
         return pickup_weight;

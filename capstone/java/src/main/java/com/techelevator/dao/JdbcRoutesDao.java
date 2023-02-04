@@ -19,6 +19,7 @@ public class JdbcRoutesDao implements RoutesDao {
     }
 
 
+    //Get all routes from the routes table
     @Override
     public List<Routes> getAllRoutes() {
         List<Routes> allRoutes = new ArrayList<>();
@@ -32,6 +33,7 @@ public class JdbcRoutesDao implements RoutesDao {
         return allRoutes;
     }
 
+    //Get route from routes table, by route_id
     @Override
     public Routes getRoutesByRouteId(int routeId) {
 
@@ -48,6 +50,7 @@ public class JdbcRoutesDao implements RoutesDao {
         return routes;
     }
 
+    //Get route from routes table, by driver_id (Routes assigned to a specific driver)
     @Override
     public List<Routes> getRoutesByDriverId(int driverId) {
         List<Routes> routesByDriverId = new ArrayList<>();
@@ -79,6 +82,8 @@ public class JdbcRoutesDao implements RoutesDao {
         return routesList;
     }*/
 
+    //Add new route to the routes table
+    //Date must be in the future
     @Override
     public Routes createRoute(Routes routes) {
         String sql = "INSERT INTO routes (route_date, driver_id) " +
@@ -89,6 +94,7 @@ public class JdbcRoutesDao implements RoutesDao {
         return getRoutesByRouteId(newId);
     }
 
+    //Update a route in the routes table
     @Override
     public void updateRoute(Routes routes) {
         String sql = "UPDATE routes " +
@@ -97,6 +103,7 @@ public class JdbcRoutesDao implements RoutesDao {
         jdbcTemplate.update(sql, routes.getRouteId(), routes.getRouteDate(), routes.getDriverId(), routes.getRouteId());
     }
 
+    //Delete a route
     @Override
     public void deleteRoute(int routeId) {
         String sql = "DELETE FROM routes WHERE route_id = ?;";

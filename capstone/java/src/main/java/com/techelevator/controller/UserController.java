@@ -66,13 +66,24 @@ public class UserController {
     //UserDetailsDao methods start here **********
 
 
-    //get my user details - for logged in user via Principal
+    //Get my user details - for logged in user via Principal
     @RequestMapping(path="/users/myDetails", method= RequestMethod.GET)
     public UserDetails getMyUserDetails(Principal principal) {
         return userDetailsDao.findUserDetailsByUsername(principal.getName());
     }
 
-    //get all user details from user_details table
+    //Get my Account_id - for logged in user via Principal
+    @RequestMapping(path="/users/myDetails/accountId", method= RequestMethod.GET)
+    public int getMyAccountId(Principal principal) {
+        int accountId = userDetailsDao.getAccountIdByUsername(principal.getName());
+        if (accountId != 0) {
+            return accountId;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot find a Recycler Account associated with that username");
+        }
+    }
+
+    //Get all user details from user_details table
     @RequestMapping(path="/users/details", method= RequestMethod.GET)
     public List<UserDetails> getAllUserDetails() {
         return userDetailsDao.findAllUserDetails();
@@ -156,9 +167,7 @@ public class UserController {
         }
     }
 
-
     //Get the total amount of credits an account has redeemed towards prizes
-    //Not 100% sure we'll need this method, keeping for now
     @RequestMapping(path="/users/details/{account_id}/redeemed", method= RequestMethod.GET)
     public int getCreditRedeemedByAccountId(@PathVariable int account_id) {
         if (userDetailsDao.findUserDetailsByAccountId(account_id) == null){

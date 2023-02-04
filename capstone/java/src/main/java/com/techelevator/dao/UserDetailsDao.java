@@ -12,6 +12,8 @@ public interface UserDetailsDao {
 
     UserDetails findUserDetailsByUsername(String username);
 
+    int getAccountIdByUsername(String username);
+
     UserDetails createUserDetails(UserDetails userDetails);
 
     void updateUserDetails(UserDetails userDetails);

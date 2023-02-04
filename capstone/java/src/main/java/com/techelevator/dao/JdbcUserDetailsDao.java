@@ -21,8 +21,6 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
     //// Do we need a method to get account_id?
 
 
-    //Methods calling on user_details table
-
     private static final int STARTING_TOTAL_POUNDS = 0;
     private static final int STARTING_CREDITS = 0;
     private static final int STARTING_CREDITS_REDEEMED = 0;
@@ -56,6 +54,19 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
             userDetails = mapRowToUserDetail(result);
         }
         return userDetails;
+    }
+
+    //Get account_id from user_details table, by username
+    public int getAccountIdByUsername(String username) {
+        String sql = "SELECT account_id " +
+                    "FROM user_details " +
+                    "WHERE username = ?;";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+        if (result.next()) {
+            int accountId = result.getInt("account_id");
+            return accountId;
+        }
+        return 0;
     }
 
     //Get My User_Details in UserController calls this, feeds in principal.getName()
@@ -151,7 +162,6 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
     }
 
     //Get the total amount of credits an account has redeemed towards prizes
-    //Not 100% sure we'll need this method, keeping for now
     @Override
     public int getCreditRedeemedByAccountId(int account_id) {
         int creditsRedeemed = 0;
@@ -169,6 +179,7 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
 
     private UserDetails mapRowToUserDetail(SqlRowSet rs) {
         UserDetails userDetail = new UserDetails();
+
         userDetail.setAccount_id(rs.getInt("account_id"));
         userDetail.setUsername(rs.getString("username"));
         userDetail.setFull_name(rs.getString("full_name"));
@@ -181,6 +192,7 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
         userDetail.setTotal_pounds_recycled(rs.getInt("total_pounds_recycled"));
         userDetail.setCredits_balance(rs.getInt("credits_balance"));
         userDetail.setCredits_redeemed(rs.getInt("credits_redeemed"));
+
         return userDetail;
     }
 }

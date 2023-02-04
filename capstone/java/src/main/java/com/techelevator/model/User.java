@@ -17,7 +17,7 @@ public class User {
    private Set<Authority> authorities = new HashSet<>();
    private boolean is_driver;
 
-   public User() { }
+   public User() {}
 
    public User(int id, String username, String password, String authorities, boolean is_driver) {
       this.id = id;

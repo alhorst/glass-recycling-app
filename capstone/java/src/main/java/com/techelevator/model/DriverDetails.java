@@ -1,14 +1,16 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.NotBlank;
 import java.sql.Driver;
 
 public class DriverDetails {
 
     private int driver_id;
     private String username;
+    @NotBlank
     private String home_office_address;
 
-    public DriverDetails() { }
+    public DriverDetails() {}
 
     public DriverDetails(int driver_id, String username, String home_office_address) {
         this.driver_id = driver_id;
