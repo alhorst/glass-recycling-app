@@ -19,10 +19,34 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
     }
 
 
-    //Do we need a getUnassignedPickups method - would display list of unassigned pickups to admin
 
+    //Returns all unassigned pickups from pickup_details - (pickups NOT assigned to routeID yet)
+    @Override
+    public List<PickupDetails> getAllUnassignedPickups() {
+            List<PickupDetails> unassignedPickups = new ArrayList<>();
+            String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
+                        "FROM pickup_details" +
+                        "WHERE route_id IS NULL OR route_id = 0;";
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while(results.next()) {
+                unassignedPickups.add(mapRowToPickupDetails(results));
+            }
+            return unassignedPickups;
+        }
 
-    //getMyPickupDetails in PickupController utilizes, feeding in the principal's username
+    @Override
+    public List<PickupDetails> getAllPickupDetails() {
+        List<PickupDetails> allPickups = new ArrayList<>();
+        String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
+                "FROM pickup_details;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            allPickups.add(mapRowToPickupDetails(results));
+        }
+        return allPickups;
+    }
+
+    //getMyPickupDetails in PickupController utilizes this method, feeding in the principal's username
     @Override
     public List<PickupDetails> getPickupDetailsByUsername(String username) {
         List<PickupDetails> myPickups = new ArrayList<>();
@@ -49,18 +73,6 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
             pickupDetails = mapRowToPickupDetails(results);
         }
         return pickupDetails;
-    }
-
-    @Override
-    public List<PickupDetails> getAllPickupDetails() {
-        List<PickupDetails> allPickups = new ArrayList<>();
-        String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
-                    "FROM pickup_details;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-        while(results.next()) {
-            allPickups.add(mapRowToPickupDetails(results));
-        }
-        return allPickups;
     }
 
     @Override

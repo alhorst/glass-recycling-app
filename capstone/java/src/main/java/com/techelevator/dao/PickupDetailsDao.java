@@ -9,6 +9,8 @@ public interface PickupDetailsDao {
 
     PickupDetails getPickupDetails(int pickup_id);
 
+    List<PickupDetails> getAllUnassignedPickups();
+
     List<PickupDetails> getAllPickupDetails();
 
     List<PickupDetails> getPickupDetailsByUsername(String username);

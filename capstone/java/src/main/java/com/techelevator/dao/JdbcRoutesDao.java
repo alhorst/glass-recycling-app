@@ -92,9 +92,9 @@ public class JdbcRoutesDao implements RoutesDao {
     @Override
     public void updateRoute(Routes routes) {
         String sql = "UPDATE routes " +
-                "SET route_id = ?, route_date = ?, driver_id = ? " +
-                "WHERE routes_id = ?;";
-        jdbcTemplate.update(sql, routes.getRouteId(), routes.getRouteDate(), routes.getDriverId());
+                    "SET route_id = ?, route_date = ?, driver_id = ? " +
+                    "WHERE route_id = ?;";
+        jdbcTemplate.update(sql, routes.getRouteId(), routes.getRouteDate(), routes.getDriverId(), routes.getRouteId());
     }
 
     @Override

@@ -25,7 +25,7 @@ CREATE SEQUENCE seq_account_id
 
 CREATE TABLE user_details (
     account_id int NOT NULL DEFAULT nextval ('seq_account_id'),
-	username varchar(50) NOT NULL,
+	username varchar(50) NOT NULL UNIQUE,
 	--full_name or first_name & last_name? does one or the other benefit us when user inputs data on the front end?
 	full_name varchar(100) NOT NULL,
 	street_address varchar(100) NOT NULL, -- 3001 Railroad St
@@ -37,7 +37,7 @@ CREATE TABLE user_details (
 	total_pounds_recycled int DEFAULT 0,
     credits_balance int DEFAULT 0, -- 1pt per pound
     credits_redeemed int DEFAULT 0,
-	CONSTRAINT PK_user_details PRIMARY KEY (username),
+	CONSTRAINT PK_user_details PRIMARY KEY (account_id),
 	CONSTRAINT FK_user_details_users FOREIGN KEY (username) REFERENCES users (username)
 );
 
@@ -50,7 +50,7 @@ CREATE SEQUENCE seq_driver_id
 
 CREATE TABLE driver_details (
     driver_id int NOT NULL DEFAULT nextval ('seq_driver_id'),
-    username varchar(50) NOT NULL,
+    username varchar(50) NOT NULL UNIQUE,
     home_office_address varchar(200) DEFAULT ('3001 Railroad St, Pittsburgh, PA 15201'), -- default to home base address, same for all drivers -- full address could avoid concatenation when feeding into API
     CONSTRAINT PK_driver_details PRIMARY KEY (driver_id),
     CONSTRAINT FK_driver_details_users FOREIGN KEY (username) REFERENCES users (username)

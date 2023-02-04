@@ -46,7 +46,7 @@ public class RoutesController {
         if (myRoutes.size() != 0) {
             return myRoutes;
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no routes assigned to this driver yet");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no Routes assigned to this particular Driver");
         }
     }
 
@@ -55,7 +55,7 @@ public class RoutesController {
     public List<Routes> getAllRoutes() {
         List<Routes> allRoutes = routesDao.getAllRoutes();
         if (allRoutes.size() == 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no routes to report at this time");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no Routes to report at this time");
         }
         return allRoutes;
     }
@@ -77,13 +77,13 @@ public class RoutesController {
     public List<Routes> getRoutesByDriverId(@PathVariable int driver_Id) {
 
         if (driverDetailsDao.getDriverByDriverId(driver_Id) == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That driver id does not exist");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "We do not have a Driver associated with this Driver ID");
         }
 
         List<Routes> results = new ArrayList<>();
         results = routesDao.getRoutesByDriverId(driver_Id);
         if (results.size() == 0) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no routes assigned to that driver");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That Driver is not currently assigned to any routes");
         } else {
             return results;
         }
@@ -96,15 +96,16 @@ public class RoutesController {
         if (newRoute != null) {
             return routesDao.createRoute(newRoute);
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No route details provided in the request");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient Route details provided in the request");
         }
     }
 
     //Update a route on the routes table - returning the updated route
+    //Utilize to Assign a driver to a route
     @RequestMapping(path="/routes/{routeId}", method= RequestMethod.PUT)
     public Routes updateRoute(@Valid @RequestBody Routes routeToUpdate, @PathVariable int routeId) {
         if (routeToUpdate.getRouteId() != routeId) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The route Id provided does not match the route record you're attempting to update");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Route ID provided does not match the Route record you're attempting to update");
         } else {
             Routes updatedRoute = null;
             routesDao.updateRoute(routeToUpdate);
@@ -118,9 +119,9 @@ public class RoutesController {
     @RequestMapping(path="/routes/{routeId}", method= RequestMethod.DELETE)
     public void deleteRoute(@PathVariable int routeId) {
         if (routesDao.getRoutesByRouteId(routeId) == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The route record you're attempting to delete, does not exist");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The Route record you're attempting to delete, does not exist");
         } else {
             routesDao.deleteRoute(routeId);
+            }
         }
     }
-}

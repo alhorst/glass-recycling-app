@@ -46,9 +46,22 @@ public class PickupController {
         }
     }
 
+    //Returns all unassigned pickups from pickup_details - (pickups NOT assigned to routeID yet)
+    //Useful for admin dash, showing active pickup requests that need to be assigned to route/driver
+    @RequestMapping(path="/pickups/unassigned", method= RequestMethod.GET)
+    public List<PickupDetails> getUnassignedPickups() {
+        if (pickupDetailsDao.getAllPickupDetails() == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There are no pickups at this time");
+        } else if (pickupDetailsDao.getAllUnassignedPickups() == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "All pickups have been assigned! Great job");
+        } else {
+            return pickupDetailsDao.getAllUnassignedPickups();
+        }
+    }
+
     //Get all pickups from the pickup_details table
     @RequestMapping(path="/pickups", method= RequestMethod.GET)
-    public List<PickupDetails> getAllPickups(){
+    public List<PickupDetails> getAllPickups() {
         if (pickupDetailsDao.getAllPickupDetails() != null){
             return pickupDetailsDao.getAllPickupDetails();
         } else {
