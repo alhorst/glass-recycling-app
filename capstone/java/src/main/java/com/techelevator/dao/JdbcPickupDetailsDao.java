@@ -19,7 +19,6 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
     }
 
 
-
     //Returns all unassigned pickups from pickup_details - (pickups NOT assigned to routeID yet)
     @Override
     public List<PickupDetails> getAllUnassignedPickups() {
@@ -34,11 +33,26 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
             return unassignedPickups;
         }
 
+    //Returns unassigned pickups from pickup_details, for a given username - (Will utilize in PickupController to return 'MyUnassignedPickups' feeding in the principal)
+    @Override
+    public List<PickupDetails> getUnassignedPickupsByUsername(String username) {
+        List<PickupDetails> myUnassignedPickups = new ArrayList<>();
+        String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
+                    "FROM pickup_details" +
+                    "WHERE route_id IS NULL OR route_id = 0 AND requesting_username = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+        while(results.next()) {
+            myUnassignedPickups.add(mapRowToPickupDetails(results));
+        }
+        return myUnassignedPickups;
+    }
+
+    //Get all pickups from the pickup_details table
     @Override
     public List<PickupDetails> getAllPickupDetails() {
         List<PickupDetails> allPickups = new ArrayList<>();
         String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
-                "FROM pickup_details;";
+                    "FROM pickup_details;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while(results.next()) {
             allPickups.add(mapRowToPickupDetails(results));
@@ -46,14 +60,15 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         return allPickups;
     }
 
-    //getMyPickupDetails in PickupController utilizes this method, feeding in the principal's username
+    //Get pickup_details from pickup_details table, by requesting_username (recyclerUsername)
+    //getMyPickups in PickupController utilizes this method, feeding in the logged-in recycler(principal) username
     @Override
-    public List<PickupDetails> getPickupDetailsByUsername(String username) {
+    public List<PickupDetails> getPickupDetailsByRecyclerUsername(String recyclerUsername) {
         List<PickupDetails> myPickups = new ArrayList<>();
         String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
                     "FROM pickup_details " +
                     "WHERE requesting_username = ?;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, recyclerUsername);
         while(results.next()) {
             PickupDetails eachPickup = mapRowToPickupDetails(results);
             myPickups.add(eachPickup);
@@ -61,8 +76,26 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         return myPickups;
     }
 
+    //Get pickup_details from pickup_details table, by Driver's Username
+    //getMyPickupsByDriver in PickupController utilizes this method, feeding in the logged-in driver(principal) username
     @Override
-    public PickupDetails getPickupDetails(int pickupId) {
+    public List<PickupDetails> getPickupDetailsByDriverUsername(String driverUsername) {
+        List<PickupDetails> myDriverPickups = new ArrayList<>();
+        String sql = "SELECT pickup_id, pickup_details.route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
+                    "FROM pickup_details " +
+                    "JOIN routes ON pickup_details.route_id = routes.route_id " +
+                    "JOIN driver_details ON routes.driver_id = driver_details.driver_id " +
+                    "WHERE username = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, driverUsername);
+        while (results.next()) {
+            myDriverPickups.add(mapRowToPickupDetails(results));
+        }
+        return myDriverPickups;
+    }
+
+    //Get pickup from pickup_details table, by pickup_id
+    @Override
+    public PickupDetails getPickupDetailsByPickupId(int pickupId) {
 
         PickupDetails pickupDetails = null;
         String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
@@ -75,6 +108,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         return pickupDetails;
     }
 
+    //Get pickup_details from pickup_details table, by route_id
     @Override
     public List<PickupDetails> getPickupDetailsByRouteId(int routeId) {
         List<PickupDetails> pickupDetailsList = new ArrayList<>();
@@ -88,6 +122,8 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         return pickupDetailsList;
     }
 
+
+    //Get pickup_details from pickup_details table, by driver_id
     @Override
     public List<PickupDetails> getPickupDetailsByDriverId(int driverId) {
         List<PickupDetails> pickupsByDriver = new ArrayList<>();
@@ -118,19 +154,15 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         return pickupDetailsList;
     }*/
 
-
-    //Kubra's Notes
-
-    //1.can you check this method in postman? While submitting pickup form, it gave an error saying that it violates
-    //violates foreign key constraint "fk_pickup_details_routes".
     @Override
     public PickupDetails createPickupDetails(PickupDetails pickupDetails) {
         String sql = "INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up) " +
                     "VALUES (?, ?, ?, ?, ?) RETURNING pickup_id;";
         Integer newId = jdbcTemplate.queryForObject(sql, Integer.class, pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.calcPickupWeight(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up());
-        return getPickupDetails(newId);
+        return getPickupDetailsByPickupId(newId);
     }
 
+    //Update a pickup
     @Override
     public void updatePickupDetails(PickupDetails pickupDetails) {
         String sql = "UPDATE pickup_details " +
@@ -140,6 +172,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
 
     }
 
+    //Delete a pickup from pickup_details table
     @Override
     public void deletePickupDetails(int pickupId) {
         String sql = "DELETE FROM pickup_details WHERE pickup_id = ?;";
@@ -159,8 +192,6 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         pickupDetails.setIs_picked_up(rowSet.getBoolean("is_picked_up"));
 
         return pickupDetails;
-
-
     }
 
 }

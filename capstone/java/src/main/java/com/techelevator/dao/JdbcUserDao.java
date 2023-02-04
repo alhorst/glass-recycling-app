@@ -22,9 +22,6 @@ public class JdbcUserDao implements UserDao {
     }
 
 
-    //Methods calling on users table
-
-
     //get all users from users table (recyclers, admins, drivers)
     @Override
     public List<User> findAllUsers() {
@@ -39,7 +36,7 @@ public class JdbcUserDao implements UserDao {
         return users;
     }
 
-    //get all drivers from users table
+    //get all drivers from users table (is_driver = true)
     @Override
     public List<User> listAllDrivers() {
         List<User> allDrivers = new ArrayList<>();
@@ -52,7 +49,7 @@ public class JdbcUserDao implements UserDao {
         return allDrivers;
     }
 
-    // returns list of all recycling users
+    //returns list of all recycling users (is_driver = false && role = 'ROLE_USER')
     @Override
     public List<User> listAllRecyclers() {
         List<User> allRecyclers = new ArrayList<>();
@@ -65,6 +62,7 @@ public class JdbcUserDao implements UserDao {
         return allRecyclers;
     }
 
+    //Get user from the users table, by username
     @Override
     public User findUserByUsername(String username) {
         if (username == null) throw new IllegalArgumentException("Username cannot be null");
@@ -77,7 +75,7 @@ public class JdbcUserDao implements UserDao {
         throw new UsernameNotFoundException("User " + username + " was not found.");
     }
 
-    //get user from users table, by user_id
+    //Get user from users table, by user_id
     @Override
     public User getUserById(int userId) {
         String sql = "SELECT * FROM users WHERE user_id = ?";
@@ -89,6 +87,7 @@ public class JdbcUserDao implements UserDao {
         }
     }
 
+    //Get user_id from the users table, by username
     @Override
     public int findUserIdByUsername(String username) {
         if (username == null) throw new IllegalArgumentException("Username cannot be null");
@@ -102,6 +101,7 @@ public class JdbcUserDao implements UserDao {
         return userId;
     }
 
+    //Add a new user to the users table
     //implemented via Authentication Controller to create both User and Driver accounts
     @Override
     public boolean create(String username, String password, String role, boolean is_driver) {
@@ -114,12 +114,14 @@ public class JdbcUserDao implements UserDao {
 
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
+
         user.setId(rs.getInt("user_id"));
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(Objects.requireNonNull(rs.getString("role")));
         user.setIs_driver(rs.getBoolean("is_driver"));
         user.setActivated(true);
+
         return user;
     }
 }

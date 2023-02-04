@@ -7,13 +7,17 @@ import java.util.List;
 
 public interface PickupDetailsDao {
 
-    PickupDetails getPickupDetails(int pickup_id);
+    PickupDetails getPickupDetailsByPickupId(int pickupId);
 
     List<PickupDetails> getAllUnassignedPickups();
 
+    List<PickupDetails> getUnassignedPickupsByUsername(String username);
+
     List<PickupDetails> getAllPickupDetails();
 
-    List<PickupDetails> getPickupDetailsByUsername(String username);
+    List<PickupDetails> getPickupDetailsByRecyclerUsername(String recyclerUsername);
+
+    List<PickupDetails> getPickupDetailsByDriverUsername(String driverUsername);
 
     List<PickupDetails> getPickupDetailsByRouteId(int routeId);
 
