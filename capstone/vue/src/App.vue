@@ -18,17 +18,25 @@
           <li><i class="fa-regular fa-calendar"></i>Schedule Pickup</li>
           <li><i class="fa-solid fa-pen"></i>Blog</li>
         </ul>
+        <div class="spacer">&nbsp;</div>
+        <div class="dropdown">
+          <router-link v-bind:to="{ name: 'account' }"
+            >Account<i class="fa-solid fa-user"></i
+          ></router-link>
+          <div class="dropdown-content">
+            <router-link id="login" v-bind:to="{ name: 'login' }">
+              Login</router-link
+            >
+            <router-link
+              id="logout"
+              v-bind:to="{ name: 'logout' }"
+              v-if="$store.state.token != ''"
+              >Logout</router-link
+            >
+            <!-- for some reason, with the v-if 'logout' doesn't show on dropdown -->
+          </div>
+        </div>
       </nav>
-      <div class="spacer">&nbsp;</div>
-      <router-link v-bind:to="{ name: 'account' }"
-        >Account<i class="fa-solid fa-user"></i
-      ></router-link>
-      <!-- This router link for logout is going to dropdown from Account...once I figure it out -->
-      <router-link
-        v-bind:to="{ name: 'logout' }"
-        v-if="$store.state.token != ''"
-        >Logout</router-link
-      >
       <!-- </div> -->
     </div>
     <router-view />
@@ -76,10 +84,14 @@ html {
   );
 }
 
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 #logo {
   float: left;
   padding-left: 10px;
-  padding-top: 10px;
   height: auto;
   width: 15%;
 }
@@ -87,8 +99,6 @@ html {
   border: 1px solid red;
   background-color: white;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: fixed;
   font-size: 20px;
   width: 100%;
@@ -99,12 +109,11 @@ html {
 }
 
 nav {
+  border: 1px solid red;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  padding: 10px 30px;
 }
 
 /* #navbar {
@@ -114,17 +123,20 @@ nav {
 } */
 
 ul {
+  border: 1px solid red;
   display: flex;
-  justify-content: flex-start;
-  list-style-type: none;
+  /* justify-content: center;
+  align-items: center; */
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 li {
   font-size: 20px;
   font-weight: 600;
-  padding: 0 20px 0 0;
+  padding: 0 20px 0 10px;
   margin-left: 10px;
-  margin-top: 10px;
   color: #0b7a1e;
 }
 
@@ -134,7 +146,7 @@ li {
 
 i {
   padding-right: 5px;
-  padding-left: 10px;
+  padding-left: 7px;
 }
 .spacer {
   flex-grow: 1;
@@ -148,13 +160,48 @@ a {
   transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   text-decoration: none;
   text-align: center;
-  margin-right: 20px;
+  margin-right: 10px;
   font-weight: 600;
 }
 
 a:hover {
   box-shadow: inset 200px 0 0 0 #9bdb66;
   color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 140px;
+  right: 0;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  text-decoration: none;
+  display: block;
+  box-shadow: inset 0 0 0 0 #0b7a1e;
+  color: #0b7a1e;
+  margin: 0 -0.25rem;
+  padding: 0.5rem;
+  transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+/* why the heck is this text blue on hover!!! */
+.dropdown-content a:hover {
+  background-color: #9bdb66;
+  box-shadow: inset 200px 0 0 0 white;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .footer {
@@ -174,6 +221,10 @@ a:hover {
     padding-top: 10px;
     position: absolute;
     width: 100%;
+  }
+
+  #logo {
+    display: none;
   }
 
   .open-menu {

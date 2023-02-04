@@ -5,26 +5,47 @@
   <div id="container">
     <!--container for information and the sign up, registration" -->
     <div class="body-container">
-      <div class="about-us">
+      <section class="about-us">
         <div id="info">
-          <b>VITRUM</b> Recycle is a grassroots program offering curbside glass
-          recycling in the Pittsburgh metro region. Despite its status as an
-          infinitely recyclable material, 75% of glass containers used by
-          consumers will be disposed of in landfills where it will never
-          decompose.
+          <h2>Get to know Vitrum</h2>
+          We're a grassroots program offering curbside glass recycling in the
+          Pittsburgh metro region. Despite its status as an infinitely
+          recyclable material, 75% of glass containers used by consumers will be
+          disposed of in landfills where it will never decompose.
           <!-- <img src="../img/bottles.png" alt="bottles" class="info-image" /> -->
         </div>
-        <div class="images-container"></div>
-      </div>
-      <div class="mid-container">
+      </section>
+      <section class="images-container">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img
+                id="one"
+                src="../img/bottles-in-crate.jpg"
+                alt="Green bottles in crate"
+              />
+            </div>
+            <div class="flip-card-back">
+              <h1>Did you know?</h1>
+              <p>
+                Recycling one glass bottle saves enough electricity to light a
+                100-watt bulb for 4 hours!
+              </p>
+            </div>
+          </div>
+        </div>
+        <div id="counter">
+          We've saved <br />XX<br />lbs of glass from the landfill!
+        </div>
+      </section>
+
+      <section class="mid-container">
         <div>
           Enroll with Vitrum today and our fleet of glass wranglers will deliver
           custom bins to your home or business.
         </div>
-        <div></div>
-      </div>
-      <div class="last-container">
-        <div></div>
+      </section>
+      <section class="last-container">
         <div>
           When those bins are full, simply schedule a pickup date on our handy
           app and drop those wine bottles and jam jars at the curb; they will be
@@ -35,7 +56,7 @@
           dashboard and earn points with every pickup to redeem for cool prizes.
           Sign up today!
         </div>
-      </div>
+      </section>
       <div id="account">
         <nav id="sign-in" class="account-sign">
           <p>
@@ -45,33 +66,10 @@
             >
           </p>
         </nav>
-        <nav id="log-in">
-          <p>
-            If you have an account, please log in<router-link
-              id="login"
-              v-bind:to="{ name: 'login' }"
-            >
-              here!</router-link
-            >
-          </p>
-        </nav>
       </div>
     </div>
 
     <!--
-  <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Account</a></li>
-      </ul>
-  </nav>
-
-  
-
-<div class= "recycling-container">
-  <h2 class="info">Information </h2>
-</div>
-
 <div class="footer-container">
   <div class="left-container">
     <section class="app-home">App Name</section>
@@ -107,29 +105,85 @@ export default {
   border: 1px solid red;
 }
 
+h2 {
+  text-align: center;
+}
+
 .about-us {
   background-color: white;
   margin-top: 5em;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
   border: 1px solid rgb(236, 1, 197);
   padding: 30px;
-  height: 130px;
-  width: 85%;
+  height: 3.7em;
   align-items: center;
   justify-content: center;
   text-align: justify;
+  overflow: auto;
 }
 
 .images-container {
+  display: flex;
   border: 1px solid orange;
   margin-top: 5em;
   padding: 30px;
 }
 
+.flip-card {
+  background-color: transparent;
+  width: 600px;
+  height: 220px;
+  perspective: 1000px;
+}
+
+/* need to figure out how to get picture full width...or maybe find
+another picture */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 9 rbga(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: transparent;
+}
+
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+#one {
+  max-width: 50%;
+  border-radius: 15px;
+}
+
+#counter {
+  background-color: white;
+  border-radius: 15px;
+}
+
 .mid-container {
   background-color: white;
-  margin-top: 5em;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-top: 2em;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
   border: 1px solid rgb(236, 1, 197);
   padding: 30px;
   height: 60px;
@@ -141,8 +195,8 @@ export default {
 
 .last-container {
   background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  margin-top: 5em;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
+  margin-top: 2em;
   border: 1px solid blue;
   padding: 30px;
   height: 200px;
