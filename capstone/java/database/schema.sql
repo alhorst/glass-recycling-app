@@ -42,11 +42,7 @@ CREATE TABLE user_details (
 );
 
 -- Driver information
-<<<<<<< HEAD
--- Sequence below --> Drivers have employee_id, starting with 3001
-=======
 -- Sequence below --> Drivers have driver_id, starting with 3001
->>>>>>> main
 CREATE SEQUENCE seq_driver_id
     INCREMENT BY 1
     START WITH 3001

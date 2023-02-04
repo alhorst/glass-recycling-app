@@ -15,7 +15,12 @@ public class PickupDetails {
     private int num_of_bins;
     private Boolean is_picked_up;
 
+    private final int FULL_BIN_WEIGHT = 60; //Full bin is 60lbs
 
+    public int calcPickupWeight() {
+        pickup_weight = num_of_bins * FULL_BIN_WEIGHT;
+        return pickup_weight;
+    }
 
     public int getPickup_id() {
         return pickup_id;

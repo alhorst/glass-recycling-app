@@ -27,26 +27,26 @@ INSERT INTO user_details (username, full_name, street_address, city, state_abbre
  VALUES ('mraymond','Miles Raymond','271 Lelia St', 'Pittsburgh', 'PA','15211','4125551212','mraymond@gmail.com',120,120,0);
 INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
  VALUES ('bblanc','Benoit Blanc','220 Luray St', 'Pittsburgh', 'PA','15214','4125551213','bblanc@gmail.com',240,120,120);
-INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
- VALUES ('903','mbron','Miles Bron','2257 Wylie Ave', 'Pittsburgh', 'PA','15219','4125551214','mbron@gmail.com','60','60','0');
-INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
- VALUES ('904','ltoussaint','Lionel Toussaint','1721 Wharton St', 'Pittsburgh', 'PA','15203','4125551215','ltoussaint@gmail.com','100','100','0');
-INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
- VALUES ('905','dcody','Duke Cody','317 Semple St', 'Pittsburgh', 'PA','15213','4125551216','dcody@gmail.com','360','60','300');
-INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
- VALUES ('906','awingfield','Amanda Wingfield','403 Grandview Ave', 'Pittsburgh', 'PA','15211','4125551217','awingfield@gmail.com','480','120','360');
-INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
- VALUES ('907','jholden','James Holden','1207 W North Ave', 'Pittsburgh', 'PA','15233','4125551218','jholden@gmail.com','60','60','0');
-INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
- VALUES ('908','aburton','Amos Burton','812 Beech Ave', 'Pittsburgh', 'PA','15233','4125551219','aburton@gmail.com','180','100','80');
-INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
- VALUES ('909','nnagata','Naomi Nagata','3120 Avalon St', 'Pittsburgh', 'PA','15219','4125551220','nnagata@gmail.com','0','0','0');
-INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
- VALUES ('910','cmao','Clarissa Mao','28 Welsford St', 'Pittsburgh', 'PA','15213','4125551221','cmao@gmail.com','300','120','180');
-INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
- VALUES ('911','cdrummer','Camina Drummer','1031 Herron Ave', 'Pittsburgh', 'PA','15219','4125551222','cdrummer@gmail.com','360','60','300');
-INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
- VALUES ('912','fjohnson','Fred Johnson','300 Heinz St', 'Pittsburgh', 'PA','15212','4125551223','fjohnson@gmail.com','420','60','360');
+INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
+ VALUES ('mbron','Miles Bron','2257 Wylie Ave', 'Pittsburgh', 'PA','15219','4125551214','mbron@gmail.com','60','60','0');
+INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
+ VALUES ('ltoussaint','Lionel Toussaint','1721 Wharton St', 'Pittsburgh', 'PA','15203','4125551215','ltoussaint@gmail.com','100','100','0');
+INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
+ VALUES ('dcody','Duke Cody','317 Semple St', 'Pittsburgh', 'PA','15213','4125551216','dcody@gmail.com','360','60','300');
+INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
+ VALUES ('awingfield','Amanda Wingfield','403 Grandview Ave', 'Pittsburgh', 'PA','15211','4125551217','awingfield@gmail.com','480','120','360');
+INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
+ VALUES ('jholden','James Holden','1207 W North Ave', 'Pittsburgh', 'PA','15233','4125551218','jholden@gmail.com','60','60','0');
+INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
+ VALUES ('aburton','Amos Burton','812 Beech Ave', 'Pittsburgh', 'PA','15233','4125551219','aburton@gmail.com','180','100','80');
+INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
+ VALUES ('nnagata','Naomi Nagata','3120 Avalon St', 'Pittsburgh', 'PA','15219','4125551220','nnagata@gmail.com','0','0','0');
+INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
+ VALUES ('cmao','Clarissa Mao','28 Welsford St', 'Pittsburgh', 'PA','15213','4125551221','cmao@gmail.com','300','120','180');
+INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
+ VALUES ('cdrummer','Camina Drummer','1031 Herron Ave', 'Pittsburgh', 'PA','15219','4125551222','cdrummer@gmail.com','360','60','300');
+INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
+ VALUES ('fjohnson','Fred Johnson','300 Heinz St', 'Pittsburgh', 'PA','15212','4125551223','fjohnson@gmail.com','420','60','360');
 INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
  VALUES ('913','kashford','Klaes Ashford','4812 Broad St', 'Pittsburgh', 'PA','15224','4125551224','kashford@gmail.com','480','0','480');
 INSERT INTO user_details (account_id, username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
@@ -60,41 +60,43 @@ INSERT INTO driver_details (username,home_office_address) VALUES ('mglassmore','
 INSERT INTO driver_details (username,home_office_address) VALUES ('cglassmore','3001 Railroad St, Pittsburgh, PA 15201');
 
 INSERT INTO routes (route_date)
- VALUES ('2023-02-03');
+ VALUES ('2023-02-05');
 INSERT INTO routes (route_date)
-VALUES ('2023-02-03');
+VALUES ('2023-02-06');
 INSERT INTO routes (route_date)
- VALUES ('2023-02-04');
+ VALUES ('2023-02-06');
+INSERT INTO routes (route_date)
+ VALUES ('2023-02-07');
 
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('mraymond', '2023-02-03', 1, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('bblanc', '2023-02-03', 2, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('mbron', '2023-02-03', 3, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('ltoussaint', '2023-02-03', 1, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('dcody', '2023-02-03', 3, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('awingfield', '2023-02-03', 2, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('jholden', '2023-02-03', 3, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('aburton', '2023-02-03', 1, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('nnagata', '2023-02-03', 2, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('cmao', '2023-02-03', 3, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('cdrummer', '2023-02-04', 1, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('fjohnson', '2023-02-04', 2, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('kashford', '2023-02-04', 3, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('adawes', '2023-02-04', 1, false);
-INSERT INTO pickup_details (requesting_username, pickup_date, num_of_bins, is_picked_up)
-VALUES ('minaros', '2023-02-04', 2, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('mraymond', '2023-02-05', 60, 1, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('bblanc', '2023-02-05', 120, 2, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('mbron', '2023-02-05', 180, 3, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('ltoussaint', '2023-02-06', 60, 1, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('dcody', '2023-02-06', 180, 3, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('awingfield', '2023-02-06', 120, 2, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('jholden', '2023-02-05', 180, 3, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('aburton', '2023-02-06', 60, 1, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('nnagata', '2023-02-07', 120, 2, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('cmao', '2023-02-07', 180, 3, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('cdrummer', '2023-02-07', 60, 1, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('fjohnson', '2023-02-05', 120, 2, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('kashford', '2023-02-06', 180, 3, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('adawes', '2023-02-06', 60, 1, false);
+INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
+VALUES ('minaros', '2023-02-07', 120, 2, false);
 
 COMMIT TRANSACTION;
