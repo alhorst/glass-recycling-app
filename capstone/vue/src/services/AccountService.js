@@ -21,8 +21,8 @@ export default {
 
 
     //get userdetail by username
-    getUserDetails(username){
-        return axios.get('/users/myDetails', username)
+    getUserDetails(){
+        return axios.get('/users/myDetails')
     }
 
 }
