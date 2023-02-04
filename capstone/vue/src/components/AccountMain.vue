@@ -17,6 +17,7 @@ Three columns( history, calendar, account)
 
 
 </div>
+
 </template>
 
 <script>
@@ -51,19 +52,15 @@ export default {
 </script>
 
 <style scoped>
-
 .account {
-    display: flex;
-    flex-direction: row-reverse;
-    font-size: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 20px;
 }
 
 .my-account {
-    border-radius: .5rem;
-    padding: 18px;
-    background-color: lightgray;
-
-  
+  border-radius: 0.5rem;
+  padding: 18px;
+  background-color: lightgray;
 }
-
 </style>

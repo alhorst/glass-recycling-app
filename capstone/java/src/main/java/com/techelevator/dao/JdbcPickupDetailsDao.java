@@ -118,6 +118,11 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         return pickupDetailsList;
     }*/
 
+
+    //Kubra's Notes
+
+    //1.can you check this method in postman? While submitting pickup form, it gave an error saying that it violates
+    //violates foreign key constraint "fk_pickup_details_routes".
     @Override
     public PickupDetails createPickupDetails(PickupDetails pickupDetails) {
         String sql = "INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up) " +
