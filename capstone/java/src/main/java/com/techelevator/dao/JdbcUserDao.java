@@ -112,6 +112,14 @@ public class JdbcUserDao implements UserDao {
         return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole, is_driver) == 1;
     }
 
+    //Delete user from the users table - keeping mind of FK constraints, where else do we need to delete first?
+    public void deleteUser(int userId) {
+        String deleteSql = "DELETE FROM users WHERE user_id = ?;";
+        jdbcTemplate.update(deleteSql, userId);
+    }
+
+
+
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
 

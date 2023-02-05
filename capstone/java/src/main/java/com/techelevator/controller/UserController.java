@@ -63,6 +63,18 @@ public class UserController {
         }
     }
 
+    //delete a user from the users table, by user_id
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path="/users/{userId}", method= RequestMethod.DELETE)
+    public void deleteUser(@PathVariable int userId) {
+        if (userDao.getUserById(userId) != null) {
+            userDao.deleteUser(userId);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No such user exists");
+        }
+    }
+
+
     //UserDetailsDao methods start here **********
 
 
@@ -124,7 +136,6 @@ public class UserController {
         }
     }
 
-    //will throw foreign key constraint error if user has pickups in pickup_details. Can this be prevented?
     //deleting a user detail from user_details table
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path="/users/details/{accountId}", method= RequestMethod.DELETE)

@@ -50,18 +50,6 @@ public class DriverController {
         }
     }
 
-    //Create a driver detail in the drivers_details table
-    //Should call this at the same time the admin adds a driver
-    @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path="/driverDetails", method= RequestMethod.POST)
-    public DriverDetails addDriverDetail(@RequestBody DriverDetails newDriver) {
-        if (newDriver != null) {
-            return driverDetailsDao.createDriver(newDriver);
-        } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No Driver Details provided in the request!");
-        }
-    }
-
     //Deletes a driver detail from the driver_details table
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path="/driverDetails/{driver_id}", method= RequestMethod.DELETE)
@@ -72,6 +60,20 @@ public class DriverController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The driver you're attempting to delete, does not exist");
         }
     }
+
+    /*
+    //Create a driver detail in the drivers_details table
+    // Update 2/5 - shouldn't need this call, /addDriver in Auth. Controller takes care of this upon registration
+    // commenting out for now
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(path="/driverDetails", method= RequestMethod.POST)
+    public DriverDetails addDriverDetail(@RequestBody DriverDetails newDriver) {
+        if (newDriver != null) {
+            return driverDetailsDao.createDriver(newDriver);
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No Driver Details provided in the request!");
+        }
+    }*/
 
      //Leaning towards us not needing this functionality - commenting out for now
     //Update a row in the driver_details table - returns the updated Driver Detail object
