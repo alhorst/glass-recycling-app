@@ -38,7 +38,9 @@ export default {
               requesting_username:'',
               pickup_date :'',
               num_of_bins : '',
-          }
+              is_picked_up:false,
+          },
+          showForm: false,
       }
   },
   methods: {

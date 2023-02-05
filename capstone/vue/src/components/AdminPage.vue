@@ -5,7 +5,7 @@
       <locations>MAP GOES HERE</locations>
     </div>
     <div id="card-pickup">
-      <h2>Pickups</h2>
+      <button v-on:click.prevent="created">Pickups</button>
       <table id="tbl-pickups">
         <thead id="tbl-head-pickups">
           <tr>
@@ -31,81 +31,81 @@
               <input
                 type="text"
                 id="firstNameFilter"
-                v-model="filter.firstName"
+                v-model="filter.pickup_id"
               />
             </td>
             <td>
               <input
                 type="text"
                 id="lastNameFilter"
-                v-model="filter.lastName"
+                v-model="filter.route_id"
               />
             </td>
             <td>
               <input
                 type="text"
                 id="usernameFilter"
-                v-model="filter.username"
+                v-model="filter.requesting_username"
               />
             </td>
             <td>
               <input
                 type="text"
                 id="emailFilter"
-                v-model="filter.emailAddress"
+                v-model="filter.pickup_date"
               />
             </td>
-            <td>
-              <select id="statusFilter" v-model="filter.status">
+             <td>
+              <select id="statusFilter" v-model="filter.num_of_bins">
                 <option value>All Bins</option>
                 <option value="Active">1</option>
                 <option value="Disabled">2</option>
                 <option value="">3</option>
               </select>
-            </td>
+            </td> 
             <td>&nbsp;</td>
           </tr>
           <tr
-            v-for="user in filteredList"
-            v-bind:key="user.id"
-            v-bind:class="{ disabled: user.status === 'Disabled' }"
+            v-for="user in users"
+            v-bind:key="user.pickup_id"
+            v-bind:class="{ disabled: user.is_picked_up === 'Not Picked Up' }"
           >
-            <td>
+             <td>
               <input
                 type="checkbox"
                 name="selectedUsers"
                 v-model="selectedUserIDs"
                 v-bind:checked="
-                  selectedUserIDs.includes(Number.parseInt(user.id))
+                  selectedUserIDs.includes(Number.parseInt(user.pickup_id))
                 "
-                v-bind:value="Number.parseInt(user.id)"
+                v-bind:value="Number.parseInt(user.pickup_id)"
               />
-            </td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.emailAddress }}</td>
-            <td>{{ user.status }}</td>
+            </td> 
+            <td>{{ user.pickup_id}}</td>
+            <td>{{ user.route_id }}</td>
+            <td>{{ user.requesting_username }}</td>
+            <td>{{ user.pickup_date }}</td>
+            <td>{{ user.num_of_bins}}</td>
             <td>
-              <button class="btnEnableDisable" v-on:click="flipStatus(user.id)">
-                {{ user.status === "Active" ? "Picked Up" : "Not Picked Up" }}
-              </button>
+               <button class="btnEnableDisable" v-on:click="flipStatus(user.pickup_id)">
+                {{ user.is_picked_up === "Not Picked Up" ? "Picked Up" : "Not Picked Up" }}
+              </button> 
             </td>
           </tr>
         </tbody>
       </table>
 
-      <div class="all-actions">
+      <!-- <div class="all-actions">
         <button
           v-bind:disabled="actionButtonDisabled"
           v-on:click="deleteSelectedUsers()"
         >
           Delete Pickup
-        </button>
+        </button> -->
 
-        <button v-on:click="showForm = !showForm">Add New Pickup! ♻️</button>
+        <!-- <button v-on:click="showForm = !showForm">Add New Pickup! ♻️</button> -->
 
-        <form id="frmAddNewPickup" v-show="showForm">
+        <!-- <form id="frmAddNewPickup" v-show="showForm">
           <div class="field">
             <label for="firstName">First Name:</label>
             <input type="text" name="firstName" v-model="newUser.firstName" />
@@ -129,142 +129,14 @@
           <button type="submit" class="btn save" v-on:click.prevent="saveUser">
             Save Pickup
           </button>
-        </form>
+        </form> -->
       </div>
-    </div>
-
-    <div id="card-driver">
-      <h2>Drivers</h2>
-      <table id="tbl-drivers">
-        <thead id="tbl-head-drivers">
-          <tr>
-            <th>&nbsp;</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone Number</th>
-            <th>Email Address</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <input
-                type="checkbox"
-                id="selectAll"
-                v-on:change="selectAllUsers($event)"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                id="firstNameFilter"
-                v-model="filter.firstName"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                id="lastNameFilter"
-                v-model="filter.lastName"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                id="usernameFilter"
-                v-model="filter.username"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                id="emailFilter"
-                v-model="filter.emailAddress"
-              />
-            </td>
-            <td>
-              <select id="statusFilter" v-model="filter.status">
-                <option value>Show All</option>
-                <option value="Active">Active</option>
-                <option value="Disabled">Inactive</option>
-              </select>
-            </td>
-            <td>&nbsp;</td>
-          </tr>
-          <tr
-            v-for="user in filteredList"
-            v-bind:key="user.id"
-            v-bind:class="{ disabled: user.status === 'Disabled' }"
-          >
-            <td>
-              <input
-                type="checkbox"
-                name="selectedUsers"
-                v-model="selectedUserIDs"
-                v-bind:checked="
-                  selectedUserIDs.includes(Number.parseInt(user.id))
-                "
-                v-bind:value="Number.parseInt(user.id)"
-              />
-            </td>
-            <td>{{ user.firstName }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.username }}</td>
-            <td>{{ user.emailAddress }}</td>
-            <td>{{ user.status }}</td>
-            <td>
-              <button class="btnEnableDisable" v-on:click="flipStatus(user.id)">
-                {{ user.status === "Active" ? "Deactivate" : "Activate" }}
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="all-actions">
-        <button
-          v-bind:disabled="actionButtonDisabled"
-          v-on:click="deleteSelectedUsers()"
-        >
-          Delete Driver
-        </button>
-
-        <button v-on:click="showForm = !showForm">Add New Driver! 🚗</button>
-
-        <form id="frmAddNewDriver" v-show="showForm">
-          <div class="field">
-            <label for="firstName">First Name:</label>
-            <input type="text" name="firstName" v-model="newUser.firstName" />
-          </div>
-          <div class="field">
-            <label for="lastName">Last Name:</label>
-            <input type="text" name="lastName" v-model="newUser.lastName" />
-          </div>
-          <div class="field">
-            <label for="username">Username:</label>
-            <input type="text" name="username" v-model="newUser.username" />
-          </div>
-          <div class="field">
-            <label for="emailAddress">Email Address:</label>
-            <input
-              type="text"
-              name="emailAddress"
-              v-model="newUser.emailAddress"
-            />
-          </div>
-          <button type="submit" class="btn save" v-on:click.prevent="saveUser">
-            Save Driver
-          </button>
-        </form>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 import Locations from "./Locations.vue";
+import PickupService from '../services/PickupService.js';
 
 export default {
   name: "admin-page",
@@ -273,16 +145,26 @@ export default {
   },
   data() {
     return {
+      users: {
+          pickup_id:'',
+          route_id: '',
+          requesting_username:'',
+          pickup_date:'',
+          num_of_bins:'',
+          is_picked_up:false,
+
+      },
       showForm: false,
       selectedUserIDs: [],
       filter: {
-        firstName: "",
-        lastName: "",
-        username: "",
-        emailAddress: "",
-        status: "",
+         pickup_id:'',
+          route_id: '',
+          requesting_username:'',
+          pickup_date:'',
+          num_of_bins:'',
+          is_picked_up:false,
       },
-      nextUserId: 7,
+      // nextUserId: 7,
       newUser: {
         id: null,
         firstName: "",
@@ -291,87 +173,45 @@ export default {
         emailAddress: "",
         status: "Active",
       },
-      users: [
-        {
-          id: 1,
-          firstName: "John",
-          lastName: "Smith",
-          username: "jsmith",
-          emailAddress: "jsmith@gmail.com",
-          status: "Active",
-        },
-        {
-          id: 2,
-          firstName: "Anna",
-          lastName: "Bell",
-          username: "abell",
-          emailAddress: "abell@yahoo.com",
-          status: "Active",
-        },
-        {
-          id: 3,
-          firstName: "George",
-          lastName: "Best",
-          username: "gbest",
-          emailAddress: "gbest@gmail.com",
-          status: "Disabled",
-        },
-        {
-          id: 4,
-          firstName: "Ben",
-          lastName: "Carter",
-          username: "bcarter",
-          emailAddress: "bcarter@gmail.com",
-          status: "Active",
-        },
-        {
-          id: 5,
-          firstName: "Katie",
-          lastName: "Jackson",
-          username: "kjackson",
-          emailAddress: "kjackson@yahoo.com",
-          status: "Active",
-        },
-        {
-          id: 6,
-          firstName: "Mark",
-          lastName: "Smith",
-          username: "msmith",
-          emailAddress: "msmith@foo.com",
-          status: "Disabled",
-        },
-      ],
+     
     };
   },
   methods: {
-    getNextUserId() {
-      return this.nextUserId++;
-    },
 
-    saveUser() {
-      this.newUser.id = this.getNextUserId();
-      this.users.push(this.newUser);
-      this.clearForm();
-    },
+    created(){
+      //get all users unassigned pickup data here
+      PickupService.getPickups().then((response)=> {
+          this.users = response.data;
+      })
+      },
+    // getNextUserId() {
+    //   return this.nextUserId++;
+    // },
 
-    clearForm() {
-      this.newUser = {
-        id: null,
-        firstName: "",
-        lastName: "",
-        username: "",
-        emailAddress: "",
-        status: "Active",
-      };
-    },
+    // saveUser() {
+    //   this.newUser.id = this.getNextUserId();
+    //   this.users.push(this.newUser);
+    //   this.clearForm();
+    // },
 
-    flipStatus(id) {
+    // clearForm() {
+    //   this.newUser = {
+    //     id: null,
+    //     firstName: "",
+    //     lastName: "",
+    //     username: "",
+    //     emailAddress: "",
+    //     status: "Active",
+    //   };
+    // },
+
+    flipStatus(pickup_id) {
       this.users.forEach((user) => {
-        if (user.id === id) {
-          if (user.status === "Active") {
-            user.status = "Disabled";
+        if (user.pickup_id === pickup_id) {
+          if (user.is_picked_up === "Not Picked Up") {
+            user.is_picked_up === " Picked Up";
           } else {
-            user.status = "Active";
+            user.is_picked_up = "Not Picked Up";
           }
         }
       });
@@ -402,7 +242,7 @@ export default {
       if (event.target.checked) {
         this.selectedUserIDs = [];
         for (let i = 0; i < this.users.length; i++) {
-          this.selectedUserIDs.push(this.users[i].id);
+          this.selectedUserIDs.push(this.users[i].pickup_id);
         }
       } else {
         this.selectedUserIDs = [];
