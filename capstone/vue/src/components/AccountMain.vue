@@ -5,23 +5,23 @@ Three columns( history, calendar, account)
 -->
 
 <template>
-  <div>
-    <div class="account">
-      <div class="my-account">
-        <router-link :to="{ name: 'account-detail' }">My Account</router-link>
-        <h4>
-          <i>{{ user.username }}</i>
-        </h4>
-      </div>
-      <!-- recycling history and calendar-->
-      <!-- <div class="pick-up">
+  <div class="account">
+    <div class="my-account">
+      <router-link :to="{ name: 'account-detail' }">My Account</router-link>
+      <h4>
+        <i>{{ user.username }}</i>
+      </h4>
+    </div>
+    <!-- recycling history and calendar-->
+    <!-- <div class="pick-up">
       <button v-on:click="showForm = !showForm">Schedule Pick up!</button>
         <pick-up v-show="showForm"></pick-up>
-      -->
-      <div>
-        <pick-up></pick-up>
-      </div>
+      
+    </div> -->
+    <div>
+      <pick-up></pick-up>
     </div>
+
     <div class="history">
       <button>My Recycling History</button>
     </div>
@@ -59,14 +59,13 @@ export default {
 <style scoped>
 .account {
   display: flex;
-  height: 800px;
+ height: 800px;
   flex-flow: column wrap;
   font-size: 18px;
   width: 200px;
 }
 
-.my-account,
-.pick-up {
+.my-account, .pick-up{
   border-radius: 0.8rem;
   padding: 20px;
   padding-bottom: 24px;
@@ -92,5 +91,6 @@ export default {
   height: 2em; /* height is 2x line-height, so two lines will display */
   overflow: hidden;
   margin-bottom: 6px;
+  align-self: flex-end;
 }
 </style>
