@@ -19,7 +19,7 @@
       >Thank you for registering, please sign in.</div>
      <label class="container">
   <input type="radio" name="radio" class="radio" >
-  <span class="checkmark">Login as Bussiness Admin</span>
+  <span class="checkmark">Login as Business Admin</span>
 </label>
 <br>
 <!--

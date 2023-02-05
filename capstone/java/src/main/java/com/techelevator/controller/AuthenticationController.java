@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import javax.validation.Valid;
 
+import com.techelevator.dao.DriverDetailsDao;
 import com.techelevator.model.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,11 +27,13 @@ public class AuthenticationController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private UserDao userDao;
+    private DriverDetailsDao driverDetailsDao;
 
-    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao) {
+    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao, DriverDetailsDao driverDetailsDao) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDao = userDao;
+        this.driverDetailsDao = driverDetailsDao;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -61,9 +64,12 @@ public class AuthenticationController {
         }
     }
 
-    //must be logged in as admin to add driver
-    // on front-end, admin view will have 'add driver' option, when form submitted with
-    // driver information, we'll send to this handler. Can change path to what works best
+    //Registers a new Driver account - adds new Driver to the users table && the driver_details table
+    //Once registered via this handler method, the new Driver is ready to be assigned to routes/pickups
+    //Must be logged in as admin to add driver
+    //Initial Setup - admin sets both Username and password for the driver on the front-end (in admin dashboard)
+    //
+    //Goal:  admin sets Username and is shown options to either set a password or have one random generated
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/addDriver", method = RequestMethod.POST)
@@ -72,7 +78,14 @@ public class AuthenticationController {
             User user = userDao.findUserByUsername(newDriver.getUsername());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Already Exists.");
         } catch (UsernameNotFoundException e) {
+            //Registers the driver into the users table
             userDao.create(newDriver.getUsername(),newDriver.getPassword(), newDriver.getRole(), true);
+
+            //Adds the new driver to driver_details table
+            DriverDetails newDriverDetail = new DriverDetails();
+            newDriverDetail.setUsername(newDriver.getUsername());
+            newDriverDetail.setHome_office_address(newDriverDetail.getHome_office_address());
+            driverDetailsDao.createDriver(newDriverDetail);
         }
     }
 }
