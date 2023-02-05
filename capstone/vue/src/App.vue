@@ -1,63 +1,78 @@
 <template>
   <div id="app">
     <!-- Nav container -->
-    <div class="nav-container">
-      <div class="toggle">
-        <i class="fa-solid fa-bars" @click="showMenu()"></i>
-      </div>
-      <!-- <div id="navbar"> -->
-      <nav :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'">
-        <img id="logo" src="./img/logo-clear.png" alt="Vitrum Recycling Logo" />
-        <ul>
-          <li>
-            <router-link v-bind:to="{ name: 'home' }"
-              ><i class="fa-solid fa-house"></i>Home</router-link
-            >
-          </li>
-          <li><i class="fa-solid fa-recycle"></i>Services</li>
-          <li><i class="fa-regular fa-calendar"></i>Schedule Pickup</li>
-          <li><i class="fa-solid fa-pen"></i>Blog</li>
-        </ul>
-        <div class="spacer">&nbsp;</div>
-        <div class="dropdown">
-
-          <!--I need to change name to "account-detail" because of I can't see the account form"Kubra-->
-          <router-link v-bind:to="{ name: 'account' }"
-            >Account<i class="fa-solid fa-user"></i
-          ></router-link>
-          <div class="dropdown-content">
-            <router-link id="login" v-bind:to="{ name: 'login' }">
-              Login</router-link
-            >
-            <router-link
-              id="logout"
-              v-bind:to="{ name: 'logout' }"
-              v-if="$store.state.token != ''"
-              >Logout</router-link
-            >
-            <!-- for some reason, with the v-if 'logout' doesn't show on dropdown -->
-          </div>
-        </div>
-      </nav>
-      <!-- </div> -->
+    <div class="toggle">
+      <i class="fa-solid fa-bars" @click="showMenu()"></i>
     </div>
-    <div class="main-view">
-    <router-view/>
-    </div>
-    <div class="footer">
+    <nav :class="this.showMobileMenu ? 'open-menu' : 'closed-menu'">
+      <img id="logo" src="./img/logo-clear.png" alt="Vitrum Recycling Logo" />
       <ul>
-        <i class="fa-solid fa-comment"></i>
-        <li>Contact us</li>
-        <i class="fa-solid fa-truck-fast"></i>
-        <li>Careers</li>
-        <li>Dummy</li>
+        <li>
+          <router-link v-bind:to="{ name: 'home' }"
+            ><i class="fa-solid fa-house"></i
+          ></router-link>
+        </li>
+        <li>About Us</li>
+        <li>Services</li>
+        <li>Schedule Pickup</li>
+        <li>Contact Us</li>
       </ul>
-      <div class="icons">
-        <i class="fa-brands fa-facebook"></i>
-        <i class="fa-brands fa-instagram"></i>
-        <i class="fa-brands fa-twitter"></i>
+      <button>
+        Sign up<router-link id="register" v-bind:to="{ name: 'register' }">
+          here!</router-link
+        >
+        <!-- <div class="spacer">&nbsp;</div> -->
+      </button>
+      <div class="dropdown">
+        <!--I need to change name to "account-detail" because of I can't see the account form"Kubra-->
+        <router-link v-bind:to="{ name: 'account' }"
+          >Account<i class="fa-solid fa-user"></i
+        ></router-link>
+        <div class="dropdown-content">
+          <router-link id="login" v-bind:to="{ name: 'login' }">
+            Login</router-link
+          >
+          <router-link
+            id="logout"
+            v-bind:to="{ name: 'logout' }"
+            v-if="$store.state.token != ''"
+            >Logout</router-link
+          >
+          <!-- for some reason, with the v-if 'logout' doesn't show on dropdown -->
+        </div>
       </div>
+    </nav>
+    <div class="main-view">
+      <router-view />
     </div>
+    <footer>
+      <div class="footer-content">
+        <div>
+          <ul class="recycling">
+            <h3>Recycling</h3>
+            <li>Where to recycle</li>
+            <li>How to recycle</li>
+            <li>Recycle an item</li>
+          </ul>
+        </div>
+        <div>
+          <ul class="help-info">
+            <h3>Help and Info</h3>
+            <li>FAQs</li>
+            <li>News</li>
+            <li>Careers</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Follow us</h3>
+          <ul class="icons">
+            <li><i class="fa-brands fa-facebook"></i></li>
+            <li><i class="fa-brands fa-twitter"></i></li>
+            <li><i class="fa-brands fa-instagram"></i></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 <script>
@@ -80,12 +95,7 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
 
 html {
-  background: linear-gradient(
-    0deg,
-    rgba(11, 122, 30, 1) 0%,
-    rgba(122, 198, 47, 1) 22%,
-    rgba(252, 252, 252, 1) 85%
-  );
+  background: white;
 }
 
 #app {
@@ -99,41 +109,31 @@ html {
   height: auto;
   width: 15%;
 }
-.nav-container {
-  border: 1px solid red;
-  background-color: white;
-  display: flex;
-  position: fixed;
-  font-size: 20px;
-  width: 100%;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-.main-view{
+
+.main-view {
   margin-top: 8%;
 }
 
 nav {
-  border: 1px solid red;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px 30px;
-}
-
-/* #navbar {
   background-color: white;
-  padding: 0.2em;
-  width: 100%;
-} */
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  padding: 10px 30px;
+  width: 100vw;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border: 1px solid red;
+}
 
 ul {
   border: 1px solid red;
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
   margin: 0;
   padding: 0;
   list-style: none;
@@ -145,6 +145,67 @@ li {
   padding: 0 20px 0 10px;
   margin-left: 10px;
   color: #0b7a1e;
+}
+button {
+  --color: #21a076;
+  padding: 0.5em 0.5em 0.5em 1em;
+  background-color: transparent;
+  border-radius: 7em;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.5s;
+  font-weight: 500;
+  font-size: 17px;
+  margin-left: 8em;
+  margin-right: 3em;
+  border: 1px solid;
+  font-family: inherit;
+  text-transform: uppercase;
+  color: var(--color);
+  z-index: 1;
+}
+
+button::before,
+.button::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  background-color: var(--color);
+  transition: 1s ease;
+}
+
+button::before {
+  top: -1em;
+  left: -1em;
+}
+
+button::after {
+  left: calc(100% + 1em);
+  top: calc(100% + 1em);
+}
+
+button:hover::before,
+.button:hover::after {
+  height: 410px;
+  width: 410px;
+}
+
+button:hover {
+  color: rgb(255, 255, 255);
+}
+
+button:active {
+  filter: brightness(0.8);
+}
+
+.dropdown {
+  border: 1px solid red;
 }
 
 .toggle {
@@ -211,16 +272,38 @@ a:hover {
   display: block;
 }
 
-.footer {
+footer {
+  border: 1px solid blue;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: absolute;
+  text-align: center;
+  height: auto;
+  width: 100vw;
+  left: 0;
+  right: 0;
+  padding-top: 1.5em;
+  border-top: 5px solid #9bdb66;
   background-color: white;
-  width: 100%;
 }
 
-.footer i {
-  color: #0b7a1e;
+.footer-content {
+  /* display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center; */
+}
+
+.footer-content div {
+  display: block;
+}
+
+.icons {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 768px) {
