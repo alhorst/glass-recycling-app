@@ -57,35 +57,7 @@
           Sign up today!
         </div>
       </section>
-      <div id="account">
-        <nav id="sign-in" class="account-sign">
-          <p>
-            Don't have an acount yet? Register
-            <router-link id="register" v-bind:to="{ name: 'register' }"
-              >here!</router-link
-            >
-          </p>
-        </nav>
-      </div>
     </div>
-
-    <!--
-<div class="footer-container">
-  <div class="left-container">
-    <section class="app-home">App Name</section>
-    <section class="home-footer">Home</section>
-    <section class="drop-off">Drop-off Hub</section>
-    <section class="contact"> Contact</section>
-    <section class="calendar">Calendar</section>
-    
-  </div>
-  <div class="right-container">
-    <img src="" alt= "Glass Recycling Logo" class="logo">
-    <section class="address">Address</section>
-  </div>
-
-</div>
--->
   </div>
 </template>
 
@@ -214,13 +186,6 @@ another picture */
   justify-content: center;
   padding-left: 30px;
   border-radius: 90px;
-}
-
-#account {
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* background-color: #24b4a5; */
-  /* padding:10px 5px 20px 0px; */
 }
 
 .desc {
