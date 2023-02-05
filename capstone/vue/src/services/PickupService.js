@@ -24,7 +24,13 @@ export default {
 
     deletePickup(pickupId) {
         return axios.delete(`/pickups/${pickupId}`);
-    }
+    },
+
+    //get all unassigned pickup request from logged in users
+
+    // getPickupRequests(){
+    //     return axios.get('/pickups/unassigned');
+    // }
 
 
 
