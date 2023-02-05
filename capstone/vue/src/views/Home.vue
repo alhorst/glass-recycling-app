@@ -1,22 +1,25 @@
-
-<!-- This is splash page. user can see the splash page but can not access the details if not logged in --> 
-
 <template>
-  <div id="container">
-    <!--container for information and the sign up, registration" -->
-    <div class="body-container">
-      <section class="about-us">
-        <div id="info">
-          <h2>Get to know Vitrum</h2>
+  <div class="body-container">
+    <div class="hero-image">
+      <div class="hero-text">
+        <h1>We're all in this together! Recycle for the planet!</h1>
+        <button><router-link id="register" v-bind:to="{ name: 'register' }">
+      </router-link>Sign up today!</button>
+      </div>
+    </div>
+    <section class="about-us">
+      <div id="info">
+        <h2>Get to know Vitrum</h2>
+        <p>
           We're a grassroots program offering curbside glass recycling in the
           Pittsburgh metro region. Despite its status as an infinitely
           recyclable material, 75% of glass containers used by consumers will be
           disposed of in landfills where it will never decompose.
-          <!-- <img src="../img/bottles.png" alt="bottles" class="info-image" /> -->
-        </div>
-      </section>
-      <section class="images-container">
-        <div class="flip-card">
+        </p>
+      </div>
+    </section>
+    <section class="images-container">
+      <!-- <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
               <img
@@ -33,31 +36,30 @@
               </p>
             </div>
           </div>
-        </div>
-        <div id="counter">
-          We've saved <br />XX<br />lbs of glass from the landfill!
-        </div>
-      </section>
+        </div> -->
+      <div id="counter">
+        We've saved <br />XX<br />lbs of glass from the landfill!
+      </div>
+    </section>
 
-      <section class="mid-container">
-        <div>
-          Enroll with Vitrum today and our fleet of glass wranglers will deliver
-          custom bins to your home or business.
-        </div>
-      </section>
-      <section class="last-container">
-        <div>
-          When those bins are full, simply schedule a pickup date on our handy
-          app and drop those wine bottles and jam jars at the curb; they will be
-          crushed to a fine sand which we sell or donate to our commercial
-          partners for a wide variety of sustainable applications: erosion
-          remediation, creating road services, and even to make swanky and
-          unique kitchen countertops. Keep track of your recycling stats on your
-          dashboard and earn points with every pickup to redeem for cool prizes.
-          Sign up today!
-        </div>
-      </section>
-    </div>
+    <section class="mid-container">
+      <div>
+        Enroll with Vitrum today and our fleet of glass wranglers will deliver
+        custom bins to your home or business.
+      </div>
+    </section>
+    <section class="last-container">
+      <div>
+        When those bins are full, simply schedule a pickup date on our handy app
+        and drop those wine bottles and jam jars at the curb; they will be
+        crushed to a fine sand which we sell or donate to our commercial
+        partners for a wide variety of sustainable applications: erosion
+        remediation, creating road services, and even to make swanky and unique
+        kitchen countertops. Keep track of your recycling stats on your
+        dashboard and earn points with every pickup to redeem for cool prizes.
+        Sign up today!
+      </div>
+    </section>
   </div>
 </template>
 
@@ -73,8 +75,33 @@ export default {
 * {
   font-family: "Raleway", sans-serif;
 }
-#container {
+
+/* why does 100% width only make the right side go to edge?? */
+/* using inspect, it's getting padding from somewhere... */
+.body-container {
   border: 1px solid red;
+  width: 100%;
+  }
+
+.hero-image {
+  border: 1px solid yellow;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../img/glass-bottles-honeycomb.jpg");
+  height: 600px;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
 
 h2 {
@@ -87,11 +114,11 @@ h2 {
   box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
   border: 1px solid rgb(236, 1, 197);
   padding: 30px;
-  height: 3.7em;
+  height: auto;
   align-items: center;
   justify-content: center;
   text-align: justify;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .images-container {

@@ -17,12 +17,8 @@
         <li>Schedule Pickup</li>
         <li>Contact Us</li>
       </ul>
-      <button>
-        Sign up<router-link id="register" v-bind:to="{ name: 'register' }">
-          here!</router-link
-        >
+      <input type="text" placeholder="Search...">
         <!-- <div class="spacer">&nbsp;</div> -->
-      </button>
       <div class="dropdown">
         <!--I need to change name to "account-detail" because of I can't see the account form"Kubra-->
         <router-link v-bind:to="{ name: 'account' }"
@@ -91,7 +87,7 @@ export default {
 };
 </script>
 
-<style>
+<style scope>
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
 
 html {
@@ -111,7 +107,7 @@ html {
 }
 
 .main-view {
-  margin-top: 8%;
+  margin-top: 3.2%;
 }
 
 nav {
@@ -145,6 +141,17 @@ li {
   padding: 0 20px 0 10px;
   margin-left: 10px;
   color: #0b7a1e;
+}
+
+input[type=text] {
+  border: 1px solid rgb(189, 188, 188);
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 17px;
+  /* float: right; */
+  padding-left: 10px;
+  padding-right: 30px;
+
 }
 button {
   --color: #21a076;
@@ -206,6 +213,7 @@ button:active {
 
 .dropdown {
   border: 1px solid red;
+  
 }
 
 .toggle {
@@ -216,9 +224,9 @@ i {
   padding-right: 5px;
   padding-left: 7px;
 }
-.spacer {
+/* .spacer {
   flex-grow: 1;
-}
+} */
 
 a {
   box-shadow: inset 0 0 0 0 #0b7a1e;
