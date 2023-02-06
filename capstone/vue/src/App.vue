@@ -152,7 +152,7 @@ li {
   padding-right: 60px;
 }
 
-input[type="text"] {
+#search-box input[type="text"] {
   border: 1px solid rgb(167, 167, 167);
   box-shadow: inset 0 2px 6px #000;
   border-radius: 20px;

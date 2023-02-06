@@ -21,6 +21,7 @@
           Vitrum today and our fleet of glass wranglers will deliver custom bins
           to your home or business.
         </p>
+        <div class="illustration"><img src="../img/happyrecycle.jpg" /></div>
       </div>
     </section>
     <section class="counter-container">
@@ -159,18 +160,19 @@ h2 {
 
 .about-us {
   background-color: white;
-  margin-top: 5em;
-  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.5);
+  margin-top: 0;
   border: 1px solid rgb(236, 1, 197);
   padding: 30px;
   padding-left: 50px;
   padding-right: 50px;
   height: auto;
-  align-items: center;
-  justify-content: center;
+  font-size: 1.5em;
   text-align: justify;
   /* overflow: auto; */
 }
+
+.illustration {
+border: 1px solid red;}
 
 .counter-container {
   display: flex;
