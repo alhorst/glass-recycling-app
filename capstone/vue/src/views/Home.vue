@@ -171,8 +171,10 @@ h2 {
   /* overflow: auto; */
 }
 
-.illustration {
-border: 1px solid red;}
+.illustration img {
+  border: 1px solid red;
+  max-width: 100%;
+}
 
 .counter-container {
   display: flex;
