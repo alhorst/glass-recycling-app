@@ -3,8 +3,11 @@
     <div class="hero-image">
       <div class="hero-text">
         <h1>We're all in this together! Recycle for the planet!</h1>
-        <button><router-link id="register" v-bind:to="{ name: 'register' }">
-      </router-link>Sign up today!</button>
+        <button>
+          <router-link id="register" v-bind:to="{ name: 'register' }">
+          </router-link
+          >Sign up today!
+        </button>
       </div>
     </div>
     <section class="about-us">
@@ -71,21 +74,15 @@ export default {
 </script>
 
 
-<style scope>
-* {
-  font-family: "Raleway", sans-serif;
-}
-
-/* why does 100% width only make the right side go to edge?? */
-/* using inspect, it's getting padding from somewhere... */
+<style scoped>
 .body-container {
   border: 1px solid red;
   width: 100%;
-  }
+}
 
 .hero-image {
   border: 1px solid yellow;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)),
     url("../img/glass-bottles-honeycomb.jpg");
   height: 600px;
   width: 100%;
@@ -98,10 +95,22 @@ export default {
 .hero-text {
   text-align: center;
   position: absolute;
+  letter-spacing: 0.3em;
+  font-size: 1.2em;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
+}
+
+.hero-image button {
+  display: inline-block;
+  padding: 10px 25px;
+  color: white;
+  font-size: 1em;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid white;
 }
 
 h2 {
@@ -227,50 +236,6 @@ another picture */
 #login:hover,
 #register:hover {
   color: #24b4a5;
-}
-
-#container {
-  /* display: flex;
-  flex-direction: column; */
-  /* align-items: center; */
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-.account-sign {
-  /* margin: 0px 10px 0px 60px; */
-  font-size: 20px;
-  /* background-color: #24b4a5; */
-  padding-left: 30px;
-  border-radius: 90px;
-}
-
-.header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 25px;
-}
-
-.body-container {
-  /* display: flex; */
-  margin: auto;
-  padding: 30px 0px 60px 100px;
-  /* border-style: solid;
-  border-color: cornsilk; */
-  /* background-color: #24b4a5; */
-  /* justify-content: space-evenly; */
-  font-style: normal;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  text-transform: none;
-  font-size: 1.5rem;
-}
-
-.info-image {
-  width: 300px;
-  /* background-color: #24b4a5; */
 }
 
 /*check media again */

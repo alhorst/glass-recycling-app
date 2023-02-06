@@ -17,8 +17,8 @@
         <li>Schedule Pickup</li>
         <li>Contact Us</li>
       </ul>
-      <input type="text" placeholder="Search...">
-        <!-- <div class="spacer">&nbsp;</div> -->
+      <input type="text" placeholder="Search..." />
+      <!-- <div class="spacer">&nbsp;</div> -->
       <div class="dropdown">
         <!--I need to change name to "account-detail" because of I can't see the account form"Kubra-->
         <router-link v-bind:to="{ name: 'account' }"
@@ -92,6 +92,7 @@ export default {
 
 html {
   background: white;
+  font-family: "Raleway", sans-serif;
 }
 
 #app {
@@ -143,7 +144,7 @@ li {
   color: #0b7a1e;
 }
 
-input[type=text] {
+input[type="text"] {
   border: 1px solid rgb(189, 188, 188);
   border-radius: 20px;
   padding: 10px;
@@ -151,7 +152,6 @@ input[type=text] {
   /* float: right; */
   padding-left: 10px;
   padding-right: 30px;
-
 }
 button {
   --color: #21a076;
@@ -213,7 +213,6 @@ button:active {
 
 .dropdown {
   border: 1px solid red;
-  
 }
 
 .toggle {
