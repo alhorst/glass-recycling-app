@@ -14,15 +14,18 @@
             <th>Route ID</th>
             <th>Requester</th>
             <th>Date</th>
+            
             <th>Number of Bins</th>
             <th>Status</th>
+            <th>Address</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>
+              <!-- this method is working! -->
               <input
-                type="checkbox"
+                 type="checkbox"
                 id="selectAll"
                 v-on:change="selectAllUsers($event)"
               />
@@ -64,6 +67,13 @@
               </select>
             </td> 
             <td>&nbsp;</td>
+            <td>
+              <input
+                type="text"
+                id="AddressFilter"
+                v-model="filter.Address"
+              />
+            </td>
           </tr>
           <tr
             v-for="user in users"
@@ -87,25 +97,28 @@
             <td>{{ user.pickup_date }}</td>
             <td>{{ user.num_of_bins}}</td>
             <td>
-               <button class="btnEnableDisable" v-on:click="flipStatus(user.pickup_id)">
+               <button class="btnEnableDisable" v-on:click="flipStatus(user.pickup_id)"
+               @click="updatePickup">
                 {{ user.is_picked_up === "Not Picked Up" ? "Picked Up" : "Not Picked Up" }}
+                
               </button> 
             </td>
           </tr>
         </tbody>
       </table>
 
-      <!-- <div class="all-actions">
+      <div class="all-actions">
+             
         <button
-          v-bind:disabled="actionButtonDisabled"
-          v-on:click="deleteSelectedUsers()"
+         v-bind:disabled="actionButtonDisabled" 
+          v-on:click.prevent="deletePickups()"
         >
           Delete Pickup
         </button> -->
 
-        <!-- <button v-on:click="showForm = !showForm">Add New Pickup! ♻️</button> -->
+         <button v-on:click="showForm = !showForm">Add New Pickup! ♻️</button> 
 
-        <!-- <form id="frmAddNewPickup" v-show="showForm">
+         <form id="frmAddNewPickup" v-show="showForm">
           <div class="field">
             <label for="firstName">First Name:</label>
             <input type="text" name="firstName" v-model="newUser.firstName" />
@@ -129,8 +142,9 @@
           <button type="submit" class="btn save" v-on:click.prevent="saveUser">
             Save Pickup
           </button>
-        </form> -->
+        </form>
       </div>
+  </div>
   </div>
 </template>
 
@@ -184,6 +198,74 @@ export default {
           this.users = response.data;
       })
       },
+      //
+      // deleteCard() {
+      // if (
+      //   confirm(
+      //     "Are you sure you want to delete this card? This action cannot be undone."
+      //   )
+      // ) {
+      //   boardsService
+      //     .deleteCard(this.card.id)
+      //     .then(response => {
+      //       if (response.status === 200) {
+      //         alert("Card successfully deleted");
+      //         this.$router.push(`/board/${this.card.boardId}`);
+      //       }
+      //     })
+      //     .catch(error => {
+      //       if (error.response) {
+      //         this.errorMsg =
+      //           "Error deleting card. Response received was '" +
+      //           error.response.statusText +
+      //           "'.";
+      //       } else if (error.request) {
+      //         this.errorMsg =
+      //           "Error deleting card. Server could not be reached.";
+      //       } else {
+      //         this.errorMsg =
+      //           "Error deleting card. Request could not be created.";
+      //       }
+      //     });
+
+      //admin needs to delete pickups
+      deletePickups(){
+         if (
+        confirm(
+          "Are you sure you want to delete this card? This action cannot be undone."
+        )
+    ) {
+        for(let i=0;i < this.selectedUserIDs.length; i++){
+        PickupService.deletePickup(this.selectedUserIDs[i]).then((response) => {
+          if(response.status === 200){
+            alert('pickup successfully deleted')
+            this.$router.push('/admin')
+          }
+      
+        }).catch(error => {
+            if (error.response) {
+              this.errorMsg =
+                "Error deleting card. Response received was '" +
+                error.response.statusText +
+                "'.";
+            } else if (error.request) {
+              this.errorMsg =
+                "Error deleting card. Server could not be reached.";
+            } else {
+              this.errorMsg =
+                "Error deleting card. Request could not be created.";
+            }
+          });
+        }
+    
+      }},
+
+      // updatePickup(){
+      //   PickupService.updatePickup().then(response=> {
+      //     forEach((user) =>{
+      //       this.user = response.data
+      //     })
+      // })
     // getNextUserId() {
     //   return this.nextUserId++;
     // },
@@ -204,12 +286,28 @@ export default {
     //     status: "Active",
     //   };
     // },
+    updatePickup(){
+     const newPickUp = {
+        pickup_id: this.pickup_id,
+        route_id: this.route_id,
+        requesting_username: this.requesting_username,
+        pickup_date: this.pickup_date,
+        num_of_bins: this.num_of_bins,
+        is_picked_up: this.is_picked_up
+     }
+        PickupService.updatePickup(newPickUp).then(response=> {
+        if(response.status === 200){
+          this.$router.push('/admin')
+        }
+      })
+  },
 
     flipStatus(pickup_id) {
       this.users.forEach((user) => {
         if (user.pickup_id === pickup_id) {
           if (user.is_picked_up === "Not Picked Up") {
             user.is_picked_up === " Picked Up";
+            
           } else {
             user.is_picked_up = "Not Picked Up";
           }
