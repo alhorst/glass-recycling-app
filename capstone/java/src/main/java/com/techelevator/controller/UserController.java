@@ -78,6 +78,12 @@ public class UserController {
     //UserDetailsDao methods start here **********
 
 
+    //Get my Full Address - for logged-in user via Principal
+    @RequestMapping(path="/users/myDetails/address", method= RequestMethod.GET)
+    public String getMyAddress(Principal principal) {
+        return userDetailsDao.getFullAddressByUsername(principal.getName());
+    }
+
     //Get my user details - for logged in user via Principal
     @RequestMapping(path="/users/myDetails", method= RequestMethod.GET)
     public UserDetails getMyUserDetails(Principal principal) {
