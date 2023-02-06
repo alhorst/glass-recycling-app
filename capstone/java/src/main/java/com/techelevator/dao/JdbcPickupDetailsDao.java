@@ -20,11 +20,14 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
 
 
     //Returns all unassigned pickups from pickup_details - (pickups NOT assigned to routeID yet)
+    // including pickup_details && full_address
     @Override
     public List<PickupDetails> getAllUnassignedPickups() {
             List<PickupDetails> unassignedPickups = new ArrayList<>();
-            String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
-                        "FROM pickup_details" +
+            String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up, " +
+                        "street_address || ', ' || city || ', ' || state_abbreviation || ' ' || zipcode AS full_address " +
+                        "FROM pickup_details " +
+                        "JOIN user_details ON pickup_details.requesting_username = user_details.username " +
                         "WHERE route_id IS NULL;";
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while(results.next()) {
