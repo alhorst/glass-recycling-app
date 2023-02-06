@@ -31,7 +31,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
                         "WHERE route_id IS NULL;";
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while(results.next()) {
-                unassignedPickups.add(mapRowToPickupDetails(results));
+                unassignedPickups.add(mapRowToPickupDetailsWithFullAddress(results));
             }
             return unassignedPickups;
         }
@@ -205,4 +205,19 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         return pickupDetails;
     }
 
+    private PickupDetails mapRowToPickupDetailsWithFullAddress(SqlRowSet rowSet) {
+
+        PickupDetails pickupDetails = new PickupDetails();
+
+        pickupDetails.setPickup_id(rowSet.getInt("pickup_id"));
+        pickupDetails.setRoute_id(rowSet.getInt("route_id"));
+        pickupDetails.setRequesting_username(rowSet.getString("requesting_username"));
+        pickupDetails.setPickup_date(rowSet.getDate("pickup_date").toLocalDate());
+        pickupDetails.setNum_of_bins(rowSet.getInt("num_of_bins"));
+        pickupDetails.setPickup_weight(rowSet.getInt("pickup_weight"));
+        pickupDetails.setIs_picked_up(rowSet.getBoolean("is_picked_up"));
+        pickupDetails.setFull_address(rowSet.getString("full_address"));
+
+        return pickupDetails;
+    }
 }

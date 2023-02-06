@@ -143,6 +143,7 @@ public class PickupController {
 
     //Updates a row in the pickup_details table
     //would be a way to assign pickup to a driver/route && mark a pickup, pickedUp = true
+    //IF assigning pickup to a route --- throws exception if PickupDate does not match the RouteDate
     @RequestMapping(path="/pickups/{pickupId}", method= RequestMethod.PUT)
     public PickupDetails updatePickupDetails(@Valid @RequestBody PickupDetails updatedPickup, @PathVariable int pickupId) {
         if (pickupId != updatedPickup.getPickup_id()) {
