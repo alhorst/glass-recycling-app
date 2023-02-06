@@ -41,7 +41,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
     public List<PickupDetails> getUnassignedPickupsByUsername(String username) {
         List<PickupDetails> myUnassignedPickups = new ArrayList<>();
         String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
-                    "FROM pickup_details" +
+                    "FROM pickup_details " +
                     "WHERE route_id IS NULL AND requesting_username = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
         while(results.next()) {
@@ -168,11 +168,19 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
     //Update a pickup
     @Override
     public void updatePickupDetails(PickupDetails pickupDetails) {
-        String sql = "UPDATE pickup_details " +
+        if (pickupDetails.getRoute_id() == 0) {
+            String sql = "UPDATE pickup_details " +
+                    "SET requesting_username = ?, pickup_date = ?, pickup_weight = ?, num_of_bins = ?, is_picked_up = ? " +
+                    "WHERE pickup_id = ?;";
+
+            jdbcTemplate.update(sql, pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.calcPickupWeight(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up(), pickupDetails.getPickup_id());
+        } else {
+            String sql = "UPDATE pickup_details " +
                     "SET route_id = ?, requesting_username = ?, pickup_date = ?, pickup_weight = ?, num_of_bins = ?, is_picked_up = ? " +
                     "WHERE pickup_id = ?;";
-        jdbcTemplate.update(sql, pickupDetails.getRoute_id(), pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.calcPickupWeight(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up(), pickupDetails.getPickup_id());
 
+            jdbcTemplate.update(sql, pickupDetails.getRoute_id(), pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.calcPickupWeight(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up(), pickupDetails.getPickup_id());
+        }
     }
 
     //Delete a pickup from pickup_details table

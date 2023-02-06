@@ -60,13 +60,13 @@ INSERT INTO driver_details (username,home_office_address) VALUES ('mglassmore','
 INSERT INTO driver_details (username,home_office_address) VALUES ('cglassmore','3001 Railroad St, Pittsburgh, PA 15201');
 
 INSERT INTO routes (route_date)
- VALUES ('2023-02-05');
+ VALUES ('2023-02-11');
 INSERT INTO routes (route_date)
-VALUES ('2023-02-06');
+VALUES ('2023-02-11');
 INSERT INTO routes (route_date)
- VALUES ('2023-02-06');
+ VALUES ('2023-02-12');
 INSERT INTO routes (route_date)
- VALUES ('2023-02-07');
+ VALUES ('2023-02-12');
 
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
 VALUES ('mraymond', '2023-02-11', 60, 1, false);

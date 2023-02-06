@@ -1,10 +1,12 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Routes;
+import org.apache.tomcat.jni.Local;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -65,6 +67,20 @@ public class JdbcRoutesDao implements RoutesDao {
         return routesByDriverId;
     }
 
+    //Get route date by route ID
+    @Override
+    public LocalDate getRouteDateByRouteId(int routeId) {
+        LocalDate routeDate = null;
+        String sql = "SELECT route_date " +
+                    "FROM routes " +
+                    "WHERE route_id = ?;";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, routeId);
+        if(result.next()) {
+            routeDate = result.getDate("route_date").toLocalDate();
+        }
+        return routeDate;
+    }
+
     //Researching best way to implement - commenting out for now
     /*
     @Override
@@ -86,10 +102,10 @@ public class JdbcRoutesDao implements RoutesDao {
     //Date must be in the future
     @Override
     public Routes createRoute(Routes routes) {
-        String sql = "INSERT INTO routes (route_date, driver_id) " +
-                "VALUES (?, ?) RETURNING route_id;";
+        String sql = "INSERT INTO routes (route_date) " +
+                "VALUES (?) RETURNING route_id;";
         Integer newId = jdbcTemplate.queryForObject(sql, Integer.class,
-        routes.getRouteDate(), routes.getDriverId());
+        routes.getRouteDate());
 
         return getRoutesByRouteId(newId);
     }
@@ -97,10 +113,17 @@ public class JdbcRoutesDao implements RoutesDao {
     //Update a route in the routes table
     @Override
     public void updateRoute(Routes routes) {
-        String sql = "UPDATE routes " +
+        if (routes.getDriverId() == 0) {
+            String sql = "UPDATE routes " +
+                    "SET route_id = ?, route_date = ? " +
+                    "WHERE route_id = ?;";
+            jdbcTemplate.update(sql, routes.getRouteId(), routes.getRouteDate(), routes.getRouteId());
+        } else {
+            String sql = "UPDATE routes " +
                     "SET route_id = ?, route_date = ?, driver_id = ? " +
                     "WHERE route_id = ?;";
-        jdbcTemplate.update(sql, routes.getRouteId(), routes.getRouteDate(), routes.getDriverId(), routes.getRouteId());
+            jdbcTemplate.update(sql, routes.getRouteId(), routes.getRouteDate(), routes.getDriverId(), routes.getRouteId());
+        }
     }
 
     //Delete a route
