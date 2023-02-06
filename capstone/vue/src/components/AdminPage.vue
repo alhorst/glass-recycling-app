@@ -145,18 +145,25 @@
           </button>
         </form>
       </div>
+       <set-route></set-route>
+        
+        
   </div>
+ 
   </div>
+  
 </template>
 
 <script>
 import Locations from "./Locations.vue";
 import PickupService from '../services/PickupService.js';
+import SetRoute from './SetRoute.vue';
 
 export default {
   name: "admin-page",
   components: {
     Locations,
+    SetRoute,
   },
   data() {
     return {

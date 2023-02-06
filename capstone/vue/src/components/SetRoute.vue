@@ -1,5 +1,5 @@
 <template>
-  <div id="map">
+  <div id="route-map">
       <h1>Route Map</h1>
 
       
@@ -10,23 +10,24 @@
 
 <script>
 export default {
-    name: "SetRoute",
+    name: "RouteMap",
     data() {
-
-    },
-
-    methods:{
-        directionsService() {
+        return {
             
-            this.map = new window.google.maps.Map(document.getElementById("map"), {
-    center: new window.google.maps.LatLng(40.46083373916581, -79.97458794232827),
-    zoom: 15,
-    mapTypeId: window.google.maps.MapTypeId.ROADMAP,
+        }
+    },
+    
+    directionsService() {
+            
+            this.map = new window.google.maps.Map(document.getElementById("route-map"), {
+            center: new window.google.maps.LatLng(40.46083373916581, -79.97458794232827),
+            zoom: 15,
+            mapTypeId: window.google.maps.MapTypeId.ROADMAP,
 });
 
-const directionsService = new window.google.maps.DirectionsService();
+            const directionsService = new window.google.maps.DirectionsService();
 
-directionsService.route(
+            directionsService.route(
     {
             origin: "3001 Railroad St, Pittsburgh, PA 15201",
             destination: "3001 Railroad St, Pittsburgh, PA 15201",
@@ -52,15 +53,8 @@ directionsService.route(
         }
     }
 )
-
-
-
-        }
-
-
-    }
+}
     
-  
 }
 </script>
 
