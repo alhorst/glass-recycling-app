@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 import javax.validation.constraints.Future;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class PickupDetails {
@@ -10,16 +11,17 @@ public class PickupDetails {
     private String requesting_username;
     //Blocks past or same day pickup requests - must be at least 1 day in advance
     @Future(message = "You must schedule a pickup for a future date")
-    private Date pickup_date;
+    private LocalDate pickup_date;
     private int pickup_weight;
     private int num_of_bins;
     private Boolean is_picked_up;
+    private String full_address;
 
     private final int FULL_BIN_WEIGHT = 60; //Full bin is 60lbs
 
     public PickupDetails() {}
 
-    public PickupDetails(int pickup_id, int route_id, String requesting_username, Date pickup_date, int pickup_weight, int num_of_bins, Boolean is_picked_up) {
+    public PickupDetails(int pickup_id, int route_id, String requesting_username, LocalDate pickup_date, int pickup_weight, int num_of_bins, Boolean is_picked_up, String full_address) {
         this.pickup_id = pickup_id;
         this.route_id = route_id;
         this.requesting_username = requesting_username;
@@ -27,6 +29,7 @@ public class PickupDetails {
         this.pickup_weight = pickup_weight;
         this.num_of_bins = num_of_bins;
         this.is_picked_up = is_picked_up;
+        this.full_address = full_address;
     }
 
     //Method to calc pickup_weight for each pickup requested, Full bin weight X num of bins
@@ -59,11 +62,11 @@ public class PickupDetails {
         this.requesting_username = requesting_username;
     }
 
-    public Date getPickup_date() {
+    public LocalDate getPickup_date() {
         return pickup_date;
     }
 
-    public void setPickup_date(Date pickup_date) {
+    public void setPickup_date(LocalDate pickup_date) {
         this.pickup_date = pickup_date;
     }
 
@@ -89,5 +92,13 @@ public class PickupDetails {
 
     public void setIs_picked_up(Boolean is_picked_up) {
         this.is_picked_up = is_picked_up;
+    }
+
+    public String getFull_address() {
+        return full_address;
+    }
+
+    public void setFull_address(String full_address) {
+        this.full_address = full_address;
     }
 }

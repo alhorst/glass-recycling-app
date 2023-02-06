@@ -93,7 +93,7 @@ public class RoutesController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/routes", method= RequestMethod.POST)
     public Routes addNewRoute(@Valid @RequestBody Routes newRoute) {
-        if (newRoute != null) {
+        if (newRoute.getRouteDate() != null) {
             return routesDao.createRoute(newRoute);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient Route details provided in the request");
@@ -106,11 +106,14 @@ public class RoutesController {
     public Routes updateRoute(@Valid @RequestBody Routes routeToUpdate, @PathVariable int routeId) {
         if (routeToUpdate.getRouteId() != routeId) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Route ID provided does not match the Route record you're attempting to update");
+        } else if (routesDao.getRoutesByRouteId(routeId) == null || routesDao.getRoutesByRouteId(routeToUpdate.getRouteId()) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That route does not exist");
         } else {
             Routes updatedRoute = null;
             routesDao.updateRoute(routeToUpdate);
             updatedRoute = routesDao.getRoutesByRouteId(routeId);
             return updatedRoute;
+
         }
     }
 

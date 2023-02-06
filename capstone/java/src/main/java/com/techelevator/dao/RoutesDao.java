@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.Routes;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,8 @@ public interface RoutesDao {
     Routes getRoutesByRouteId(int routeId);
 
     List<Routes> getRoutesByDriverId(int driverId);
+
+    LocalDate getRouteDateByRouteId(int routeId);
 
     //In Progress - researching best way to implement
     //commenting out for now
