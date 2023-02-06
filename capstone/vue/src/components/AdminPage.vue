@@ -3,7 +3,12 @@
     <h2>Welcome to your Dashboard!</h2>
     <div class="map">
       <locations>MAP GOES HERE</locations>
+     
     </div>
+    <div>
+    <driver-table class="driver-main">driver</driver-table> 
+    </div>
+    <!-- <h2>driver</h2> -->
     <div id="card-pickup">
       <button v-on:click.prevent="created">Pickups</button>
       <table id="tbl-pickups">
@@ -103,11 +108,10 @@
                 
               </button> 
             </td>
-            <!-- <td>{{user.address}}</td> -->
+            <td>{{user.full_address}}</td>
           </tr>
         </tbody>
       </table>
-
       <div class="all-actions">
              
         <button
@@ -115,11 +119,11 @@
           v-on:click.prevent="deletePickups()"
         >
           Delete Pickup
-        </button> -->
+        </button> 
 
-         <button v-on:click="showForm = !showForm">Add New Pickup! ♻️</button> 
+         <!-- <button v-on:click="showForm = !showForm">Add New Pickup! ♻️</button>  -->
 
-         <form id="frmAddNewPickup" v-show="showForm">
+        <!-- <form id="frmAddNewPickup" v-show="showForm">
           <div class="field">
             <label for="firstName">First Name:</label>
             <input type="text" name="firstName" v-model="newUser.firstName" />
@@ -143,20 +147,22 @@
           <button type="submit" class="btn save" v-on:click.prevent="saveUser">
             Save Pickup
           </button>
-        </form>
+        </form> -->
       </div>
-  </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Locations from "./Locations.vue";
 import PickupService from '../services/PickupService.js';
+import DriverTable from '../components/DriverTable.vue';
 
 export default {
   name: "admin-page",
   components: {
     Locations,
+    DriverTable
   },
   data() {
     return {
@@ -167,9 +173,9 @@ export default {
           pickup_date:'',
           num_of_bins:'',
           is_picked_up:false,
-          // address:'',
-
+          full_address:'',
       },
+      
       
       showForm: false,
       selectedUserIDs: [],
@@ -180,6 +186,7 @@ export default {
           pickup_date:'',
           num_of_bins:'',
           is_picked_up:false,
+          full_address:'',
       },
       // nextUserId: 7,
       newUser: {
@@ -232,7 +239,7 @@ export default {
       //     });
 
       //admin needs to delete pickups
-      deletePickups(){
+    deletePickups(){
          if (
         confirm(
           "Are you sure you want to delete this card? This action cannot be undone."
@@ -240,9 +247,14 @@ export default {
     ) {
         for(let i=0;i < this.selectedUserIDs.length; i++){
         PickupService.deletePickup(this.selectedUserIDs[i]).then((response) => {
-          if(response.status === 200){
+          if(response.status === 204){
             alert('pickup successfully deleted')
-            this.$router.push('/admin')
+            // this.$router.push('/admin')
+             PickupService.getPickups().then((response)=> {
+          this.users = response.data;
+      })
+
+            
           }
       
         }).catch(error => {
@@ -304,11 +316,11 @@ export default {
         }
       })
   },
-  getAddress(username){
-    PickupService.getAddress(username).then(response=>{
-               this.address= response.data
-    })
-  },
+  // getAddress(requesting_username){
+  //   PickupService.getAddress(requesting_username).then(response=>{
+  //              this.users.address= response.data
+  //   })
+  // },
 
     flipStatus(pickup_id) {
       this.users.forEach((user) => {
@@ -405,13 +417,13 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: grid;
+ .container { 
+  /* display: grid;
   grid-template-areas:
     "map"
     "pickups"
     "drivers";
-  grid-template-rows: auto;
+  grid-template-rows: auto; */
   gap: 40px;
   padding: 10px;
   border: 1px solid white;
@@ -422,7 +434,7 @@ export default {
 .map {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   box-sizing: border-box;
-  grid-area: map;
+  /* grid-area: map; */
   padding: 20px 0;
   background-color: white;
 }
@@ -430,26 +442,26 @@ export default {
 #card-pickup {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   box-sizing: border-box;
-  grid-area: pickups;
+  /* grid-area: pickups; */
   padding: 20px 0;
   border: 1px solid red;
 }
 
-#card-driver {
+/* #card-driver {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   box-sizing: border-box;
   grid-area: drivers;
   padding: 20px 0;
   border: 1px solid blue;
-}
+} */
 
 h2 {
-  font-size: 2em;
+  font-size: 3em;
   font-family: "Raleway", sans-serif;
   text-transform: uppercase;
   background-color: rgb(36, 182, 126);
   text-align: center;
-  margin-top: 5px;
+  margin-top: 30px;
   margin-bottom: 5px;
 }
 table {
@@ -464,13 +476,18 @@ table {
   padding: 10px;
 }
 
-#tbl-head-drivers {
+/* #tbl-head-drivers {
   padding: 10px;
-}
+} */
 
 th {
   text-transform: uppercase;
   background-color: grey;
+  padding: 16px;
+}
+
+.drive-view {
+  margin-top: 40px;
 }
 
 td {
@@ -490,14 +507,14 @@ select {
   font-size: 16px;
 }
 
-#frmAddNewDriver {
+/* #frmAddNewDriver {
   display: flex;
   align-items: center;
-}
+} */
 
 form {
   margin: 20px;
-  width: 350px;
+  width: 300px;
 }
 
 .field {
@@ -529,4 +546,5 @@ button {
   margin: 10px;
   float: right;
 }
+
 </style>
