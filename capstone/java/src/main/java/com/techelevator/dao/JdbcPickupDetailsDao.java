@@ -25,7 +25,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
             List<PickupDetails> unassignedPickups = new ArrayList<>();
             String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
                         "FROM pickup_details" +
-                        "WHERE route_id IS NULL OR route_id = 0;";
+                        "WHERE route_id IS NULL;";
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while(results.next()) {
                 unassignedPickups.add(mapRowToPickupDetails(results));
@@ -39,7 +39,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         List<PickupDetails> myUnassignedPickups = new ArrayList<>();
         String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
                     "FROM pickup_details" +
-                    "WHERE route_id IS NULL OR route_id = 0 AND requesting_username = ?;";
+                    "WHERE route_id IS NULL AND requesting_username = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
         while(results.next()) {
             myUnassignedPickups.add(mapRowToPickupDetails(results));

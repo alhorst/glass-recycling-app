@@ -15,8 +15,7 @@ public interface DriverDetailsDao {
 
     DriverDetails createDriver(DriverDetails driverDetails);
 
-    // Commenting out for now - don't think we'll need this functionality
-    // void updateDriver(DriverDetails driverDetails);
+    void updateDriver(DriverDetails driverDetails);
 
     void deleteDriver(int driver_Id);
 }
