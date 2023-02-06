@@ -116,7 +116,7 @@ public class JdbcRoutesDao implements RoutesDao {
         Routes routes = new Routes();
 
         routes.setRouteId(rowSet.getInt("route_id"));
-        routes.setRouteDate(rowSet.getDate("route_date"));
+        routes.setRouteDate(rowSet.getDate("route_date").toLocalDate());
         routes.setDriverId(rowSet.getInt("driver_id"));
 
         return routes;

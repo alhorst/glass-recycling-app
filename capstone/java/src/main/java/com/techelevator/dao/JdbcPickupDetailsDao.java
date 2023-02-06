@@ -189,7 +189,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         pickupDetails.setPickup_id(rowSet.getInt("pickup_id"));
         pickupDetails.setRoute_id(rowSet.getInt("route_id"));
         pickupDetails.setRequesting_username(rowSet.getString("requesting_username"));
-        pickupDetails.setPickup_date(rowSet.getDate("pickup_date"));
+        pickupDetails.setPickup_date(rowSet.getDate("pickup_date").toLocalDate());
         pickupDetails.setNum_of_bins(rowSet.getInt("num_of_bins"));
         pickupDetails.setPickup_weight(rowSet.getInt("pickup_weight"));
         pickupDetails.setIs_picked_up(rowSet.getBoolean("is_picked_up"));
