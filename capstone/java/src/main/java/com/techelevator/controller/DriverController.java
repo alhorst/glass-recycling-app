@@ -61,7 +61,7 @@ public class DriverController {
         }
     }
 
-    /*
+
     //Create a driver detail in the drivers_details table
     // Update 2/5 - shouldn't need this call, /addDriver in Auth. Controller takes care of this upon registration
     // commenting out for now
@@ -69,21 +69,26 @@ public class DriverController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/driverDetails", method= RequestMethod.POST)
     public DriverDetails addDriverDetail(@RequestBody DriverDetails newDriver) {
-        if (newDriver != null) {
-            return driverDetailsDao.createDriver(newDriver);
+        if (newDriver.getUsername() == null || newDriver.getHome_office_address() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not enough details provided in the request!");
+        } else if (driverDetailsDao.getDriverByUsername(newDriver.getUsername()) != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "That Driver username already exists");
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No Driver Details provided in the request!");
+            return driverDetailsDao.createDriver(newDriver);
         }
     }
 
     //Update a row in the driver_details table - returns the updated Driver Detail object
     @RequestMapping(path="/driverDetails/{driver_id}", method= RequestMethod.PUT)
     public DriverDetails updateDriverDetail(@RequestBody DriverDetails driverToUpdate, @PathVariable int driver_id) {
-        if (driverToUpdate.getDriver_id() == driver_id) {
+        if (driverToUpdate.getDriver_id() != driver_id) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Driver ID provided does not match the record you're attempting to update");
+        } else if (driverDetailsDao.getDriverByDriverId(driverToUpdate.getDriver_id()) == null || driverDetailsDao.getDriverByDriverId(driver_id) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no Driver associated with that Driver ID");
+        } else {
             driverDetailsDao.updateDriver(driverToUpdate);
             return driverDetailsDao.getDriverByDriverId(driver_id);
-        } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Driver ID provided does not match the record you're attempting to update");
         }
     }
 }
+

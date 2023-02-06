@@ -142,14 +142,19 @@ public class PickupController {
     }
 
     //Updates a row in the pickup_details table
-    //would be a way to assign pickup to a driver/route
+    //would be a way to assign pickup to a driver/route && mark a pickup, pickedUp = true
+    //IF assigning pickup to a route --- throws exception if PickupDate does not match the RouteDate
     @RequestMapping(path="/pickups/{pickupId}", method= RequestMethod.PUT)
     public PickupDetails updatePickupDetails(@Valid @RequestBody PickupDetails updatedPickup, @PathVariable int pickupId) {
-        if (pickupId == updatedPickup.getPickup_id()) {
+        if (pickupId != updatedPickup.getPickup_id()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Pickup ID provided does not match the Pickup you're attempting to update");
+        } else if (pickupDetailsDao.getPickupDetailsByPickupId(updatedPickup.getPickup_id()) == null || pickupDetailsDao.getPickupDetailsByPickupId(pickupId) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "That Pickup does not exist");
+        } else if (updatedPickup.getRoute_id() != 0 && updatedPickup.getPickup_date().compareTo(routesDao.getRouteDateByRouteId(updatedPickup.getRoute_id())) != 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Pickup Date does not match the Route date");
+        } else {
             pickupDetailsDao.updatePickupDetails(updatedPickup);
             return pickupDetailsDao.getPickupDetailsByPickupId(pickupId);
-        } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The pickup Id provided does not match the record you're attempting to update");
         }
     }
 

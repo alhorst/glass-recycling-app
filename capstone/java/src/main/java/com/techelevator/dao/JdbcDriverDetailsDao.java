@@ -76,8 +76,9 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
     @Override
     public void updateDriver(DriverDetails driverDetails) {
         String sql = "UPDATE driver_details " +
-                    "SET driver_id = ?, username = ?, home_office_address = ?;";
-        jdbcTemplate.update(sql, driverDetails.getDriver_id(), driverDetails.getUsername(), HOME_OFFICE_ADDRESS);
+                    "SET driver_id = ?, username = ?, home_office_address = ? " +
+                    "WHERE driver_id = ?;";
+        jdbcTemplate.update(sql, driverDetails.getDriver_id(), driverDetails.getUsername(), driverDetails.getHome_office_address(), driverDetails.getDriver_id());
     }
 
     //Delete driver from driver_details table
