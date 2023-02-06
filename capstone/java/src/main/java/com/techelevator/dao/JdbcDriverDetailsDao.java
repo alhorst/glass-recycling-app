@@ -72,13 +72,13 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
         return getDriverByDriverId(driverId);
     }
 
-    //   Commenting out for now - don't think we'll need this functionality
-    /*@Override
+    //Update a driver in the driver_details table
+    @Override
     public void updateDriver(DriverDetails driverDetails) {
         String sql = "UPDATE driver_details " +
                     "SET driver_id = ?, username = ?, home_office_address = ?;";
         jdbcTemplate.update(sql, driverDetails.getDriver_id(), driverDetails.getUsername(), HOME_OFFICE_ADDRESS);
-    }*/
+    }
 
     //Delete driver from driver_details table
     //Can run into FK constraint if driver is associated with routes/pickups

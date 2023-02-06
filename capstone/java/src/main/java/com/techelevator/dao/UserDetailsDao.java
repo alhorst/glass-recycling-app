@@ -22,6 +22,8 @@ public interface UserDetailsDao {
 
     String getFullAddressByAccountId(int account_id);
 
+    String getFullAddressByUsername(String username);
+
     int getTotalGlassRecycledByAccountId(int account_id);
 
     int getCreditBalanceByAccountId(int account_id);

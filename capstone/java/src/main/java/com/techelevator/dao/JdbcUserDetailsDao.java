@@ -133,6 +133,23 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
         return address;
     }
 
+    //Get full address in string format for Routes API, using username
+    //getMyFullAddress in UserController utilizes this, feeding in Principal.getName()
+    //example - '3001 Railroad St, Pittsburgh, PA 15201'
+    @Override
+    public String getFullAddressByUsername(String username) {
+        String address = null;
+        String sql = "SELECT street_address, city, state_abbreviation, zipcode " +
+                "FROM user_details WHERE username = ?;";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, username);
+        if (result.next()){
+            address = result.getString("street_address") + ", " + result.getString("city") + ", " +
+                    result.getString("state_abbreviation") + " " + result.getString("zipcode");
+        }
+        return address;
+    }
+
     //Get total amount of glass recycled for an account_id
     @Override
     public int getTotalGlassRecycledByAccountId(int account_id) {

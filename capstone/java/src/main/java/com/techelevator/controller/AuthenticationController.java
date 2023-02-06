@@ -53,6 +53,7 @@ public class AuthenticationController {
         return new ResponseEntity<>(new LoginResponseDto(jwt, user), httpHeaders, HttpStatus.OK);
     }
 
+    //Register a recycler user account(ROLE_USER) or an Admin account(ROLE_ADMIN). (is_driver = false by default)
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public void registerUser(@Valid @RequestBody RegisterUserDto newUser) {

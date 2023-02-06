@@ -17,7 +17,10 @@
         <li>Schedule Pickup</li>
         <li>Contact Us</li>
       </ul>
-      <input type="text" placeholder="Search..." />
+      <div id="search-box">
+        <input type="text" placeholder="Search..." />
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
       <!-- <div class="spacer">&nbsp;</div> -->
       <div class="dropdown">
         <!--I need to change name to "account-detail" because of I can't see the account form"Kubra-->
@@ -144,15 +147,28 @@ li {
   color: #0b7a1e;
 }
 
-input[type="text"] {
-  border: 1px solid rgb(189, 188, 188);
+#search-box {
+  padding-left: 20px;
+  padding-right: 60px;
+}
+
+#search-box input[type="text"] {
+  border: 1px solid rgb(167, 167, 167);
+  box-shadow: inset 0 2px 6px #000;
   border-radius: 20px;
-  padding: 10px;
+  padding: 7px;
+  text-align: right;
+  word-spacing: 3px;
   font-size: 17px;
-  /* float: right; */
   padding-left: 10px;
   padding-right: 30px;
 }
+
+#search-box i:hover {
+  color: #c0c0c0;
+  cursor: pointer;
+}
+
 button {
   --color: #21a076;
   padding: 0.5em 0.5em 0.5em 1em;

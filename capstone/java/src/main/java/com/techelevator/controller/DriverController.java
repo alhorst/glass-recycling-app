@@ -75,9 +75,8 @@ public class DriverController {
         }
     }*/
 
-     //Leaning towards us not needing this functionality - commenting out for now
     //Update a row in the driver_details table - returns the updated Driver Detail object
-    /*@RequestMapping(path="/driverDetails/{driver_id}", method= RequestMethod.PUT)
+    @RequestMapping(path="/driverDetails/{driver_id}", method= RequestMethod.PUT)
     public DriverDetails updateDriverDetail(@RequestBody DriverDetails driverToUpdate, @PathVariable int driver_id) {
         if (driverToUpdate.getDriver_id() == driver_id) {
             driverDetailsDao.updateDriver(driverToUpdate);
@@ -85,5 +84,5 @@ public class DriverController {
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Driver ID provided does not match the record you're attempting to update");
         }
-    }*/
+    }
 }
