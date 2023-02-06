@@ -65,7 +65,6 @@ public class DriverController {
     //Create a driver detail in the drivers_details table
     // Update 2/5 - shouldn't need this call, /addDriver in Auth. Controller takes care of this upon registration
     // commenting out for now
-    */
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/driverDetails", method= RequestMethod.POST)
     public DriverDetails addDriverDetail(@RequestBody DriverDetails newDriver) {
