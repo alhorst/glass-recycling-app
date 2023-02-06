@@ -26,6 +26,10 @@ export default {
         return axios.delete(`/pickups/${pickupId}`);
     },
 
+    getAddress(username){
+        return axios.get('/users/myDetails/address', username)
+    }
+
     //get all unassigned pickup request from logged in users
 
     // getPickupRequests(){

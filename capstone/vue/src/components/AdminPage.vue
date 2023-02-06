@@ -103,6 +103,7 @@
                 
               </button> 
             </td>
+            <!-- <td>{{user.address}}</td> -->
           </tr>
         </tbody>
       </table>
@@ -166,8 +167,10 @@ export default {
           pickup_date:'',
           num_of_bins:'',
           is_picked_up:false,
+          // address:'',
 
       },
+      
       showForm: false,
       selectedUserIDs: [],
       filter: {
@@ -301,6 +304,11 @@ export default {
         }
       })
   },
+  getAddress(username){
+    PickupService.getAddress(username).then(response=>{
+               this.address= response.data
+    })
+  },
 
     flipStatus(pickup_id) {
       this.users.forEach((user) => {
@@ -326,9 +334,9 @@ export default {
     changeStatus(statusToChange) {
       for (let i = 0; i < this.selectedUserIDs.length; i++) {
         for (let j = 0; j < this.users.length; j++) {
-          if (this.users[j].id === this.selectedUserIDs[i]) {
-            if (statusToChange === "Active" || statusToChange === "Disabled") {
-              this.users[j].status = statusToChange;
+          if (this.users[j].pickup_id === this.selectedUserIDs[i]) {
+            if (statusToChange === "Not Picked Up" || statusToChange === "Picked Up") {
+              this.users[j].is_picked_up = statusToChange;
             } else if (statusToChange === "Delete") {
               this.users.splice(i, 1);
             }
