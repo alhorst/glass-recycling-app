@@ -9,7 +9,7 @@
         />
       </div>
       <div class="login-form__content">
-        <div class="login-form__header">Thanks for recycling with us</div>
+        <div class="login-form__header">Thanks for recycling with us!</div>
       </div>
       <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
         Invalid username and password!
@@ -132,13 +132,21 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap");
 
-.text-center {
+body {
   background: radial-gradient(
     circle,
     rgba(11, 122, 30, 1) 0%,
     rgba(122, 198, 47, 1) 30%,
     rgba(252, 252, 252, 1) 95%
   );
+}
+.text-center {
+  /* background: radial-gradient(
+    circle,
+    rgba(11, 122, 30, 1) 0%,
+    rgba(122, 198, 47, 1) 30%,
+    rgba(252, 252, 252, 1) 95%
+  ); */
   margin: 0px;
   padding: 150px;
 }
