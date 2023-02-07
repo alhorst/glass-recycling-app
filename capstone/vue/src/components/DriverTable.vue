@@ -221,6 +221,8 @@ export default {
       },
     };
   },
+
+  
   methods: {
 
     //created method to get all updated driver list
