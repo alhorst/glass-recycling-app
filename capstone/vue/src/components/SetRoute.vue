@@ -1,6 +1,8 @@
 <template>
   <div id="route-map">
     <h1>Route Map</h1>
+    <div id="map">
+    </div>
   </div>
 </template>
 
@@ -23,18 +25,22 @@ export default {
       waypointArr: [],
     };
   },
-
+    mounted() {
+this.directionsService();
+    },
   created() {
        PickupService.getPickups().then((response)=> {
            this.unassignedPickups = response.data;
-
    })
-
+        
    },
+
   methods: {
     directionsService() {
+
+        
       this.map = new window.google.maps.Map(
-        document.getElementById("route-map"),
+        document.getElementById("map"),
         {
           center: new window.google.maps.LatLng(
             40.46083373916581,
@@ -79,4 +85,11 @@ export default {
 </script>
 
 <style>
+#map{
+    width:500px;
+    height:500px;
+
+}
+
+
 </style>
