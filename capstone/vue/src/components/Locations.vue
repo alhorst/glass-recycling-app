@@ -48,9 +48,9 @@ export default {
   data() {
     return {
       map: null,
-      mapCenter: { lat: 40.46083373916581, lng: -79.97458794232827},
+      mapCenter: { lat: 40.46078, lng: -79.97463},
       locations: [
-        { coord: { lat: 40.46833, lng: -79.97458 }, name: "Vitrum Recylce Dropoff Center" },
+        { coord: { lat: 40.46078, lng: -79.97463 }, name: "Vitrum Recylce Dropoff Center" },
         { coord: { lat: 40.42167, lng: -80.00757 }, name: "mraymond" },
         { coord: { lat: 40.47198, lng: -80.01398 }, name: "bblanc" },
         { coord: { lat: 40.44714, lng: -79.97501 }, name: "mbron" },

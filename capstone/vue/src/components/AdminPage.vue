@@ -207,14 +207,15 @@ export default {
      
     };
   },
-  methods: {
-
-    created(){
+   created(){
       //get all users unassigned pickup data here
       PickupService.getPickups().then((response)=> {
           this.users = response.data;
       })
       },
+  methods: {
+
+   
       //
       // deleteCard() {
       // if (
