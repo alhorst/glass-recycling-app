@@ -8,7 +8,7 @@
     <div>
     <driver-table class="driver-main">driver</driver-table> 
     </div>
-    <!-- <h2>driver</h2> -->
+  
     <div id="card-pickup">
       <button v-on:click.prevent="created">Pickups</button>
       <table id="tbl-pickups">
@@ -214,39 +214,7 @@ export default {
       })
       },
   methods: {
-
-   
-      //
-      // deleteCard() {
-      // if (
-      //   confirm(
-      //     "Are you sure you want to delete this card? This action cannot be undone."
-      //   )
-      // ) {
-      //   boardsService
-      //     .deleteCard(this.card.id)
-      //     .then(response => {
-      //       if (response.status === 200) {
-      //         alert("Card successfully deleted");
-      //         this.$router.push(`/board/${this.card.boardId}`);
-      //       }
-      //     })
-      //     .catch(error => {
-      //       if (error.response) {
-      //         this.errorMsg =
-      //           "Error deleting card. Response received was '" +
-      //           error.response.statusText +
-      //           "'.";
-      //       } else if (error.request) {
-      //         this.errorMsg =
-      //           "Error deleting card. Server could not be reached.";
-      //       } else {
-      //         this.errorMsg =
-      //           "Error deleting card. Request could not be created.";
-      //       }
-      //     });
-
-      //admin needs to delete pickups
+//admin needs to delete pickups
     deletePickups(){
          if (
         confirm(
@@ -324,11 +292,6 @@ export default {
         }
       })
   },
-  // getAddress(requesting_username){
-  //   PickupService.getAddress(requesting_username).then(response=>{
-  //              this.users.address= response.data
-  //   })
-  // },
 
     flipStatus(pickup_id) {
       this.users.forEach((user) => {

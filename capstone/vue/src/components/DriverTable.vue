@@ -240,6 +240,84 @@ export default {
         }
       })
     },
+    enabledSelectedUsers() {
+      this.changeStatus("Active");
+    },
+    disableSelectedUsers() {
+      this.changeStatus("Disabled");
+    },
+    deleteSelectedUsers() {
+      this.changeStatus("Delete");
+    },
+    changeStatus(statusToChange) {
+      for (let i = 0; i < this.selectedUserIDs.length; i++) {
+        for (let j = 0; j < this.users.length; j++) {
+          if (this.users[j].pickup_id === this.selectedUserIDs[i]) {
+            if (statusToChange === "Not Picked Up" || statusToChange === "Picked Up") {
+              this.users[j].is_picked_up = statusToChange;
+            } else if (statusToChange === "Delete") {
+              this.users.splice(i, 1);
+            }
+          }
+        }
+      }
+    },
+    selectAllUsers(event) {
+      if (event.target.checked) {
+        this.selectedUserIDs = [];
+        for (let i = 0; i < this.drivers.length; i++) {
+          this.selectedUserIDs.push(this.drivers[i].driver_id);
+        }
+      } else {
+        this.selectedUserIDs = [];
+      }
+    },
+  computed: {
+    actionButtonDisabled() {
+      if (this.selectedUserIDs.length === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    filteredList() {
+      let filteredUsers = this.drivers;
+      if (this.filter.driver_id != "") {
+        filteredUsers = filteredUsers.filter((driver) =>
+         driver.driver_id
+            .toLowerCase()
+            .includes(this.filter.driver_id.toLowerCase())
+        );
+      }
+      if (this.filter.username != "") {
+        filteredUsers = filteredUsers.filter((driver) =>
+          driver.username
+            .toLowerCase()
+            .includes(this.filter.username.toLowerCase())
+        );
+      }
+      // if (this.filter.username != "") {
+      //   filteredUsers = filteredUsers.filter((user) =>
+      //     user.username
+      //       .toLowerCase()
+      //       .includes(this.filter.username.toLowerCase())
+      //   );
+      // }
+      // if (this.filter.emailAddress != "") {
+      //   filteredUsers = filteredUsers.filter((user) =>
+      //     user.emailAddress
+      //       .toLowerCase()
+      //       .includes(this.filter.emailAddress.toLowerCase())
+      //   );
+      // }
+      // if (this.filter.status != "") {
+      //   filteredUsers = filteredUsers.filter(
+      //     (user) => user.status === this.filter.status
+      //   );
+      // }
+      return filteredUsers;
+    },
+  },
 }
 }
 </script>
