@@ -221,14 +221,17 @@ export default {
       },
     };
   },
-  methods: {
 
-    //created method to get all updated driver list
+  //created method to get all updated driver list
     created(){
       DriverService.getAllDrivers().then(response =>{
         this.drivers = response.data
       })
     },
+
+  methods: {
+
+    
     //add newe driver to the table
     addDriver(){
       DriverService.addDriver(this.newDriver).then((response) => {
