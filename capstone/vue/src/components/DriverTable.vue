@@ -139,17 +139,21 @@
             />
           </td>
           <td>&nbsp;</td>
+          <!-- 
+            driver in filteredUsers does not work
+           -->
         </tr>
-        <tr v-for="driver in drivers" v-bind:key="driver.id">
+        <tr v-for="driver in drivers" v-bind:key="driver.user_id"
+         v-bind:class="{ disabled: driver.driver_id === 'Not Picked Up' }">
           <td>
             <input
               type="checkbox"
               name="selectedUsers"
               v-model="selectedUserIDs"
               v-bind:checked="
-                selectedUserIDs.includes(Number.parseInt(driver.employee_id))
+                selectedUserIDs.includes(Number.parseInt(driver.driver_id))
               "
-              v-bind:value="Number.parseInt(driver.employee_id)"
+              v-bind:value="Number.parseInt(driver.driver_id)"
             />
           </td>
           <td>{{ driver.driver_id }}</td>
@@ -161,7 +165,7 @@
     <div id="all-actions">
       <button
         v-bind:disabled="actionButtonDisabled"
-        v-on:click="deleteSelectedUsers()"
+        v-on:click.prevent="deleteDriver()"
       >
         Delete Driver
       </button>
@@ -206,7 +210,7 @@ export default {
       selectedUserIDs: [],
       showForm: false,
       filter: {
-        employee_id: "",
+        driver_id: "",
         username: "",
         home_office_address: "",
       },
@@ -232,6 +236,43 @@ export default {
     },
 
   methods: {
+
+    //delete driver
+    deleteDriver(){
+         if (
+        confirm(
+          "Are you sure you want to delete this card? This action cannot be undone."
+        )
+    ) {
+        for(let i=0;i < this.selectedUserIDs.length; i++){
+        DriverService.deleteDriver(this.selectedUserIDs[i]).then((response) => {
+          if(response.status === 204){
+            alert('pickup successfully deleted')
+            // this.$router.push('/admin')
+             DriverService.getAllDrivers().then((response)=> {
+          this.drivers = response.data;
+      })
+
+            
+          }
+      
+        }).catch(error => {
+            if (error.response) {
+              this.errorMsg =
+                "Error deleting driver. Response received was '" +
+                error.response.statusText +
+                "'.";
+            } else if (error.request) {
+              this.errorMsg =
+                "Error deleting driver. Server could not be reached.";
+            } else {
+              this.errorMsg =
+                "Error deleting driver. Request could not be created.";
+            }
+          });
+        }
+    
+      }},
 
     
     //add newe driver to the table
@@ -267,7 +308,7 @@ export default {
         }
       }
     },
-    selectAllUsers(event) {
+    selectAllDrivers(event) {
       if (event.target.checked) {
         this.selectedUserIDs = [];
         for (let i = 0; i < this.drivers.length; i++) {
@@ -301,25 +342,7 @@ export default {
             .includes(this.filter.username.toLowerCase())
         );
       }
-      // if (this.filter.username != "") {
-      //   filteredUsers = filteredUsers.filter((user) =>
-      //     user.username
-      //       .toLowerCase()
-      //       .includes(this.filter.username.toLowerCase())
-      //   );
-      // }
-      // if (this.filter.emailAddress != "") {
-      //   filteredUsers = filteredUsers.filter((user) =>
-      //     user.emailAddress
-      //       .toLowerCase()
-      //       .includes(this.filter.emailAddress.toLowerCase())
-      //   );
-      // }
-      // if (this.filter.status != "") {
-      //   filteredUsers = filteredUsers.filter(
-      //     (user) => user.status === this.filter.status
-      //   );
-      // }
+      
       return filteredUsers;
     },
   },

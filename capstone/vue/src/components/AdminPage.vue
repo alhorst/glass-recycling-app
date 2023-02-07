@@ -251,32 +251,7 @@ export default {
     
       }},
 
-      // updatePickup(){
-      //   PickupService.updatePickup().then(response=> {
-      //     forEach((user) =>{
-      //       this.user = response.data
-      //     })
-      // })
-    // getNextUserId() {
-    //   return this.nextUserId++;
-    // },
-
-    // saveUser() {
-    //   this.newUser.id = this.getNextUserId();
-    //   this.users.push(this.newUser);
-    //   this.clearForm();
-    // },
-
-    // clearForm() {
-    //   this.newUser = {
-    //     id: null,
-    //     firstName: "",
-    //     lastName: "",
-    //     username: "",
-    //     emailAddress: "",
-    //     status: "Active",
-    //   };
-    // },
+      
     updatePickup(){
      const newPickUp = {
         pickup_id: this.pickup_id,

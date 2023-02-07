@@ -10,5 +10,10 @@ export default {
     //get all driver tables from db
     getAllDrivers(){
         return axios.get('/driverDetails')
+    },
+
+    //delete driver
+    deleteDriver(driverId){
+        return axios.delete(`/driverDetails/${driverId}`)
     }
 }
