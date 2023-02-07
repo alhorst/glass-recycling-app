@@ -145,6 +145,11 @@ export default {
   margin-bottom: 1px;
 }
 
+.alert {
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
 .form-control {
   width: 95%;
   margin: 10px;
