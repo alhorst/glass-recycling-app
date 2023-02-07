@@ -221,12 +221,9 @@ export default {
       },
     };
   },
-<<<<<<< HEAD
-=======
 
   
   methods: {
->>>>>>> main
 
   //created method to get all updated driver list
     created(){
