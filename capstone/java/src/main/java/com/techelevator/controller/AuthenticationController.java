@@ -22,6 +22,7 @@ import com.techelevator.security.jwt.TokenProvider;
 
 @RestController
 @CrossOrigin
+@PreAuthorize("permitAll")
 public class AuthenticationController {
 
     private final TokenProvider tokenProvider;
@@ -36,6 +37,7 @@ public class AuthenticationController {
         this.driverDetailsDao = driverDetailsDao;
     }
 
+    //Login for recyclers, drivers, admins
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginDto loginDto) {
 

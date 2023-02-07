@@ -5,6 +5,7 @@ import com.techelevator.dao.RoutesDao;
 import com.techelevator.model.DriverDetails;
 import com.techelevator.model.Routes;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@PreAuthorize("isAuthenticated()")
 public class RoutesController {
 
     private RoutesDao routesDao;
@@ -28,7 +30,7 @@ public class RoutesController {
 
     //To-Do:
     ////Get routes by date Method--- thinking of the best way to implement and pass date to the handler method
-    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
+
 
     //RoutesDao Methods start here **********
 
@@ -90,6 +92,8 @@ public class RoutesController {
     }
 
     //Add a route to the routes table - returning the new Route object
+    //Admins only
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/routes", method= RequestMethod.POST)
     public Routes addNewRoute(@Valid @RequestBody Routes newRoute) {
@@ -102,6 +106,8 @@ public class RoutesController {
 
     //Update a route on the routes table - returning the updated route
     //Utilize to Assign a driver to a route
+    //Admins only
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path="/routes/{routeId}", method= RequestMethod.PUT)
     public Routes updateRoute(@Valid @RequestBody Routes routeToUpdate, @PathVariable int routeId) {
         if (routeToUpdate.getRouteId() != routeId) {
@@ -118,6 +124,8 @@ public class RoutesController {
     }
 
     //Deletes a route from the routes table
+    //Admins only
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path="/routes/{routeId}", method= RequestMethod.DELETE)
     public void deleteRoute(@PathVariable int routeId) {

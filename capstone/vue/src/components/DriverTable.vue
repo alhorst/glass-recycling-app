@@ -244,7 +244,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 /* <!-- .container {
   display: grid;
   grid-template-areas:

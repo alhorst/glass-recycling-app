@@ -5,6 +5,7 @@ import com.techelevator.dao.PickupDetailsDao;
 import com.techelevator.dao.RoutesDao;
 import com.techelevator.model.DriverDetails;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@PreAuthorize("isAuthenticated()")
 public class DriverController {
 
     private DriverDetailsDao driverDetailsDao;
@@ -24,9 +26,6 @@ public class DriverController {
         this.routesDao = routesDao;
     }
 
-
-    //To-do:
-    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
     //DriverDetailsDao Methods start here **********
 
@@ -51,6 +50,8 @@ public class DriverController {
     }
 
     //Deletes a driver detail from the driver_details table
+    //Admins only
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path="/driverDetails/{driver_id}", method= RequestMethod.DELETE)
     public void deleteDriverDetail(@PathVariable int driver_id) {
@@ -63,8 +64,8 @@ public class DriverController {
 
 
     //Create a driver detail in the drivers_details table
-    // Update 2/5 - shouldn't need this call, /addDriver in Auth. Controller takes care of this upon registration
-    // commenting out for now
+    // Update 2/5 - Shouldn't need this handler method, /addDriver endpoint in Authentication Controller implements this already upon driver registration
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/driverDetails", method= RequestMethod.POST)
     public DriverDetails addDriverDetail(@RequestBody DriverDetails newDriver) {
@@ -78,6 +79,8 @@ public class DriverController {
     }
 
     //Update a row in the driver_details table - returns the updated Driver Detail object
+    //Admins only
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path="/driverDetails/{driver_id}", method= RequestMethod.PUT)
     public DriverDetails updateDriverDetail(@RequestBody DriverDetails driverToUpdate, @PathVariable int driver_id) {
         if (driverToUpdate.getDriver_id() != driver_id) {

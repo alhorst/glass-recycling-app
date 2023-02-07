@@ -5,6 +5,7 @@ import com.techelevator.dao.PickupDetailsDao;
 import com.techelevator.dao.RoutesDao;
 import com.techelevator.model.PickupDetails;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@PreAuthorize("isAuthenticated()")
 public class PickupController {
 
     private PickupDetailsDao pickupDetailsDao;
@@ -26,9 +28,9 @@ public class PickupController {
         this.driverDetailsDao = driverDetailsDao;
     }
 
+
     //To-do:
     //////look into get pickup details by Date method
-    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
 
     //PickupDetailsDao Methods start here **********
@@ -71,6 +73,8 @@ public class PickupController {
 
     //Returns all unassigned pickups from pickup_details - (pickups NOT assigned to routeID yet)
     //Useful for admin dash, showing active pickup requests that need to be assigned to route/driver
+    //Admins only
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path="/pickups/unassigned", method= RequestMethod.GET)
     public List<PickupDetails> getUnassignedPickups() {
         if (pickupDetailsDao.getAllPickupDetails() == null) {
@@ -83,6 +87,8 @@ public class PickupController {
     }
 
     //Get all pickups from the pickup_details table
+    //Admins only
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path="/pickups", method= RequestMethod.GET)
     public List<PickupDetails> getAllPickups() {
         if (pickupDetailsDao.getAllPickupDetails() != null){
@@ -159,6 +165,8 @@ public class PickupController {
     }
 
     //Deletes a pickup from the pickup_details table
+    //Both users and admins are able to do this
+    //example, I as a user want to delete my outstanding pickup request, then create a new
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path="/pickups/{pickupId}", method= RequestMethod.DELETE)
     public void deletePickupDetails(@PathVariable int pickupId) {

@@ -45,32 +45,64 @@
       <router-view />
     </div>
     <footer>
-      <div class="footer-content">
-        <div>
-          <ul class="recycling">
-            <h3>Recycling</h3>
-            <li>Where to recycle</li>
-            <li>How to recycle</li>
-            <li>Recycle an item</li>
-          </ul>
-        </div>
-        <div>
-          <ul class="help-info">
-            <h3>Help and Info</h3>
-            <li>FAQs</li>
-            <li>News</li>
+      <!-- Footer main -->
+      <section class="footer-main">
+        <div class="footer-main-item">
+          <h3 class="footer-title">About</h3>
+          <ul>
+            <li>Services</li>
+            <li>Pricing</li>
+            <li>Customers</li>
             <li>Careers</li>
           </ul>
         </div>
-        <div>
-          <h3>Follow us</h3>
-          <ul class="icons">
-            <li><i class="fa-brands fa-facebook"></i></li>
-            <li><i class="fa-brands fa-twitter"></i></li>
-            <li><i class="fa-brands fa-instagram"></i></li>
+        <div class="footer-main-item">
+          <h3 class="footer-title">Resources</h3>
+          <ul>
+            <li>Be a better recycler</li>
+            <li>How to recycle</li>
+            <li>What to recycle</li>
+            <li>Recycle an item</li>
           </ul>
         </div>
-      </div>
+        <div class="footer-main-item">
+          <h3 class="footer-title">Contact</h3>
+          <ul>
+            <li>Help</li>
+            <li>News</li>
+            <li>FAQs</li>
+            <li>Volunteer</li>
+          </ul>
+        </div>
+        <div class="footer-main-item">
+          <h3 class="footer-title">Stay Updated</h3>
+          <p>Subscribe to our newsletter to get the latest recycling news!</p>
+          <form>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter email address"
+            />
+            <input type="submit" value="Subscribe" />
+          </form>
+        </div>
+      </section>
+      <!-- Footer socials -->
+      <section class="footer-social">
+        <ul class="footer-social-list">
+          <li><i class="fa-brands fa-facebook"></i></li>
+          <li><i class="fa-brands fa-twitter"></i></li>
+          <li><i class="fa-brands fa-instagram"></i></li>
+        </ul>
+      </section>
+      <!-- Footer legal -->
+      <section class="footer-legal">
+        <ul class="footer-legal-list">
+          <li>Terms &amp; Conditions</li>
+          <li>Privacy Policy</li>
+          <li>&copy; 2023 Copyright Vitrum Inc.</li>
+        </ul>
+      </section>
     </footer>
   </div>
 </template>
@@ -96,11 +128,18 @@ export default {
 html {
   background: white;
   font-family: "Raleway", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+template {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 #app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  flex: 1;
 }
 
 #logo {
@@ -112,7 +151,7 @@ html {
 
 .main-view {
   margin-top: 3.2%;
-  margin-bottom: 400px;
+  margin-bottom: 5%;
 }
 
 nav {
@@ -127,20 +166,19 @@ nav {
   width: 100vw;
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border: 1px solid red;
 }
 
-ul {
-  border: 1px solid red;
+nav ul {
   display: flex;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-li {
+nav li {
   font-size: 20px;
   font-weight: 600;
   padding: 0 20px 0 10px;
@@ -196,7 +234,7 @@ button::before,
   display: block;
   width: 50px;
   height: 20px;
-  transform: translate(-50%, -50%);
+  transform: translate(-40%, -40%);
   position: absolute;
   border-radius: 50%;
   z-index: -1;
@@ -285,7 +323,7 @@ a:hover {
   padding: 0.5rem;
   transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
-/* why the heck is this text blue on hover!!! */
+
 .dropdown-content a:hover {
   background-color: #9bdb66;
   box-shadow: inset 200px 0 0 0 white;
@@ -298,52 +336,135 @@ a:hover {
 
 footer {
   border: 1px solid blue;
+  background-color: #9bdb66;
+  line-height: 1.5;
+  color: #0b7a1e;
+}
+
+.footer-title {
+  font-size: 1.475em;
+}
+
+.footer-main {
+  border: 1px solid red;
+  padding: 0.2em 1.875em;
   display: flex;
-  position: absolute;
-  text-align: center;
-  height: auto;
-  width: 100vw;
-  left: 0;
-  right: 0;
-  padding-top: 1.5em;
-  border-top: 5px solid #9bdb66;
-  background-color: white;
+  flex-wrap: wrap;
 }
 
-.footer-content {
-  /* display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center; */
+.footer-main-item {
+  padding: 1.25em;
+  min-width: 12.5em;
 }
 
-.footer-content div {
-  display: block;
-}
-
-.icons {
+footer ul {
   list-style: none;
+  padding-left: 0;
+  font-size: 1.175em;
+}
+
+footer form {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+}
+
+footer input[type="email"] {
+  border: 0;
+  padding: 0.625em;
+}
+
+footer input[type="submit"] {
+  background-color: #21a076;
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  font-size: 0.95em;
+  text-transform: uppercase;
+  border-radius: 2em;
+  padding: 0.57em 2.15em;
+  margin-left: 0.5em;
+  transition: all 0.3s;
+}
+
+footer input[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0.5em 0.5em 2em rgba(0, 0, 0, 0.2);
+}
+
+footer input[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.footer-social {
+  padding: 0 1.875em 0;
+  color: #0b7a1e;
+}
+
+.footer-social-list {
+  display: flex;
   justify-content: center;
 }
 
-@media screen and (max-width: 768px) {
-  .nav-container {
-    padding-top: 10px;
-    position: absolute;
-    width: 100%;
+.footer-social-list li {
+  margin: 0.5em;
+  font-size: 1.5em;
+}
+
+.footer-legal {
+  border-top: 1px solid #9bdb66;
+  padding: 0 0.875em;
+}
+
+.footer-legal-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer-legal-list li {
+  margin: 0.125em 0.625em;
+  white-space: nowrap;
+  font-size: 0.75em;
+}
+
+.footer-legal-list li:nth-last-child(2) {
+  flex: 1;
+}
+
+@media only screen and (min-width: 477px) {
+  .footer-main {
+    justify-content: space-around;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    z-index: 100;
+    position: relative;
+    transition: all 0.2s ease-out;
+    padding-top: 8px;
+    width: 20%;
+    float: right;
+  }
+
+  nav ul {
+    flex-direction: column;
+    text-align: center;
   }
 
   #logo {
     display: none;
   }
 
+  .dropdown i {
+    display: none;
+  }
+
   .open-menu {
     opacity: 1;
-    height: 150px;
+    height: auto;
   }
 
   .closed-menu {
@@ -352,21 +473,20 @@ footer {
     padding: 0;
   }
 
-  nav {
-    flex-direction: column;
-    z-index: 100;
-    position: relative;
-    transition: all 0.2s ease-out;
-  }
-
-  nav ul {
-    flex-direction: column;
-  }
-
   .toggle {
     display: block;
     text-align: right;
     padding: 0 10px 10px 0;
+  }
+
+  #search-box {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 1240px) {
+  .footer-main {
+    justify-content: space-evenly;
   }
 }
 </style>

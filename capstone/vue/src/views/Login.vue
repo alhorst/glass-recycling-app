@@ -9,7 +9,7 @@
         />
       </div>
       <div class="login-form__content">
-        <div class="login-form__header">Thanks for recycling with us</div>
+        <div class="login-form__header">Thanks for recycling with us!</div>
       </div>
       <div class="alert alert-danger" role="alert" v-if="invalidCredentials">
         Invalid username and password!
@@ -130,15 +130,15 @@ export default {
 
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap");
-
-.text-center {
+body {
   background: radial-gradient(
     circle,
     rgba(11, 122, 30, 1) 0%,
     rgba(122, 198, 47, 1) 30%,
     rgba(252, 252, 252, 1) 95%
   );
+}
+.text-center {
   margin: 0px;
   padding: 150px;
 }
@@ -153,7 +153,7 @@ export default {
 .form-signin {
   background-color: white;
   max-width: 400px;
-  height: 550px;
+  height: 570px;
   margin: 0 auto;
   border-radius: 5px;
   overflow: hidden;
@@ -200,7 +200,7 @@ export default {
 
 .form-control::placeholder {
   color: #aaaaaa;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .login-form__button {
@@ -211,16 +211,13 @@ export default {
   width: 100%;
   border: none;
   outline: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
   width: 95%;
   margin: 10px;
   padding: 10px 5px 10px 5px;
 }
 
-.login-form__button:active {
-  background: #008067;
-}
 .login-form_links {
   margin-top: 15px;
   text-align: center;
@@ -228,7 +225,6 @@ export default {
 
 .login-form_link {
   font-size: 0.9em;
-  color: #008067;
   text-decoration: none;
 }
 
