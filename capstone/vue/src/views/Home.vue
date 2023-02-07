@@ -25,14 +25,16 @@
       </div>
     </section>
     <section class="mid-container">
-      <div>
-        When those bins are full, simply schedule a pickup date on our handy app
-        and drop those wine bottles and jam jars at the curb; they will be
-        crushed to a fine sand which we sell or donate to our commercial
-        partners for a wide variety of sustainable applications: erosion
-        remediation, creating road services, and even to make swanky and unique
-        kitchen countertops. Keep track of your recycling stats on your
-        dashboard and earn points with every pickup to redeem for cool prizes.
+      <div id="services">
+        <p>
+          When those bins are full, simply schedule a pickup date on our handy
+          app and drop those wine bottles and jam jars at the curb; they will be
+          crushed to a fine sand which we sell or donate to our commercial
+          partners for a wide variety of sustainable applications: erosion
+          remediation, creating road services, and even to make swanky and
+          unique kitchen countertops. Keep track of your recycling stats on your
+          dashboard and earn points with every pickup to redeem for cool prizes.
+        </p>
       </div>
     </section>
     <section class="counter-container">
@@ -124,7 +126,7 @@ export default {
   text-align: center;
   position: absolute;
   letter-spacing: 0.3em;
-  font-size: 1.2em;
+  font-size: 1.7em;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -135,14 +137,33 @@ export default {
   display: inline-block;
   padding: 10px 25px;
   color: white;
-  font-size: 1em;
+  font-size: 0.75em;
   text-align: center;
   cursor: pointer;
   border: 2px solid white;
+  margin-top: 2em;
 }
 
-h2 {
+.about-us h2 {
+  text-transform: uppercase;
+  font-size: 2.5em;
+  letter-spacing: 3px;
+  margin-right: -3px;
+  margin-bottom: 1.5em;
   text-align: center;
+  position: relative;
+}
+
+.about-us h2::after {
+  content: "";
+  width: 5em;
+  height: 0.2em;
+  background-color: #ffe46c;
+  position: absolute;
+  bottom: -0.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2em;
 }
 
 .about-us {
@@ -155,7 +176,11 @@ h2 {
   height: auto;
   font-size: 1.5em;
   text-align: justify;
-  /* overflow: auto; */
+}
+
+p {
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .illustration img {
@@ -178,6 +203,7 @@ h2 {
 .counter-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: #9bdb66;
   margin-top: 5em;
   height: 200px;
@@ -208,11 +234,11 @@ h2 {
 
 .mt-header::after {
   content: "";
-  width: 10em;
+  width: 5em;
   height: 0.2em;
   background-color: #ffe46c;
   position: absolute;
-  bottom: -.5em;
+  bottom: -0.5em;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 2em;

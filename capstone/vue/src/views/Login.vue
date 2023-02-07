@@ -212,23 +212,21 @@ body {
 }
 
 .login-form__button {
-  padding: 10px;
-  color: #ffffff;
+  display: inline-block;
+  padding: 10px 35px;
+  border-radius: 7em;
+  position: relative;
   font-weight: bold;
-  background: #009578;
-  width: 100%;
   border: none;
-  outline: none;
-  border-radius: 8px;
   cursor: pointer;
-  width: 95%;
   margin: 10px;
-  padding: 10px 5px 10px 5px;
+  transform: translate(100%);
+}
+.login-form__button::before,
+.login-form__button::after {
+  transform: translate(-20%, -40%);
 }
 
-.login-form__button:active {
-  background: #008067;
-}
 .login-form_links {
   margin-top: 15px;
   text-align: center;
@@ -236,7 +234,6 @@ body {
 
 .login-form_link {
   font-size: 0.9em;
-  color: #008067;
   text-decoration: none;
 }
 

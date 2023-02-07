@@ -234,7 +234,7 @@ button::before,
   display: block;
   width: 50px;
   height: 20px;
-  transform: translate(-50%, -50%);
+  transform: translate(-40%, -40%);
   position: absolute;
   border-radius: 50%;
   z-index: -1;
@@ -376,9 +376,10 @@ footer input[type="email"] {
 footer input[type="submit"] {
   background-color: #21a076;
   color: white;
-  border: none;
+  border: 1px solid white;
   cursor: pointer;
   font-size: 0.95em;
+  text-transform: uppercase;
   border-radius: 2em;
   padding: 0.57em 2.15em;
   margin-left: 0.5em;
