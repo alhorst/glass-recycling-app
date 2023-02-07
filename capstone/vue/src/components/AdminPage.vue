@@ -149,19 +149,26 @@
           </button>
         </form> -->
       </div>
-    </div>
+       <set-route></set-route>
+        
+        
   </div>
+ 
+  </div>
+  
 </template>
 
 <script>
 import Locations from "./Locations.vue";
 import PickupService from '../services/PickupService.js';
+import SetRoute from './SetRoute.vue';
 import DriverTable from '../components/DriverTable.vue';
 
 export default {
   name: "admin-page",
   components: {
     Locations,
+    SetRoute,
     DriverTable
   },
   data() {

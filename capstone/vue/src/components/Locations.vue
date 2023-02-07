@@ -48,11 +48,12 @@ export default {
   data() {
     return {
       map: null,
-      mapCenter: { lat: 42.3327, lng: -83.0458 },
+      mapCenter: { lat: 40.46083373916581, lng: -79.97458794232827},
       locations: [
-        { coord: { lat: 42.34, lng: -83.0456 }, name: "Ford Field" },
-        { coord: { lat: 42.3411, lng: -83.0553 }, name: "L.C. Arena" },
-        { coord: { lat: 42.339, lng: -83.0485 }, name: "Comerica Park" },
+        { coord: { lat: 40.46833, lng: -79.97458 }, name: "Vitrum Recylce Dropoff Center" },
+        { coord: { lat: 40.42167, lng: -80.00757 }, name: "mraymond" },
+        { coord: { lat: 40.47198, lng: -80.01398 }, name: "bblanc" },
+        { coord: { lat: 40.44714, lng: -79.97501 }, name: "mbron" },
       ],
     };
   },
@@ -61,7 +62,7 @@ export default {
       this.calculateCenter();
       this.map = new window.google.maps.Map(document.getElementById("map"), {
         center: this.mapCenter,
-        zoom: 14,
+        zoom: 13,
         maxZoom: 20,
         minZoom: 3,
         streetViewControl: true,
