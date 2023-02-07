@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       user: "",
-      expanded: false,
+      // expanded: false,
       showForm: false,
     };
   },
@@ -77,6 +77,7 @@ export default {
   height: 2em; /* height is 2x line-height, so two lines will display */
   overflow: hidden;
   margin-bottom: 6px;
+  text-align: center;
 }
 
 .history {

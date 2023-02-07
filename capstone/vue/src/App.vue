@@ -29,7 +29,7 @@
       <!-- <div class="spacer">&nbsp;</div> -->
       <div class="dropdown">
         <!--I need to change name to "account-detail" because of I can't see the account form"Kubra-->
-        <router-link v-bind:to="{ name: 'account-detail' }"
+        <router-link v-bind:to="{ name: 'account' }"
           >Account<i class="fa-solid fa-user"></i
         ></router-link>
         <div class="dropdown-content">
@@ -158,7 +158,7 @@ template {
 }
 
 .main-view {
-  margin-top: 3.2%;
+  margin-top: 6%;
   margin-bottom: 5%;
 }
 
