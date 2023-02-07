@@ -166,7 +166,7 @@ nav {
   width: 100vw;
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: 2;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border: 1px solid red;
 }
@@ -439,19 +439,32 @@ footer input[type="submit"]:active {
 }
 
 @media only screen and (max-width: 768px) {
-  .nav-container {
-    padding-top: 10px;
-    position: absolute;
-    width: 100%;
+  nav {
+    flex-direction: column;
+    z-index: 100;
+    position: relative;
+    transition: all 0.2s ease-out;
+    padding-top: 8px;
+    width: 20%;
+    float: right;
+  }
+
+  nav ul {
+    flex-direction: column;
+    text-align: center;
   }
 
   #logo {
     display: none;
   }
 
+  .dropdown i {
+    display: none;
+  }
+
   .open-menu {
     opacity: 1;
-    height: 150px;
+    height: auto;
   }
 
   .closed-menu {
@@ -460,21 +473,14 @@ footer input[type="submit"]:active {
     padding: 0;
   }
 
-  nav {
-    flex-direction: column;
-    z-index: 100;
-    position: relative;
-    transition: all 0.2s ease-out;
-  }
-
-  nav ul {
-    flex-direction: column;
-  }
-
   .toggle {
     display: block;
     text-align: right;
     padding: 0 10px 10px 0;
+  }
+
+  #search-box {
+    display: none;
   }
 }
 
