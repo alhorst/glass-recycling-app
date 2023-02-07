@@ -1,6 +1,6 @@
 <template>
   <div id="route-map">
-    <h1>Route Map</h1>
+    <h1>VITRUM Route Map</h1>
     <div id="map">
     </div>
   </div>
@@ -46,7 +46,7 @@ this.directionsService();
             40.46083373916581,
             -79.97458794232827
           ),
-          zoom: 15,
+          zoom: 12,
           mapTypeId: window.google.maps.MapTypeId.ROADMAP,
         }
       );
@@ -86,8 +86,11 @@ this.directionsService();
 
 <style>
 #map{
-    width:500px;
+    width:70vw;
     height:500px;
+    margin: auto;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
 
 }
 
