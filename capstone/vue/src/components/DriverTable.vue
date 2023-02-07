@@ -102,12 +102,12 @@
     </div>
   </div> -->
   <div id="card-driver">
-    <h2>Driver</h2>
+    <button v-on:click.prevent="created">Drivers</button>
     <table id="tbl-drivers">
       <thead id="tbl-head-drivers">
         <tr>
           <th>&nbsp;</th>
-          <th>Employee Id</th>
+          <th>Driver Id</th>
           <th>Username</th>
           <th>Home Office Address</th>
         </tr>
@@ -125,7 +125,7 @@
             <input
               type="text"
               id="firstNameFilter"
-              v-model="filter.employee_id"
+              v-model="filter.driver_id"
             />
           </td>
           <td>
@@ -152,7 +152,7 @@
               v-bind:value="Number.parseInt(driver.employee_id)"
             />
           </td>
-          <td>{{ driver.employee_id }}</td>
+          <td>{{ driver.driver_id }}</td>
           <td>{{ driver.username }}</td>
           <td>{{ driver.home_office_address }}</td>
         </tr>
@@ -177,8 +177,8 @@
           <input type="text" name="firstName" v-model="newDriver.password" />
         </div>
         <div class="field">
-          <label for="lastName">Office:</label>
-          <input type="text" name="lastName" v-model="newDriver.home_office_address" />
+          <label for="firstName">confirmPassword:</label>
+          <input type="text" name="firstName" v-model="newDriver.confirmPassword" />
         </div>
         <div class="field">
           <label for="lastName">status:</label>
@@ -193,13 +193,13 @@
 </template>
 
 <script>
-// import DriverService from "../services/DriverService.js";
+import DriverService from "../services/DriverService.js";
 export default {
   name: "driver-table",
   data() {
     return {
       drivers: {
-        employee_id: "",
+        driver_id: "",
         username: "",
         home_office_address: "",
       },
@@ -212,22 +212,35 @@ export default {
       },
 
       newDriver: {
-          employee_id:'',
-        username: "",
-        password: '',
+        driver_id: '',
+        password: "",
+        confirmPassword: '',
         is_driver: true,
+        role: "user",
         home_office_address: "3001 Railroad St, Pittsburgh, PA 15201",
       },
     };
   },
-//   methods: {
-//     //add newe driver to the table
-//       DriverService.addDriver(this.newDriver).then((response) => {
-//         if (response.status === 201) {
-//           this.$router.push("/admin");
-//         }
-//       })
-//     },
+  methods: {
+
+    //created method to get all updated driver list
+    created(){
+      DriverService.getAllDrivers().then(response =>{
+        this.drivers = response.data
+      })
+    },
+    //add newe driver to the table
+    addDriver(){
+      DriverService.addDriver(this.newDriver).then((response) => {
+        if (response.status === 201) {
+          // this.$router.push("/admin");
+           DriverService.getAllDrivers().then(response =>{
+        this.drivers = response.data
+      })
+        }
+      })
+    },
+}
 }
 </script>
 
