@@ -158,7 +158,7 @@ template {
 }
 
 .main-view {
-  margin-top: 6%;
+  margin-top: 5%;
   margin-bottom: 5%;
 }
 
