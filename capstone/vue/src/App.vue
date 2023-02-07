@@ -24,7 +24,7 @@
       <!-- <div class="spacer">&nbsp;</div> -->
       <div class="dropdown">
         <!--I need to change name to "account-detail" because of I can't see the account form"Kubra-->
-        <router-link v-bind:to="{ name: 'account' }"
+        <router-link v-bind:to="{ name: 'account-detail' }"
           >Account<i class="fa-solid fa-user"></i
         ></router-link>
         <div class="dropdown-content">

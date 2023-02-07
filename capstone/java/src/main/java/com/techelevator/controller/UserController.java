@@ -5,6 +5,7 @@ import com.techelevator.dao.UserDetailsDao;
 import com.techelevator.model.User;
 import com.techelevator.model.UserDetails;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@PreAuthorize("isAuthenticated()")
 public class UserController {
 
     private UserDao userDao;
@@ -24,9 +26,6 @@ public class UserController {
         this.userDetailsDao = userDetailsDao;
     }
 
-
-    //To-do:
-    ///// Look into Authorization for methods - what needs to be Admin Authorized? Only authenticated? and public?
 
     //UserDao Methods start here **********
 
@@ -64,6 +63,7 @@ public class UserController {
     }
 
     //delete a user from the users table, by user_id
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path="/users/{userId}", method= RequestMethod.DELETE)
     public void deleteUser(@PathVariable int userId) {
@@ -145,6 +145,7 @@ public class UserController {
     }
 
     //deleting a user detail from user_details table
+    @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path="/users/details/{accountId}", method= RequestMethod.DELETE)
     public void deleteUserDetails(@PathVariable int accountId) {

@@ -201,7 +201,7 @@ h2 {
   font-size: 3.5em;
   letter-spacing: 3px;
   margin-right: -3px;
-  margin-bottom: 5em;
+  margin-bottom: 1.5em;
   text-align: center;
   position: relative;
 }
@@ -209,10 +209,10 @@ h2 {
 .mt-header::after {
   content: "";
   width: 10em;
-  height: 0.8em;
+  height: 0.2em;
   background-color: #ffe46c;
   position: absolute;
-  bottom: -2em;
+  bottom: -.5em;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 2em;
