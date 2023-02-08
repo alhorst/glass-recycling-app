@@ -2,7 +2,7 @@
   <div class="container">
     <h2>Welcome to your Dashboard!</h2>
     <div class="map">
-      <locations>MAP GOES HERE</locations>
+      <locations></locations>
     </div>
     <div>
       <driver-table class="driver-main">driver</driver-table>
@@ -448,17 +448,18 @@ select {
   padding: 5px;
 }
 
-form {
-  margin: 20px;
-  width: 300px;
-}
+/* #frmAddNewPickup {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+} */
 
 .field {
-  padding: 10px 0px;
+  padding: 10px;
 }
 
 label {
-  width: 135px;
+  padding-right: 5px;
   display: inline-block;
 }
 

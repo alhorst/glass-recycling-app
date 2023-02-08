@@ -169,7 +169,7 @@
         Delete Driver
       </button>
 
-      <button v-on:click="showForm = !showForm">Add New Driver! 🚗</button>
+      <button v-on:click="showForm = !showForm">Add New Driver!</button>
       <form id="frmAddNewDriver" v-show="showForm">
         <div class="field">
           <label for="firstName">Username:</label>
@@ -188,7 +188,7 @@
           />
         </div>
         <div class="field">
-          <label for="lastName">status:</label>
+          <label for="lastName">Status:</label>
           <input type="text" name="lastName" v-model="newDriver.is_driver" />
         </div>
         <button type="submit" class="btn save" v-on:click.prevent="addDriver">
@@ -436,9 +436,6 @@ select {
   align-items: center;
   justify-content: space-around;
 }
-
-/* form {
-} */
 
 .field {
   padding: 10px;
