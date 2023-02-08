@@ -138,10 +138,14 @@ public class PickupController {
     }
 
     //Add a pickup in the pickup_details table
+    //also checks for active outstanding requests for that user, can only have 1 active request per user
+    //they must delete current request & add new. Or, edit current request.
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/pickups", method= RequestMethod.POST)
     public PickupDetails addPickupDetails(@Valid @RequestBody PickupDetails newPickup) {
-        if (newPickup != null) {
+        if (pickupDetailsDao.getOutstandingPickupsByUsername(newPickup.getRequesting_username()).size() >= 1) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "There is already an active pickup request for this user. MAX 1 outstanding request per user");
+        } else if (newPickup != null){
             return pickupDetailsDao.createPickupDetails(newPickup);
         }
         return null;

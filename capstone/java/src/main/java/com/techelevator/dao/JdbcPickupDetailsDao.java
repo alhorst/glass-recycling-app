@@ -53,6 +53,40 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         return myUnassignedPickups;
     }
 
+    //Get all outstanding pickups (pickups not picked up yet)
+    @Override
+    public List<PickupDetails> getAllOutstandingPickups() {
+        List<PickupDetails> outstandingPickups = new ArrayList<>();
+        String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up, " +
+                    "street_address || ', ' || city || ', ' || state_abbreviation || ' ' || zipcode AS full_address " +
+                    "FROM pickup_details " +
+                    "JOIN user_details ON pickup_details.requesting_username = user_details.username " +
+                    "WHERE is_picked_up = false;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        while(results.next()) {
+            outstandingPickups.add(mapRowToPickupDetails(results));
+        }
+        return outstandingPickups;
+    }
+
+    //Get outstanding pickups by username (Only 1 outstanding pickup per user)
+    //utilize to check upon create pickup request, if user already has an outstanding pickup --> throw exception
+    //if exception is thrown --> User can delete existing request and create a new OR update the existing request
+    @Override
+    public List<PickupDetails> getOutstandingPickupsByUsername(String username) {
+        List<PickupDetails> outstandingPickups = new ArrayList<>();
+        String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up, " +
+                "street_address || ', ' || city || ', ' || state_abbreviation || ' ' || zipcode AS full_address " +
+                "FROM pickup_details " +
+                "JOIN user_details ON pickup_details.requesting_username = user_details.username " +
+                "WHERE is_picked_up = false AND requesting_username = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, username);
+        while(results.next()) {
+            outstandingPickups.add(mapRowToPickupDetails(results));
+        }
+        return outstandingPickups;
+    }
+
     //Get all pickups from the pickup_details table
     // including pickup_details && full_address
     @Override
