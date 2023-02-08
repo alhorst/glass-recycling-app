@@ -162,7 +162,7 @@ export default {
 }
 
 .form-control:focus {
-  border-color: #009578;
+  border-color: #4bc970;
 }
 
 .form-control::placeholder {
@@ -174,7 +174,7 @@ export default {
   padding: 10px;
   color: #ffffff;
   font-weight: bold;
-  background: #009578;
+  background: #4bc970;
   width: 100%;
   border: none;
   outline: none;

@@ -139,9 +139,13 @@ export default {
   color: white;
   font-size: 0.75em;
   text-align: center;
+  font-weight: bold;
+  letter-spacing: 0.12em;
   cursor: pointer;
-  border: 2px solid white;
   margin-top: 2em;
+  background-color: #5dc06a;
+  padding: 19px 39px 18px 39px;
+  
 }
 
 .about-us h2 {
@@ -184,8 +188,8 @@ p {
 }
 
 .illustration img {
-  border: 1px solid red;
   max-width: 100%;
+  margin-top: 2em;
 }
 
 .mid-container {

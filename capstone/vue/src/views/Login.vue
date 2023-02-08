@@ -130,15 +130,6 @@ export default {
 
 
 <style scoped>
-/* this is not showing */
-body {
-  background: radial-gradient(
-    circle,
-    rgba(11, 122, 30, 1) 0%,
-    rgba(122, 198, 47, 1) 30%,
-    rgba(252, 252, 252, 1) 95%
-  );
-}
 .text-center {
   margin: 0px;
   padding: 150px;
@@ -196,7 +187,7 @@ body {
 }
 
 .form-control:focus {
-  border-color: #009578;
+  border-color: #5dc06a;
 }
 
 .form-control::placeholder {
@@ -208,7 +199,8 @@ body {
   padding: 10px;
   color: #ffffff;
   font-weight: bold;
-  background: #009578;
+  letter-spacing: .12em;
+  background: #4bc970;
   width: 100%;
   border: none;
   outline: none;
@@ -218,6 +210,11 @@ body {
   margin: 10px;
   padding: 10px 5px 10px 5px;
 }
+
+.login-form__button::before {
+  transform: translate(-2%, -40%);
+}
+
 
 .login-form_links {
   margin-top: 15px;
