@@ -3,6 +3,7 @@ BEGIN TRANSACTION;
 -- Admin account
 INSERT INTO users (username, password_hash, role, is_driver) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN', 'false');
 
+-- Recyclers
 INSERT INTO users (username, password_hash, role, is_driver) VALUES ('mraymond','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER', 'false');
 INSERT INTO users (username, password_hash, role, is_driver) VALUES ('bblanc','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER', 'false');
 INSERT INTO users (username, password_hash, role, is_driver) VALUES ('mbron','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER', 'false');
@@ -19,6 +20,7 @@ INSERT INTO users (username, password_hash, role, is_driver) VALUES ('kashford',
 INSERT INTO users (username, password_hash, role, is_driver) VALUES ('adawes','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER', 'false');
 INSERT INTO users (username, password_hash, role, is_driver) VALUES ('minaros','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER', 'false');
 
+-- Drivers
 INSERT INTO users (username, password_hash, role, is_driver) VALUES ('lglassmore','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER', 'true');
 INSERT INTO users (username, password_hash, role, is_driver) VALUES ('mglassmore','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER', 'true');
 INSERT INTO users (username, password_hash, role, is_driver) VALUES ('cglassmore','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER', 'true');
@@ -83,11 +85,11 @@ VALUES ('awingfield', '2023-02-11', 120, 2, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
 VALUES ('jholden', '2023-02-11', 180, 3, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('aburton', '2023-02-11', 60, 1, false);
+VALUES ('aburton', '2023-02-12', 60, 1, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('nnagata', '2023-02-11', 120, 2, false);
+VALUES ('nnagata', '2023-02-12', 120, 2, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('cmao', '2023-02-11', 180, 3, false);
+VALUES ('cmao', '2023-02-12', 180, 3, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
 VALUES ('cdrummer', '2023-02-12', 60, 1, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)

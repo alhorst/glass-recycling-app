@@ -25,4 +25,5 @@ export default {
         return axios.get('/users/myDetails')
     }
 
+
 }

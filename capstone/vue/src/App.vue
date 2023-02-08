@@ -251,7 +251,7 @@ nav li {
 }
 
 button {
-  --color: #21a076;
+  --color: rgb(93, 192, 106);
   padding: 0.5em 0.5em 0.5em 1em;
   background-color: transparent;
   border-radius: 7em;

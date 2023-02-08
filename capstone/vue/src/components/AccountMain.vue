@@ -8,23 +8,18 @@ Three columns( history, calendar, account)
   <div class="account">
     <div class="my-account">
       <router-link :to="{ name: 'account-detail' }">My Account</router-link>
-      <h4>
-        <i>{{ user.username }}</i>
-      </h4>
+      <h4> {{$store.state.user.username}}  </h4>
     </div>
-    <!-- recycling history and calendar-->
-    <!-- <div class="pick-up">
-      <button v-on:click="showForm = !showForm">Schedule Pick up!</button>
-        <pick-up v-show="showForm"></pick-up>
-      
-    </div> -->
-    <div>
+    <button class="pickup-button" v-on:click="showForm = !showForm">Schedule Pick Up</button>
+    <div v-show="showForm">
       <pick-up></pick-up>
     </div>
 
-    <div class="history">
+    <!-- <div class="history">
       <button>My Recycling History</button>
-    </div>
+    </div> -->
+    
+      <button class="history">My Recycling History</button>
   </div>
 </template>
 
@@ -80,8 +75,13 @@ export default {
   text-align: center;
 }
 
+.pickup-button {
+  margin :15px;
+}
+
 .history {
-  border-radius: 0.8rem;
+   margin :15px;
+  /* border-radius: 0.8rem;
   padding: 20px;
   padding-bottom: 24px;
   background-color: whitesmoke;
@@ -90,8 +90,8 @@ export default {
 
   line-height: 0.5em;
   height: 2em; /* height is 2x line-height, so two lines will display */
-  overflow: hidden;
+  /* overflow: hidden;
   margin-bottom: 6px;
-  align-self: flex-end;
+  align-self: flex-end;  */
 }
 </style>
