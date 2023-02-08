@@ -377,7 +377,6 @@ a:hover {
 }
 
 footer {
-  border: 1px solid blue;
   background-color: #9bdb66;
   line-height: 1.5;
   color: #0b7a1e;
@@ -388,7 +387,6 @@ footer {
 }
 
 .footer-main {
-  border: 1px solid red;
   padding: 0.2em 1.875em;
   display: flex;
   flex-wrap: wrap;
@@ -416,12 +414,16 @@ footer input[type="email"] {
 }
 
 footer input[type="submit"] {
-  background-color: #21a076;
+  font-family: "Raleway", sans-serif;
+  background-color: #5dc06a;
   color: white;
-  border: 1px solid white;
+  border: 1px solid #5dc06a;
   cursor: pointer;
   font-size: 0.95em;
   text-transform: uppercase;
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: 0.1em;
   border-radius: 2em;
   padding: 0.57em 2.15em;
   margin-left: 0.5em;

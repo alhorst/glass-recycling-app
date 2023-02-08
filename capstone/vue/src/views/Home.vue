@@ -46,11 +46,11 @@
         <div class="card-wrapper">
           <div class="card">
             <img
-              src="../img/tyler.jpg"
+              src="../img/matt.jpg"
               alt="Profile image"
               class="profile-img"
             />
-            <h3>Tyler Harrington</h3>
+            <h3>Matt Hosner</h3>
             <p class="job-title">Founder &amp; CEO</p>
             <p class="about">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -61,12 +61,12 @@
 
           <div class="card">
             <img
-              src="../img/maria.jpg"
+              src="../img/kubra.jpg"
               alt="Profile image"
               class="profile-img"
             />
-            <h3>Maria Spiels</h3>
-            <p class="job-title">Marketing Director</p>
+            <h3>Kubra Tapan</h3>
+            <p class="job-title">Fullstack Developer</p>
             <p class="about">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Adipisci, alias aliquam amet autem blanditiis commodi consectetur
@@ -75,9 +75,28 @@
           </div>
 
           <div class="card">
-            <img src="../img/jon.jpg" alt="Profile image" class="profile-img" />
-            <h3>Jon Nakamura</h3>
-            <p class="job-title">Logistics Director</p>
+            <img
+              src="../img/greg.jpg"
+              alt="Profile image"
+              class="profile-img"
+            />
+            <h3>Greg Sabella</h3>
+            <p class="job-title">Backend Developer</p>
+            <p class="about">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Adipisci, alias aliquam amet autem blanditiis commodi consectetur
+              cum dolorem ea eos error.
+            </p>
+          </div>
+
+          <div class="card">
+            <img
+              src="../img/alexis.jpg"
+              alt="Profile image"
+              class="profile-img"
+            />
+            <h3>Alexis Horst</h3>
+            <p class="job-title">Frontend Developer</p>
             <p class="about">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Adipisci, alias aliquam amet autem blanditiis commodi consectetur
@@ -145,7 +164,12 @@ export default {
   margin-top: 2em;
   background-color: #5dc06a;
   padding: 19px 39px 18px 39px;
-  
+  transition: all 0.3s;
+}
+
+.hero-image button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0.5em 0.5em 2em rgba(0, 0, 0, 0.2);
 }
 
 .about-us h2 {
