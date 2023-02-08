@@ -16,7 +16,7 @@ export default {
 
     // //add new user detail.
     addUserDetails(userDetail) {
-        console.log(userDetail);
+
         return axios.post('/users/details', userDetail)
     },
 
@@ -24,6 +24,11 @@ export default {
     //get userdetail by username
     getUserDetails(){
         return axios.get('/users/myDetails')
+    },
+
+    //update userdetails
+    updateUserDetails(userDetail, accountId){
+        return axios.put(`users/details/${accountId}`, userDetail)
     }
 
 

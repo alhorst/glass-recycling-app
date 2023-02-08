@@ -2,11 +2,11 @@
   <div>
     <form v-on:submit.prevent="saveAccountDetails">
       <div class="banner">
-        <h1>{{ userDetails }}</h1>
+        <h1>My Account</h1>
       </div>
       <!-- <h2>Applicant Details</h2> -->
       <div class="item">
-        <p>Username {{ userDetails }}</p>
+        <p>Username</p>
         <input type="text" name="name" v-model="userDetails.username" />
       </div>
       <div class="item">
@@ -52,7 +52,7 @@
       </div>
       <div class="btn-block">
         <button type="button" v-on:click="cancel()">Cancel</button>
-        <button type="submit">Save</button>
+        <button type="submit" >Save</button>
       </div>
     </form>
   </div>
@@ -82,7 +82,11 @@ export default {
 
   created() {
     AccountService.getUserDetails().then((response) => {
-      this.userDetails = response.data;
+      
+        this.userDetails = Object.assign({},response.data);
+         console.log(response.data)
+      
+      
     });
   },
   methods: {
@@ -101,7 +105,7 @@ export default {
 </script>
 
 <style scoped>
-/* html, body {
+html, body {
       min-height: 100%;
       }
       body, div, form, input, select, p { 
@@ -273,5 +277,5 @@ export default {
       .city-item select {
       width: calc(50% - 8px);
       }
-      } */
+      }
 </style>
