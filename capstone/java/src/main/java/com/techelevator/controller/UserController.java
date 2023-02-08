@@ -79,7 +79,7 @@ public class UserController {
 
     //Get the total pounds of glass recycled across all users in the application
     // "How many pounds of glass has Vitrum kept out of landfills?"
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("permitAll")
     @RequestMapping(path="/stats/total", method= RequestMethod.GET)
     public Long getTotalGlassRecycled() {
         return userDetailsDao.getTotalGlassRecycled();
