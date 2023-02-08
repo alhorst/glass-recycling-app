@@ -38,7 +38,7 @@
       </div>
     </section>
     <section class="counter-container">
-      <div id="counter">We've saved XX lbs of glass from landfills!</div>
+      <div id="counter">We've saved {{totalGlass}} lbs of glass from landfills!</div>
     </section>
     <section class="last-container">
       <div class="meet-team">
@@ -110,9 +110,20 @@
 </template>
 
 <script>
+import AccountService from '../services/AccountService';
 export default {
   name: "home",
   //name: "account"
+  data() {
+    return {
+      totalGlass: '',
+    }
+  },
+  created() {
+      AccountService.getTotalGlassRecycled().then((response) => {
+        this.totalGlass = response.data;
+      })
+  }
 };
 </script>
 

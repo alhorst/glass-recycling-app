@@ -23,6 +23,11 @@ export default {
     //get userdetail by username
     getUserDetails(){
         return axios.get('/users/myDetails')
+    },
+
+    //get total glass recycled with Vitrum
+    getTotalGlassRecycled(){
+        return axios.get('/stats/total')
     }
 
 
