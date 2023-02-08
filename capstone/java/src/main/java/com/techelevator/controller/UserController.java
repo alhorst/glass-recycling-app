@@ -120,11 +120,10 @@ public class UserController {
     }
 
     //add new user detail to user_details table --- registering a user after they've completed information form
-    //small change done here by Kubra
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/users/details", method= RequestMethod.POST)
     public UserDetails addNewUserDetails(@Valid @RequestBody UserDetails newUserDetail) {
-        if ((newUserDetail.getUsername()).equals(userDetailsDao.findUserDetailsByUsername(newUserDetail.getUsername()))){
+        if ((newUserDetail.getUsername()).equals(userDetailsDao.findUserDetailsByUsername(newUserDetail.getUsername()).getUsername())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "That user account already exists.");
         } else {
             return userDetailsDao.createUserDetails(newUserDetail);
@@ -136,7 +135,7 @@ public class UserController {
     public UserDetails updateUserDetails(@Valid @RequestBody UserDetails userDetails, @PathVariable int accountId) {
         if (userDetails.getAccount_id() != accountId) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Account Id provided does not match the UserDetail you're trying to update");
-        } else if (userDetailsDao.findUserDetailsByAccountId(userDetails.getAccount_id()) == null || userDetailsDao.findUserDetailsByAccountId(accountId) == null) {
+        } else if (userDetailsDao.findUserDetailsByAccountId(accountId) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no user associated with that Account Id");
         } else {
             userDetailsDao.updateUserDetails(userDetails);
