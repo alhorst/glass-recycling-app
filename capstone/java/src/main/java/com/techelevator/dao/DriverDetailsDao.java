@@ -2,7 +2,6 @@ package com.techelevator.dao;
 
 import com.techelevator.model.DriverDetails;
 
-import java.sql.Driver;
 import java.util.List;
 
 public interface DriverDetailsDao {
@@ -18,4 +17,5 @@ public interface DriverDetailsDao {
     void updateDriver(DriverDetails driverDetails);
 
     void deleteDriver(int driver_Id);
+
 }

@@ -77,6 +77,7 @@ public class UserController {
 
     //UserDetailsDao methods start here **********
 
+
     //Get the total pounds of glass recycled across all users in the application
     // "How many pounds of glass has Vitrum kept out of landfills?"
     @PreAuthorize("permitAll")

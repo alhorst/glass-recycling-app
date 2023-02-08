@@ -21,4 +21,5 @@ public interface UserDao {
     boolean create(String username, String password, String role, boolean is_driver);
 
     void deleteUser(int userId);
+
 }

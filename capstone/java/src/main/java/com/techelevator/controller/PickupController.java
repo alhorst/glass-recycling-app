@@ -29,10 +29,6 @@ public class PickupController {
     }
 
 
-    //To-do:
-    //////look into get pickup details by Date method
-
-
     //PickupDetailsDao Methods start here **********
 
 
