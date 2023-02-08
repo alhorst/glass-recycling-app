@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +18,23 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    //To-do:
-    //// Do we need a method to get account_id?
-
 
     private static final int STARTING_TOTAL_POUNDS = 0;
     private static final int STARTING_CREDITS = 0;
     private static final int STARTING_CREDITS_REDEEMED = 0;
+
+
+    //Get the total pounds of glass recycled across all users in the application
+    // "How many pounds of glass has Vitrum kept out of landfills?"
+    @Override
+    public long getTotalGlassRecycled() {
+        String sql = "SELECT SUM(total_pounds_recycled) AS total_glass_recycled " +
+                    "FROM user_details;";
+
+        long totalGlassRecycled = jdbcTemplate.queryForObject(sql, Long.class);
+
+        return totalGlassRecycled;
+    }
 
     //Get all user details from user_details table
     @Override
