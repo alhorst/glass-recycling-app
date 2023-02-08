@@ -3,10 +3,13 @@
     <div class="hero-image">
       <div class="hero-text">
         <h1>We're all in this together! Recycle for the planet!</h1>
-        <button>
+        <!-- <button>
           <router-link id="register" v-bind:to="{ name: 'register' }">
           </router-link
           >Sign up today!
+        </button> -->
+        <button>
+        <router-link id="register" :to="{ name: 'register'}">Sign up today!</router-link>
         </button>
       </div>
     </div>

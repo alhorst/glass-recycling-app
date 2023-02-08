@@ -21,10 +21,10 @@
       >
         Thank you for registering, please sign in.
       </div>
-      <label class="container">
+      <!-- <label class="container">
         <input type="radio" name="radio" class="radio" />
         <span class="checkmark">Login as Business Admin</span>
-      </label>
+      </label> -->
       <br />
       <!--
       <label for="username" class="sr-only"><b>Username: </b></label> -->
@@ -77,29 +77,11 @@ export default {
       user: {
         username: "",
         password: "",
+        // is_driver:'',
       },
       invalidCredentials: false,
     };
   },
-  // methods: {
-  //   login() {
-  //     authService
-  //       .login(this.user)
-  //       .then(response => {
-  //         if (response.status == 200) {
-  //           this.$store.commit("SET_AUTH_TOKEN", response.data.token);
-  //           this.$store.commit("SET_USER", response.data.user);
-  //           this.$router.push("/account");
-  //         }
-  //       })
-  //       .catch(error => {
-  //         const response = error.response;
-
-  //         if (response.status === 401) {
-  //           this.invalidCredentials = true;
-  //         }
-  //       });
-  //   },
 
   methods: {
     login() {
@@ -111,7 +93,11 @@ export default {
             this.$store.commit("SET_USER", response.data.user);
             if (response.data.user.username === "admin") {
               this.$router.push("/admin");
-            } else {
+            } 
+            else if(response.data.user.is_driver === true){
+              this.$router.push('/driver')
+            }
+            else {
               this.$router.push("/account");
             }
           }
