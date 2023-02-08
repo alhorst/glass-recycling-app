@@ -138,7 +138,7 @@
               v-model="filter.home_office_address"
             />
           </td>
-          <td>&nbsp;</td>
+          <!-- <td>&nbsp;</td> -->
           <!-- 
             driver in filteredUsers does not work
            -->
@@ -327,8 +327,8 @@ export default {
     filteredList() {
       let filteredUsers = this.drivers;
       if (this.filter.driver_id != "") {
-        filteredUsers = filteredUsers.filter((driver) =>
-          driver.driver_id == Number.parseInt(this.filter.driver_id)
+        filteredUsers = filteredUsers.filter(
+          (driver) => driver.driver_id == Number.parseInt(this.filter.driver_id)
         );
       }
       if (this.filter.username != "") {
@@ -346,107 +346,106 @@ export default {
 </script>
 
 <style scoped>
-/* <!-- .container {
-  display: grid;
-  grid-template-areas:
-    "map"
-    "pickups"
-    "drivers";
-  grid-template-rows: auto;
-  gap: 40px;
-  padding: 10px;
-  border: 1px solid white;
-  margin: 50px;
+.container {
+  padding: 0.75em;
+  margin: 4em;
   text-align: center;
-} --> */
-
-/* <!-- .map {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-sizing: border-box;
-  grid-area: map;
-  padding: 20px 0;
-  background-color: white;
-} -->
-
-<!-- #card-pickup {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-sizing: border-box;
-  grid-area: pickups;
-  padding: 20px 0;
-  border: 1px solid red;
-} --> */
-
-#card-driver {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-sizing: border-box;
-  /* grid-area: drivers; */
-  padding: 20px 0;
-  border: 1px solid blue;
 }
 
 h2 {
-  font-size: 2em;
-  font-family: "Raleway", sans-serif;
+  font-size: 3em;
   text-transform: uppercase;
-  background-color: rgb(36, 182, 126);
   text-align: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
+
+#card-driver {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 3em;
+  border: 1px solid blue;
+}
+
+#card-driver button {
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: 0.07em;
+  border-radius: 25px;
+  border: none;
+  padding: 10px 25px;
+  margin: 1.2em 1.5em 2em;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+}
+
 table {
-  /* margin-top: 20px;  */
-  font-family: "Raleyway", sans-serif;
-  margin-bottom: 10px;
-  background-color: grey;
-  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid red;
+  background-color: rgb(233, 233, 233);
+  font-weight: 600;
+  width: 97.5%;
 }
 
-#tbl-head-pickups {
+/* #tbl-head-drivers {
   padding: 10px;
-}
-
-#tbl-head-drivers {
-  padding: 10px;
-}
+} */
 
 th {
   text-transform: uppercase;
-  background-color: grey;
+  letter-spacing: 0.35em;
+  font-weight: bold;
+  background-color: rgb(93, 192, 106);
+  padding: 1em;
+}
+
+td input {
+  border: 1px solid white;
+  width: 8em;
+  margin: 0.4em;
+  border-radius: 1em;
 }
 
 td {
-  padding: 5px;
+  padding: 7px;
+}
+
+tr {
+  margin: 1px;
 }
 
 tr:nth-child(even) {
-  background-color: lightgreen;
+  background-color: white;
 }
 
-tr.disabled {
+/* tr.disabled {
   color: red;
-}
+} */
 
 input,
 select {
-  font-size: 16px;
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  padding: 5px;
 }
 
 #frmAddNewDriver {
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
 
-form {
-  margin: 20px;
-  width: 350px;
-}
+/* form {
+} */
 
 .field {
-  padding: 10px 0px;
+  padding: 10px;
 }
 
 label {
-  width: 135px;
+  padding-right: 5px;
   display: inline-block;
 }
 

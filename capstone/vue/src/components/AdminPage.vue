@@ -448,11 +448,6 @@ select {
   padding: 5px;
 }
 
-/* #frmAddNewDriver {
-  display: flex;
-  align-items: center;
-} */
-
 form {
   margin: 20px;
   width: 300px;
