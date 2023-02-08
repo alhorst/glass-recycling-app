@@ -85,13 +85,20 @@ CREATE TABLE pickup_details (
 );
 
 
--- Brought up idea of a credits table to track pounds of glass, credits, along with account_id
--- Andy said it can live on the user_details table in our case, assuming one user account has one credit account which is true
--- credits table
---- user_id (connect user table)
---- pounds recycled
---- credits balance
---- * ask product owner - about need for credits redeemed
+CREATE TABLE prize_details (
+    prize_id SERIAL,
+    prize_name varchar(200) NOT NULL,
+    point_value int NOT NULL,
+    --is_redeemed boolean --- Once a prize is redeemed, is it removed from the list?
+    CONSTRAINT PK_prize_details PRIMARY KEY (prize_id)
+);
+
+CREATE TABLE prize_user (
+    prize_id int,
+    account_id int NOT NULL,
+    date_redeemed date NOT NULL,
+    CONSTRAINT PK_prize_user PRIMARY KEY (prize_id, account_id)
+);
 
 COMMIT TRANSACTION;
 

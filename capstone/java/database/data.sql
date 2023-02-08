@@ -101,4 +101,16 @@ VALUES ('adawes', '2023-02-12', 60, 1, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
 VALUES ('minaros', '2023-02-12', 120, 2, false);
 
+-- load prize_details table with prizes
+INSERT INTO prize_details (prize_name, point_value)
+VALUES ('Vitrum Tshirt', 75),
+       ('Vitrum Snapback Hat', 150),
+       ('$25 Amazon Giftcard', 250),
+       ('Local Brewery Tour Experience', 400),
+       ('$100 REI Gift Card', 600),
+       ('Espresso Machine', 1500),
+       ('PlayStation 5 Console', 2500),
+       ('Weekend Getaway to 7 Springs Resort', 3750),
+       ('Custom Recycled Glass Kitchen Countertop', 5000);
+
 COMMIT TRANSACTION;
