@@ -32,9 +32,4 @@ public interface UserDetailsDao {
 
     int getCreditRedeemedByAccountId(int account_id);
 
-
-
-
-
-
 }

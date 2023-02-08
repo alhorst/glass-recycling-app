@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class JdbcDriverDetailsDao implements DriverDetailsDao{
+public class JdbcDriverDetailsDao implements DriverDetailsDao {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -90,10 +90,13 @@ public class JdbcDriverDetailsDao implements DriverDetailsDao{
     }
 
     private DriverDetails mapRowToDriverDetails(SqlRowSet rs) {
+
         DriverDetails driverDetails = new DriverDetails();
+
         driverDetails.setDriver_id(rs.getInt("driver_id"));
         driverDetails.setUsername(rs.getString("username"));
         driverDetails.setHome_office_address(rs.getString("home_office_address"));
+
         return driverDetails;
     }
 }

@@ -36,4 +36,5 @@ public interface PickupDetailsDao {
     void pickupConfirmed(String username, int pickup_weight);
 
     void deletePickupDetails(int pickup_id);
+
 }

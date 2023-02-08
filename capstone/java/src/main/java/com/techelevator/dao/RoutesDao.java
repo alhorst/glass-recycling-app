@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface RoutesDao {
 
-
     List<Routes> getAllRoutes();
 
     Routes getRoutesByRouteId(int routeId);
@@ -17,9 +16,7 @@ public interface RoutesDao {
 
     LocalDate getRouteDateByRouteId(int routeId);
 
-    //In Progress - researching best way to implement
-    //commenting out for now
-    //List<Routes> getRoutesByDate(Date routeDate);
+    List<Routes> getRoutesByDate(Date routeDate);
 
     Routes createRoute(Routes route);
 

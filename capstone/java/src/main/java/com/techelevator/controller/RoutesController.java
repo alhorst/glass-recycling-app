@@ -28,10 +28,6 @@ public class RoutesController {
     }
 
 
-    //To-Do:
-    ////Get routes by date Method--- thinking of the best way to implement and pass date to the handler method
-
-
     //RoutesDao Methods start here **********
 
 

@@ -81,8 +81,7 @@ public class JdbcRoutesDao implements RoutesDao {
         return routeDate;
     }
 
-    //Researching best way to implement - commenting out for now
-    /*
+    //Get list of routes grouped by date
     @Override
     public List<Routes> getRoutesByDate(Date routeDate) {
         List<Routes> routesList = new ArrayList<>();
@@ -96,7 +95,7 @@ public class JdbcRoutesDao implements RoutesDao {
         }
 
         return routesList;
-    }*/
+    }
 
     //Add new route to the routes table
     //Date must be in the future

@@ -24,15 +24,18 @@ public class JdbcUserDetailsDao implements UserDetailsDao {
     private static final int STARTING_CREDITS_REDEEMED = 0;
 
 
-    //Get the total pounds of glass recycled across all users in the application
+    // Get the total pounds of glass recycled across all users in the application
     // "How many pounds of glass has Vitrum kept out of landfills?"
     @Override
     public long getTotalGlassRecycled() {
+        long totalGlassRecycled = 0;
         String sql = "SELECT SUM(total_pounds_recycled) AS total_glass_recycled " +
                     "FROM user_details;";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
 
-        long totalGlassRecycled = jdbcTemplate.queryForObject(sql, Long.class);
-
+        if (result.next()) {
+            totalGlassRecycled = result.getLong("total_glass_recycled");
+        }
         return totalGlassRecycled;
     }
 
