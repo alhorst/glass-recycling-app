@@ -119,8 +119,8 @@
           Delete Pickup
         </button>
 
-       <!--one button for assigning route id  -->
-       <button v-on:click="showForm = !showForm">Assign Route</button>
+        <!--one button for assigning route id  -->
+        <button v-on:click="showForm = !showForm">Assign Route</button>
         <form id="frmAddNewDriver" v-show="showForm">
         <div class="field">
           <label for="routeID">RouteId:</label>
@@ -221,15 +221,14 @@ export default {
     };
   },
 
-   created() {
+  created() {
     //get all users unassigned pickup data here
     PickupService.getPickups().then((response) => {
       this.users = response.data;
     });
   },
- 
+
   methods: {
-    
     //admin needs to delete pickups
     deletePickups() {
       if (
@@ -418,7 +417,7 @@ h2 {
   border-radius: 25px;
   border: none;
   padding: 10px 25px;
-  margin: 1.2em 0 2em;
+  margin: 1.2em 1.5em 2em;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 

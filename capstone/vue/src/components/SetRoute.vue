@@ -1,6 +1,6 @@
 <template>
   <div id="route-map">
-    <h1>VITRUM Route Map</h1>
+    <h1>Driver Route Map</h1>
     <div id="map"></div>
     <div id="panel"></div>
   </div>
@@ -31,8 +31,12 @@ export default {
     PickupService.getPickups().then((response) => {
       this.unassignedPickups = response.data;
     });
+    this.assignRoute();
+        
+
   },
-  methods: {
+
+    methods: {
     directionsService() {
       const map = new window.google.maps.Map(document.getElementById("map"), {
         zoom: 4,
@@ -56,12 +60,10 @@ export default {
         .route({
           origin: origin,
           destination: destination,
-          waypoints: [
-            { location: "4812 Broad St, Pittsburgh, PA 15244" },
-            { location: "715 Ivy St, Pittsburgh, PA 15232" },
-          ],
+          waypoints: this.waypointArr,
           travelMode: window.google.maps.TravelMode.DRIVING,
           avoidTolls: true,
+          optimizeWaypoints: true
         })
         .then((result) => {
           display.setDirections(result);
@@ -70,8 +72,19 @@ export default {
           alert("Could not display directions due to: " + e);
         });
     },
-  },
-};
+    assignRoute() {
+          let assigningArr = this.unassignedPickups;
+          for (var i = 0; i < assigningArr.length; i++) {
+              if (this.assigningArr[i].route_id == 1) {
+                     this.waypointArr.push({
+                     location:assigningArr[i].full_address,
+                     stopover:true
+                  })
+              }
+          } 
+  }
+  }
+}
 </script>
 <style>
 #map {
