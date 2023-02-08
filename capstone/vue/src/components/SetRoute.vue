@@ -1,13 +1,12 @@
 <template>
   <div id="route-map">
     <h1>VITRUM Route Map</h1>
-    <div id="map">
-    </div>
+    <div id="map"></div>
+    <div id="panel"></div>
   </div>
 </template>
-
 <script>
-import PickupService from '../services/PickupService';
+import PickupService from "../services/PickupService";
 export default {
   name: "RouteMap",
   data() {
@@ -22,77 +21,64 @@ export default {
         is_picked_up: false,
         full_address: "",
       },
-      waypointArr: [10],
+      waypointArr: [],
     };
   },
-    mounted() {
-        this.directionsService();
-    },
-    created() {
-       PickupService.getPickups().then((response)=> {
-           this.unassignedPickups = response.data;
-   })
-        
-   },
-
+  mounted() {
+    this.directionsService();
+  },
+  created() {
+    PickupService.getPickups().then((response) => {
+      this.unassignedPickups = response.data;
+    });
+  },
   methods: {
     directionsService() {
-
-        
-      this.map = new window.google.maps.Map(
-        document.getElementById("map"),
-        {
-          center: new window.google.maps.LatLng(
-            40.46083373916581,
-            -79.97458794232827
-          ),
-          zoom: 12,
-          mapTypeId: window.google.maps.MapTypeId.ROADMAP,
-        }
-      );
-
+      const map = new window.google.maps.Map(document.getElementById("map"), {
+        zoom: 4,
+        center: { lat: 40.46083373916581, lng: -79.97458794232827 },
+      });
       const directionsService = new window.google.maps.DirectionsService();
-
-      directionsService.route(
-        {
-          origin: "3001 Railroad St, Pittsburgh, PA 15201",
-          destination: "3001 Railroad St, Pittsburgh, PA 15201",
+      const directionsRenderer = new window.google.maps.DirectionsRenderer({
+        draggable: true,
+        map,
+        panel: document.getElementById("panel"),
+      });
+        this.displayRoute(
+            "3001 Railroad St, Pittsburgh, PA 15201",
+            "3001 Railroad St, Pittsburgh, PA 15201",
+            directionsService,
+          directionsRenderer
+  );
+    },
+    displayRoute(origin, destination, service, display) {
+      service
+        .route({
+          origin: origin,
+          destination: destination,
           waypoints: [
-            {
-              location: "4812 Broad St, Pittsburgh, PA 15244",
-              stopover: true,
-            },
-            {
-              location: "715 Ivy St, Pittsburgh, PA 15232",
-              stopover: true,
-            },
+            { location: "4812 Broad St, Pittsburgh, PA 15244" },
+            { location: "715 Ivy St, Pittsburgh, PA 15232" },
           ],
-
-          travelMode: "DRIVING",
-        },
-        (response, status) => {
-          if (status === "OK") {
-            new window.google.maps.DirectionsRenderer.setDirections({
-              suppressMarkers: true,
-              directions: response,
-            });
-          }
-        }
-      );
+          travelMode: window.google.maps.TravelMode.DRIVING,
+          avoidTolls: true,
+        })
+        .then((result) => {
+          display.setDirections(result);
+        })
+        .catch((e) => {
+          alert("Could not display directions due to: " + e);
+        });
     },
   },
 };
 </script>
-
 <style>
-#map{
-    width:70vw;
-    height:500px;
-    margin: auto;
-    margin-bottom: 40px;
-    padding-bottom: 40px;
-
+#map {
+  width: 70vw;
+  height: 500px;
+  margin: auto;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
 }
-
-
 </style>
