@@ -22,13 +22,13 @@ export default {
         is_picked_up: false,
         full_address: "",
       },
-      waypointArr: [],
+      waypointArr: [10],
     };
   },
     mounted() {
-this.directionsService();
+        this.directionsService();
     },
-  created() {
+    created() {
        PickupService.getPickups().then((response)=> {
            this.unassignedPickups = response.data;
    })
@@ -72,7 +72,7 @@ this.directionsService();
         },
         (response, status) => {
           if (status === "OK") {
-            new window.google.maps.DirectionsRenderer({
+            new window.google.maps.DirectionsRenderer.setDirections({
               suppressMarkers: true,
               directions: response,
             });
