@@ -174,6 +174,7 @@ export default {
   padding: 10px;
   color: #ffffff;
   font-weight: bold;
+  letter-spacing: 0.12em;
   background: #4bc970;
   width: 100%;
   border: none;
@@ -185,9 +186,10 @@ export default {
   padding: 10px 5px 10px 5px;
 }
 
-.login-form__button:active {
-  background: #008067;
+.login-form__button::before {
+  transform: translate(-2%, -40%);
 }
+
 .login-form_links {
   margin-top: 15px;
   text-align: center;
