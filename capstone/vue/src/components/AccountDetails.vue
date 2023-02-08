@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="item">
-          <p>FullName</p>
+          <p>Full Name</p>
           <input type="text" name="fullname" v-model="userDetails.full_name"/>
          
         </div>
@@ -56,7 +56,9 @@ export default {
             zipcode: '',
             phone_number:'',
             email_address:'',
-
+            total_pounds_recycled: 0,
+            credits_balance: 0,
+            credits_redeemed: 0
         },
         }
     },
