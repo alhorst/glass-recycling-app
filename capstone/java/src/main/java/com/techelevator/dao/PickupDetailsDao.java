@@ -13,6 +13,10 @@ public interface PickupDetailsDao {
 
     List<PickupDetails> getUnassignedPickupsByUsername(String username);
 
+    List<PickupDetails> getAllOutstandingPickups();
+
+    List<PickupDetails> getOutstandingPickupsByUsername(String username);
+
     List<PickupDetails> getAllPickupDetails();
 
     List<PickupDetails> getPickupDetailsByRecyclerUsername(String recyclerUsername);
