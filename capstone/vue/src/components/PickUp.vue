@@ -7,11 +7,21 @@
 
           <fieldset>
             <label for="name">Name:</label>
-            <input type="text" id="name" name="user_name" v-model="pickup.requesting_username" />
+            <input
+              type="text"
+              id="name"
+              name="user_name"
+              v-model="pickup.requesting_username"
+            />
 
             <label for="email">Date:</label>
-            <input type="date" id="email" name="date" v-model="pickup.pickup_date"/>
-             <label for="job">Number of Bins:</label>
+            <input
+              type="date"
+              id="email"
+              name="date"
+              v-model="pickup.pickup_date"
+            />
+            <label for="job">Number of Bins:</label>
             <select id="job" name="user_job" v-model="pickup.num_of_bins">
               <optgroup label="">
                 <option value="1">1</option>
@@ -20,7 +30,7 @@
               </optgroup>
             </select>
           </fieldset>
-          <button type="submit" v-on:click="addPickUp()" >Submit</button>
+          <button type="submit" v-on:click="addPickUp()">Submit</button>
         </form>
       </div>
     </div>
@@ -32,30 +42,27 @@ import PickupService from "../services/PickupService.js";
 
 export default {
   name: "pick-up",
-  data(){
-      return {
-          pickup: {
-              requesting_username:'',
-              pickup_date :'',
-              num_of_bins : '',
-              is_picked_up:false,
-          },
-          showForm: false,
-      }
+  data() {
+    return {
+      pickup: {
+        requesting_username: "",
+        pickup_date: "",
+        num_of_bins: "",
+        is_picked_up: false,
+      },
+      showForm: false,
+    };
   },
   methods: {
-     addPickUp(){
-      PickupService.addPickup(this.pickup).then((response)=> {
-          if(response.status === 201){
-              this.$router.push('/account')
-          }
-      })
-     },
-  }
-  }
-
-
-
+    addPickUp() {
+      PickupService.addPickup(this.pickup).then((response) => {
+        if (response.status === 201) {
+          this.$router.push("/account");
+        }
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -73,11 +80,10 @@ body {
 }
 
 form {
-  max-width: 300px;
+  width: 400px;
   margin: 10px auto;
   padding: 10px 20px;
-  background: #f4f7f8;
-  border-radius: 8px;
+  background: whitesmoke;
 }
 
 h1 {
@@ -99,8 +105,8 @@ select {
   outline: 0;
   padding: 15px;
   width: 100%;
-  background-color: #e8eeef;
-  color: #8a97a0;
+  background-color: #eeeeee;
+  color: #959a9e;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
   margin-bottom: 30px;
 }
@@ -117,13 +123,14 @@ button {
   background-color: #4bc970;
   font-size: 18px;
   text-align: center;
-  font-style: normal;
   border-radius: 5px;
   width: 80%;
-  border: 1px solid #3ac162;
-  border-width: 1px 1px 3px;
   box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-  margin-bottom: 10px;
+  margin: 0 2em 3em 2em;
+}
+
+button::before {
+  transform: translate(-25%, -40%);
 }
 
 fieldset {
