@@ -18,6 +18,8 @@ export default {
         return axios.post('/pickups', pickup);
     },
 
+
+    //update pickup(assign route id)
     updatePickup(pickup) {
         return axios.put(`/pickups/${pickup.pickupId}`, pickup);
     },
@@ -26,8 +28,8 @@ export default {
         return axios.delete(`/pickups/${pickupId}`);
     },
 
-    //get all unassigned pickups included the addres
-
+    //update pickup details
+  
 
 
     

@@ -2,13 +2,9 @@
   <div class="container">
     <div id="driver-dash">
       <div id="navbar">
-        <nav>
-          <ul>
-            <router-link v-bind:to="{ name: 'home' }">Home</router-link>
+       
             Dashboard Pick-ups Routes Account
-          </ul>
-        </nav>
-        <router-view />
+      
       </div>
     </div>
   </div>
@@ -21,8 +17,8 @@ export default {
 </script>
 
 <style>
-#driver-dash {
+/* #driver-dash {
   display: flex;
   align-items: center;
-}
+} */
 </style>
