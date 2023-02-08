@@ -7,14 +7,15 @@
         <div class="item">
           <p>Username</p>
           <div class="name-item">
-            <input type="text" name="name" placeholder="UserName" 
-            v-model="userDetails.username"/>
+            {{$store.state.user.username}}
+            <!-- <input type="text" name="name" {{$store.state.user.username}} /> -->
             <!-- <input type="text" name="name" placeholder="Last"/> -->
           </div>
         </div>
         <div class="item">
           <p>FullName</p>
           <input type="text" name="fullname" v-model="userDetails.full_name"/>
+         
         </div>
         <div class="item">
           <p>Phone Number</p>
@@ -60,7 +61,7 @@ export default {
         }
     },
    created(){
-       AccountService.getUserDetails().then(response => {
+       AccountService.getUserDetails(this.userDetails.username).then(response => {
          this.userDetails = response.data;
        })
    },

@@ -143,8 +143,7 @@
             driver in filteredUsers does not work
            -->
         </tr>
-        <tr v-for="driver in drivers" v-bind:key="driver.user_id"
-         v-bind:class="{ disabled: driver.driver_id === 'Not Picked Up' }">
+        <tr v-for="(driver, key) in filteredList" v-bind:key="key">
           <td>
             <input
               type="checkbox"
@@ -153,7 +152,7 @@
               v-bind:checked="
                 selectedUserIDs.includes(Number.parseInt(driver.driver_id))
               "
-              v-bind:value="Number.parseInt(driver.driver_id)"
+              v-bind:value="parseInt(driver.driver_id)"
             />
           </td>
           <td>{{ driver.driver_id }}</td>
@@ -182,7 +181,11 @@
         </div>
         <div class="field">
           <label for="firstName">confirmPassword:</label>
-          <input type="text" name="firstName" v-model="newDriver.confirmPassword" />
+          <input
+            type="text"
+            name="firstName"
+            v-model="newDriver.confirmPassword"
+          />
         </div>
         <div class="field">
           <label for="lastName">status:</label>
@@ -202,11 +205,7 @@ export default {
   name: "driver-table",
   data() {
     return {
-      drivers: {
-        driver_id: "",
-        username: "",
-        home_office_address: "",
-      },
+      drivers: [],
       selectedUserIDs: [],
       showForm: false,
       filter: {
@@ -216,9 +215,9 @@ export default {
       },
 
       newDriver: {
-        driver_id: '',
+        driver_id: "",
         password: "",
-        confirmPassword: '',
+        confirmPassword: "",
         is_driver: true,
         role: "user",
         home_office_address: "3001 Railroad St, Pittsburgh, PA 15201",
@@ -226,65 +225,60 @@ export default {
     };
   },
 
-  
-
   //created method to get all updated driver list
-    created(){
-      DriverService.getAllDrivers().then(response =>{
-        this.drivers = response.data
-      })
-    },
+  created() {
+    DriverService.getAllDrivers().then((response) => {
+      this.drivers = response.data;
+    });
+  },
 
   methods: {
-
     //delete driver
-    deleteDriver(){
-         if (
+    deleteDriver() {
+      if (
         confirm(
           "Are you sure you want to delete this card? This action cannot be undone."
         )
-    ) {
-        for(let i=0;i < this.selectedUserIDs.length; i++){
-        DriverService.deleteDriver(this.selectedUserIDs[i]).then((response) => {
-          if(response.status === 204){
-            alert('pickup successfully deleted')
-            // this.$router.push('/admin')
-             DriverService.getAllDrivers().then((response)=> {
-          this.drivers = response.data;
-      })
-
-            
-          }
-      
-        }).catch(error => {
-            if (error.response) {
-              this.errorMsg =
-                "Error deleting driver. Response received was '" +
-                error.response.statusText +
-                "'.";
-            } else if (error.request) {
-              this.errorMsg =
-                "Error deleting driver. Server could not be reached.";
-            } else {
-              this.errorMsg =
-                "Error deleting driver. Request could not be created.";
-            }
-          });
+      ) {
+        for (let i = 0; i < this.selectedUserIDs.length; i++) {
+          DriverService.deleteDriver(this.selectedUserIDs[i])
+            .then((response) => {
+              if (response.status === 204) {
+                alert("pickup successfully deleted");
+                // this.$router.push('/admin')
+                DriverService.getAllDrivers().then((response) => {
+                  this.drivers = response.data;
+                });
+              }
+            })
+            .catch((error) => {
+              if (error.response) {
+                this.errorMsg =
+                  "Error deleting driver. Response received was '" +
+                  error.response.statusText +
+                  "'.";
+              } else if (error.request) {
+                this.errorMsg =
+                  "Error deleting driver. Server could not be reached.";
+              } else {
+                this.errorMsg =
+                  "Error deleting driver. Request could not be created.";
+              }
+            });
         }
-    
-      }},
+      }
+    },
 
-    
     //add newe driver to the table
-    addDriver(){
+    addDriver() {
       DriverService.addDriver(this.newDriver).then((response) => {
         if (response.status === 201) {
           // this.$router.push("/admin");
-           DriverService.getAllDrivers().then(response =>{
-        this.drivers = response.data
-      })
+          DriverService.getAllDrivers().then((response) => {
+            this.drivers = response.data;
+          });
         }
-      })
+      });
     },
     enabledSelectedUsers() {
       this.changeStatus("Active");
@@ -299,7 +293,10 @@ export default {
       for (let i = 0; i < this.selectedUserIDs.length; i++) {
         for (let j = 0; j < this.users.length; j++) {
           if (this.users[j].pickup_id === this.selectedUserIDs[i]) {
-            if (statusToChange === "Not Picked Up" || statusToChange === "Picked Up") {
+            if (
+              statusToChange === "Not Picked Up" ||
+              statusToChange === "Picked Up"
+            ) {
               this.users[j].is_picked_up = statusToChange;
             } else if (statusToChange === "Delete") {
               this.users.splice(i, 1);
@@ -318,6 +315,7 @@ export default {
         this.selectedUserIDs = [];
       }
     },
+  },
   computed: {
     actionButtonDisabled() {
       if (this.selectedUserIDs.length === 0) {
@@ -330,9 +328,7 @@ export default {
       let filteredUsers = this.drivers;
       if (this.filter.driver_id != "") {
         filteredUsers = filteredUsers.filter((driver) =>
-         driver.driver_id
-            .toLowerCase()
-            .includes(this.filter.driver_id.toLowerCase())
+          driver.driver_id == Number.parseInt(this.filter.driver_id)
         );
       }
       if (this.filter.username != "") {
@@ -342,12 +338,11 @@ export default {
             .includes(this.filter.username.toLowerCase())
         );
       }
-      
+
       return filteredUsers;
     },
   },
-}
-}
+};
 </script>
 
 <style scoped>
