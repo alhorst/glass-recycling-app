@@ -186,21 +186,49 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
     }
 
     //Update a pickup
+    // (DRY) Utilize for:
+    //// updating details such as pickup_date or num_of_bins
+    //// to assign a pickup to a route (update route_id from 0 to the route_id #)
+    //// for driver's to mark a pickup, picked_up (calls confirmPickup method to update user_details record)
     @Override
     public void updatePickupDetails(PickupDetails pickupDetails) {
+        // if pickup is still unassigned, allow update w/o causing FK constraint error (route_id will remain null in the db)
         if (pickupDetails.getRoute_id() == 0) {
             String sql = "UPDATE pickup_details " +
                     "SET requesting_username = ?, pickup_date = ?, pickup_weight = ?, num_of_bins = ?, is_picked_up = ? " +
                     "WHERE pickup_id = ?;";
-
             jdbcTemplate.update(sql, pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.calcPickupWeight(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up(), pickupDetails.getPickup_id());
-        } else {
+        }
+        // if updated pickup is now assigned, and NOT yet picked up
+        else if (!pickupDetails.getIs_picked_up()) {
             String sql = "UPDATE pickup_details " +
                     "SET route_id = ?, requesting_username = ?, pickup_date = ?, pickup_weight = ?, num_of_bins = ?, is_picked_up = ? " +
                     "WHERE pickup_id = ?;";
-
             jdbcTemplate.update(sql, pickupDetails.getRoute_id(), pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.calcPickupWeight(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up(), pickupDetails.getPickup_id());
         }
+        // if updated pickup is now picked up, calls confirmPickup method to modify total Lbs recycled and credit balance for the user
+        else {
+            String sql = "UPDATE pickup_details " +
+                    "SET route_id = ?, requesting_username = ?, pickup_date = ?, pickup_weight = ?, num_of_bins = ?, is_picked_up = ? " +
+                    "WHERE pickup_id = ?;";
+            jdbcTemplate.update(sql, pickupDetails.getRoute_id(), pickupDetails.getRequesting_username(), pickupDetails.getPickup_date(), pickupDetails.calcPickupWeight(), pickupDetails.getNum_of_bins(), pickupDetails.getIs_picked_up(), pickupDetails.getPickup_id());
+
+            //will add pickupWeight to the user's total lbs. recycled && disperse credits for the pickup
+            pickupConfirmed(pickupDetails.getRequesting_username(), pickupDetails.getPickup_weight());
+        }
+    }
+
+    // Updates user details once pickup is confirmed by driver
+    // Adds pickup_weight to total_pounds_recycled
+    // Adds credits_earned to current credit balance, user can now redeem immediately for prizes
+    @Override
+    public void pickupConfirmed(String username, int pickup_weight) {
+        int credits_earned = pickup_weight;
+        String sql = "UPDATE user_details " +
+                "SET total_pounds_recycled = total_pounds_recycled + ?, " +
+                "credits_balance = credits_balance + ? " +
+                "WHERE username = ?;";
+        jdbcTemplate.update(sql, pickup_weight, credits_earned, username);
     }
 
     //Delete a pickup from pickup_details table
