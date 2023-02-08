@@ -8,6 +8,7 @@ import store from '../store/index'
 import Account from '../views/Account.vue'
 import AccountDetails from '../views/AccountDetails.vue'
 import Admin from '../views/Admin.vue'
+import Driver from '../views/Driver.vue'
 
 Vue.use(Router)
 
@@ -65,14 +66,14 @@ const router = new Router({
         requiresAuth: true
       }
     },
-    // {
-    //   path: "/driver",
-    //   name: "driver-dash",
-    //   component: Driver,
-    //   meta: {
-    //     requiresAuth: false
-    //   }
-    // },
+    {
+      path: "/driver",
+      name: "driver-dash",
+      component: Driver,
+      meta: {
+        requiresAuth: true
+      }
+    },
     {
     path: "/account",
     name: "account",

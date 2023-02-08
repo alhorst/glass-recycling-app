@@ -16,6 +16,7 @@ export default {
 
     // //add new user detail.
     addUserDetails(userDetail) {
+        console.log(userDetail);
         return axios.post('/users/details', userDetail)
     },
 

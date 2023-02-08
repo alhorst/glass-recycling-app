@@ -1,92 +1,107 @@
 <template>
-<form v-on:submit.prevent>
-        <div class="banner">
-          <h1>My Account</h1>
+  <div>
+    <form v-on:submit.prevent="saveAccountDetails">
+      <div class="banner">
+        <h1>{{ userDetails }}</h1>
+      </div>
+      <!-- <h2>Applicant Details</h2> -->
+      <div class="item">
+        <p>Username {{ userDetails }}</p>
+        <input type="text" name="name" v-model="userDetails.username" />
+      </div>
+      <div class="item">
+        <p>FullName</p>
+        <input type="text" name="fullname" v-model="userDetails.full_name" />
+      </div>
+      <div class="item">
+        <p>Phone Number</p>
+        <input type="text" name="name" v-model="userDetails.phone_number" />
+      </div>
+      <div class="item">
+        <p>Email</p>
+        <input type="text" name="name" v-model="userDetails.email_address" />
+      </div>
+      <div class="item">
+        <p>Address</p>
+        <input
+          type="text"
+          name="name"
+          placeholder="Street address"
+          v-model="userDetails.street_address"
+        />
+        <div class="city-item">
+          <input
+            type="text"
+            name="name"
+            placeholder="City"
+            v-model="userDetails.city"
+          />
+          <input
+            type="text"
+            name="name"
+            placeholder="State"
+            v-model="userDetails.state_abbreviation"
+          />
+          <input
+            type="text"
+            name="name"
+            placeholder="Postal / Zip code"
+            v-model="userDetails.zipcode"
+          />
         </div>
-        <!-- <h2>Applicant Details</h2> -->
-        <div class="item">
-          <p>Username</p>
-          <div class="name-item">
-            {{$store.state.user.username}}
-            <!-- <input type="text" name="name" {{$store.state.user.username}} /> -->
-            <!-- <input type="text" name="name" placeholder="Last"/> -->
-          </div>
-        </div>
-        <div class="item">
-          <p>FullName</p>
-          <input type="text" name="fullname" v-model="userDetails.full_name"/>
-         
-        </div>
-        <div class="item">
-          <p>Phone Number</p>
-          <input type="text" name="name" v-model="userDetails.phone_number"/>
-        </div>
-        <div class="item">
-          <p>Email</p>
-          <input type="text" name="name" v-model="userDetails.email_address"/>
-        </div>
-        <div class="item">
-          <p>Address</p>
-          <input type="text" name="name" placeholder="Street address" v-model="userDetails.street_address" />
-          <div class="city-item">
-            <input type="text" name="name" placeholder="City" v-model="userDetails.city"/>
-            <input type="text" name="name" placeholder="State" v-model="userDetails.state_abbreviation" />
-            <input type="text" name="name" placeholder="Postal / Zip code" v-model="userDetails.zipcode"/>
-          </div>
-        </div>
-        <div class="btn-block">
-            <button type="button" v-on:click="cancel()">Cancel</button>
-          <button type="submit" v-on:click="saveAccountDetails()">Save</button>
-        </div>
-      </form>
+      </div>
+      <div class="btn-block">
+        <button type="button" v-on:click="cancel()">Cancel</button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
 import AccountService from "../services/AccountService.js";
 export default {
-    name: "account-details",
-    data() {
-        return {
-            userDetails: {
-            username: '',
-            full_name: '',
-            street_address: '',
-            city: '',
-            state_abbreviation: '',
-            zipcode: '',
-            phone_number:'',
-            email_address:'',
+  name: "account-details",
+  data() {
+    return {
+      userDetails: {
+        username: "",
+        full_name: "",
+        street_address: "",
+        city: "",
+        state_abbreviation: "",
+        zipcode: "",
+        phone_number: "",
+        email_address: "",
+        // total_pounds_recycled:0,
+        // credits_balance:0,
+        // credits_redeemed:0,
+      },
+    };
+  },
 
-        },
+  created() {
+    AccountService.getUserDetails().then((response) => {
+      this.userDetails = response.data;
+    });
+  },
+  methods: {
+    saveAccountDetails() {
+      AccountService.addUserDetails(this.userDetails).then((response) => {
+        if (response.status === 201) {
+          this.$router.push("/account");
         }
+      });
     },
-   created(){
-       AccountService.getUserDetails(this.userDetails.username).then(response => {
-         this.userDetails = response.data;
-       })
-   },
-
-methods: {
-    saveAccountDetails(){
-
-        AccountService.addUserDetails(this.userDetails).then((response) => {
-            if(response.status === 201) {
-                //
-                this.$router.push('/account')
-        }
-      })
-    },
-     cancel(){
+    cancel() {
       this.$router.push("/account");
     },
-
-    }
-}
-
+  },
+};
 </script>
 
 <style scoped>
-  html, body {
+/* html, body {
       min-height: 100%;
       }
       body, div, form, input, select, p { 
@@ -258,5 +273,5 @@ methods: {
       .city-item select {
       width: calc(50% - 8px);
       }
-      }
+      } */
 </style>
