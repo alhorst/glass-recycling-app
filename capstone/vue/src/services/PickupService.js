@@ -21,7 +21,7 @@ export default {
 
     //update pickup(assign route id)
     updatePickup(pickup) {
-        return axios.put(`/pickups/${pickup.pickupId}`, pickup);
+        return axios.put(`/pickups/${pickup.pickup_id}`, pickup);
     },
 
     deletePickup(pickupId) {

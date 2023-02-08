@@ -86,9 +86,9 @@
                 name="selectedUsers"
                 v-model="selectedUserIDs"
                 v-bind:checked="
-                  selectedUserIDs.includes(Number.parseInt(user.pickup_id))
+                  selectedUserIDs.includes(user)
                 "
-                v-bind:value="Number.parseInt(user.pickup_id)"
+                v-bind:value="user"
               />
             </td>
             <td>{{ user.pickup_id }}</td>
@@ -99,7 +99,6 @@
             <td>
               <button
                 class="btnEnableDisable"
-                v-on:click="flipStatus(user.pickup_id)"
                 @click="updatePickup">
                 {{
                   user.is_picked_up === "Not Picked Up"
@@ -124,8 +123,8 @@
        <button v-on:click="showForm = !showForm">Assign Route</button>
         <form id="frmAddNewDriver" v-show="showForm">
         <div class="field">
-          <label for="firstName">RouteId:</label>
-          <input type="text" name="firstName" v-model="newRoute" />
+          <label for="routeID">RouteId:</label>
+          <input type="number" name="routeID" v-model="newRouteId" />
         </div>
         <!-- <button type="submit" class="btn save" v-on:click.prevent="addDriver">
           Save Route
@@ -133,7 +132,7 @@
 
         <button
         v-bind:disabled="actionButtonDisabled"
-        v-on:click.prevent="updatePickup"
+        v-on:click.prevent="updatePickup()"
       >
         Save Route
       </button>
@@ -195,8 +194,9 @@ export default {
         num_of_bins: "",
         is_picked_up: false,
         full_address: "",
+      
       },
-      newRoute:'',
+      newRouteId:0,
 
       showForm: false,
       selectedUserIDs: [],
@@ -251,15 +251,15 @@ export default {
             .catch((error) => {
               if (error.response) {
                 this.errorMsg =
-                  "Error deleting card. Response received was '" +
+                  "Error deleting pickup. Response received was '" +
                   error.response.statusText +
                   "'.";
               } else if (error.request) {
                 this.errorMsg =
-                  "Error deleting card. Server could not be reached.";
+                  "Error deleting pickup. Server could not be reached.";
               } else {
                 this.errorMsg =
-                  "Error deleting card. Request could not be created.";
+                  "Error deleting pickup. Request could not be created.";
               }
             });
         }
@@ -267,19 +267,25 @@ export default {
     },
 
     updatePickup() {
-      const newPickUp = {
-        // pickup_id: this.pickup_id,
-        route_id: this.newRoute,
-        // requesting_username: this.requesting_username,
-        // pickup_date: this.pickup_date,
-        // num_of_bins: this.num_of_bins,
-        // is_picked_up: this.is_picked_up,
-      };
-      PickupService.updatePickup(newPickUp).then((response) => {
-        if (response.status === 204) {
-          this.$router.push("/admin");
+      // const newPickUp = {
+      //   pickup_id: this.pickup_id,
+      //   route_id: Number(this.newRoute),
+      //   requesting_username: this.requesting_username,
+      //    pickup_date: this.pickup_date,
+      //   num_of_bins: this.num_of_bins,
+      //    is_picked_up: this.is_picked_up,
+      // };
+      for(let i=0; i<this.selectedUserIDs.length; i++){
+        this.selectedUserIDs[i].route_id = parseInt(this.newRouteId)
+      PickupService.updatePickup(this.selectedUserIDs[i]).then((response) => {
+        if (response.status === 200) {
+          alert('successful')
+          response;
         }
       });
+
+    }
+    this.selectedUserIDs = [];
     },
 
     flipStatus(pickup_id) {

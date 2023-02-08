@@ -152,6 +152,7 @@ public class PickupController {
     //IF assigning pickup to a route --- throws exception if PickupDate does not match the RouteDate
     @RequestMapping(path="/pickups/{pickupId}", method= RequestMethod.PUT)
     public PickupDetails updatePickupDetails(@Valid @RequestBody PickupDetails updatedPickup, @PathVariable int pickupId) {
+        System.out.println(updatedPickup.getPickup_id());
         if (pickupId != updatedPickup.getPickup_id()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The Pickup ID provided does not match the Pickup you're attempting to update");
         } else if (pickupDetailsDao.getPickupDetailsByPickupId(updatedPickup.getPickup_id()) == null || pickupDetailsDao.getPickupDetailsByPickupId(pickupId) == null) {
