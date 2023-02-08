@@ -100,7 +100,8 @@
               <button
                 class="btnEnableDisable"
                 v-on:click="flipStatus(user.pickup_id)"
-                @click="updatePickup">
+                @click="updatePickup"
+              >
                 {{
                   user.is_picked_up === "Not Picked Up"
                     ? "Picked Up"
@@ -120,24 +121,24 @@
           Delete Pickup
         </button>
 
-       <!--one button for assigning route id  -->
-       <button v-on:click="showForm = !showForm">Assign Route</button>
+        <!--one button for assigning route id  -->
+        <button v-on:click="showForm = !showForm">Assign Route</button>
         <form id="frmAddNewDriver" v-show="showForm">
-        <div class="field">
-          <label for="firstName">RouteId:</label>
-          <input type="text" name="firstName" v-model="newRoute" />
-        </div>
-        <!-- <button type="submit" class="btn save" v-on:click.prevent="addDriver">
+          <div class="field">
+            <label for="firstName">RouteId:</label>
+            <input type="text" name="firstName" v-model="newRoute" />
+          </div>
+          <!-- <button type="submit" class="btn save" v-on:click.prevent="addDriver">
           Save Route
         </button> -->
 
-        <button
-        v-bind:disabled="actionButtonDisabled"
-        v-on:click.prevent="updatePickup"
-      >
-        Save Route
-      </button>
-      </form>
+          <button
+            v-bind:disabled="actionButtonDisabled"
+            v-on:click.prevent="updatePickup"
+          >
+            Save Route
+          </button>
+        </form>
 
         <!-- <button v-on:click="showForm = !showForm">Add New Pickup! ♻️</button>  -->
 
@@ -196,7 +197,7 @@ export default {
         is_picked_up: false,
         full_address: "",
       },
-      newRoute:'',
+      newRoute: "",
 
       showForm: false,
       selectedUserIDs: [],
@@ -221,15 +222,14 @@ export default {
     };
   },
 
-   created() {
+  created() {
     //get all users unassigned pickup data here
     PickupService.getPickups().then((response) => {
       this.users = response.data;
     });
   },
- 
+
   methods: {
-    
     //admin needs to delete pickups
     deletePickups() {
       if (
@@ -412,7 +412,7 @@ h2 {
   border-radius: 25px;
   border: none;
   padding: 10px 25px;
-  margin: 1.2em 0 2em;
+  margin: 1.2em 1.5em 2em;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 
