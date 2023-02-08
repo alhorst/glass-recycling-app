@@ -77,6 +77,13 @@ public class UserController {
 
     //UserDetailsDao methods start here **********
 
+    //Get the total pounds of glass recycled across all users in the application
+    // "How many pounds of glass has Vitrum kept out of landfills?"
+    @PreAuthorize("permitAll()")
+    @RequestMapping(path="/stats/total", method= RequestMethod.GET)
+    public Long getTotalGlassRecycled() {
+        return userDetailsDao.getTotalGlassRecycled();
+    }
 
     //Get my Full Address - for logged-in user via Principal
     @RequestMapping(path="/users/myDetails/address", method= RequestMethod.GET)

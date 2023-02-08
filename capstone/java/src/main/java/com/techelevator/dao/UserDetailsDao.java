@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface UserDetailsDao {
 
+    long getTotalGlassRecycled();
+
     List<UserDetails> findAllUserDetails();
 
     UserDetails findUserDetailsByAccountId(int account_id);
