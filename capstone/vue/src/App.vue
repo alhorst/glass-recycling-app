@@ -17,14 +17,19 @@
         <li>Schedule Pickup</li>
         <li>Contact Us</li>
       </ul>
-      <div id="search-box">
-        <input type="text" placeholder="Search..." />
-        <i class="fa-solid fa-magnifying-glass"></i>
+      <div class="search-container">
+        <input type="checkbox" id="check" />
+        <div class="search-box">
+          <input type="text" placeholder="Search..." />
+          <label for="check" class="icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </label>
+        </div>
       </div>
       <!-- <div class="spacer">&nbsp;</div> -->
       <div class="dropdown">
         <!--I need to change name to "account-detail" because of I can't see the account form"Kubra-->
-        <router-link v-bind:to="{ name: 'account-detail' }"
+        <router-link v-bind:to="{ name: 'account' }"
           >Account<i class="fa-solid fa-user"></i
         ></router-link>
         <div class="dropdown-content">
@@ -132,6 +137,9 @@ html {
   padding: 0;
 }
 
+body {
+  margin: 0;
+}
 template {
   display: flex;
   min-height: 100vh;
@@ -150,7 +158,7 @@ template {
 }
 
 .main-view {
-  margin-top: 3.2%;
+  margin-top: 5%;
   margin-bottom: 5%;
 }
 
@@ -186,30 +194,64 @@ nav li {
   color: #0b7a1e;
 }
 
-#search-box {
+.search-container {
+  max-width: 400px;
+  width: 100%;
+}
+
+.search-container .search-box {
+  position: relative;
+  height: 40px;
+  max-width: 40px;
+  margin: auto;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+#check:checked ~ .search-box {
+  max-width: 300px;
+}
+
+.search-box input {
+  font-family: "Raleway", sans-serif;
+  position: absolute;
+  height: 95%;
+  width: 93%;
+  border-radius: 25px;
+  background: white;
+  outline: none;
+  border: none;
   padding-left: 20px;
-  padding-right: 60px;
+  font-size: 14px;
 }
 
-#search-box input[type="text"] {
-  border: 1px solid rgb(167, 167, 167);
-  box-shadow: inset 0 2px 6px #000;
-  border-radius: 20px;
-  padding: 7px;
-  text-align: right;
-  word-spacing: 3px;
-  font-size: 17px;
-  padding-left: 10px;
-  padding-right: 30px;
+.search-box .icon {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  width: 50px;
+  height: 100%;
+  text-align: center;
+  line-height: 45px;
+  color: #9bdb66;
+  font-size: 20px;
+  border-radius: 25px;
 }
 
-#search-box i:hover {
-  color: #c0c0c0;
-  cursor: pointer;
+#check:checked ~ .search-box .icon {
+  background: #9bdb66;
+  color: white;
+  width: 60px;
+  border-radius: 0 25px 25px 0;
+}
+
+#check {
+  display: none;
 }
 
 button {
-  --color: #21a076;
+  --color: rgb(93, 192, 106);
   padding: 0.5em 0.5em 0.5em 1em;
   background-color: transparent;
   border-radius: 7em;

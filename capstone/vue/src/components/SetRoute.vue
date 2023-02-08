@@ -1,6 +1,8 @@
 <template>
   <div id="route-map">
-    <h1>Route Map</h1>
+    <h1>VITRUM Route Map</h1>
+    <div id="map">
+    </div>
   </div>
 </template>
 
@@ -23,24 +25,28 @@ export default {
       waypointArr: [],
     };
   },
-
+    mounted() {
+this.directionsService();
+    },
   created() {
        PickupService.getPickups().then((response)=> {
            this.unassignedPickups = response.data;
-
    })
-
+        
    },
+
   methods: {
     directionsService() {
+
+        
       this.map = new window.google.maps.Map(
-        document.getElementById("route-map"),
+        document.getElementById("map"),
         {
           center: new window.google.maps.LatLng(
             40.46083373916581,
             -79.97458794232827
           ),
-          zoom: 15,
+          zoom: 12,
           mapTypeId: window.google.maps.MapTypeId.ROADMAP,
         }
       );
@@ -79,4 +85,14 @@ export default {
 </script>
 
 <style>
+#map{
+    width:70vw;
+    height:500px;
+    margin: auto;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+
+}
+
+
 </style>

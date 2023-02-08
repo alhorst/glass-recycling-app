@@ -130,6 +130,7 @@ export default {
 
 
 <style scoped>
+/* this is not showing */
 body {
   background: radial-gradient(
     circle,

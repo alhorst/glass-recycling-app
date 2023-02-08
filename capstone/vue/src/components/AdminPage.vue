@@ -3,12 +3,11 @@
     <h2>Welcome to your Dashboard!</h2>
     <div class="map">
       <locations>MAP GOES HERE</locations>
-     
     </div>
     <div>
-    <driver-table class="driver-main">driver</driver-table> 
+      <driver-table class="driver-main">driver</driver-table>
     </div>
-    <!-- <h2>driver</h2> -->
+
     <div id="card-pickup">
       <button v-on:click.prevent="created">Pickups</button>
       <table id="tbl-pickups">
@@ -19,7 +18,7 @@
             <th>Route ID</th>
             <th>Requester</th>
             <th>Date</th>
-            
+
             <th>Number of Bins</th>
             <th>Status</th>
             <th>Address</th>
@@ -30,7 +29,7 @@
             <td>
               <!-- this method is working! -->
               <input
-                 type="checkbox"
+                type="checkbox"
                 id="selectAll"
                 v-on:change="selectAllUsers($event)"
               />
@@ -63,21 +62,17 @@
                 v-model="filter.pickup_date"
               />
             </td>
-             <td>
+            <td>
               <select id="statusFilter" v-model="filter.num_of_bins">
                 <option value>All Bins</option>
                 <option value="Active">1</option>
                 <option value="Disabled">2</option>
                 <option value="">3</option>
               </select>
-            </td> 
+            </td>
             <td>&nbsp;</td>
             <td>
-              <input
-                type="text"
-                id="AddressFilter"
-                v-model="filter.Address"
-              />
+              <input type="text" id="AddressFilter" v-model="filter.Address" />
             </td>
           </tr>
           <tr
@@ -85,7 +80,7 @@
             v-bind:key="user.pickup_id"
             v-bind:class="{ disabled: user.is_picked_up === 'Not Picked Up' }"
           >
-             <td>
+            <td>
               <input
                 type="checkbox"
                 name="selectedUsers"
@@ -95,33 +90,38 @@
                 "
                 v-bind:value="Number.parseInt(user.pickup_id)"
               />
-            </td> 
-            <td>{{ user.pickup_id}}</td>
+            </td>
+            <td>{{ user.pickup_id }}</td>
             <td>{{ user.route_id }}</td>
             <td>{{ user.requesting_username }}</td>
             <td>{{ user.pickup_date }}</td>
-            <td>{{ user.num_of_bins}}</td>
+            <td>{{ user.num_of_bins }}</td>
             <td>
-               <button class="btnEnableDisable" v-on:click="flipStatus(user.pickup_id)"
-               @click="updatePickup">
-                {{ user.is_picked_up === "Not Picked Up" ? "Picked Up" : "Not Picked Up" }}
-                
-              </button> 
+              <button
+                class="btnEnableDisable"
+                v-on:click="flipStatus(user.pickup_id)"
+                @click="updatePickup"
+              >
+                {{
+                  user.is_picked_up === "Not Picked Up"
+                    ? "Picked Up"
+                    : "Not Picked Up"
+                }}
+              </button>
             </td>
-            <td>{{user.full_address}}</td>
+            <td>{{ user.full_address }}</td>
           </tr>
         </tbody>
       </table>
       <div class="all-actions">
-             
         <button
-         v-bind:disabled="actionButtonDisabled" 
+          v-bind:disabled="actionButtonDisabled"
           v-on:click.prevent="deletePickups()"
         >
           Delete Pickup
-        </button> 
+        </button>
 
-         <!-- <button v-on:click="showForm = !showForm">Add New Pickup! ♻️</button>  -->
+        <!-- <button v-on:click="showForm = !showForm">Add New Pickup! ♻️</button>  -->
 
         <!-- <form id="frmAddNewPickup" v-show="showForm">
           <div class="field">
@@ -149,51 +149,46 @@
           </button>
         </form> -->
       </div>
-       <set-route></set-route>
-        
-        
+      <set-route></set-route>
+    </div>
   </div>
- 
-  </div>
-  
 </template>
 
 <script>
 import Locations from "./Locations.vue";
-import PickupService from '../services/PickupService.js';
-import SetRoute from './SetRoute.vue';
-import DriverTable from '../components/DriverTable.vue';
+import PickupService from "../services/PickupService.js";
+import SetRoute from "./SetRoute.vue";
+import DriverTable from "../components/DriverTable.vue";
 
 export default {
   name: "admin-page",
   components: {
     Locations,
     SetRoute,
-    DriverTable
+    DriverTable,
   },
   data() {
     return {
       users: {
-          pickup_id:'',
-          route_id: '',
-          requesting_username:'',
-          pickup_date:'',
-          num_of_bins:'',
-          is_picked_up:false,
-          full_address:'',
+        pickup_id: "",
+        route_id: "",
+        requesting_username: "",
+        pickup_date: "",
+        num_of_bins: "",
+        is_picked_up: false,
+        full_address: "",
       },
-      
-      
+
       showForm: false,
       selectedUserIDs: [],
       filter: {
-         pickup_id:'',
-          route_id: '',
-          requesting_username:'',
-          pickup_date:'',
-          num_of_bins:'',
-          is_picked_up:false,
-          full_address:'',
+        pickup_id: "",
+        route_id: "",
+        requesting_username: "",
+        pickup_date: "",
+        num_of_bins: "",
+        is_picked_up: false,
+        full_address: "",
       },
       // nextUserId: 7,
       newUser: {
@@ -204,138 +199,72 @@ export default {
         emailAddress: "",
         status: "Active",
       },
-     
     };
   },
-   created(){
-      //get all users unassigned pickup data here
-      PickupService.getPickups().then((response)=> {
-          this.users = response.data;
-      })
-      },
+  created() {
+    //get all users unassigned pickup data here
+    PickupService.getPickups().then((response) => {
+      this.users = response.data;
+    });
+  },
   methods: {
-
-   
-      //
-      // deleteCard() {
-      // if (
-      //   confirm(
-      //     "Are you sure you want to delete this card? This action cannot be undone."
-      //   )
-      // ) {
-      //   boardsService
-      //     .deleteCard(this.card.id)
-      //     .then(response => {
-      //       if (response.status === 200) {
-      //         alert("Card successfully deleted");
-      //         this.$router.push(`/board/${this.card.boardId}`);
-      //       }
-      //     })
-      //     .catch(error => {
-      //       if (error.response) {
-      //         this.errorMsg =
-      //           "Error deleting card. Response received was '" +
-      //           error.response.statusText +
-      //           "'.";
-      //       } else if (error.request) {
-      //         this.errorMsg =
-      //           "Error deleting card. Server could not be reached.";
-      //       } else {
-      //         this.errorMsg =
-      //           "Error deleting card. Request could not be created.";
-      //       }
-      //     });
-
-      //admin needs to delete pickups
-    deletePickups(){
-         if (
+    //admin needs to delete pickups
+    deletePickups() {
+      if (
         confirm(
           "Are you sure you want to delete this card? This action cannot be undone."
         )
-    ) {
-        for(let i=0;i < this.selectedUserIDs.length; i++){
-        PickupService.deletePickup(this.selectedUserIDs[i]).then((response) => {
-          if(response.status === 204){
-            alert('pickup successfully deleted')
-            // this.$router.push('/admin')
-             PickupService.getPickups().then((response)=> {
-          this.users = response.data;
-      })
-
-            
-          }
-      
-        }).catch(error => {
-            if (error.response) {
-              this.errorMsg =
-                "Error deleting card. Response received was '" +
-                error.response.statusText +
-                "'.";
-            } else if (error.request) {
-              this.errorMsg =
-                "Error deleting card. Server could not be reached.";
-            } else {
-              this.errorMsg =
-                "Error deleting card. Request could not be created.";
-            }
-          });
+      ) {
+        for (let i = 0; i < this.selectedUserIDs.length; i++) {
+          PickupService.deletePickup(this.selectedUserIDs[i])
+            .then((response) => {
+              if (response.status === 204) {
+                alert("pickup successfully deleted");
+                // this.$router.push('/admin')
+                PickupService.getPickups().then((response) => {
+                  this.users = response.data;
+                });
+              }
+            })
+            .catch((error) => {
+              if (error.response) {
+                this.errorMsg =
+                  "Error deleting card. Response received was '" +
+                  error.response.statusText +
+                  "'.";
+              } else if (error.request) {
+                this.errorMsg =
+                  "Error deleting card. Server could not be reached.";
+              } else {
+                this.errorMsg =
+                  "Error deleting card. Request could not be created.";
+              }
+            });
         }
-    
-      }},
+      }
+    },
 
-      // updatePickup(){
-      //   PickupService.updatePickup().then(response=> {
-      //     forEach((user) =>{
-      //       this.user = response.data
-      //     })
-      // })
-    // getNextUserId() {
-    //   return this.nextUserId++;
-    // },
-
-    // saveUser() {
-    //   this.newUser.id = this.getNextUserId();
-    //   this.users.push(this.newUser);
-    //   this.clearForm();
-    // },
-
-    // clearForm() {
-    //   this.newUser = {
-    //     id: null,
-    //     firstName: "",
-    //     lastName: "",
-    //     username: "",
-    //     emailAddress: "",
-    //     status: "Active",
-    //   };
-    // },
-    updatePickup(){
-     const newPickUp = {
+    updatePickup() {
+      const newPickUp = {
         pickup_id: this.pickup_id,
         route_id: this.route_id,
         requesting_username: this.requesting_username,
         pickup_date: this.pickup_date,
         num_of_bins: this.num_of_bins,
-        is_picked_up: this.is_picked_up
-     }
-        PickupService.updatePickup(newPickUp).then(response=> {
-        if(response.status === 200){
-          this.$router.push('/admin')
+        is_picked_up: this.is_picked_up,
+      };
+      PickupService.updatePickup(newPickUp).then((response) => {
+        if (response.status === 200) {
+          this.$router.push("/admin");
         }
-      })
-  },
-  // getAddress(requesting_username){
-  //   PickupService.getAddress(requesting_username).then(response=>{
-  //              this.users.address= response.data
-  //   })
-  // },
+      });
+    },
 
     flipStatus(pickup_id) {
       this.users.forEach((user) => {
         if (user.pickup_id === pickup_id) {
           if (user.is_picked_up === "Not Picked Up") {
             user.is_picked_up === " Picked Up";
-            
           } else {
             user.is_picked_up = "Not Picked Up";
           }
@@ -355,7 +284,10 @@ export default {
       for (let i = 0; i < this.selectedUserIDs.length; i++) {
         for (let j = 0; j < this.users.length; j++) {
           if (this.users[j].pickup_id === this.selectedUserIDs[i]) {
-            if (statusToChange === "Not Picked Up" || statusToChange === "Picked Up") {
+            if (
+              statusToChange === "Not Picked Up" ||
+              statusToChange === "Picked Up"
+            ) {
               this.users[j].is_picked_up = statusToChange;
             } else if (statusToChange === "Delete") {
               this.users.splice(i, 1);
@@ -425,94 +357,95 @@ export default {
 </script>
 
 <style scoped>
- .container { 
-  /* display: grid;
-  grid-template-areas:
-    "map"
-    "pickups"
-    "drivers";
-  grid-template-rows: auto; */
-  gap: 40px;
-  padding: 10px;
-  border: 1px solid white;
-  margin: 50px;
+.container {
+  padding: 0.75em;
+  border: 1px solid red;
+  margin: 4em;
   text-align: center;
 }
-
-.map {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-sizing: border-box;
-  /* grid-area: map; */
-  padding: 20px 0;
-  background-color: white;
-}
-
-#card-pickup {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-sizing: border-box;
-  /* grid-area: pickups; */
-  padding: 20px 0;
-  border: 1px solid red;
-}
-
-/* #card-driver {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-sizing: border-box;
-  grid-area: drivers;
-  padding: 20px 0;
-  border: 1px solid blue;
-} */
 
 h2 {
   font-size: 3em;
-  font-family: "Raleway", sans-serif;
   text-transform: uppercase;
-  background-color: rgb(36, 182, 126);
   text-align: center;
-  margin-top: 30px;
-  margin-bottom: 5px;
 }
+
+#card-pickup {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-sizing: border-box;
+  padding: 20px;
+  margin-top: 5em;
+  border-radius: 3em;
+  border: 1px solid red;
+}
+
+#card-pickup button {
+  font-size: 1em;
+  font-weight: bold;
+  letter-spacing: 0.07em;
+  border-radius: 25px;
+  border: none;
+  padding: 10px 25px;
+  margin: 1.2em 0 2em;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+}
+
 table {
-  /* margin-top: 20px;  */
-  font-family: "Raleyway", sans-serif;
-  margin-bottom: 10px;
-  background-color: grey;
-  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid rgb(233, 233, 233);
+  background-color: rgb(233, 233, 233);
+  font-weight: 600;
 }
 
-#tbl-head-pickups {
-  padding: 10px;
+#tbl-pickups button {
+  padding: 5px 10px;
+  margin: 0.5em;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  border: none;
 }
-
-/* #tbl-head-drivers {
-  padding: 10px;
-} */
 
 th {
   text-transform: uppercase;
-  background-color: grey;
-  padding: 16px;
+  letter-spacing: 0.35em;
+  /* bold not working? */
+  font-weight: bold;
+  background-color: rgb(93, 192, 106);
+  padding: 1em;
 }
 
-.drive-view {
-  margin-top: 40px;
+td input {
+  border: 1px solid white;
+  width: 8em;
+  margin: 0.4em;
+  border-radius: 1em;
 }
 
 td {
-  padding: 5px;
+  padding: 7px;
+}
+
+tr {
+  margin: 1px;
 }
 
 tr:nth-child(even) {
-  background-color: lightgreen;
+  background-color: white;
 }
 
+/* when picked up */
 tr.disabled {
-  color: red;
+  color: rgb(47, 211, 25);
 }
 
 input,
 select {
-  font-size: 16px;
+  font-family: "Raleway", sans-serif;
+  font-size: 14px;
+  padding: 5px;
 }
 
 /* #frmAddNewDriver {
@@ -555,4 +488,11 @@ button {
   float: right;
 }
 
+/* .map {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-sizing: border-box;
+  grid-area: map;
+  padding: 20px 0;
+  background-color: white;
+} */
 </style>
