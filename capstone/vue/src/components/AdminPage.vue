@@ -119,7 +119,8 @@
           Delete Pickup
         </button>
 
-        <!--one button for assigning route id  -->
+        <!--one button for assigning route id  
+        route_id is type of number-->
         <button v-on:click="showForm = !showForm">Assign Route</button>
         <form id="frmAddNewDriver" v-show="showForm">
         <div class="field">
@@ -266,19 +267,12 @@ export default {
     },
 
     updatePickup() {
-      // const newPickUp = {
-      //   pickup_id: this.pickup_id,
-      //   route_id: Number(this.newRoute),
-      //   requesting_username: this.requesting_username,
-      //    pickup_date: this.pickup_date,
-      //   num_of_bins: this.num_of_bins,
-      //    is_picked_up: this.is_picked_up,
-      // };
+     
       for(let i=0; i<this.selectedUserIDs.length; i++){
         this.selectedUserIDs[i].route_id = parseInt(this.newRouteId)
       PickupService.updatePickup(this.selectedUserIDs[i]).then((response) => {
         if (response.status === 200) {
-          alert('successful')
+          // alert('successful')
           response;
         }
       });

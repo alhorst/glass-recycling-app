@@ -6,8 +6,12 @@ export default {
         return axios.get(`/pickups/${pickupId}`);
     }, //remember to change this to http if we set a baseURL
 
-    getPickups() {
-        return axios.get('/pickups/unassigned');
+    // getPickups() {
+    //     return axios.get('/pickups/unassigned');
+    // },
+
+    getPickups(){
+        return axios.get('/pickups');
     },
 
     getPickupByDriverId(driverId) {
@@ -28,7 +32,8 @@ export default {
         return axios.delete(`/pickups/${pickupId}`);
     },
 
-    //update pickup details
+   // get all pickups
+
   
 
 
