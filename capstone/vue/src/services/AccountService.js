@@ -16,6 +16,7 @@ export default {
 
     // //add new user detail.
     addUserDetails(userDetail) {
+
         return axios.post('/users/details', userDetail)
     },
 
@@ -28,6 +29,11 @@ export default {
     //get total glass recycled with Vitrum
     getTotalGlassRecycled(){
         return axios.get('/stats/total')
+    },
+
+    //update userdetails
+    updateUserDetails(userDetail, accountId){
+        return axios.put(`users/details/${accountId}`, userDetail)
     }
 
 

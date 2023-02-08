@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-md-12">
-        <form v-on:submit.prevent>
+        <form>
           <h3>Schedule Pick Up</h3>
 
           <fieldset>

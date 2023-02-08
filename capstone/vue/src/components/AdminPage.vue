@@ -121,6 +121,25 @@
           Delete Pickup
         </button>
 
+        <!--one button for assigning route id  -->
+        <button v-on:click="showForm = !showForm">Assign Route</button>
+        <form id="frmAddNewDriver" v-show="showForm">
+          <div class="field">
+            <label for="firstName">RouteId:</label>
+            <input type="text" name="firstName" v-model="newRoute" />
+          </div>
+          <!-- <button type="submit" class="btn save" v-on:click.prevent="addDriver">
+          Save Route
+        </button> -->
+
+          <button
+            v-bind:disabled="actionButtonDisabled"
+            v-on:click.prevent="updatePickup"
+          >
+            Save Route
+          </button>
+        </form>
+
         <!-- <button v-on:click="showForm = !showForm">Add New Pickup! ♻️</button>  -->
 
         <!-- <form id="frmAddNewPickup" v-show="showForm">
@@ -178,6 +197,7 @@ export default {
         is_picked_up: false,
         full_address: "",
       },
+      newRoute: "",
 
       showForm: false,
       selectedUserIDs: [],
@@ -201,12 +221,14 @@ export default {
       },
     };
   },
+
   created() {
     //get all users unassigned pickup data here
     PickupService.getPickups().then((response) => {
       this.users = response.data;
     });
   },
+
   methods: {
     //admin needs to delete pickups
     deletePickups() {
@@ -246,15 +268,15 @@ export default {
 
     updatePickup() {
       const newPickUp = {
-        pickup_id: this.pickup_id,
-        route_id: this.route_id,
-        requesting_username: this.requesting_username,
-        pickup_date: this.pickup_date,
-        num_of_bins: this.num_of_bins,
-        is_picked_up: this.is_picked_up,
+        // pickup_id: this.pickup_id,
+        route_id: this.newRoute,
+        // requesting_username: this.requesting_username,
+        // pickup_date: this.pickup_date,
+        // num_of_bins: this.num_of_bins,
+        // is_picked_up: this.is_picked_up,
       };
       PickupService.updatePickup(newPickUp).then((response) => {
-        if (response.status === 200) {
+        if (response.status === 204) {
           this.$router.push("/admin");
         }
       });
@@ -390,7 +412,7 @@ h2 {
   border-radius: 25px;
   border: none;
   padding: 10px 25px;
-  margin: 1.2em 0 2em;
+  margin: 1.2em 1.5em 2em;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 

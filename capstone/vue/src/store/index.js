@@ -22,7 +22,6 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    newUser: Object
 
   },
   mutations: {
