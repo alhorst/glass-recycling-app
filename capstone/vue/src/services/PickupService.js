@@ -41,6 +41,11 @@ export default {
     getMyPickupsHistory(username){
         return axios.get('pickups/myPickups/history', username)
     },
+
+    //get all pickups assigned to the logged in driver
+    getDriverPickUpRoutes(username){
+        return axios.get('/pickups/drivers/myPickups', username)
+    },
   
 
 
