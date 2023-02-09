@@ -131,7 +131,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path="/users/details", method= RequestMethod.POST)
     public UserDetails addNewUserDetails(@Valid @RequestBody UserDetails newUserDetail) {
-        if ((newUserDetail.getUsername()).equals(userDetailsDao.findUserDetailsByUsername(newUserDetail.getUsername()).getUsername())){
+        if ((newUserDetail.getUsername()).equals(userDetailsDao.findUserDetailsByUsername(newUserDetail.getUsername()))){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "That user account already exists.");
         } else {
             return userDetailsDao.createUserDetails(newUserDetail);

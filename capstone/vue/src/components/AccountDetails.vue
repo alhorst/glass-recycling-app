@@ -9,6 +9,7 @@
         <p>Username:</p>
         <input type="text" name="name" v-model="userDetails.username" />
       </div>
+      <!-- <h3>{{$store.state.user.username}}</h3> -->
       <!-- Name input -->
       <div class="form-item">
         <p>Full Name:</p>
@@ -91,6 +92,7 @@ export default {
       console.log(response.data);
     });
   },
+ 
   methods: {
     saveAccountDetails() {
       AccountService.addUserDetails(this.userDetails).then((response) => {

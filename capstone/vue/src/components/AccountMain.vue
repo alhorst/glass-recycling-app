@@ -44,8 +44,8 @@ export default {
 
   //this created method update the user after we calling the method. then we can retrive the information that w want to here
   created() {
-    //after saving account details, the form should be the same.
-    //get address
+    // after saving account details, the form should be the same.
+    // get address
     AccountService.getUserDetails().then((response) => {
       this.user = response.data;
     });
@@ -69,7 +69,7 @@ export default {
 
 .my-account,
 .pick-up {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-size: 1.5em;
   padding: 1em;
   background-color: whitesmoke;
