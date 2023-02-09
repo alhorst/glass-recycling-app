@@ -104,7 +104,7 @@ VALUES ('minaros', '2023-02-12', 120, 2, false);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
 VALUES ('mraymond', '2023-01-31', 90, 3, true);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('mraymond', '2023-01-15', 60,2, true);
+VALUES ('mraymond', '2023-01-15', 60, 2, true);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
 VALUES ('mraymond', '2022-12-31', 30, 1, true);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
