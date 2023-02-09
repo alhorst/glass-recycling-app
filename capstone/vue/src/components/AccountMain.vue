@@ -21,18 +21,25 @@ Three columns( history, calendar, account)
       <button>My Recycling History</button>
     </div> -->
 
-    <button class="history">My Recycling History</button>
+    <div>
+      <h2>My Recycling History</h2>
+      <history></history>
+    </div>
+  
   </div>
 </template>
 
 <script>
 import AccountService from "../services/AccountService.js";
 import PickUp from "../components/PickUp.vue";
+import History from "../components/History.vue";
+import PickupService from '../services/PickupService'
 
 export default {
   name: "account-main",
   components: {
     PickUp,
+    History,
   },
   data() {
     return {
@@ -50,6 +57,15 @@ export default {
       this.user = response.data;
     });
   },
+  methods: {
+
+     getPickups(){
+         PickupService.getMyPickups(this.requesting_username).then((response)=>{
+             this.myPickups = response.data;
+         })
+        }
+
+  }
 };
 </script>
 
@@ -93,7 +109,7 @@ export default {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 
-.history {
+/* .history {
   font-size: 1em;
   font-weight: bold;
   letter-spacing: 0.07em;
@@ -101,5 +117,5 @@ export default {
   width: 12.5em;
   border: none;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
-}
+} */
 </style>

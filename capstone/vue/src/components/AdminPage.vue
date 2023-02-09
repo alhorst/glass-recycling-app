@@ -138,34 +138,6 @@
         Save Route
       </button>
       </form>
-
-        <!-- <button v-on:click="showForm = !showForm">Add New Pickup! ♻️</button>  -->
-
-        <!-- <form id="frmAddNewPickup" v-show="showForm">
-          <div class="field">
-            <label for="firstName">First Name:</label>
-            <input type="text" name="firstName" v-model="newUser.firstName" />
-          </div>
-          <div class="field">
-            <label for="lastName">Last Name:</label>
-            <input type="text" name="lastName" v-model="newUser.lastName" />
-          </div>
-          <div class="field">
-            <label for="username">Username:</label>
-            <input type="text" name="username" v-model="newUser.username" />
-          </div>
-          <div class="field">
-            <label for="emailAddress">Email Address:</label>
-            <input
-              type="text"
-              name="emailAddress"
-              v-model="newUser.emailAddress"
-            />
-          </div>
-          <button type="submit" class="btn save" v-on:click.prevent="saveUser">
-            Save Pickup
-          </button>
-        </form> -->
       </div>
       <set-route></set-route>
     </div>
@@ -195,6 +167,9 @@ export default {
         num_of_bins: "",
         is_picked_up: false,
         full_address: "",
+        pickup_weight:0,
+        
+
       
       },
       newRouteId:0,
@@ -238,7 +213,7 @@ export default {
         )
       ) {
         for (let i = 0; i < this.selectedUserIDs.length; i++) {
-          PickupService.deletePickup(this.selectedUserIDs[i])
+          PickupService.deletePickup(this.selectedUserIDs[i].pickup_id)
             .then((response) => {
               if (response.status === 204) {
                 alert("pickup successfully deleted");
@@ -272,7 +247,7 @@ export default {
         this.selectedUserIDs[i].route_id = parseInt(this.newRouteId)
       PickupService.updatePickup(this.selectedUserIDs[i]).then((response) => {
         if (response.status === 200) {
-          // alert('successful')
+           alert('successful')
           response;
         }
       });

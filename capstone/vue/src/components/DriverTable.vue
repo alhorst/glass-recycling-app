@@ -191,7 +191,7 @@
           <label for="lastName">Status:</label>
           <input type="text" name="lastName" v-model="newDriver.is_driver" />
         </div>
-        <button type="submit" class="btn save" v-on:click.prevent="addDriver">
+        <button type="submit" class="btn save" v-on:click.prevent="addDriver" >
           Save Driver
         </button>
       </form>
