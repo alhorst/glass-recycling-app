@@ -4,11 +4,13 @@
     <div class="map">
       <locations></locations>
     </div>
+
     <div>
       <driver-table class="driver-main">driver</driver-table>
     </div>
 
     <div id="card-pickup">
+      <!-- does this need to be a button? -->
       <button v-on:click.prevent="created">Pickups</button>
       <table id="tbl-pickups">
         <thead id="tbl-head-pickups">
@@ -141,7 +143,11 @@
       </div>
       <set-route></set-route>
     </div>
+     <div>
+      <prize-details class="prize-main">prizes</prize-details>
+    </div>
   </div>
+  
 </template>
 
 <script>
@@ -149,6 +155,7 @@ import Locations from "./Locations.vue";
 import PickupService from "../services/PickupService.js";
 import SetRoute from "./SetRoute.vue";
 import DriverTable from "../components/DriverTable.vue";
+import PrizeDetails from "../components/PrizeDetails.vue";
 
 export default {
   name: "admin-page",
@@ -156,6 +163,8 @@ export default {
     Locations,
     SetRoute,
     DriverTable,
+    PrizeDetails,
+  
   },
   data() {
     return {
