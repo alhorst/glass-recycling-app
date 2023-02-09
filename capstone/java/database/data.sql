@@ -110,7 +110,7 @@ VALUES ('mraymond', '2022-12-31', 30, 1, true);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
 VALUES ('mraymond', '2022-12-15', 60, 2, true);
 INSERT INTO pickup_details (requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up)
-VALUES ('mraymond', '2023-11-30', 30, 1, true);
+VALUES ('mraymond', '2022-11-30', 30, 1, true);
 
 -- load prize_details table with prizes
 INSERT INTO prize_details (prize_name, point_value)
