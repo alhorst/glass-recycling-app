@@ -27,10 +27,12 @@ export default {
   },
   mounted() {
     this.directionsService();
+    this.assignRouteOne();
   },
   created() {
     PickupService.getPickups().then((response) => {
       this.allPickups = response.data;
+      
     this.assignRouteOne();
     this.assignRouteTwo();
 
