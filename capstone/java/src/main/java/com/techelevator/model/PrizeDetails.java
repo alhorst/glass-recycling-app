@@ -1,9 +1,14 @@
 package com.techelevator.model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 public class PrizeDetails {
 
     private int prize_id;
+    @NotEmpty
     private String prize_name;
+    @Min(value = 1, message = "Point Value must be at least 1")
     private int point_value;
 
     public PrizeDetails() {
