@@ -32,6 +32,8 @@
         <router-link v-bind:to="{ name: 'account' }"
           >Account<i class="fa-solid fa-user"></i
         ></router-link>
+
+    
         <div class="dropdown-content">
           <router-link id="login" v-bind:to="{ name: 'login' }">
             Login</router-link

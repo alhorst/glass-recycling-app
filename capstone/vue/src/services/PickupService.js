@@ -32,8 +32,12 @@ export default {
         return axios.delete(`/pickups/${pickupId}`);
     },
 
-   // get all pickups
+ //get pickups bu username
 
+    getMyPickups(username){
+        return axios.get('pickups/myPickups', username)
+    }
+,
   
 
 
