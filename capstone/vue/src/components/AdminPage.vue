@@ -144,7 +144,7 @@
       <set-route></set-route>
     </div>
      <div>
-      <prize-details class="prize-main">prizes</prize-details>
+      <prize-details>prizes</prize-details>
     </div>
   </div>
   

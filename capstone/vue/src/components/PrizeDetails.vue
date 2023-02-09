@@ -1,18 +1,18 @@
 <template>
-  <div id="prize-list">
-    <h1>Prizes!</h1>
+  <div class="prize-container">
+    <h1>Prize List</h1>
     <table id="tbl-prizes">
       <thead id="tbl-head-prizes">
         <tr>
           <th>&nbsp;</th>
-          <th>Prize</th>
+          <th class="left">Prize</th>
           <th>Points to Redeem</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(prize, key) in prizeList" v-bind:key="key">
           <td>
-            <input
+            <!-- <input
               type="checkbox"
               name="selectedPrizes"
               v-model="selectedPrizeIDs"
@@ -21,8 +21,10 @@
               "
               v-bind:value="parseInt(prize.prize_id)"
             />
+          </td> -->
           </td>
-          <td>{{ prize.prize_name }}</td>
+
+          <td class="left">{{ prize.prize_name }}</td>
           <td>{{ prize.point_value }}</td>
         </tr>
       </tbody>
@@ -48,5 +50,23 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.prize-container {
+  margin-top: 3em;
+  border: 1px solid red;
+}
+
+.prize-container h1 {
+  font-size: 2em;
+}
+
+#tbl-prizes {
+  text-align: center;
+  font-size: 1.2em;
+  margin: auto;
+}
+
+#tbl-prizes .left {
+  text-align: left;
+}
 </style>
