@@ -216,8 +216,8 @@ nav li {
 .search-box input {
   font-family: "Raleway", sans-serif;
   position: absolute;
-  height: 95%;
-  width: 93%;
+  height: 94%;
+  width: 50%;
   border-radius: 25px;
   background: white;
   outline: none;
@@ -230,9 +230,10 @@ nav li {
   position: absolute;
   right: -2px;
   top: 0;
-  width: 50px;
+  width: 40px;
   height: 100%;
   text-align: center;
+  background: white;
   line-height: 45px;
   color: #9bdb66;
   font-size: 20px;

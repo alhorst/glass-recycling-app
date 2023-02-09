@@ -69,14 +69,7 @@ export default {
 *,
 *:before,
 *:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
-}
-
-body {
-  font-family: "Nunito", sans-serif;
-  color: #384047;
 }
 
 form {
@@ -84,6 +77,7 @@ form {
   margin: 10px auto;
   padding: 10px 20px;
   background: whitesmoke;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 
 h1 {
@@ -97,16 +91,17 @@ input[type="search"],
 input[type="url"],
 textarea,
 select {
-  background: rgba(255, 255, 255, 0.1);
+  /* background: rgba(255, 255, 255, 0.041); */
   border: none;
   font-size: 16px;
+  font-family: "Raleway", sans-serif;
   height: auto;
   margin: 0;
   outline: 0;
   padding: 15px;
   width: 100%;
-  background-color: #eeeeee;
-  color: #959a9e;
+  background-color: #e6e6e6;
+  color: #9e9e9e;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
   margin-bottom: 30px;
 }
@@ -123,9 +118,10 @@ button {
   background-color: #4bc970;
   font-size: 18px;
   text-align: center;
+  font-weight: bold;
+  letter-spacing: 0.12em;
   border-radius: 5px;
   width: 80%;
-  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
   margin: 0 2em 3em 2em;
 }
 
@@ -153,7 +149,7 @@ label.light {
   display: inline;
 }
 
-.number {
+/* .number {
   background-color: #5fcf80;
   color: #fff;
   height: 30px;
@@ -165,7 +161,7 @@ label.light {
   text-align: center;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
   border-radius: 100%;
-}
+} */
 
 @media screen and (min-width: 480px) {
   form {

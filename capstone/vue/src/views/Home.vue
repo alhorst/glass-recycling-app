@@ -9,7 +9,9 @@
           >Sign up today!
         </button> -->
         <button>
-        <router-link id="register" :to="{ name: 'register'}">Sign up today!</router-link>
+          <router-link id="register" :to="{ name: 'register' }"
+            >Sign up today!</router-link
+          >
         </button>
       </div>
     </div>
@@ -41,7 +43,9 @@
       </div>
     </section>
     <section class="counter-container">
-      <div id="counter">We've saved {{totalGlass}} lbs of glass from landfills!</div>
+      <div id="counter">
+        We've saved <span>{{ totalGlass }}</span> lbs of glass from landfills!
+      </div>
     </section>
     <section class="last-container">
       <div class="meet-team">
@@ -113,20 +117,20 @@
 </template>
 
 <script>
-import AccountService from '../services/AccountService';
+import AccountService from "../services/AccountService";
 export default {
   name: "home",
   //name: "account"
   data() {
     return {
-      totalGlass: '',
-    }
+      totalGlass: "",
+    };
   },
   created() {
-      AccountService.getTotalGlassRecycled().then((response) => {
-        this.totalGlass = response.data;
-      })
-  }
+    AccountService.getTotalGlassRecycled().then((response) => {
+      this.totalGlass = response.data;
+    });
+  },
 };
 </script>
 
@@ -257,6 +261,29 @@ p {
   border-radius: 15px;
   border: 1px solid yellow;
 }
+
+#counter span {
+  font-size: 2em;
+  border-bottom: 6px solid;
+  border-radius: 10px;
+}
+
+/* none of this animation works yet /sob */
+
+/* #counter span {
+  animation: 0.5s steps(10) forwards infinite;
+}
+
+#counter span:before {
+  content: attr(0);
+
+}
+
+@keyframes animate {
+  100% {
+    transform: translate(0, -10em, 0);
+  }
+} */
 
 .last-container {
   background-color: white;
