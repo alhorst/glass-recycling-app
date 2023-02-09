@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-md-12">
-        <form>
+        <form v-on:submit.prevent="addPickUp" >
           <h3>Schedule Pick Up</h3>
 
           <fieldset>
@@ -30,7 +30,7 @@
               </optgroup>
             </select>
           </fieldset>
-          <button type="submit" v-on:click="addPickUp()">Submit</button>
+          <button type="submit" >Submit</button>
         </form>
       </div>
     </div>
@@ -51,6 +51,7 @@ export default {
         is_picked_up: false,
       },
       showForm: false,
+      msg:'',
     };
   },
   methods: {
@@ -59,10 +60,16 @@ export default {
         if (response.status === 201) {
           this.$router.push("/account");
         }
-      });
-    },
-  },
-};
+      }
+      ).catch((error)=> {
+        if(error.response){
+          this.msg=' Error in scheduling pick up, please try another date'
+          alert(this.msg)
+        }
+      })
+  }
+  }
+}
 </script>
 
 <style scoped>

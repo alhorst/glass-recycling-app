@@ -12,18 +12,31 @@
 import PickupService from "../services/PickupService.js";
 import SetRoute from "./SetRoute.vue";
 export default {
-  name: "driver-dash",
+  name: "driver-dashboard",
   components: {
     SetRoute,
   },
-  mounted() {
-    this.SetRoute.directionsService();
-    this.assignRouteOne();
+  data(){
+    return {
+      users: {
+        pickup_id: "",
+        route_id: "",
+        requesting_username: "",
+        pickup_date: "",
+        num_of_bins: "",
+        is_picked_up: false,
+        full_address: "",
+      },
+    }
   },
+  // mounted() {
+  //   this.SetRoute.directionsService();
+  //   this.SetRoute.assignRouteOne();
+  // },
   created() {
     PickupService.getPickups().then((response) => {
       this.users = response.data;
-      this.SetRoute.assignRouteOne();
+      // this.SetRoute.assignRouteOne();
     });
   },
 };

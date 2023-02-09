@@ -10,7 +10,7 @@ export default {
     //     return axios.get('/pickups/unassigned');
     // },
 
-    getPickups(){
+    getPickups() {
         return axios.get('/pickups');
     },
 
@@ -32,8 +32,15 @@ export default {
         return axios.delete(`/pickups/${pickupId}`);
     },
 
-   // get all pickups
+    //get pickups by username
+    getMyPickups(username){
+        return axios.get('pickups/myPickups', username)
+    },
 
+    //get completed pickups by username
+    getMyPickupsHistory(username){
+        return axios.get('pickups/myPickups/history', username)
+    },
   
 
 
