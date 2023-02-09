@@ -10,7 +10,7 @@ export default {
     //     return axios.get('/pickups/unassigned');
     // },
 
-    getPickups(){
+    getPickups() {
         return axios.get('/pickups');
     },
 
