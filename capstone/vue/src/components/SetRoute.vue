@@ -27,19 +27,18 @@ export default {
   },
   mounted() {
     this.directionsService();
-    
   },
   created() {
     PickupService.getPickups().then((response) => {
       this.allPickups = response.data;
-    });
     this.assignRouteOne();
     this.assignRouteTwo();
-        
 
+    });
+    
   },
 
-    methods: {
+  methods: {
     directionsService() {
       const map = new window.google.maps.Map(document.getElementById("map"), {
         zoom: 4,
@@ -51,22 +50,22 @@ export default {
         map,
         panel: document.getElementById("panel"),
       });
-        this.displayRoute(
-            "3001 Railroad St, Pittsburgh, PA 15201",
-            "3001 Railroad St, Pittsburgh, PA 15201",
-            directionsService,
-          directionsRenderer
-  );
+      this.displayRouteOne(
+        "3001 Railroad St, Pittsburgh, PA 15201",
+        "3001 Railroad St, Pittsburgh, PA 15201",
+        directionsService,
+        directionsRenderer
+      );
     },
-    displayRoute(origin, destination, service, display) {
+    displayRouteOne(origin, destination, service, display) {
       service
         .route({
           origin: origin,
           destination: destination,
-          waypoints: this.waypointArr,
+          waypoints: this.routeOne,
           travelMode: window.google.maps.TravelMode.DRIVING,
           avoidTolls: true,
-          optimizeWaypoints: true
+          optimizeWaypoints: true,
         })
         .then((result) => {
           display.setDirections(result);
@@ -76,31 +75,32 @@ export default {
         });
     },
     assignRouteOne() {
-          
-          for (var i = 0; i < this.allPickups.length; i++) {
-              if (parseInt(this.allPickups[i].route_id) == 1) {
-                     this.routeOne.push({
-                     location:this.allPickups[i].full_address,
-                     stopover:true
-              })
-              }
-          } 
+      for (var i = 0; i < this.allPickups.length; i++) {
+        if (parseInt(this.allPickups[i].route_id) == 1) {
+            this.routeOne.push({
+            location: this.allPickups[i].full_address,
+            stopover: true,
+          });
+        }
+      }
+    },
+    assignRouteTwo() {
+      for (var i = 0; i < this.allPickups.length; i++) {
+        if (parseInt(this.allPickups[i].route_id) == 2) {
+          this.routeTwo.push({
+            location: this.allPickups[i].full_address,
+            stopover: true,
+          });
+        }
+      }
+      //   },
+      //   filterVersionOne() {
+      //             return this.allPickups.filter((p) =>
+      //             p.route_id == 1)
+      //         },
+    },
   },
-  assignRouteTwo() {
-          
-          for (var i = 0; i < this.allPickups.length; i++) {
-              if (parseInt(this.allPickups[i].route_id) == 2) {
-                     this.routeTwo.push({
-                     location:this.allPickups[i].full_address,
-                     stopover:true
-              })
-              }
-          } 
-  }
-
-
-  }
-}
+};
 </script>
 <style>
 #map {
