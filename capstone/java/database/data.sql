@@ -104,6 +104,7 @@ VALUES ('minaros', '2023-02-12', 120, 2, false);
 -- load prize_details table with prizes
 INSERT INTO prize_details (prize_name, point_value)
 VALUES ('Vitrum Tshirt', 75),
+       ('Donation to Red Cross - Sand Bags for Flood Remediation', 100),
        ('Vitrum Snapback Hat', 150),
        ('$25 Amazon Giftcard', 250),
        ('Local Brewery Tour Experience', 400),

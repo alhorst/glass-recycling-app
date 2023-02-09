@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class JdbcPickupDetailsDao implements PickupDetailsDao {
 
-    private final JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     public JdbcPickupDetailsDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
