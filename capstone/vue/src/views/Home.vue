@@ -60,9 +60,9 @@
             <h3>Matt Hosner</h3>
             <p class="job-title">Founder &amp; CEO</p>
             <p class="about">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Adipisci, alias aliquam amet autem blanditiis commodi consectetur
-              cum dolorem ea eos error.
+              Matt left a career in real estate finance to pursue his dream of
+              bringing sustainable glass recycling to the Pittsburgh region. He
+              enjoys birding, photography, and attending live music events.
             </p>
           </div>
 
@@ -75,9 +75,11 @@
             <h3>Kubra Tapan</h3>
             <p class="job-title">Fullstack Developer</p>
             <p class="about">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Adipisci, alias aliquam amet autem blanditiis commodi consectetur
-              cum dolorem ea eos error.
+              Kubra moved recently to Boston from her native Turkey and is now
+              pursuing her dream of a career in software development. Her
+              fantastic all around coding skills and willingness to jump in and
+              help anywhere she is needed make her an essential component of the
+              Vitrum team.
             </p>
           </div>
 
@@ -90,9 +92,11 @@
             <h3>Greg Sabella</h3>
             <p class="job-title">Backend Developer</p>
             <p class="about">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Adipisci, alias aliquam amet autem blanditiis commodi consectetur
-              cum dolorem ea eos error.
+              As an avid rock climber and outdoor enthusiast, Greg attacks
+              server development issues with the same determination and
+              analytical intensity he brings to a Class 5 backcountry route. He
+              currently resides in Lynchburg, VA, where he enjoys taking his dog
+              out 17 times a night.
             </p>
           </div>
 
@@ -105,9 +109,11 @@
             <h3>Alexis Horst</h3>
             <p class="job-title">Frontend Developer</p>
             <p class="about">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Adipisci, alias aliquam amet autem blanditiis commodi consectetur
-              cum dolorem ea eos error.
+              With strong technical skill, extensive training in creative
+              fields, and a keen eye for design, Alexis was the natural choice
+              to lead Vitrum's front end development. She keeps the site looking
+              great and makes sure the experience is fun and intuitive for our
+              customers.
             </p>
           </div>
         </div>
