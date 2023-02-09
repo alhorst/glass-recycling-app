@@ -190,6 +190,11 @@ export default {
   box-shadow: 0.5em 0.5em 2em rgba(0, 0, 0, 0.2);
 }
 
+.hero-image button a {
+  color: white;
+  box-shadow: none;
+}
+
 .about-us h2 {
   text-transform: uppercase;
   font-size: 2.5em;
