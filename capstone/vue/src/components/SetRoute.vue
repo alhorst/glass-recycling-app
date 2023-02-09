@@ -11,7 +11,7 @@ export default {
   name: "RouteMap",
   data() {
     return {
-      unassignedPickups: [],
+      allPickups: [],
       filter: {
         pickup_id: "",
         route_id: "",
@@ -21,17 +21,20 @@ export default {
         is_picked_up: false,
         full_address: "",
       },
-      waypointArr: [],
+      routeOne: [],
+      routeTwo: [],
     };
   },
   mounted() {
     this.directionsService();
+    
   },
   created() {
     PickupService.getPickups().then((response) => {
-      this.unassignedPickups = response.data;
+      this.allPickups = response.data;
     });
-    this.assignRoute();
+    this.assignRouteOne();
+    this.assignRouteTwo();
         
 
   },
@@ -72,17 +75,30 @@ export default {
           alert("Could not display directions due to: " + e);
         });
     },
-    assignRoute() {
-          let assigningArr = this.unassignedPickups;
-          for (var i = 0; i < assigningArr.length; i++) {
-              if (this.assigningArr[i].route_id == 1) {
-                     this.waypointArr.push({
-                     location:assigningArr[i].full_address,
+    assignRouteOne() {
+          
+          for (var i = 0; i < this.allPickups.length; i++) {
+              if (parseInt(this.allPickups[i].route_id) == 1) {
+                     this.routeOne.push({
+                     location:this.allPickups[i].full_address,
                      stopover:true
-                  })
+              })
+              }
+          } 
+  },
+  assignRouteTwo() {
+          
+          for (var i = 0; i < this.allPickups.length; i++) {
+              if (parseInt(this.allPickups[i].route_id) == 2) {
+                     this.routeTwo.push({
+                     location:this.allPickups[i].full_address,
+                     stopover:true
+              })
               }
           } 
   }
+
+
   }
 }
 </script>
