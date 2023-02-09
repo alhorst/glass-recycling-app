@@ -37,7 +37,7 @@ export default {
 
 
 created(){
-         PickupService.getMyPickups(this.user).then((response)=>{
+         PickupService.getMyPickupsHistory(this.user).then((response)=>{
              this.myPickups = response.data;
          })
         }
