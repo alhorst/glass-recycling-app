@@ -84,7 +84,7 @@ public class PickupController {
 
     //Get all pickups from the pickup_details table
     //Admins only
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path="/pickups", method= RequestMethod.GET)
     public List<PickupDetails> getAllPickups() {
         if (pickupDetailsDao.getAllPickupDetails() != null){
