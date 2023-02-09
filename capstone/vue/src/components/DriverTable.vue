@@ -244,7 +244,7 @@ export default {
           DriverService.deleteDriver(this.selectedUserIDs[i])
             .then((response) => {
               if (response.status === 204) {
-                alert("pickup successfully deleted");
+                alert("driver successfully deleted");
                 // this.$router.push('/admin')
                 DriverService.getAllDrivers().then((response) => {
                   this.drivers = response.data;

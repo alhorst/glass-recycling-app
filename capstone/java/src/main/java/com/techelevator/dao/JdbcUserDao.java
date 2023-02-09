@@ -15,7 +15,7 @@ import com.techelevator.model.User;
 @Component
 public class JdbcUserDao implements UserDao {
 
-    private final JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     public JdbcUserDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
