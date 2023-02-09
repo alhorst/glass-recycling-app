@@ -133,7 +133,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
                 "street_address || ', ' || city || ', ' || state_abbreviation || ' ' || zipcode AS full_address " +
                 "FROM pickup_details " +
                 "JOIN user_details ON pickup_details.requesting_username = user_details.username " +
-                "WHERE requesting_username = ? AND is_picked_up = false;";
+                "WHERE requesting_username = ? AND is_picked_up = true;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, recyclerUsername);
         while(results.next()) {
             PickupDetails eachPickup = mapRowToPickupDetails(results);
