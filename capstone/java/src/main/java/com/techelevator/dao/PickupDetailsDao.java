@@ -23,6 +23,8 @@ public interface PickupDetailsDao {
 
     List<PickupDetails> getPickupDetailsByDriverUsername(String driverUsername);
 
+    List<PickupDetails> getCompletedPickupDetailsByRecyclerUsername(String recyclerUsername);
+
     List<PickupDetails> getPickupDetailsByRouteId(int routeId);
 
     List<PickupDetails> getPickupDetailsByDriverId(int driverId);

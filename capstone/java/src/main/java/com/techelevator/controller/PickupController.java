@@ -33,10 +33,20 @@ public class PickupController {
 
 
     //Get my(user) pickups - Will return pickups requested by the logged-in Recycling user account
-    //--- filtering by Date, thinking this could be done w/ a filter function on the front end
     @RequestMapping(path="/pickups/myPickups", method= RequestMethod.GET)
     public List<PickupDetails> getMyPickups(Principal principal) {
         List<PickupDetails> myPickups = pickupDetailsDao.getPickupDetailsByRecyclerUsername(principal.getName());
+        if (myPickups.size() != 0) {
+            return myPickups;
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Currently, you have not scheduled any pickups");
+        }
+    }
+
+    //Get my(user) pickups history - Will return pickup history (completed pickups) by the logged-in Recycling user account
+    @RequestMapping(path="/pickups/myPickups/history", method= RequestMethod.GET)
+    public List<PickupDetails> getMyPickupsHistory(Principal principal) {
+        List<PickupDetails> myPickups = pickupDetailsDao.getCompletedPickupDetailsByRecyclerUsername(principal.getName());
         if (myPickups.size() != 0) {
             return myPickups;
         } else {
