@@ -70,7 +70,7 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
     }
 
     //Get outstanding pickups by username (Only 1 outstanding pickup per user)
-    //utilize to check upon create pickup request, if user already has an outstanding pickup --> throw exception
+    //utilize as a check when user requests a pickup, if user already has an outstanding pickup --> throw exception
     //if exception is thrown --> User can delete existing request and create a new OR update the existing request
     @Override
     public List<PickupDetails> getOutstandingPickupsByUsername(String username) {
@@ -197,7 +197,6 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
         return pickupDetailsList;
     }
 
-
     //Get pickup_details from pickup_details table, by driver_id
     // including pickup_details && full_address
     @Override
@@ -214,20 +213,6 @@ public class JdbcPickupDetailsDao implements PickupDetailsDao {
             pickupsByDriver.add(mapRowToPickupDetails(results));
         }
         return pickupsByDriver;
-    }
-
-    //NOT implemented in controller currently - need to use?
-    @Override
-    public List<PickupDetails> getPickupDetailsByDate(Date pickupDate) {
-        List<PickupDetails> pickupDetailsList = new ArrayList<>();
-        String sql = "SELECT pickup_id, route_id, requesting_username, pickup_date, pickup_weight, num_of_bins, is_picked_up " +
-                    "FROM pickup_details " +
-                    "WHERE pickup_date = ?;";
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, pickupDate);
-        while (results.next()) {
-            pickupDetailsList.add(mapRowToPickupDetails(results));
-        }
-        return pickupDetailsList;
     }
 
     @Override
