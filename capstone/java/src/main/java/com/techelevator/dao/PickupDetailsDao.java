@@ -29,8 +29,6 @@ public interface PickupDetailsDao {
 
     List<PickupDetails> getPickupDetailsByDriverId(int driverId);
 
-    List<PickupDetails> getPickupDetailsByDate(Date pickupDate);
-
     PickupDetails createPickupDetails(PickupDetails pickupDetails);
 
     void updatePickupDetails(PickupDetails pickupDetails);

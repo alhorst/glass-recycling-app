@@ -5,8 +5,8 @@
         
         <ul>
             <li>
-          <h3>In {{pickup.pickup_date}}, you saved 
-              {{pickup.pickup_weight}} lbs of glass
+          <h3>On {{ pickup.pickup_date }}, you saved 
+              {{ pickup.pickup_weight }} lbs of glass
               from landfills!</h3>
           </li>
         
