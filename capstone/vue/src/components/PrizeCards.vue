@@ -11,7 +11,7 @@
       </div>
     </div>
   </div> -->
-  <section class="container">
+  <div class="container">
     <!-- flippy card one -->
     <div class="flip-card">
       <div class="flippy-inner">
@@ -175,7 +175,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -198,14 +198,14 @@ export default {
   object-fit: cover;
 }
 .container {
-  border: 1px solid blue;
   height: 100%;
   width: 100%;
-  margin-top: 5em;
+  margin-top: 2em;
   display: flex;
-  /* flex-wrap: wrap; */
-  /* flex-direction: row; */
-  /* justify-content: center; */
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .flip-card {
@@ -253,4 +253,16 @@ p {
   padding-top: 5em;
   text-align: center;
 }
+
+/* @media screen and (min-width: 700px) {
+  .container .flip-card {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .last-container .card {
+    margin: 2em;
+  } */
 </style>
