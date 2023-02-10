@@ -59,7 +59,7 @@
             />
             <h3>Matt Hosner</h3>
             <p class="job-title">Founder &amp; CEO</p>
-            <p class="about">
+            <p class="about-matt">
               Matt left a career in real estate finance to pursue his dream of
               bringing sustainable glass recycling to the Pittsburgh region. He
               enjoys birding, photography, and attending live music events.
@@ -74,7 +74,7 @@
             />
             <h3>Kubra Tapan</h3>
             <p class="job-title">Fullstack Developer</p>
-            <p class="about">
+            <p class="about-kubra">
               Kubra moved recently to Boston from her native Turkey and is now
               pursuing her dream of a career in software development. Her
               fantastic all around coding skills and willingness to jump in and
@@ -91,7 +91,7 @@
             />
             <h3>Greg Sabella</h3>
             <p class="job-title">Backend Developer</p>
-            <p class="about">
+            <p class="about-greg">
               As an avid rock climber and outdoor enthusiast, Greg attacks
               server development issues with the same determination and
               analytical intensity he brings to a Class 5 backcountry route. He
@@ -108,7 +108,7 @@
             />
             <h3>Alexis Horst</h3>
             <p class="job-title">Frontend Developer</p>
-            <p class="about">
+            <p class="about-alexis">
               With strong technical skill, extensive training in creative
               fields, and a keen eye for design, Alexis was the natural choice
               to lead Vitrum's front end development. She keeps the site looking
@@ -149,12 +149,10 @@ export default {
 }
 
 .body-container {
-  border: 1px solid red;
   width: 100%;
 }
 
 .hero-image {
-  border: 1px solid yellow;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)),
     url("../img/glass-bottles-honeycomb.jpg");
   height: 600px;
@@ -225,8 +223,7 @@ export default {
 
 .about-us {
   background-color: white;
-  margin-top: 0;
-  border: 1px solid rgb(236, 1, 197);
+  margin-top: 1em;
   padding: 30px;
   padding-left: 50px;
   padding-right: 50px;
@@ -247,9 +244,8 @@ p {
 
 .mid-container {
   background-color: white;
-  margin-top: 2em;
-  border: 1px solid rgb(236, 1, 197);
-  padding: 30px;
+  margin-top: 1em;
+  padding: 20px;
   height: auto;
   font-size: 1.5em;
   text-align: justify;
@@ -261,21 +257,26 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #9bdb66;
+  color: white;
+  /* background-color: #9bdb66; */
   margin-top: 5em;
-  height: 200px;
+  height: 400px;
   width: 100%;
+  background-image: url("../img/bottles-in-crate.jpg");
 }
 
 #counter {
   font-size: 3em;
   border-radius: 15px;
-  background-color: transparent;
-  border: 1px solid yellow;
+  padding: 1em;
+  width: 100%;
+  text-align: center;
+  backdrop-filter: blur(10px);
 }
 
 #counter span {
   font-size: 2em;
+  font-weight: bold;
   border-bottom: 6px solid;
 }
 
@@ -299,7 +300,6 @@ p {
 .last-container {
   background-color: white;
   padding: 10em 0;
-  border: 1px solid blue;
 }
 
 .mt-header {
@@ -339,6 +339,7 @@ p {
   align-items: center;
   justify-content: center;
   margin: 2em 0;
+  height: 800px;
   box-shadow: 0.5em 0.5em 3em rgba(0, 0, 0, 0.2);
 }
 
@@ -353,17 +354,40 @@ p {
   margin: 1.5em 0 0.5em;
 }
 
+.last-container .card-matt h3 {
+  font-size: 2em;
+  margin: 1.5em 0 0.5em;
+}
+
 .last-container .job-title {
-  color: #0c5321;
+  color: #4d885b;
   font-size: 1.5em;
-  font-weight: 400;
+  font-weight: bold;
 }
 
 .last-container .about {
   font-size: 1.3em;
   margin: 1.5em 0;
-  /* font-style: italic; */
   text-align: center;
+}
+
+.last-container .about-matt {
+  font-size: 1.3em;
+  text-align: center;
+  margin: 1.5em 0 4.5em;
+}
+
+.last-container .about-kubra,
+.about-alexis {
+  font-size: 1.3em;
+  text-align: center;
+  margin: 1.5em 0 2.2em;
+}
+
+.last-container .about-greg {
+  font-size: 1.3em;
+  text-align: center;
+  margin: 1.5em 0 1em;
 }
 
 @media screen and (min-width: 700px) {
