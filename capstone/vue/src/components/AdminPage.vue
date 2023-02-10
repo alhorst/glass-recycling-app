@@ -11,7 +11,7 @@
 
     <div id="card-pickup">
       <!-- does this need to be a button? -->
-      <h2>Pickups</h2>
+      <h3>Pickups</h3>
       <table id="tbl-pickups">
         <thead id="tbl-head-pickups">
           <tr>
