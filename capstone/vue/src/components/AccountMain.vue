@@ -26,7 +26,7 @@ Three columns( history, calendar, account)
       <history></history>
     </div>
 
-    <div><prize-cards></prize-cards></div>
+    <div id="prize-cards"><prize-cards></prize-cards></div>
   </div>
 </template>
 
@@ -109,6 +109,7 @@ export default {
   border: none;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
+
 
 /* .history {
   font-size: 1em;
