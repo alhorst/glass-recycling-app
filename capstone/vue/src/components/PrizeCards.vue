@@ -19,6 +19,7 @@
           <img alt="Vitrum white tshirt with logo" src="../img/tshirt.png" />
         </div>
         <div class="flippy-back">
+          <h3>75 points</h3>
           <p>
             Let everyone know you're an eco-friendly warrior who helps keep
             glass out of landfills. As an honorary glass wrangler, feel free to
@@ -37,6 +38,7 @@
           />
         </div>
         <div class="flippy-back">
+          <h3>100 Points</h3>
           <p>
             This donation helps the Red Cross get sandbags to places where
             they're needed most.
@@ -51,6 +53,7 @@
           <img alt="Black Vitrum snapback hat" src="../img/hat.png" />
         </div>
         <div class="flippy-back">
+          <h3>150 Points</h3>
           <p>
             Keep the sun out of your eyes while you're out and about. Or maybe
             working in your garden, or taking your dog for a walk.
@@ -65,6 +68,7 @@
             <img alt="Amazon giftcard" src="../img/amazoncard.png" />
           </div>
           <div class="flippy-back">
+            <h3>250 Points</h3>
             <p>
               Buy yourself that OEKO-TEX certified organic cotton blanket you've
               always wanted.
@@ -82,6 +86,7 @@
             />
           </div>
           <div class="flippy-back">
+            <h3>400 Points</h3>
             <p>
               Mm, smell the hops! Get a behind the scenes look at how your
               favorite beer is made and drink some brew with your friends!
@@ -96,6 +101,7 @@
             <img alt="REI giftcard" src="../img/reicard.jpg" />
           </div>
           <div class="flippy-back">
+            <h3>600 Points</h3>
             <p>
               Go buy some hiking gear and a reusable waterbottle to prepare for
               your weekend getaway to 7 Springs Resort!
@@ -113,6 +119,7 @@
             />
           </div>
           <div class="flippy-back">
+            <h3>1500 Points</h3>
             <p>
               With this espresso machine, you are no longer beholden to the $6
               coffees at your local shop. Buy some beans and get caffinated!
@@ -127,6 +134,7 @@
             <img alt="Playstation 5 controller" src="../img/psfive.jpg" />
           </div>
           <div class="flippy-back">
+            <h3>2500 Points</h3>
             <p>
               Relax and go play some games! You deserve it! When is the next
               Assassin's created coming out?
@@ -143,6 +151,7 @@
             />
           </div>
           <div class="flippy-back">
+            <h3>3750 Points</h3>
             <p>
               Welcome to paradise. Don't forget to bring your gear, your dog,
               and your family. Or you can leave them at home. Probably bring
@@ -158,6 +167,7 @@
             <img alt="Recycled glass countertop" src="../img/countertop.jpg" />
           </div>
           <div class="flippy-back">
+            <h3>5000 Points</h3>
             <p>
               It looks like broken glass but it's actually really expensive.
             </p>
