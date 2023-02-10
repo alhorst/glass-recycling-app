@@ -247,7 +247,7 @@ export default {
 }
 
 .flip-card h3 {
-    text-align: center;
+  text-align: center;
 }
 p {
   padding-top: 5em;

@@ -1,12 +1,12 @@
 <template>
   <div class="container">
     <div id="driver-dash">
-      <div id="navbar">Pick-Ups Routes Account</div>
+      <div id="navbar">
+        Welcome to your dashboard
+        <strong>{{ $store.state.user.username }}</strong
+        >!
+      </div>
     </div>
-    <div>
-      <h3>Driver: {{ $store.state.user.username }}</h3>
-    </div>
-
     <set-route></set-route>
   </div>
 </template>
@@ -67,13 +67,11 @@ export default {
   align-items: center;
 } */
 
-.driver-dash h3 {
-  text-align: center;
-}
-
 #navbar {
   font-size: 25px;
   text-align: center;
-  padding: 13px;
+  margin-top: 1em;
+  padding: 1.5em 0;
+  background-color: rgb(233, 233, 233);
 }
 </style>

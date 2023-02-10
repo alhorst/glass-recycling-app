@@ -26,7 +26,10 @@ Three columns( history, calendar, account)
       <history></history>
     </div>
 
-    <div><prize-cards></prize-cards></div>
+    <div>
+      <h2>Available Prizes</h2>
+      <prize-cards></prize-cards>
+    </div>
   </div>
 </template>
 
@@ -108,6 +111,10 @@ export default {
   width: 12.5em;
   border: none;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+h2 {
+  text-align: center;
 }
 
 /* .history {
