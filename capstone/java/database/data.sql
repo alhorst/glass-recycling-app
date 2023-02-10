@@ -26,7 +26,7 @@ INSERT INTO users (username, password_hash, role, is_driver) VALUES ('mglassmore
 INSERT INTO users (username, password_hash, role, is_driver) VALUES ('cglassmore','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER', 'true');
 
 INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
- VALUES ('mraymond','Miles Raymond','271 Lelia St', 'Pittsburgh', 'PA','15211','4125551212','mraymond@gmail.com',120,120,0);
+VALUES ('mraymond','Miles Raymond','271 Lelia St', 'Pittsburgh', 'PA','15211','4125551212','mraymond@gmail.com',120,120,0);
 INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
  VALUES ('bblanc','Benoit Blanc','220 Luray St', 'Pittsburgh', 'PA','15214','4125551213','bblanc@gmail.com',240,120,120);
 INSERT INTO user_details (username, full_name, street_address, city, state_abbreviation, zipcode, phone_number, email_address, total_pounds_recycled, credits_balance, credits_redeemed)
