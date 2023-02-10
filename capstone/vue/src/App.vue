@@ -178,7 +178,6 @@ nav {
   top: 0;
   z-index: 2;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  border: 1px solid red;
 }
 
 nav ul {
@@ -312,7 +311,6 @@ button:active {
 }
 
 .dropdown {
-  border: 1px solid red;
 }
 
 .toggle {

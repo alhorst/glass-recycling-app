@@ -4,7 +4,7 @@
       <div id="navbar">Pick-Ups Routes Account</div>
     </div>
     <div>
-      <h3>Driver: {{$store.state.user.username}}</h3>
+      <h3>Driver: {{ $store.state.user.username }}</h3>
     </div>
 
     <set-route></set-route>
@@ -20,7 +20,7 @@ export default {
   components: {
     SetRoute,
   },
-  data(){
+  data() {
     return {
       users: {
         pickup_id: "",
@@ -31,8 +31,8 @@ export default {
         is_picked_up: false,
         full_address: "",
       },
-      user:'',
-    }
+      user: "",
+    };
   },
   // mounted() {
   //   this.SetRoute.directionsService();
@@ -43,34 +43,37 @@ export default {
   // created() {
   //   PickupService.getPickups().then((response) => {
   //     this.users = response.data;
-      // this.SetRoute.assignRouteOne();
+  // this.SetRoute.assignRouteOne();
 
   //      created() {
-  
+
   //   AccountService.getUserDetails().then((response) => {
   //     this.user = response.data;
   //   });
   // },
   methods: {
-
-      getDriverPickups(){
-        PickupService.getDriverPickUpRoutes(this.user).then(response => {
-          this.users= response.data;
-        })
-      }
-  }
-}
+    getDriverPickups() {
+      PickupService.getDriverPickUpRoutes(this.user).then((response) => {
+        this.users = response.data;
+      });
+    },
+  },
+};
 </script>
 
-<style>
+<style scoped>
 /* #driver-dash {
   display: flex;
   align-items: center;
 } */
 
+.driver-dash h3 {
+  text-align: center;
+}
+
 #navbar {
   font-size: 25px;
-  text-align:center;
+  text-align: center;
   padding: 13px;
 }
 </style>

@@ -246,6 +246,9 @@ export default {
   transform: rotateY(180deg);
 }
 
+.flip-card h3 {
+    text-align: center;
+}
 p {
   padding-top: 5em;
   text-align: center;

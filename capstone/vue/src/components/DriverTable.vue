@@ -191,7 +191,7 @@
           <label for="lastName">Status:</label>
           <input type="text" name="lastName" v-model="newDriver.is_driver" />
         </div>
-        <button type="submit" class="btn save" v-on:click.prevent="addDriver" >
+        <button type="submit" class="btn save" v-on:click.prevent="addDriver">
           Save Driver
         </button>
       </form>
@@ -367,7 +367,6 @@ h2 {
   box-sizing: border-box;
   padding: 20px;
   border-radius: 3em;
-  border: 1px solid blue;
 }
 
 #card-driver button {
@@ -383,7 +382,6 @@ h2 {
 
 table {
   border-collapse: collapse;
-  border: 1px solid red;
   background-color: rgb(233, 233, 233);
   font-weight: 600;
   width: 97.5%;

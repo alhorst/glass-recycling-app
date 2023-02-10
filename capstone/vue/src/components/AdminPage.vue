@@ -385,7 +385,6 @@ h2 {
   padding: 20px;
   margin-top: 5em;
   border-radius: 3em;
-  border: 1px solid red;
 }
 
 #card-pickup button {
