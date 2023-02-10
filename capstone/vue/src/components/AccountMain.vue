@@ -26,7 +26,10 @@ Three columns( history, calendar, account)
       <history></history>
     </div>
 
-    <div id="prize-cards"><prize-cards></prize-cards></div>
+    <div>
+      <h2>Available Prizes</h2>
+      <prize-cards></prize-cards>
+    </div>
   </div>
 </template>
 
@@ -110,6 +113,9 @@ export default {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
 }
 
+h2 {
+  text-align: center;
+}
 
 /* .history {
   font-size: 1em;

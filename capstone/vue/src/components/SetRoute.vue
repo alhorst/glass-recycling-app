@@ -25,18 +25,14 @@ export default {
       routeTwo: [],
     };
   },
-  mounted() {
-    
-  },
+  mounted() {},
   created() {
     PickupService.getPickups().then((response) => {
       this.allPickups = response.data;
       this.directionsService();
-    this.assignRouteOne();
-    this.assignRouteTwo();
-    
+      this.assignRouteOne();
+      this.assignRouteTwo();
     });
-    
   },
 
   methods: {
@@ -78,7 +74,7 @@ export default {
     assignRouteOne() {
       for (var i = 0; i < this.allPickups.length; i++) {
         if (parseInt(this.allPickups[i].route_id) == 1) {
-            this.routeOne.push({
+          this.routeOne.push({
             location: this.allPickups[i].full_address,
             stopover: true,
           });
@@ -104,6 +100,10 @@ export default {
 };
 </script>
 <style scoped>
+#route-map h1 {
+  text-align: center;
+  margin: 1em;
+}
 #map {
   width: 70vw;
   height: 500px;

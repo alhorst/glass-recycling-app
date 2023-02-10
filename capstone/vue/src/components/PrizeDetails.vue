@@ -42,7 +42,6 @@ export default {
 <style scoped>
 .prize-container {
   margin-top: 3em;
-  border: 1px solid red;
 }
 
 .prize-container h1 {
