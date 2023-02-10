@@ -102,7 +102,7 @@
     </div>
   </div> -->
   <div id="card-driver">
-    <button v-on:click.prevent="created">Drivers</button>
+    <h2>Drivers</h2>
     <table id="tbl-drivers">
       <thead id="tbl-head-drivers">
         <tr>

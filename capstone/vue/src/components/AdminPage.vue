@@ -11,7 +11,7 @@
 
     <div id="card-pickup">
       <!-- does this need to be a button? -->
-      <button v-on:click.prevent="created">Pickups</button>
+      <h2>Pickups</h2>
       <table id="tbl-pickups">
         <thead id="tbl-head-pickups">
           <tr>
@@ -87,9 +87,7 @@
                 type="checkbox"
                 name="selectedUsers"
                 v-model="selectedUserIDs"
-                v-bind:checked="
-                  selectedUserIDs.includes(user)
-                "
+                v-bind:checked="selectedUserIDs.includes(user)"
                 v-bind:value="user"
               />
             </td>
@@ -99,9 +97,7 @@
             <td>{{ user.pickup_date }}</td>
             <td>{{ user.num_of_bins }}</td>
             <td>
-              <button
-                class="btnEnableDisable"
-                @click="updatePickup">
+              <button class="btnEnableDisable" @click="updatePickup">
                 {{
                   user.is_picked_up === "Not Picked Up"
                     ? "Picked Up"
@@ -125,29 +121,28 @@
         route_id is type of number-->
         <button v-on:click="showForm = !showForm">Assign Route</button>
         <form id="frmAddNewDriver" v-show="showForm">
-        <div class="field">
-          <label for="routeID">RouteId:</label>
-          <input type="number" name="routeID" v-model="newRouteId" />
-        </div>
-        <!-- <button type="submit" class="btn save" v-on:click.prevent="addDriver">
+          <div class="field">
+            <label for="routeID">RouteId:</label>
+            <input type="number" name="routeID" v-model="newRouteId" />
+          </div>
+          <!-- <button type="submit" class="btn save" v-on:click.prevent="addDriver">
           Save Route
         </button> -->
 
-        <button
-        v-bind:disabled="actionButtonDisabled"
-        v-on:click.prevent="updatePickup()"
-      >
-        Save Route
-      </button>
-      </form>
+          <button
+            v-bind:disabled="actionButtonDisabled"
+            v-on:click.prevent="updatePickup()"
+          >
+            Save Route
+          </button>
+        </form>
       </div>
       <set-route></set-route>
     </div>
-     <div>
+    <div>
       <prize-details>prizes</prize-details>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -164,7 +159,6 @@ export default {
     SetRoute,
     DriverTable,
     PrizeDetails,
-  
   },
   data() {
     return {
@@ -176,12 +170,9 @@ export default {
         num_of_bins: "",
         is_picked_up: false,
         full_address: "",
-        pickup_weight:0,
-        
-
-      
+        pickup_weight: 0,
       },
-      newRouteId:0,
+      newRouteId: 0,
 
       showForm: false,
       selectedUserIDs: [],
@@ -251,18 +242,16 @@ export default {
     },
 
     updatePickup() {
-     
-      for(let i=0; i<this.selectedUserIDs.length; i++){
-        this.selectedUserIDs[i].route_id = parseInt(this.newRouteId)
-      PickupService.updatePickup(this.selectedUserIDs[i]).then((response) => {
-        if (response.status === 200) {
-           alert('successful')
-          response;
-        }
-      });
-
-    }
-    this.selectedUserIDs = [];
+      for (let i = 0; i < this.selectedUserIDs.length; i++) {
+        this.selectedUserIDs[i].route_id = parseInt(this.newRouteId);
+        PickupService.updatePickup(this.selectedUserIDs[i]).then((response) => {
+          if (response.status === 200) {
+            alert("successful");
+            response;
+          }
+        });
+      }
+      this.selectedUserIDs = [];
     },
 
     flipStatus(pickup_id) {
@@ -364,7 +353,6 @@ export default {
 <style scoped>
 .container {
   padding: 0.75em;
-  border: 1px solid red;
   margin: 4em;
   text-align: center;
 }
