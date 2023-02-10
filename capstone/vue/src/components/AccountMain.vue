@@ -26,8 +26,7 @@ Three columns( history, calendar, account)
       <history></history>
     </div>
 
-    <div><prize-details></prize-details></div>
-  
+    <div><prize-cards></prize-cards></div>
   </div>
 </template>
 
@@ -36,14 +35,14 @@ import AccountService from "../services/AccountService.js";
 import PickUp from "../components/PickUp.vue";
 import History from "../components/History.vue";
 import PickupService from "../services/PickupService";
-import PrizeDetails from "../components/PrizeDetails.vue";
+import PrizeCards from "../components/PrizeCards.vue";
 
 export default {
   name: "account-main",
   components: {
     PickUp,
     History,
-    PrizeDetails
+    PrizeCards,
   },
   data() {
     return {
@@ -62,14 +61,12 @@ export default {
     });
   },
   methods: {
-
-     getPickups(){
-         PickupService.getMyPickups(this.requesting_username).then((response)=>{
-             this.myPickups = response.data;
-         })
-        }
-
-  }
+    getPickups() {
+      PickupService.getMyPickups(this.requesting_username).then((response) => {
+        this.myPickups = response.data;
+      });
+    },
+  },
 };
 </script>
 

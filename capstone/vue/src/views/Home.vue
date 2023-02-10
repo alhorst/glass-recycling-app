@@ -270,13 +270,13 @@ p {
 #counter {
   font-size: 3em;
   border-radius: 15px;
+  background-color: transparent;
   border: 1px solid yellow;
 }
 
 #counter span {
   font-size: 2em;
   border-bottom: 6px solid;
-  border-radius: 10px;
 }
 
 /* none of this animation works yet /sob */
@@ -333,7 +333,7 @@ p {
 
 .last-container .card {
   width: 32em;
-  background-color: #ebeef8;
+  background-color: #e4e7e1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -350,11 +350,11 @@ p {
 
 .last-container .card h3 {
   font-size: 2em;
-  margin: 1.5em 0;
+  margin: 1.5em 0 0.5em;
 }
 
 .last-container .job-title {
-  color: #0c2d53;
+  color: #0c5321;
   font-size: 1.5em;
   font-weight: 400;
 }
@@ -362,12 +362,8 @@ p {
 .last-container .about {
   font-size: 1.3em;
   margin: 1.5em 0;
-  font-style: italic;
+  /* font-style: italic; */
   text-align: center;
-}
-
-.last-container .card {
-  border: 1px solid red;
 }
 
 @media screen and (min-width: 700px) {

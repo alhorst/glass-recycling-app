@@ -11,18 +11,7 @@
       </thead>
       <tbody>
         <tr v-for="(prize, key) in prizeList" v-bind:key="key">
-          <td>
-            <!-- <input
-              type="checkbox"
-              name="selectedPrizes"
-              v-model="selectedPrizeIDs"
-              v-bind:checked="
-                selectedPrizeIDs.includes(Number.parseInt(prize.prize_id))
-              "
-              v-bind:value="parseInt(prize.prize_id)"
-            />
-          </td> -->
-          </td>
+          <td></td>
 
           <td class="left">{{ prize.prize_name }}</td>
           <td>{{ prize.point_value }}</td>
